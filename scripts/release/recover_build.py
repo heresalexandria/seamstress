@@ -226,7 +226,9 @@ def recover(run_id: str, sha: str, version: str, incoming: Path, pr_output: Path
     jobs = validate_jobs([job for page in pages for job in page['jobs']], run)
     logs = {}
     for arch, job in jobs.items():
-        log = subprocess.check_output(['gh', 'api', f"repos/{REPOSITORY}/actions/jobs/{job['id']}/logs"], text=True)
+        # Raw job logs may contain ANSI escapes. Capture them for validation;
+        # never render them to the terminal or relax the JSON API boundary.
+        log = subprocess.check_output(['gh', 'api', '--allow-escape-sequences', f"repos/{REPOSITORY}/actions/jobs/{job['id']}/logs"], text=True)
         checkout_sha(log, job, sha)
         logs[arch] = log
     pages = api(f'actions/runs/{run_id}/artifacts?per_page=100', pages=True)
@@ -238,7 +240,9 @@ def recover(run_id: str, sha: str, version: str, incoming: Path, pr_output: Path
         for arch, item in artifacts.items():
             archive = Path(temporary)/f'{arch}.zip'
             with archive.open('wb') as output:
-                subprocess.run(['gh', 'api', f"repos/{REPOSITORY}/actions/artifacts/{item['id']}/zip"], stdout=output, check=True)
+                # Binary archives may contain any byte, including ESC. Keep the
+                # response in a file and verify its digest before extraction.
+                subprocess.run(['gh', 'api', '--allow-escape-sequences', f"repos/{REPOSITORY}/actions/artifacts/{item['id']}/zip"], stdout=output, check=True)
             extract_verified(archive, item, staging/f'build-mac-{arch}', version, arch)
         current = api(f'actions/runs/{run_id}')
         require(current.get('status') == 'completed' and current.get('run_attempt') == run['run_attempt'], 'Source run changed while downloading')

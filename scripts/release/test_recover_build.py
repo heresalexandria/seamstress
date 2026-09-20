@@ -18,6 +18,7 @@ import recover_build as recovery
 SHA = 'a' * 40
 TRIGGER_SHA = 'b' * 40
 VERSION = '1.2.3'
+SIGNED_BYTES = b'original signed bytes\x00\x1b[31m\xff'
 
 
 def stamped(message: str, second: int = 1) -> str:
@@ -70,6 +71,11 @@ class RecoveryTests(unittest.TestCase):
                                      ('123', SHA, '1.2.3-rc.1')]:
             with self.subTest(values=(run_id, sha, version)), self.assertRaises(ValueError):
                 recovery.inputs(run_id, sha, version)
+
+    def test_json_api_retains_escape_sequence_protection(self):
+        with patch.object(recovery.subprocess, 'check_output', return_value=b'{"id":123}') as call:
+            self.assertEqual(recovery.api('actions/runs/123'), {'id': 123})
+        self.assertNotIn('--allow-escape-sequences', call.call_args.args[0])
 
     def test_failed_publisher_run_can_still_have_valid_native_builds(self):
         recovery.validate_run(self.run, self.workflow, '123')
@@ -154,7 +160,7 @@ class RecoveryTests(unittest.TestCase):
         with zipfile.ZipFile(stream, 'w') as target:
             for name in (f'Seamstress-{VERSION}-{arch}.dmg', f'Seamstress-{VERSION}-{arch}.zip',
                          'latest-mac.yml', f'verification-{arch}.json'):
-                target.writestr(name, b'original signed bytes')
+                target.writestr(name, SIGNED_BYTES)
             if extra is not None:
                 target.writestr(extra, b'unexpected')
         return stream.getvalue()
@@ -167,7 +173,7 @@ class RecoveryTests(unittest.TestCase):
             item = {'digest': digest or 'sha256:' + hashlib.sha256(data).hexdigest(),
                     'size_in_bytes': len(data) if size is None else size}
             recovery.extract_verified(archive, item, root/'native', VERSION, 'arm64')
-            self.assertEqual((root/'native'/f'Seamstress-{VERSION}-arm64.zip').read_bytes(), b'original signed bytes')
+            self.assertEqual((root/'native'/f'Seamstress-{VERSION}-arm64.zip').read_bytes(), SIGNED_BYTES)
 
     def test_download_digest_and_size_are_hard_failures(self):
         data = self.archive()
@@ -195,6 +201,7 @@ class RecoveryTests(unittest.TestCase):
             item['size_in_bytes'] = len(data)
             item['digest'] = 'sha256:' + hashlib.sha256(data).hexdigest()
             self.logs[arch] = self.logs[arch].replace('1234 bytes', f'{len(data)} bytes').replace('d' * 64, item['digest'][7:])
+            self.logs[arch] += stamped('\x1b[36mCaptured log decoration\x1b[0m')
         for changed in (False, True):
             reads = 0
             def api(endpoint, **kwargs):
@@ -208,10 +215,12 @@ class RecoveryTests(unittest.TestCase):
                         'actions/runs/123/artifacts?per_page=100': [{'artifacts': self.artifacts}]}[endpoint]
             def download(command, *, stdout, check):
                 self.assertTrue(check)
-                self.assertEqual(command[:2], ['gh', 'api'])
+                self.assertEqual(command[:3], ['gh', 'api', '--allow-escape-sequences'])
                 artifact_id = int(command[-1].split('/')[-2])
                 stdout.write(payloads[artifact_id])
             def log(command, **kwargs):
+                self.assertEqual(command[:3], ['gh', 'api', '--allow-escape-sequences'])
+                self.assertTrue(kwargs['text'])
                 job_id = int(command[-1].split('/')[-2])
                 return self.logs['arm64' if job_id == 101 else 'x64']
             with self.subTest(changed=changed), tempfile.TemporaryDirectory() as temporary:
@@ -232,6 +241,8 @@ class RecoveryTests(unittest.TestCase):
                         self.assertEqual(result['pr'], '7')
                         self.assertEqual(result['sha'], SHA)
                         self.assertEqual({path.name for path in incoming.iterdir()}, {'build-mac-arm64', 'build-mac-x64'})
+                        for arch in ('arm64', 'x64'):
+                            self.assertEqual((incoming/f'build-mac-{arch}'/f'Seamstress-{VERSION}-{arch}.zip').read_bytes(), SIGNED_BYTES)
                         self.assertTrue(pr.is_file())
 
     def test_source_validation_reads_the_expected_commit_and_checks_ancestry(self):
