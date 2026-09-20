@@ -1,0 +1,218 @@
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { api, isDesktop } from './api';
+import { clamp, filename, message, parseTimecode, timecode } from './format';
+import { Icon, WeaveMark, WovenIllustration } from './Icons';
+import { Timeline } from './Timeline';
+import { UpdateControl } from './UpdateControl';
+import { VideoViewer, type ViewerHandle } from './VideoViewer';
+import type { JobEvent, JobStage, Project, Seam, Stage } from './types';
+
+const stageNames: Record<JobStage, string> = { import: 'Opening your video', detect: 'Finding the joins', analyze: 'Measuring the transitions', preview: 'Making review previews', process: 'Processing your video', export: 'Exporting your film' };
+type ActiveJob = { id: string | null; stage: JobStage; progress?: number; message: string };
+
+export default function App() {
+  const [project, setProject] = useState<Project | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [frame, setFrame] = useState(0);
+  const [job, setJob] = useState<ActiveJob | null>(null);
+  const [operation, setOperation] = useState('');
+  const [error, setError] = useState('');
+  const [notice, setNotice] = useState('');
+  const [dragOver, setDragOver] = useState(false);
+  const [cancelling, setCancelling] = useState(false);
+  const [exportDialog, setExportDialog] = useState(false);
+  const [exportError, setExportError] = useState('');
+  const [exportIntent, setExportIntent] = useState<'process' | 'export'>('export');
+  const [crf, setCrf] = useState(14);
+  const [previewSeconds, setPreviewSeconds] = useState(6);
+  const [timeDraft, setTimeDraft] = useState('');
+  const [frameDraft, setFrameDraft] = useState('');
+  const [help, setHelp] = useState(false);
+  const viewer = useRef<ViewerHandle>(null);
+  const projectRef = useRef(project);
+  const jobRef = useRef(job);
+  const pendingJob = useRef(false);
+  const operationRef = useRef(false);
+  const completedJobs = useRef(new Set<string>());
+  const dragDepth = useRef(0);
+  const selected = project?.seams.find(s => s.id === selectedId);
+  const selectedIndex = project?.seams.findIndex(s => s.id === selectedId) ?? -1;
+  const busy = Boolean(job || operation);
+  const enabledCount = project?.seams.filter(s => s.enabled).length ?? 0;
+  const lowConfidence = project?.seams.filter(s => s.enabled && s.confidence !== undefined && s.confidence < .6).length ?? 0;
+  const hasPlan = Boolean(project?.artifacts.plan);
+  projectRef.current = project; jobRef.current = job;
+  const isWorking = () => Boolean(jobRef.current || pendingJob.current || operationRef.current);
+
+  const applyProject = useCallback((next: Project, fresh = false) => {
+    setProject(next);
+    setSelectedId(current => !fresh && next.seams.some(s => s.id === current) ? current : next.seams[0]?.id ?? null);
+    if (fresh) setFrame(0);
+    try { localStorage.setItem('seamstress:last-project', next.projectPath); } catch { /* Storage is optional. */ }
+  }, []);
+
+  useEffect(() => api.onJobEvent((event: JobEvent) => {
+    if (completedJobs.current.has(event.jobId)) return;
+    if (jobRef.current?.id && event.jobId !== jobRef.current.id) return;
+    if (!jobRef.current && !pendingJob.current) return;
+    if (event.type === 'progress') {
+      setJob(current => ({ id: event.jobId, stage: event.stage, progress: event.progress ?? current?.progress, message: event.message || stageNames[event.stage] }));
+      return;
+    }
+    completedJobs.current.add(event.jobId); pendingJob.current = false;
+    if (event.project && (!projectRef.current || event.project.projectPath === projectRef.current.projectPath)) applyProject(event.project);
+    setJob(null); setCancelling(false);
+    if (event.type === 'error') setError(event.error || event.message || 'The job could not complete. Your source video is unchanged.');
+    else setNotice(event.type === 'cancelled' ? 'Processing stopped. Your source video is unchanged.' : event.stage === 'export' ? 'Export complete. Your film is ready to review.' : event.stage === 'process' && event.project?.artifacts.export ? 'Workflow complete. Your export is ready to review.' : 'Stage complete. Your project has been updated.');
+  }), [applyProject]);
+
+  useEffect(() => {
+    setTimeDraft(selected ? timecode(selected.frame / (project?.metadata.fps ?? 24)) : '');
+    setFrameDraft(selected ? String(selected.frame) : '');
+  }, [selected?.id, selected?.frame, project?.metadata.fps]);
+
+  useEffect(() => {
+    const key = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement;
+      if (target.closest('input, textarea, select, button, [contenteditable="true"], [role="dialog"]') || !project || exportDialog) return;
+      if (event.code === 'Space') { event.preventDefault(); viewer.current?.toggle(); }
+      if (event.code === 'ArrowLeft' || event.code === 'ArrowRight') { event.preventDefault(); viewer.current?.step(event.code === 'ArrowLeft' ? -1 : 1); }
+    };
+    window.addEventListener('keydown', key); return () => window.removeEventListener('keydown', key);
+  }, [project, exportDialog]);
+
+  async function importVideo(path?: string) {
+    if (isWorking()) return;
+    setError(''); setNotice('');
+    operationRef.current = true;
+    try {
+      const source = path ?? await api.pickVideo();
+      if (!source) return;
+      pendingJob.current = true;
+      setJob({ id: null, stage: 'import', message: 'Preparing the source, timeline and seam candidates…' });
+      applyProject(await api.createProject({ source }), true);
+    } catch (reason) {
+      if (/cancelled|canceled/i.test(message(reason))) setNotice('Import stopped. Your source video is unchanged.');
+      else setError(message(reason));
+    } finally { operationRef.current = false; pendingJob.current = false; setJob(null); setCancelling(false); }
+  }
+
+  async function openProject() {
+    if (isWorking()) return;
+    setError('');
+    operationRef.current = true; setOperation('Opening project…');
+    try { const next = await api.openProject(); if (next) { applyProject(next, true); setNotice('Project reopened.'); } }
+    catch (reason) { setError(message(reason)); }
+    finally { operationRef.current = false; setOperation(''); }
+  }
+
+  async function reopenLast() {
+    if (isWorking()) return;
+    try {
+      const path = localStorage.getItem('seamstress:last-project');
+      if (!path) { await openProject(); return; }
+      operationRef.current = true; setOperation('Reopening your project…'); setError('');
+      applyProject(await api.getProject(path), true);
+    } catch (reason) { setError(message(reason)); } finally { operationRef.current = false; setOperation(''); }
+  }
+
+  async function saveSeams(seams: Seam[], focusId?: string) {
+    if (!project || isWorking()) return;
+    const frames = seams.map(s => s.frame);
+    if (new Set(frames).size !== frames.length) { setError('There is already a seam at that frame. Choose a different frame.'); return; }
+    operationRef.current = true; setOperation('Saving seam changes…'); setError('');
+    try {
+      const next = await api.setSeams({ projectPath: project.projectPath, seams: [...seams].sort((a, b) => a.frame - b.frame) });
+      applyProject(next);
+      if (focusId) setSelectedId(focusId);
+      setNotice('Seams saved. Analyze again to update corrected previews.');
+    } catch (reason) { setError(message(reason)); }
+    finally { operationRef.current = false; setOperation(''); }
+  }
+
+  function moveSeam(seam: Seam, nextFrame: number) {
+    if (!project || nextFrame === seam.frame) return;
+    if (!Number.isInteger(nextFrame) || nextFrame <= 0 || nextFrame >= project.metadata.frame_count) { setError(`Use a frame between 1 and ${project.metadata.frame_count - 1}.`); return; }
+    void saveSeams(project.seams.map(s => s.id === seam.id ? { ...s, frame: nextFrame, time: nextFrame / project.metadata.fps, origin: 'manual', confidence: undefined, reasons: undefined } : s), seam.id);
+  }
+
+  function selectSeam(seam: Seam) { setSelectedId(seam.id); viewer.current?.seek(Math.max(0, seam.frame - 1)); }
+  function addSeam() {
+    if (!project || isWorking()) return;
+    const at = clamp(frame, 1, project.metadata.frame_count - 1);
+    const existing = project.seams.find(s => s.frame === at);
+    if (existing) { selectSeam(existing); setNotice('A seam already exists at this frame.'); return; }
+    const id = crypto.randomUUID();
+    void saveSeams([...project.seams, { id, frame: at, time: at / project.metadata.fps, enabled: true, origin: 'manual' }], id);
+  }
+
+  async function runStage(stage: Stage, exportPath?: string) {
+    if (!project || isWorking()) return;
+    setError(''); setNotice(''); setCancelling(false); pendingJob.current = true;
+    setJob({ id: null, stage, message: stageNames[stage] });
+    try {
+      const result = await api.run({ projectPath: project.projectPath, stage, options: { crf, previewSeconds, ...(exportPath ? { exportPath } : {}) } });
+      if (!completedJobs.current.has(result.jobId)) setJob(current => ({ ...(current ?? { stage, message: stageNames[stage] }), id: result.jobId }));
+    } catch (reason) { pendingJob.current = false; setJob(null); setError(message(reason)); }
+  }
+
+  async function exportVideo() {
+    if (!project) return;
+    setExportError('');
+    try {
+      const destination = await api.chooseExportPath({ suggestedName: `${filename(project.source).replace(/\.[^.]+$/, '')}-seamstress.mp4` });
+      if (!destination) return;
+      setExportDialog(false); await runStage(exportIntent, destination);
+    } catch (reason) { setExportError(message(reason)); }
+  }
+
+  function showExport(intent: 'process' | 'export') { setExportError(''); setExportIntent(intent); setExportDialog(true); }
+
+  function dialogKeys(event: React.KeyboardEvent<HTMLElement>) {
+    if (event.key === 'Escape') { setExportDialog(false); return; }
+    if (event.key !== 'Tab') return;
+    const controls = [...event.currentTarget.querySelectorAll<HTMLElement>('button:not(:disabled), select:not(:disabled), input:not(:disabled)')];
+    const first = controls[0], last = controls[controls.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+  }
+
+  async function cancelJob() {
+    if (!job?.id) return;
+    setCancelling(true);
+    try { await api.cancelJob(job.id); }
+    catch (reason) { setCancelling(false); setError(message(reason)); }
+  }
+
+  function dropVideo(event: React.DragEvent) {
+    event.preventDefault(); setDragOver(false); dragDepth.current = 0;
+    if (busy) return;
+    const files = event.dataTransfer.files;
+    if (files.length !== 1) { setError('Drop one video at a time. Each video becomes its own project.'); return; }
+    try { void importVideo(api.pathForFile(files[0])); } catch (reason) { setError(message(reason)); }
+  }
+
+  const progress = job?.progress === undefined ? undefined : clamp(job.progress > 1 ? job.progress / 100 : job.progress, 0, 1);
+  const stageItems: { stage: Stage; label: string; icon: string; detail: string; ready: boolean; done: boolean }[] = [
+    { stage: 'detect', label: 'Find seams', icon: 'scan', detail: 'Locate the joins', ready: Boolean(project), done: Boolean(project?.seams.length) },
+    { stage: 'analyze', label: 'Analyze & match', icon: 'sliders', detail: 'Framing, motion & color', ready: enabledCount > 0, done: hasPlan },
+    { stage: 'preview', label: 'Review previews', icon: 'play', detail: 'See each transition', ready: hasPlan, done: Boolean(project?.artifacts.seamPreviews?.length || project?.artifacts.fullPreview) },
+    { stage: 'export', label: 'Export film', icon: 'export', detail: 'Keep the whole story', ready: hasPlan, done: Boolean(project?.artifacts.export) },
+  ];
+
+  return <div className={`app-shell ${dragOver ? 'is-dragging' : ''}`} onDragEnter={event => { if (event.dataTransfer.types.includes('Files')) { event.preventDefault(); dragDepth.current++; setDragOver(true); } }} onDragOver={event => { if (event.dataTransfer.types.includes('Files')) event.preventDefault(); }} onDragLeave={event => { event.preventDefault(); dragDepth.current = Math.max(0, dragDepth.current - 1); if (!dragDepth.current) setDragOver(false); }} onDrop={dropVideo}>
+    <div className="window-bar"><span>SEAMSTRESS STUDIO</span><UpdateControl busy={busy}/><span className="window-local"><i/> {isDesktop ? 'LOCAL WORKSPACE' : 'BROWSER PREVIEW'}</span></div>
+    <aside className="sidebar"><div className="brand"><WeaveMark/><div><span className="wordmark">Seamstress</span><span className="brand-tagline">A continuous story.</span></div></div><div className="sidebar-project"><span className="eyebrow">YOUR WORKSPACE</span><button className="project-card" onClick={openProject} disabled={busy}><span className="project-icon"><Icon name="film"/></span><span><strong>{project?.name || 'Untitled project'}</strong><small>{project ? `${timecode(project.metadata.duration, false)} · ${project.metadata.fps.toFixed(3)} fps` : 'A new thread starts here'}</small></span><Icon name="down" size={13}/></button><div className="project-actions"><button onClick={() => void importVideo()} disabled={busy}><Icon name="plus" size={13}/> New video</button><button onClick={openProject} disabled={busy}><Icon name="folder" size={13}/> Open</button></div></div><div className="workflow">{project && <button className="project-path-button" onClick={() => void api.revealFile(project.projectPath).catch(e => setError(message(e)))}><Icon name="folder" size={12}/> Show project in Finder <Icon name="external" size={11}/></button>}<span className="eyebrow">THE WORKFLOW</span>{stageItems.map((item, i) => <button key={item.stage} className={`workflow-step ${item.done ? 'is-complete' : ''} ${job?.stage === item.stage ? 'is-current' : ''}`} onClick={() => item.stage === 'export' ? showExport('export') : void runStage(item.stage)} disabled={!item.ready || busy}><span className="step-number">{item.done ? <Icon name="check" size={13}/> : `0${i + 1}`}</span><span><strong>{item.label}</strong><small>{item.detail}</small></span><Icon name={item.icon} size={17}/></button>)}</div><div className="sidebar-bottom"><div className="preserve-note"><span className="stitch-line"/><p>Every frame has a story.<br/><em>Keep it together.</em></p></div><button className="sidebar-help" onClick={() => setHelp(v => !v)}><Icon name="help" size={16}/> A little guidance <span>?</span></button><div className="local-status"><i/> ORIGINAL VIDEO PRESERVED</div></div></aside>
+    <main className="workspace"><header className="workspace-header"><div className="breadcrumb">Workspace <Icon name="chevron" size={12}/><span>{project ? project.name : 'New project'}</span></div><div className="header-actions">{project?.artifacts.export && <button className="text-button" onClick={() => void api.revealFile(project.artifacts.export!).catch(e => setError(message(e)))}><Icon name="external" size={14}/> Show export</button>}<button className="secondary-button" onClick={() => showExport('export')} disabled={!hasPlan || busy}><Icon name="export" size={15}/> Export</button><button className="primary-button compact" onClick={() => showExport('process')} disabled={!project || busy}>{job?.stage === 'process' ? <span className="spinner"/> : <Icon name="diamond" size={14}/>} Run workflow</button></div></header>
+      {!isDesktop && <div className="browser-banner"><Icon name="help" size={14}/> Interface preview · importing and processing video require the desktop app.</div>}
+      {(error || notice) && <div className={`notification ${error ? 'is-error' : ''}`} role={error ? 'alert' : 'status'}><Icon name={error ? 'warning' : 'check'} size={15}/><span>{error || notice}</span><button className="icon-button" onClick={() => { setError(''); setNotice(''); }} aria-label="Dismiss message"><Icon name="close" size={14}/></button></div>}
+      {project ? <><div className="project-heading"><div><span className="eyebrow">THE EDITING ROOM</span><h1>Make the cut <em>disappear.</em></h1></div><div className="project-meta"><span>{project.metadata.width >= project.metadata.height ? 'LANDSCAPE' : 'PORTRAIT'}</span><i/>{project.seams.length} {project.seams.length === 1 ? 'JOIN' : 'JOINS'}<i/>{timecode(project.metadata.duration, false)}</div></div><VideoViewer key={project.id} ref={viewer} project={project} selected={selected} frame={frame} onFrame={setFrame} previewSeconds={previewSeconds}/><Timeline project={project} selected={selected} frame={frame} disabled={busy} onSeek={at => viewer.current?.seek(at)} onSelect={selectSeam} onMove={moveSeam} onAdd={addSeam}/>{project.seams.length > 0 && <div className="seam-strip" aria-label="Select a seam">{project.seams.map((seam, index) => <button key={seam.id} className={`${selectedId === seam.id ? 'selected' : ''} ${!seam.enabled ? 'off' : ''}`} onClick={() => selectSeam(seam)}><span className="mono">{String(index + 1).padStart(2, '0')}</span><span>{timecode(seam.time, false)}</span>{seam.confidence !== undefined && seam.confidence < .6 ? <Icon name="warning" size={12}/> : <span className="seam-pill-dot"/>}</button>)}</div>}</> : <section className="empty-state"><div className="empty-eyebrow"><span/> YOUR NEXT CONTINUOUS SHOT</div><h1>Separate clips.<br/><em>One uninterrupted story.</em></h1><p className="empty-description">Smooth the little jumps between generated clips.<br/>Bring your film. We’ll find the threads.</p><div className="import-dropzone" onClick={() => !busy && void importVideo()} onKeyDown={e => { if ((e.key === 'Enter' || e.key === ' ') && !busy) { e.preventDefault(); void importVideo(); } }} role="button" tabIndex={busy ? -1 : 0} aria-label="Import a video"><WovenIllustration/><div className="import-dropzone-copy"><span className="import-plus"><Icon name={operation ? 'film' : 'plus'} size={22}/></span><strong>{operation || 'Drop your video here'}</strong><span>or choose a file to begin</span></div><div className="import-formats">MP4 · MOV · MKV · WEBM <span>PROCESSED ON YOUR DEVICE</span></div></div><div className="empty-bottom"><button className="text-button" onClick={openProject} disabled={busy}><Icon name="folder" size={16}/> Open a project <Icon name="arrow" size={14}/></button><span className="subtle-dot"/><button className="text-button dim" onClick={reopenLast} disabled={busy}>Continue last session</button></div><div className="empty-principles"><span><Icon name="film" size={15}/> Original frames</span><span><Icon name="sliders" size={15}/> Measured corrections</span><span><Icon name="loop" size={15}/> Review every seam</span></div></section>}
+      {(job || operation) && <div className="job-panel" role="status"><div className="job-symbol"><span className="spinner"/></div><div className="job-copy"><strong>{operation || (job && stageNames[job.stage])}</strong><span>{operation ? 'Your source remains untouched.' : job?.message}</span><div className={`job-track ${progress === undefined ? 'indeterminate' : ''}`}><span style={progress === undefined ? undefined : { width: `${progress * 100}%` }}/></div></div>{job && <><span className="job-percent mono">{progress === undefined ? '···' : `${Math.round(progress * 100)}%`}</span><button className="small-button" onClick={cancelJob} disabled={!job.id || cancelling}>{cancelling ? 'Stopping…' : 'Cancel'}</button></>}</div>}
+      <footer className="workspace-footer"><span><WeaveMark small/> Made for the moments in between.</span><span className="mono">{project ? `REV ${String(project.revision).padStart(3, '0')}` : 'READY WHEN YOU ARE'}</span></footer>
+    </main>
+    <aside className="inspector"><div className="inspector-header"><span className="eyebrow">SEAM INSPECTOR</span><Icon name="sliders" size={16}/></div>{selected && project ? <><div className="seam-heading"><span className="seam-index">{String(selectedIndex + 1).padStart(2, '0')}</span><div><h2>A closer look.</h2><span>{selected.origin === 'manual' ? 'Manually placed seam' : 'Detected transition'}</span></div></div><div className="inspector-section"><div className="label-row"><label htmlFor="seam-enabled">Include in correction</label><button id="seam-enabled" role="switch" aria-checked={selected.enabled} className={`toggle ${selected.enabled ? 'on' : ''}`} disabled={busy} onClick={() => void saveSeams(project.seams.map(s => s.id === selected.id ? { ...s, enabled: !s.enabled } : s))}><span/></button></div><label className="field-label" htmlFor="seam-time">Cut time <span>MIN : SEC</span></label><div className="input-wrap"><input id="seam-time" value={timeDraft} className="mono" disabled={busy} onChange={e => setTimeDraft(e.target.value)} onBlur={() => { const seconds = parseTimecode(timeDraft); if (seconds === null) { setError('Enter a time as mm:ss.mmm, hh:mm:ss.mmm, or seconds.'); setTimeDraft(timecode(selected.time)); } else moveSeam(selected, Math.round(seconds * project.metadata.fps)); }} onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur(); }}/><Icon name="diamond" size={13}/></div><label className="field-label" htmlFor="seam-frame">Exact frame <span>ZERO BASED</span></label><div className="input-wrap"><input id="seam-frame" inputMode="numeric" value={frameDraft} className="mono" disabled={busy} onChange={e => setFrameDraft(e.target.value)} onBlur={() => { const n = Number(frameDraft); if (!frameDraft.trim() || !Number.isInteger(n)) { setError('Enter a whole frame number.'); setFrameDraft(String(selected.frame)); } else moveSeam(selected, n); }} onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur(); }}/><span className="input-suffix">F</span></div><p className="field-help">The first frame after the cut. Drag its marker or enter an exact position.</p></div><div className="inspector-section"><div className="section-caption">THE READOUT</div>{selected.confidence !== undefined ? <div className="confidence"><span>{selected.confidence < .6 ? <Icon name="warning" size={15}/> : <span className="status-dot"/>}{selected.confidence < .6 ? 'Needs a closer look' : 'Detection confidence'}</span><strong className="mono">{Math.round(clamp(selected.confidence, 0, 1) * 100)}%</strong></div> : <div className="muted-info"><Icon name="diamond" size={15}/>{selected.origin === 'manual' ? 'Placed by you' : 'Confidence not provided'}</div>}{selected.kind && <div className="kind-chip">{selected.kind.replace(/[_-]/g, ' ')}</div>}{selected.reasons?.length ? <ul className="reason-list">{selected.reasons.map((reason, i) => <li key={i}>{reason}</li>)}</ul> : <p className="field-help">Analyze this video to inspect the transition. A detected cut still needs a visual check.</p>}</div><div className="inspector-section"><div className="section-caption">REVIEW WINDOW</div><label className="select-row" htmlFor="preview-seconds"><span>Time around cut</span><select id="preview-seconds" value={previewSeconds} disabled={busy} onChange={e => setPreviewSeconds(Number(e.target.value))}>{[4, 6, 8, 12].map(n => <option key={n} value={n}>{n} seconds</option>)}</select></label><button className="secondary-button full" disabled={!hasPlan || busy} onClick={() => void runStage('preview')}><Icon name="play" size={14}/> Generate seam previews</button><p className="field-help">Review movement and color at normal speed before exporting.</p></div><button className="delete-seam" disabled={busy} onClick={() => void saveSeams(project.seams.filter(s => s.id !== selected.id))}><Icon name="trash" size={14}/> Remove seam</button></> : <div className="inspector-empty"><div className="inspector-glyph"><Icon name="diamond" size={32}/><span/></div><h2>Mind the<br/><em>in-between.</em></h2><p>{project ? 'Find the joins, then select a marker to inspect and adjust its correction.' : 'Every join is a little different. This is where you give each one the attention it deserves.'}</p><div className="inspector-empty-rule"/><div className="inspector-tip"><span>01</span><p>Find where one clip<br/>becomes the next.</p></div><div className="inspector-tip"><span>02</span><p>Match the framing,<br/>motion and color.</p></div><div className="inspector-tip"><span>03</span><p>Watch it through.<br/>Trust what you see.</p></div>{project && <button className="secondary-button full" disabled={busy} onClick={() => void runStage('detect')}><Icon name="scan" size={15}/> Find seams</button>}</div>}{Boolean(project?.warnings?.length || lowConfidence) && <div className="project-warnings"><div><Icon name="warning" size={15}/><strong>Review notes</strong></div>{lowConfidence > 0 && <p>{lowConfidence} {lowConfidence === 1 ? 'join needs' : 'joins need'} a closer look.</p>}{project?.warnings?.map((warning, i) => <p key={i}>{warning}</p>)}</div>}<div className="inspector-footnote"><span className="mini-stitch"/> A good seam is one you don’t notice.</div></aside>
+    {dragOver && <div className="drop-overlay"><WeaveMark/><h2>Start a new thread.</h2><p>{busy ? 'Finish or cancel the current job before importing.' : 'Drop one video to create a project.'}</p></div>}
+    {help && <div className="help-popover" role="dialog" aria-label="Workflow guidance"><button className="icon-button" onClick={() => setHelp(false)} aria-label="Close guidance"><Icon name="close" size={15}/></button><span className="eyebrow">A LITTLE GUIDANCE</span><h2>Follow the thread.</h2><p>Import a video, find its joins, and adjust the markers. Analysis prepares a source-specific correction. Generate previews to review each seam, then export the whole film.</p><p>The original source is preserved. Uncertain matches are shown for your review; a completed job doesn’t certify an invisible join.</p><div><kbd>Space</kbd> Play / pause <kbd>← →</kbd> Step one frame</div></div>}
+    {exportDialog && project && <div className="modal-backdrop" onClick={() => setExportDialog(false)}><section className="export-modal" role="dialog" aria-modal="true" aria-labelledby="export-title" onClick={e => e.stopPropagation()} onKeyDown={dialogKeys}><button className="modal-close icon-button" onClick={() => setExportDialog(false)} aria-label="Close export"><Icon name="close"/></button><div className="export-emblem"><Icon name="export" size={27}/></div><span className="eyebrow">THE FINAL THREAD</span><h2 id="export-title">Bring it all <em>together.</em></h2><p>{exportIntent === 'process' ? 'Analyze the joins, build previews, and export your film in one workflow.' : 'Export the entire corrected film at its original size and frame rate.'}</p><div className="export-facts"><span>{project.metadata.width} × {project.metadata.height}</span><span>{project.metadata.fps_fraction} fps</span><span>{timecode(project.metadata.duration, false)}</span></div><label className="field-label" htmlFor="export-quality">Picture quality</label><select autoFocus id="export-quality" className="quality-select" value={crf} onChange={e => setCrf(Number(e.target.value))}><option value={10}>Very high · CRF 10 · larger file</option><option value={14}>High · CRF 14</option><option value={18}>Balanced · CRF 18 · smaller file</option></select><p className="field-help">H.264 video · {project.metadata.has_audio ? 'original audio copied' : 'no source audio'} · original timing</p>{Boolean(project.warnings?.length || lowConfidence) && <div className="export-review-note"><Icon name="warning" size={15}/> Your project has review notes. Check the previews before calling the edit finished.</div>}{exportError && <div className="export-error" role="alert"><Icon name="warning" size={15}/><span>{exportError}</span></div>}<button className="primary-button full" onClick={() => void exportVideo()} disabled={busy || (exportIntent === 'export' && !hasPlan)}><Icon name="export" size={16}/>{exportIntent === 'process' ? 'Choose location & run workflow' : 'Choose location & export'} <Icon name="arrow" size={15}/></button><button className="text-button modal-cancel" onClick={() => setExportDialog(false)}>Back to the editing room</button></section></div>}
+  </div>;
+}

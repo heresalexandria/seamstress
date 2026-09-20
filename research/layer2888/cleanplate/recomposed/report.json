@@ -1,0 +1,31 @@
+{
+  "source": "IYTYT.mp4",
+  "cleanplate_generations": 1,
+  "source_foreground_pose_blending": false,
+  "background_map": "fixed affine (v2)",
+  "frames": [
+    {
+      "frame": 2888,
+      "source_foreground_core_pixels": 53601,
+      "changed_foreground_core_pixels": 0,
+      "work_region_pixels": 99983,
+      "changed_pixels_outside_work_region": 0,
+      "remaining_magenta_pixels": 0,
+      "removal_region_pixels": 97749,
+      "original_visible_background_preserved_outside_removal_and_fg": true,
+      "status": "Native matte inspection required; not integrated"
+    },
+    {
+      "frame": 2896,
+      "source_foreground_core_pixels": 53438,
+      "changed_foreground_core_pixels": 0,
+      "work_region_pixels": 100026,
+      "changed_pixels_outside_work_region": 0,
+      "remaining_magenta_pixels": 254,
+      "removal_region_pixels": 97762,
+      "original_visible_background_preserved_outside_removal_and_fg": true,
+      "status": "Native matte inspection required; not integrated"
+    }
+  ],
+  "status": "Native stills justified one bounded temporal proof; that proof subsequently failed visible contour/plate continuity and was not integrated."
+}

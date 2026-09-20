@@ -1,0 +1,8 @@
+# Versions used to validate the desktop engine and native packaging.
+numpy==2.5.3
+scipy==1.18.1
+Pillow==12.3.0
+opencv-python-headless==5.0.0.93
+scikit-image==0.26.0
+pyinstaller==6.22.3
+PyYAML==6.0.3

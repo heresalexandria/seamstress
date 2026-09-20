@@ -1,0 +1,3108 @@
+{
+  "rgb_interior_definition": "Every input channel8..247; excludes asymptotic boundary flatness",
+  "active_columns": "Input channels8..247, all output channels retained",
+  "reports": [
+    {
+      "label": "361",
+      "frame": 361,
+      "model_sha256": "1463d5dd2fe0d7c8a7a940fa6ee4f340ebeda1dd076bc7428d31acd2bc638941",
+      "sides": {
+        "left": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.5676657845695239,
+            "min_active_column_singular": 0.5676302436791697,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.5676302436791697,
+            "strict_rgb_interior_min_determinant": 0.5304596308508736,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.8115906417285692,
+            "max_change": 8.398129184358048,
+            "p99_change": 4.874717892871714,
+            "worst_strict_rgb_interior": {
+              "input": [
+                160.0,
+                32.0,
+                8.0
+              ],
+              "xy": [
+                0.6666666666666666,
+                0.0
+              ],
+              "output": [
+                166.22647528414004,
+                33.70557450359741,
+                1.450885231219119
+              ],
+              "jacobian": [
+                [
+                  1.0059474882759787,
+                  -0.0004914473229291616,
+                  -0.007520786457746453
+                ],
+                [
+                  0.0044021155637778975,
+                  1.001915279945024,
+                  -0.001009369206016686
+                ],
+                [
+                  -0.0011013810897999576,
+                  0.002781561717435821,
+                  0.5676657845695239
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.6412168485605676,
+            "min_active_column_singular": 0.6814372964711066,
+            "strict_rgb_interior_sample_count": 46342,
+            "strict_rgb_interior_min_singular": 0.7073203803544954,
+            "strict_rgb_interior_min_determinant": 0.7445211058783683,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.07049123449430401,
+            "max_change": 6.96457541912304,
+            "p99_change": 4.402409043347222,
+            "worst_strict_rgb_interior": {
+              "input": [
+                97.0,
+                51.0,
+                8.0
+              ],
+              "xy": [
+                0.7193119624706802,
+                0.22253129346314326
+              ],
+              "output": [
+                101.71450829272844,
+                51.797852617361045,
+                2.062583902011168
+              ],
+              "jacobian": [
+                [
+                  1.0392889487433195,
+                  0.0073687395378385645,
+                  -0.027896968716476067
+                ],
+                [
+                  0.02878833570942163,
+                  1.0120327739514892,
+                  -0.004259751727047956
+                ],
+                [
+                  -0.0067197941129979455,
+                  0.006244300132882685,
+                  0.7081594583662181
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.628810408370116,
+            "min_active_column_singular": 0.6678082760675077,
+            "strict_rgb_interior_sample_count": 49551,
+            "strict_rgb_interior_min_singular": 0.7229827628690131,
+            "strict_rgb_interior_min_determinant": 0.7646909735177825,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.07517881514691747,
+            "max_change": 6.988819674587326,
+            "p99_change": 4.109825423966883,
+            "worst_strict_rgb_interior": {
+              "input": [
+                93.0,
+                50.0,
+                8.0
+              ],
+              "xy": [
+                0.5723221266614542,
+                0.23922114047287898
+              ],
+              "output": [
+                97.23700759769193,
+                50.53791702393161,
+                2.1350210072466034
+              ],
+              "jacobian": [
+                [
+                  1.0424338587409068,
+                  0.008192592197019621,
+                  -0.029520368230748772
+                ],
+                [
+                  0.030832285495648648,
+                  1.0138111060106212,
+                  -0.0021636663569921666
+                ],
+                [
+                  -0.0049268119667011945,
+                  0.008050805560406715,
+                  0.7238719681955281
+                ]
+              ]
+            }
+          }
+        },
+        "right": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.8138750044561789,
+            "min_active_column_singular": 0.6891030160869559,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.6891030160869559,
+            "strict_rgb_interior_min_determinant": 0.6798383220456886,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.5856167710289946,
+            "max_change": 7.814416899862238,
+            "p99_change": 4.5211449583118295,
+            "worst_strict_rgb_interior": {
+              "input": [
+                247.0,
+                247.0,
+                247.0
+              ],
+              "xy": [
+                0.5,
+                1.0
+              ],
+              "output": [
+                249.63778416497928,
+                250.4606104171008,
+                247.35419683944733
+              ],
+              "jacobian": [
+                [
+                  0.872735657012015,
+                  -0.10737833465640279,
+                  -0.11794242019510648
+                ],
+                [
+                  -0.12295696986535631,
+                  0.8138750044561789,
+                  -0.14596307232898198
+                ],
+                [
+                  -0.020443304823857034,
+                  -0.019480346719603858,
+                  0.982484910074902
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.7945123768297275,
+            "min_active_column_singular": 0.805732146990146,
+            "strict_rgb_interior_sample_count": 45097,
+            "strict_rgb_interior_min_singular": 0.8362580223723879,
+            "strict_rgb_interior_min_determinant": 0.8453887790172708,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.08324820978426763,
+            "max_change": 7.25811829814531,
+            "p99_change": 4.365065651088782,
+            "worst_strict_rgb_interior": {
+              "input": [
+                9.0,
+                8.0,
+                8.0
+              ],
+              "xy": [
+                0.4691164972634871,
+                0.6954102920723226
+              ],
+              "output": [
+                6.904081340760914,
+                5.967172589842889,
+                11.111408477230654
+              ],
+              "jacobian": [
+                [
+                  0.9025489418808981,
+                  -0.07658151712342764,
+                  -0.07439849391318809
+                ],
+                [
+                  -0.07874569001577925,
+                  0.9228769830557155,
+                  -0.06332091406423501
+                ],
+                [
+                  0.15666294402858227,
+                  0.13696625314227262,
+                  1.1305668934111175
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.7979745430160126,
+            "min_active_column_singular": 0.7655793838450738,
+            "strict_rgb_interior_sample_count": 41966,
+            "strict_rgb_interior_min_singular": 0.8298375030945917,
+            "strict_rgb_interior_min_determinant": 0.8478702780322388,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.0824087742688194,
+            "max_change": 7.095640055551655,
+            "p99_change": 4.483243270781434,
+            "worst_strict_rgb_interior": {
+              "input": [
+                8.0,
+                8.0,
+                8.0
+              ],
+              "xy": [
+                0.47537138389366695,
+                0.7009735744089013
+              ],
+              "output": [
+                5.974627212594376,
+                6.0114505248101,
+                10.933494334415423
+              ],
+              "jacobian": [
+                [
+                  0.9016516979091218,
+                  -0.08581850894818821,
+                  -0.08379648677351526
+                ],
+                [
+                  -0.07963735646321446,
+                  0.9122747174282111,
+                  -0.07480291830828989
+                ],
+                [
+                  0.15000859960131407,
+                  0.14713444636624118,
+                  1.1414194252561956
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "722",
+      "frame": 722,
+      "model_sha256": "c453d5faddc9d644020fe61beae9a6a7a6d9ac2814232b8cc22e4674bcabac9b",
+      "sides": {
+        "left": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.7566685237138469,
+            "min_active_column_singular": 0.7566652256405415,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.7566652256405415,
+            "strict_rgb_interior_min_determinant": 0.7132371341703403,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.7459509375454996,
+            "max_change": 10.367716685222774,
+            "p99_change": 6.053270797683899,
+            "worst_strict_rgb_interior": {
+              "input": [
+                192.0,
+                64.0,
+                8.0
+              ],
+              "xy": [
+                0.3333333333333333,
+                0.0
+              ],
+              "output": [
+                194.93462350770193,
+                65.37369115138041,
+                2.491423136430196
+              ],
+              "jacobian": [
+                [
+                  1.0004696998682334,
+                  -0.00012467511999147973,
+                  -0.001070766821271718
+                ],
+                [
+                  4.041581806291106e-05,
+                  0.9998405364944176,
+                  -0.0003632245748690366
+                ],
+                [
+                  -0.0006942687486901633,
+                  -7.687223314789549e-06,
+                  0.7566685237138469
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.8548941692980065,
+            "min_active_column_singular": 0.8309061819742194,
+            "strict_rgb_interior_sample_count": 52206,
+            "strict_rgb_interior_min_singular": 0.8309061819742194,
+            "strict_rgb_interior_min_determinant": 0.8264693650958066,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.2469001316336919,
+            "max_change": 8.07850677763139,
+            "p99_change": 5.441715186331784,
+            "worst_strict_rgb_interior": {
+              "input": [
+                157.0,
+                165.0,
+                156.0
+              ],
+              "xy": [
+                0.18451915559030493,
+                0.0890125173852573
+              ],
+              "output": [
+                153.9607679062461,
+                161.61136784541165,
+                151.95411826838145
+              ],
+              "jacobian": [
+                [
+                  0.8969022178181945,
+                  -0.052710483706619016,
+                  0.008077776302457096
+                ],
+                [
+                  -0.08693174966492734,
+                  0.948808570812389,
+                  0.003862466611678883
+                ],
+                [
+                  -0.1172502020384627,
+                  -0.06030524154164141,
+                  1.0115901208720288
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.844475018734471,
+            "min_active_column_singular": 0.8025363878450704,
+            "strict_rgb_interior_sample_count": 53109,
+            "strict_rgb_interior_min_singular": 0.8025363878450704,
+            "strict_rgb_interior_min_determinant": 0.8141939846540752,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.3127923380839486,
+            "max_change": 7.985388177242243,
+            "p99_change": 5.3468553801148095,
+            "worst_strict_rgb_interior": {
+              "input": [
+                177.0,
+                144.0,
+                126.0
+              ],
+              "xy": [
+                0.3127443315089914,
+                0.11126564673157163
+              ],
+              "output": [
+                173.91641453594454,
+                140.77147996012212,
+                121.88436348673524
+              ],
+              "jacobian": [
+                [
+                  0.9183922279113972,
+                  -0.0774547854155685,
+                  -0.030890575137732412
+                ],
+                [
+                  -0.07584982880689495,
+                  0.9190855165664402,
+                  -0.030940223406730638
+                ],
+                [
+                  -0.09213150687639882,
+                  -0.08483442438569,
+                  0.9778500624565822
+                ]
+              ]
+            }
+          }
+        },
+        "right": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.510218873732482,
+            "min_active_column_singular": 0.2938805882669665,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.2938805882669665,
+            "strict_rgb_interior_min_determinant": 0.24015148646131637,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.3126759137956399,
+            "max_change": 10.926415150122033,
+            "p99_change": 6.435164528043449,
+            "worst_strict_rgb_interior": {
+              "input": [
+                247.0,
+                247.0,
+                247.0
+              ],
+              "xy": [
+                0.16666666666666666,
+                0.75
+              ],
+              "output": [
+                251.55640709510752,
+                250.81598695043496,
+                250.9194435431051
+              ],
+              "jacobian": [
+                [
+                  0.6563083033664725,
+                  -0.2131522033378701,
+                  -0.21054027524485264
+                ],
+                [
+                  -0.19606215096479218,
+                  0.7267341106163485,
+                  -0.19483455613720935
+                ],
+                [
+                  -0.19890225345966428,
+                  -0.2010184041876073,
+                  0.7189078938405373
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.6354846879245315,
+            "min_active_column_singular": 0.6351699728249416,
+            "strict_rgb_interior_sample_count": 52755,
+            "strict_rgb_interior_min_singular": 0.6351699728249416,
+            "strict_rgb_interior_min_determinant": 0.6723045324789967,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.060850662955835445,
+            "max_change": 8.48940570728675,
+            "p99_change": 5.5031904090850405,
+            "worst_strict_rgb_interior": {
+              "input": [
+                247.0,
+                219.0,
+                177.0
+              ],
+              "xy": [
+                0.1313526192337764,
+                0.7065368567454798
+              ],
+              "output": [
+                253.22163801710062,
+                224.84969600193728,
+                183.95886303934736
+              ],
+              "jacobian": [
+                [
+                  0.6354846879245315,
+                  0.010068781919130743,
+                  0.008658273557102802
+                ],
+                [
+                  0.008572383129262562,
+                  1.0418483016786126,
+                  0.03727056219042879
+                ],
+                [
+                  0.005138624782603074,
+                  0.019269943065467032,
+                  1.0163319174874914
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.6275278714022079,
+            "min_active_column_singular": 0.6272640094484045,
+            "strict_rgb_interior_sample_count": 52999,
+            "strict_rgb_interior_min_singular": 0.6272640094484045,
+            "strict_rgb_interior_min_determinant": 0.6543875701250327,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.061678423773125386,
+            "max_change": 8.645705861409454,
+            "p99_change": 5.970035060833364,
+            "worst_strict_rgb_interior": {
+              "input": [
+                247.0,
+                220.0,
+                180.0
+              ],
+              "xy": [
+                0.12509773260359655,
+                0.7121001390820584
+              ],
+              "output": [
+                253.25955180788205,
+                225.98630515377553,
+                187.03263045609367
+              ],
+              "jacobian": [
+                [
+                  0.6275278714022079,
+                  0.00916691951164239,
+                  0.00787096935135878
+                ],
+                [
+                  0.007970973349074484,
+                  1.0379806224722756,
+                  0.03445484936474941
+                ],
+                [
+                  0.004782000203476855,
+                  0.01790329083735287,
+                  1.0150260742890396
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "1083",
+      "frame": 1083,
+      "model_sha256": "a2a28e4ba689fff821d4252c1a1a762d76af41097a80bcf0b611ab1ba38c2c51",
+      "sides": {
+        "left": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.8506147712765255,
+            "min_active_column_singular": 0.7815716214862368,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.7815716214862368,
+            "strict_rgb_interior_min_determinant": 0.7853800349904528,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.7560485502995558,
+            "max_change": 10.04668231620289,
+            "p99_change": 4.330957814773075,
+            "worst_strict_rgb_interior": {
+              "input": [
+                192.0,
+                64.0,
+                16.0
+              ],
+              "xy": [
+                0.5,
+                0.75
+              ],
+              "output": [
+                199.64134198894095,
+                69.45255324279758,
+                17.65073970619172
+              ],
+              "jacobian": [
+                [
+                  0.8915144600144913,
+                  -0.11441238262301567,
+                  -0.08788655610487695
+                ],
+                [
+                  -0.07796573574455579,
+                  0.9171643695569287,
+                  -0.05553198233968715
+                ],
+                [
+                  -0.02832337874793467,
+                  -0.032019106228879934,
+                  0.9797559712540505
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.8544544985441398,
+            "min_active_column_singular": 0.7760523525073587,
+            "strict_rgb_interior_sample_count": 43814,
+            "strict_rgb_interior_min_singular": 0.7867388425967331,
+            "strict_rgb_interior_min_determinant": 0.7960749377502478,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.07035846122563466,
+            "max_change": 8.17174083251652,
+            "p99_change": 3.521451800611259,
+            "worst_strict_rgb_interior": {
+              "input": [
+                189.0,
+                82.0,
+                22.0
+              ],
+              "xy": [
+                0.6129788897576232,
+                0.6453407510431154
+              ],
+              "output": [
+                195.5747975328663,
+                86.29031421624055,
+                23.163490511674897
+              ],
+              "jacobian": [
+                [
+                  0.906369652744786,
+                  -0.13895112193523573,
+                  -0.0918484635249115
+                ],
+                [
+                  -0.05945628330124464,
+                  0.9074496805406795,
+                  -0.04454023718608369
+                ],
+                [
+                  -0.01830325383721032,
+                  -0.03333105313090101,
+                  0.9815996544045476
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.8499051064047052,
+            "min_active_column_singular": 0.8043524375441444,
+            "strict_rgb_interior_sample_count": 46068,
+            "strict_rgb_interior_min_singular": 0.8043524375441444,
+            "strict_rgb_interior_min_determinant": 0.8041025944484353,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.06833108571147926,
+            "max_change": 8.349901952786837,
+            "p99_change": 3.4619662860593006,
+            "worst_strict_rgb_interior": {
+              "input": [
+                8.0,
+                8.0,
+                8.0
+              ],
+              "xy": [
+                0.49726348709929635,
+                0.8623087621696801
+              ],
+              "output": [
+                6.570873286734794,
+                6.507277792622119,
+                6.5069356945667
+              ],
+              "jacobian": [
+                [
+                  0.9295810400453153,
+                  -0.06223357114395256,
+                  -0.05444698085631394
+                ],
+                [
+                  -0.06728577594489593,
+                  0.9269117551403685,
+                  -0.0696245774453157
+                ],
+                [
+                  -0.07351275958203551,
+                  -0.06268064528801354,
+                  0.947478587797935
+                ]
+              ]
+            }
+          }
+        },
+        "right": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.7554222610673911,
+            "min_active_column_singular": 0.6178183020682799,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.6178183020682799,
+            "strict_rgb_interior_min_determinant": 0.6042000327249575,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.6337032156775007,
+            "max_change": 9.68610364605479,
+            "p99_change": 4.27736887723122,
+            "worst_strict_rgb_interior": {
+              "input": [
+                247.0,
+                247.0,
+                247.0
+              ],
+              "xy": [
+                0.3333333333333333,
+                0.5
+              ],
+              "output": [
+                249.4914712936469,
+                248.87094204082462,
+                248.8908905772288
+              ],
+              "jacobian": [
+                [
+                  0.8384236052465894,
+                  -0.14480281852610233,
+                  -0.14666263943541935
+                ],
+                [
+                  -0.10949667591700063,
+                  0.8796447048487721,
+                  -0.1126300522619772
+                ],
+                [
+                  -0.11029710704269746,
+                  -0.11326391916202283,
+                  0.8767889576515131
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.880347618909866,
+            "min_active_column_singular": 0.8260947517223625,
+            "strict_rgb_interior_sample_count": 46452,
+            "strict_rgb_interior_min_singular": 0.8916812234853062,
+            "strict_rgb_interior_min_determinant": 0.8884418106770854,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.3600743668530925,
+            "max_change": 7.825920756205051,
+            "p99_change": 3.487736376241214,
+            "worst_strict_rgb_interior": {
+              "input": [
+                239.0,
+                239.0,
+                241.0
+              ],
+              "xy": [
+                0.12197028928850664,
+                0.33936022253129344
+              ],
+              "output": [
+                241.91723381744725,
+                240.90198707714873,
+                243.28587369636585
+              ],
+              "jacobian": [
+                [
+                  0.956890890120178,
+                  -0.044283085092160945,
+                  -0.04563343867204139
+                ],
+                [
+                  -0.025546245089685726,
+                  0.9699856940012523,
+                  -0.029867575920377476
+                ],
+                [
+                  -0.030945001465738642,
+                  -0.03508008825008346,
+                  0.9610121765373378
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.8924506799624794,
+            "min_active_column_singular": 0.8844195951057848,
+            "strict_rgb_interior_sample_count": 50210,
+            "strict_rgb_interior_min_singular": 0.8899660062772438,
+            "strict_rgb_interior_min_determinant": 0.8995959206411518,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.6791404818892661,
+            "max_change": 7.3898482322079815,
+            "p99_change": 3.2331448765056976,
+            "worst_strict_rgb_interior": {
+              "input": [
+                112.0,
+                33.0,
+                9.0
+              ],
+              "xy": [
+                0.5598123534010946,
+                0.6564673157162726
+              ],
+              "output": [
+                107.9573067060895,
+                30.851593052300984,
+                9.234691533637571
+              ],
+              "jacobian": [
+                [
+                  0.8961957000024938,
+                  0.010503934729314324,
+                  0.04643093817173849
+                ],
+                [
+                  -0.06708790892403727,
+                  1.0057945180590764,
+                  0.02878512978721659
+                ],
+                [
+                  -0.029827665163438155,
+                  -0.0051256914136104115,
+                  1.000884011550422
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "1444",
+      "frame": 1444,
+      "model_sha256": "9de30cf68bb4ce66a135aac20546802d1dd39c250fc3d80bd87b1fd9e208b152",
+      "sides": {
+        "left": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.4576025817936973,
+            "min_active_column_singular": 0.45752865835720957,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.45752865835720957,
+            "strict_rgb_interior_min_determinant": 0.3532541977026951,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.667082920345816,
+            "max_change": 10.302324928168758,
+            "p99_change": 5.939564537565546,
+            "worst_strict_rgb_interior": {
+              "input": [
+                128.0,
+                128.0,
+                8.0
+              ],
+              "xy": [
+                0.0,
+                1.0
+              ],
+              "output": [
+                134.7483160907739,
+                129.2331106465249,
+                1.028273110004137
+              ],
+              "jacobian": [
+                [
+                  1.0453453623903783,
+                  0.01583408274643716,
+                  -0.016805424866731755
+                ],
+                [
+                  0.03337425760270207,
+                  1.012718781905619,
+                  0.0017077712901709674
+                ],
+                [
+                  0.00010672562315328094,
+                  0.00030027313002456424,
+                  0.4576025817936973
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.6533708040970598,
+            "min_active_column_singular": 0.6533528468574042,
+            "strict_rgb_interior_sample_count": 50305,
+            "strict_rgb_interior_min_singular": 0.6533528468574042,
+            "strict_rgb_interior_min_determinant": 0.6979380185448635,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.22191446198313966,
+            "max_change": 10.005582044676629,
+            "p99_change": 4.394074526034544,
+            "worst_strict_rgb_interior": {
+              "input": [
+                158.0,
+                62.0,
+                8.0
+              ],
+              "xy": [
+                0.2001563721657545,
+                0.8956884561891516
+              ],
+              "output": [
+                163.06819903864542,
+                63.45863606239834,
+                1.826608229742173
+              ],
+              "jacobian": [
+                [
+                  1.0517888657271897,
+                  0.033713576040099724,
+                  -0.009883222896974075
+                ],
+                [
+                  0.039094645781815984,
+                  1.0168233137976728,
+                  0.0036382141260702383
+                ],
+                [
+                  0.0014158288663779217,
+                  -0.003683216278778545,
+                  0.6533708040970598
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.6752595516359463,
+            "min_active_column_singular": 0.6744046792557367,
+            "strict_rgb_interior_sample_count": 50489,
+            "strict_rgb_interior_min_singular": 0.6744046792557367,
+            "strict_rgb_interior_min_determinant": 0.7918266644611403,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.28334967071919714,
+            "max_change": 10.083552789169232,
+            "p99_change": 5.257707168874346,
+            "worst_strict_rgb_interior": {
+              "input": [
+                177.0,
+                70.0,
+                9.0
+              ],
+              "xy": [
+                0.09382329945269742,
+                0.9735744089012517
+              ],
+              "output": [
+                184.7966129613212,
+                72.6227552123632,
+                2.2415320783864487
+              ],
+              "jacobian": [
+                [
+                  1.2021960633654203,
+                  0.1324086798175017,
+                  -0.004210998849259795
+                ],
+                [
+                  0.11221311712216675,
+                  1.0631970523705547,
+                  0.00232985608337799
+                ],
+                [
+                  -0.03267886374306528,
+                  -0.03881681770285361,
+                  0.6752595516359463
+                ]
+              ]
+            }
+          }
+        },
+        "right": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.7663410505917909,
+            "min_active_column_singular": 0.6451140799297526,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.6451140799297526,
+            "strict_rgb_interior_min_determinant": 0.6323945837458947,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.7047114276662536,
+            "max_change": 10.465366179636419,
+            "p99_change": 6.0441578732150125,
+            "worst_strict_rgb_interior": {
+              "input": [
+                247.0,
+                247.0,
+                247.0
+              ],
+              "xy": [
+                0.5,
+                0.75
+              ],
+              "output": [
+                250.09644011367024,
+                248.39316923696026,
+                248.74855428508636
+              ],
+              "jacobian": [
+                [
+                  0.8039529944666128,
+                  -0.15937850172321077,
+                  -0.14107002303120453
+                ],
+                [
+                  -0.07990940505476374,
+                  0.9164682365988597,
+                  -0.07184674292733462
+                ],
+                [
+                  -0.09907035415687915,
+                  -0.10032037828369766,
+                  0.9022202563565429
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.7721464836030592,
+            "min_active_column_singular": 0.766261887757535,
+            "strict_rgb_interior_sample_count": 52181,
+            "strict_rgb_interior_min_singular": 0.766261887757535,
+            "strict_rgb_interior_min_determinant": 0.7040419507447844,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.1677881706510123,
+            "max_change": 10.060659615092334,
+            "p99_change": 4.211685654648414,
+            "worst_strict_rgb_interior": {
+              "input": [
+                172.0,
+                100.0,
+                60.0
+              ],
+              "xy": [
+                0.21579358874120408,
+                0.8623087621696801
+              ],
+              "output": [
+                167.7518929343628,
+                95.58197909746067,
+                62.759573516486746
+              ],
+              "jacobian": [
+                [
+                  0.8581811890077233,
+                  -0.034841080980697825,
+                  0.09734806514330785
+                ],
+                [
+                  -0.14272831668125718,
+                  0.9470166429646554,
+                  -0.005134225564802364
+                ],
+                [
+                  0.05641758201859659,
+                  -0.0028578946804316274,
+                  0.8780136158703016
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.779771543103875,
+            "min_active_column_singular": 0.7266731814978201,
+            "strict_rgb_interior_sample_count": 51502,
+            "strict_rgb_interior_min_singular": 0.7266731814978201,
+            "strict_rgb_interior_min_determinant": 0.7654834963597557,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.31769193500035875,
+            "max_change": 10.061076452589589,
+            "p99_change": 4.398898229281375,
+            "worst_strict_rgb_interior": {
+              "input": [
+                205.0,
+                138.0,
+                87.0
+              ],
+              "xy": [
+                0.14698983580922595,
+                0.9123783031988874
+              ],
+              "output": [
+                198.87850082998938,
+                130.73136768111917,
+                89.11010816552631
+              ],
+              "jacobian": [
+                [
+                  0.8827473303553575,
+                  0.036682483899028284,
+                  0.21451343089802322
+                ],
+                [
+                  -0.053204937222403714,
+                  1.0382475166765062,
+                  0.0773531815003139
+                ],
+                [
+                  0.07006285842831517,
+                  -0.01653050305591819,
+                  0.8513141128563859
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "1805",
+      "frame": 1805,
+      "model_sha256": "25830db4814afd6c8821079d0413a37c5ff776f7d26fa5c88ffdcdcc61717a23",
+      "sides": {
+        "left": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.8412634362167637,
+            "min_active_column_singular": 0.7813508200376875,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.7813508200376875,
+            "strict_rgb_interior_min_determinant": 0.7321911500162335,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.7303555158386805,
+            "max_change": 7.2270825478589416,
+            "p99_change": 3.939141218008995,
+            "worst_strict_rgb_interior": {
+              "input": [
+                8.0,
+                8.0,
+                8.0
+              ],
+              "xy": [
+                1.0,
+                0.0
+              ],
+              "output": [
+                6.801950525497479,
+                5.83410193063742,
+                7.00423569689989
+              ],
+              "jacobian": [
+                [
+                  0.9433249566711854,
+                  -0.06407952155647578,
+                  -0.055640822804855716
+                ],
+                [
+                  -0.09663725342951324,
+                  0.8821439997502853,
+                  -0.09560499609413853
+                ],
+                [
+                  -0.047250292031844054,
+                  -0.04931065377918564,
+                  0.9530629333389697
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.7714543825340634,
+            "min_active_column_singular": 0.7740584035952177,
+            "strict_rgb_interior_sample_count": 52989,
+            "strict_rgb_interior_min_singular": 0.8954452436692932,
+            "strict_rgb_interior_min_determinant": 0.8915274341423202,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.15341374918010048,
+            "max_change": 5.962888801247431,
+            "p99_change": 3.439000527231818,
+            "worst_strict_rgb_interior": {
+              "input": [
+                49.0,
+                110.0,
+                168.0
+              ],
+              "xy": [
+                0.5973416731821736,
+                0.5730180806675939
+              ],
+              "output": [
+                48.44299902514468,
+                109.01848183148867,
+                165.51180629152356
+              ],
+              "jacobian": [
+                [
+                  1.01448206896157,
+                  -0.007522470006819049,
+                  -0.0178826661876883
+                ],
+                [
+                  0.013885310431334119,
+                  0.976781665973391,
+                  -0.04030076371122959
+                ],
+                [
+                  -0.002983537362979405,
+                  -0.05094592595190761,
+                  0.9215480449423126
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.8044987772123307,
+            "min_active_column_singular": 0.8110075065620059,
+            "strict_rgb_interior_sample_count": 50919,
+            "strict_rgb_interior_min_singular": 0.8703325728072048,
+            "strict_rgb_interior_min_determinant": 0.8878780278678368,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.47580045074360194,
+            "max_change": 5.2963009467338225,
+            "p99_change": 4.4777863763077,
+            "worst_strict_rgb_interior": {
+              "input": [
+                232.0,
+                183.0,
+                156.0
+              ],
+              "xy": [
+                0.6442533229085223,
+                0.35048678720445064
+              ],
+              "output": [
+                228.96320602418533,
+                182.7453108528787,
+                153.90987283031126
+              ],
+              "jacobian": [
+                [
+                  0.9964145769184256,
+                  -0.05192605850692189,
+                  -0.07168731528639682
+                ],
+                [
+                  -0.025665310989154477,
+                  0.9585718456203836,
+                  -0.03835040759986441
+                ],
+                [
+                  -0.017788930812287163,
+                  -0.05680314452007451,
+                  0.9345867820023841
+                ]
+              ]
+            }
+          }
+        },
+        "right": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.6233315099133279,
+            "min_active_column_singular": 0.5534503303454182,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.5534503303454182,
+            "strict_rgb_interior_min_determinant": 0.508138267445873,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.6080272624794048,
+            "max_change": 7.830290253109894,
+            "p99_change": 4.033686643853807,
+            "worst_strict_rgb_interior": {
+              "input": [
+                247.0,
+                247.0,
+                247.0
+              ],
+              "xy": [
+                0.3333333333333333,
+                0.5
+              ],
+              "output": [
+                250.59628346748988,
+                249.46840274001227,
+                250.31514968051488
+              ],
+              "jacobian": [
+                [
+                  0.7878853347693848,
+                  -0.14819526137790717,
+                  -0.14786645693669698
+                ],
+                [
+                  -0.11065809208440669,
+                  0.8703640545014082,
+                  -0.10930978054875595
+                ],
+                [
+                  -0.14061091067310372,
+                  -0.13990094119526475,
+                  0.8110134079479963
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.6920089086729604,
+            "min_active_column_singular": 0.6924928604412443,
+            "strict_rgb_interior_sample_count": 54295,
+            "strict_rgb_interior_min_singular": 0.8773687710146786,
+            "strict_rgb_interior_min_determinant": 0.8088246024719703,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.06166208082344094,
+            "max_change": 5.945586887564048,
+            "p99_change": 3.4086292705110837,
+            "worst_strict_rgb_interior": {
+              "input": [
+                245.0,
+                234.0,
+                243.0
+              ],
+              "xy": [
+                0.547302580140735,
+                0.4283727399165508
+              ],
+              "output": [
+                250.2998818383053,
+                237.8003098868288,
+                248.01126707152835
+              ],
+              "jacobian": [
+                [
+                  0.8833981253088723,
+                  -0.024141382885147777,
+                  -0.012460401551152245
+                ],
+                [
+                  -0.007899839149672516,
+                  0.9774876721816099,
+                  -0.00840304923116264
+                ],
+                [
+                  -0.010718641535731877,
+                  -0.024188824378995832,
+                  0.9372413579054069
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.7763767357332085,
+            "min_active_column_singular": 0.7201287718791582,
+            "strict_rgb_interior_sample_count": 56328,
+            "strict_rgb_interior_min_singular": 0.7201287718791582,
+            "strict_rgb_interior_min_determinant": 0.7024092442193591,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.07506236659397285,
+            "max_change": 5.893455874783001,
+            "p99_change": 2.9222723022240147,
+            "worst_strict_rgb_interior": {
+              "input": [
+                246.0,
+                243.0,
+                247.0
+              ],
+              "xy": [
+                0.400312744331509,
+                0.2336578581363004
+              ],
+              "output": [
+                248.87872079480024,
+                244.78287550476676,
+                249.58604942130867
+              ],
+              "jacobian": [
+                [
+                  0.877833319009369,
+                  -0.12093334964652058,
+                  -0.09106954326603045
+                ],
+                [
+                  -0.06533265329272808,
+                  0.920174198156019,
+                  -0.05562651319144152
+                ],
+                [
+                  -0.08981615247625996,
+                  -0.10837584791698873,
+                  0.8957543949053388
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "2166",
+      "frame": 2166,
+      "model_sha256": "3db4520995b257b1cbb4f50d0a1f9c7626fccd5614498f6ae98f4dcdbc16ad9a",
+      "sides": {
+        "left": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.8188883021190421,
+            "min_active_column_singular": 0.6096041990831388,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.6096041990831388,
+            "strict_rgb_interior_min_determinant": 0.5811054126634024,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.5995246327349236,
+            "max_change": 5.648701659502551,
+            "p99_change": 3.6794033030792943,
+            "worst_strict_rgb_interior": {
+              "input": [
+                8.0,
+                8.0,
+                8.0
+              ],
+              "xy": [
+                0.0,
+                0.0
+              ],
+              "output": [
+                5.657071394969775,
+                4.998526305480098,
+                4.91541090921866
+              ],
+              "jacobian": [
+                [
+                  0.877755478105831,
+                  -0.10666550709710876,
+                  -0.10908645971997721
+                ],
+                [
+                  -0.12954053418391354,
+                  0.8361681311608447,
+                  -0.1244520590902276
+                ],
+                [
+                  -0.13301146799661723,
+                  -0.12769963499514603,
+                  0.8481174954899089
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.7642057315061219,
+            "min_active_column_singular": 0.7515790157673596,
+            "strict_rgb_interior_sample_count": 48182,
+            "strict_rgb_interior_min_singular": 0.7992029020917815,
+            "strict_rgb_interior_min_determinant": 0.7701286284870209,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.0552416726092508,
+            "max_change": 5.241772970178074,
+            "p99_change": 4.5483888219679205,
+            "worst_strict_rgb_interior": {
+              "input": [
+                8.0,
+                8.0,
+                14.0
+              ],
+              "xy": [
+                0.08444096950742767,
+                0.17246175243393602
+              ],
+              "output": [
+                5.304244014920051,
+                4.5916541622117695,
+                10.883112265840863
+              ],
+              "jacobian": [
+                [
+                  0.9326752180061408,
+                  -0.04270935838288992,
+                  -0.08274810459185034
+                ],
+                [
+                  -0.05033191629538081,
+                  0.8977459679588105,
+                  -0.08892198515133032
+                ],
+                [
+                  -0.05308418070825027,
+                  -0.04446987898469956,
+                  0.9317387790507929
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.7695424441919521,
+            "min_active_column_singular": 0.7159209239116553,
+            "strict_rgb_interior_sample_count": 57118,
+            "strict_rgb_interior_min_singular": 0.7507358590046452,
+            "strict_rgb_interior_min_determinant": 0.7142985144477534,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.5536525461340018,
+            "max_change": 4.783484613380054,
+            "p99_change": 3.6284029022148543,
+            "worst_strict_rgb_interior": {
+              "input": [
+                11.0,
+                11.0,
+                9.0
+              ],
+              "xy": [
+                0.028146989835809225,
+                0.016689847009735744
+              ],
+              "output": [
+                8.050234162308218,
+                7.193353169225575,
+                5.195935631017736
+              ],
+              "jacobian": [
+                [
+                  0.9164522400189199,
+                  -0.07261314121744178,
+                  -0.06301516636775872
+                ],
+                [
+                  -0.0883223051636719,
+                  0.8859405583371966,
+                  -0.065239245678125
+                ],
+                [
+                  -0.08532385790861952,
+                  -0.07856537451131729,
+                  0.9046513741898501
+                ]
+              ]
+            }
+          }
+        },
+        "right": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.9021970941460893,
+            "min_active_column_singular": 0.872355463668276,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.872355463668276,
+            "strict_rgb_interior_min_determinant": 0.8555729868186424,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.8608140206366018,
+            "max_change": 5.60452362311905,
+            "p99_change": 3.173519706400621,
+            "worst_strict_rgb_interior": {
+              "input": [
+                64.0,
+                32.0,
+                32.0
+              ],
+              "xy": [
+                0.16666666666666666,
+                0.0
+              ],
+              "output": [
+                66.19127856912075,
+                34.841795721279105,
+                34.45484219495401
+              ],
+              "jacobian": [
+                [
+                  0.9462060574815041,
+                  -0.030879177951533165,
+                  -0.011632327697270739
+                ],
+                [
+                  -0.06659376649379567,
+                  0.9531246279603778,
+                  -0.034911416628915504
+                ],
+                [
+                  -0.052606111559583724,
+                  -0.0378292429747944,
+                  0.9529848306563338
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.9083065368749885,
+            "min_active_column_singular": 0.9055697135019888,
+            "strict_rgb_interior_sample_count": 42387,
+            "strict_rgb_interior_min_singular": 0.9055697135019888,
+            "strict_rgb_interior_min_determinant": 0.8825417054968555,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.8973585561407448,
+            "max_change": 4.9223760374415875,
+            "p99_change": 3.930873334240944,
+            "worst_strict_rgb_interior": {
+              "input": [
+                74.0,
+                103.0,
+                161.0
+              ],
+              "xy": [
+                0.982017200938233,
+                0.18915159944367177
+              ],
+              "output": [
+                73.63458262010685,
+                101.90808058724625,
+                162.41159033718665
+              ],
+              "jacobian": [
+                [
+                  0.9142245849818948,
+                  -0.03248648130355036,
+                  -0.015851382728328645
+                ],
+                [
+                  -0.020745904898717527,
+                  0.989159898267701,
+                  -0.00565970910690794
+                ],
+                [
+                  0.0059627307348932845,
+                  0.003412481273699086,
+                  1.006150982219424
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.9212890233552571,
+            "min_active_column_singular": 0.8622947973719997,
+            "strict_rgb_interior_sample_count": 48150,
+            "strict_rgb_interior_min_singular": 0.8622947973719997,
+            "strict_rgb_interior_min_determinant": 0.8384147716694282,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.3162466791815802,
+            "max_change": 4.8620981431110835,
+            "p99_change": 3.504463507777514,
+            "worst_strict_rgb_interior": {
+              "input": [
+                60.0,
+                48.0,
+                44.0
+              ],
+              "xy": [
+                0.04691164972634871,
+                0.0890125173852573
+              ],
+              "output": [
+                61.95596877373287,
+                50.04704294417755,
+                45.51475259996172
+              ],
+              "jacobian": [
+                [
+                  0.9421725083753643,
+                  -0.04335850676507391,
+                  -0.01515345077828556
+                ],
+                [
+                  -0.0627247358715266,
+                  0.939046857644513,
+                  -0.044242155935862115
+                ],
+                [
+                  -0.03764754612988952,
+                  -0.03781365293183114,
+                  0.9530742967731101
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "2527",
+      "frame": 2527,
+      "model_sha256": "aa242fa6a108941cefaf8320877938baaf9d0fd47cd0fb32fd80ed5862bcb644",
+      "sides": {
+        "left": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.5485945090961604,
+            "min_active_column_singular": 0.5473861993581686,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.5473861993581686,
+            "strict_rgb_interior_min_determinant": 0.5277970395852574,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.6644810838863024,
+            "max_change": 8.837791538826458,
+            "p99_change": 4.705940118659214,
+            "worst_strict_rgb_interior": {
+              "input": [
+                8.0,
+                192.0,
+                247.0
+              ],
+              "xy": [
+                0.8333333333333333,
+                0.5
+              ],
+              "output": [
+                1.5186199073316446,
+                189.3249893640556,
+                249.43882769536583
+              ],
+              "jacobian": [
+                [
+                  0.5485945090961604,
+                  0.03334815552954673,
+                  0.03209251621652953
+                ],
+                [
+                  -0.03148025635078966,
+                  1.0383996502140462,
+                  0.038180151721235234
+                ],
+                [
+                  0.024617584449288188,
+                  -0.02776359067905787,
+                  0.9545438432561468
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.8239877220249028,
+            "min_active_column_singular": 0.773961978224379,
+            "strict_rgb_interior_sample_count": 53702,
+            "strict_rgb_interior_min_singular": 0.773961978224379,
+            "strict_rgb_interior_min_determinant": 0.7740688651024558,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.07061405877473158,
+            "max_change": 7.952247227823548,
+            "p99_change": 5.12392676905404,
+            "worst_strict_rgb_interior": {
+              "input": [
+                9.0,
+                8.0,
+                8.0
+              ],
+              "xy": [
+                0.584831899921814,
+                0.13351877607788595
+              ],
+              "output": [
+                7.333779994543118,
+                5.396851082169366,
+                6.923912976820125
+              ],
+              "jacobian": [
+                [
+                  0.9336817261209323,
+                  -0.060664893037351675,
+                  -0.06864991914253338
+                ],
+                [
+                  -0.1004744791687564,
+                  0.8838530117297054,
+                  -0.09723896278879707
+                ],
+                [
+                  -0.05901168838126658,
+                  -0.04802435687233242,
+                  0.955498389152071
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.8887981751591898,
+            "min_active_column_singular": 0.8455956102349593,
+            "strict_rgb_interior_sample_count": 45994,
+            "strict_rgb_interior_min_singular": 0.8455956102349593,
+            "strict_rgb_interior_min_determinant": 0.8831064147645102,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.15756349965012956,
+            "max_change": 7.618286001017175,
+            "p99_change": 4.716637842245546,
+            "worst_strict_rgb_interior": {
+              "input": [
+                47.0,
+                18.0,
+                10.0
+              ],
+              "xy": [
+                0.0688037529319781,
+                0.9235048678720446
+              ],
+              "output": [
+                47.61832095590051,
+                19.78068957545352,
+                11.605530906437615
+              ],
+              "jacobian": [
+                [
+                  0.9779341920462912,
+                  -0.0127563230541341,
+                  -0.0060235541833009165
+                ],
+                [
+                  -0.10022501496354153,
+                  0.9397481004027597,
+                  -0.028243862457131286
+                ],
+                [
+                  -0.13055006055792262,
+                  -0.07740738086547694,
+                  0.9657312807927312
+                ]
+              ]
+            }
+          }
+        },
+        "right": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.7376945585235148,
+            "min_active_column_singular": 0.4850310946518942,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.4850310946518942,
+            "strict_rgb_interior_min_determinant": 0.40391102347640184,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.5325939149245158,
+            "max_change": 8.942506082578966,
+            "p99_change": 4.764089116996445,
+            "worst_strict_rgb_interior": {
+              "input": [
+                8.0,
+                8.0,
+                8.0
+              ],
+              "xy": [
+                0.16666666666666666,
+                1.0
+              ],
+              "output": [
+                3.76158141864605,
+                4.6468356589248,
+                3.7568196760280452
+              ],
+              "jacobian": [
+                [
+                  0.7509339041187122,
+                  -0.1516032429150851,
+                  -0.15853593193025972
+                ],
+                [
+                  -0.11803818092526086,
+                  0.8213775424998442,
+                  -0.13585065280161146
+                ],
+                [
+                  -0.1342818711443332,
+                  -0.14616849116632302,
+                  0.7376945585235148
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.6153885498463936,
+            "min_active_column_singular": 0.5438698684146401,
+            "strict_rgb_interior_sample_count": 53714,
+            "strict_rgb_interior_min_singular": 0.5438698684146401,
+            "strict_rgb_interior_min_determinant": 0.4625998062995853,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.13382232432978827,
+            "max_change": 7.815907368743083,
+            "p99_change": 5.432629145352835,
+            "worst_strict_rgb_interior": {
+              "input": [
+                8.0,
+                8.0,
+                9.0
+              ],
+              "xy": [
+                0.23768569194683348,
+                0.8678720445062587
+              ],
+              "output": [
+                3.742476062392801,
+                4.702726729021586,
+                4.750825823761778
+              ],
+              "jacobian": [
+                [
+                  0.7734980756264402,
+                  -0.1283991896370562,
+                  -0.15404146530923235
+                ],
+                [
+                  -0.09305834492505838,
+                  0.847262428786653,
+                  -0.12938265452655173
+                ],
+                [
+                  -0.11145140305113266,
+                  -0.12698084528346243,
+                  0.7670497546278146
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.5785104500585199,
+            "min_active_column_singular": 0.5770250083918372,
+            "strict_rgb_interior_sample_count": 52927,
+            "strict_rgb_interior_min_singular": 0.6327091340197293,
+            "strict_rgb_interior_min_determinant": 0.5538599501005498,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.12278393031281454,
+            "max_change": 7.607789421778506,
+            "p99_change": 5.534461380961549,
+            "worst_strict_rgb_interior": {
+              "input": [
+                10.0,
+                8.0,
+                9.0
+              ],
+              "xy": [
+                0.4253322908522283,
+                0.8623087621696801
+              ],
+              "output": [
+                5.451934433632731,
+                4.693890578250589,
+                4.911835345652375
+              ],
+              "jacobian": [
+                [
+                  0.8030034843920397,
+                  -0.10885601702360148,
+                  -0.13155797336492547
+                ],
+                [
+                  -0.08428289595605598,
+                  0.878178855846155,
+                  -0.09508757895266129
+                ],
+                [
+                  -0.08914259310932593,
+                  -0.08109319364626799,
+                  0.8220798839796029
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "2888",
+      "frame": 2888,
+      "model_sha256": "8658929a19d76c3454d36e766a2b0ef99614c2f6813c4a7ad55141a687ddcec1",
+      "sides": {
+        "left": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.8617575450092545,
+            "min_active_column_singular": 0.7828166092413439,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.7828166092413439,
+            "strict_rgb_interior_min_determinant": 0.7918935691327249,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.7106694822604558,
+            "max_change": 5.428909273673526,
+            "p99_change": 3.5240148488617202,
+            "worst_strict_rgb_interior": {
+              "input": [
+                8.0,
+                8.0,
+                8.0
+              ],
+              "xy": [
+                0.6666666666666666,
+                0.25
+              ],
+              "output": [
+                7.8387823131716345,
+                5.71180020206087,
+                6.301290985148553
+              ],
+              "jacobian": [
+                [
+                  0.9920326194801774,
+                  -0.01124509291204312,
+                  -0.014083137462394646
+                ],
+                [
+                  -0.10392524766997013,
+                  0.8800147538943204,
+                  -0.10437699201941619
+                ],
+                [
+                  -0.07876580384357013,
+                  -0.07658850755314539,
+                  0.9187575122661968
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.8841967226635461,
+            "min_active_column_singular": 0.8675725777463987,
+            "strict_rgb_interior_sample_count": 34591,
+            "strict_rgb_interior_min_singular": 0.8729259567730576,
+            "strict_rgb_interior_min_determinant": 0.869088149762386,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.07095179601769973,
+            "max_change": 5.2098564884113046,
+            "p99_change": 3.3165786333104075,
+            "worst_strict_rgb_interior": {
+              "input": [
+                8.0,
+                8.0,
+                15.0
+              ],
+              "xy": [
+                0.400312744331509,
+                0.37273991655076494
+              ],
+              "output": [
+                8.02016879328319,
+                5.103999110814115,
+                12.663461464867698
+              ],
+              "jacobian": [
+                [
+                  1.0027235588330168,
+                  -0.0011329399104624827,
+                  -0.004508895451074579
+                ],
+                [
+                  -0.038804811444588694,
+                  0.9284394711513144,
+                  -0.0758907486732987
+                ],
+                [
+                  -0.03476503199165393,
+                  -0.03186163196583536,
+                  0.9363456956598206
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.8572563413288208,
+            "min_active_column_singular": 0.8044087485403358,
+            "strict_rgb_interior_sample_count": 41862,
+            "strict_rgb_interior_min_singular": 0.880611549294298,
+            "strict_rgb_interior_min_determinant": 0.8944366869074912,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.07307320133827579,
+            "max_change": 5.1759636105816185,
+            "p99_change": 3.1284331340523917,
+            "worst_strict_rgb_interior": {
+              "input": [
+                191.0,
+                112.0,
+                28.0
+              ],
+              "xy": [
+                0.3565285379202502,
+                0.6842837273991655
+              ],
+              "output": [
+                196.02155258587206,
+                115.03428622910938,
+                27.359873511166782
+              ],
+              "jacobian": [
+                [
+                  0.9067875133940788,
+                  -0.028065325938200658,
+                  0.03685530263521741
+                ],
+                [
+                  -0.05553008570319662,
+                  0.9851795775045105,
+                  0.025696356920803964
+                ],
+                [
+                  0.017201032994165644,
+                  0.010019509612817501,
+                  1.0039667946262227
+                ]
+              ]
+            }
+          }
+        },
+        "right": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.8408946074885861,
+            "min_active_column_singular": 0.838746858069939,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.838746858069939,
+            "strict_rgb_interior_min_determinant": 0.8724735798866465,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.8674050396787554,
+            "max_change": 5.025916459458216,
+            "p99_change": 3.4785913426274857,
+            "worst_strict_rgb_interior": {
+              "input": [
+                8.0,
+                8.0,
+                8.0
+              ],
+              "xy": [
+                0.0,
+                1.0
+              ],
+              "output": [
+                5.710410467536091,
+                8.555367778097441,
+                10.301782528341288
+              ],
+              "jacobian": [
+                [
+                  0.8408946074885861,
+                  -0.12241591096848836,
+                  -0.11092983760267217
+                ],
+                [
+                  0.032746390460967945,
+                  1.0318715084964332,
+                  0.03262584936101831
+                ],
+                [
+                  0.14643555660373409,
+                  0.1290637288225227,
+                  1.120811062946128
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.9195032671932495,
+            "min_active_column_singular": 0.8823819527785515,
+            "strict_rgb_interior_sample_count": 35462,
+            "strict_rgb_interior_min_singular": 0.8823819527785515,
+            "strict_rgb_interior_min_determinant": 0.8737987605236749,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.7756443858890449,
+            "max_change": 4.940100541862847,
+            "p99_change": 3.380384085461637,
+            "worst_strict_rgb_interior": {
+              "input": [
+                81.0,
+                55.0,
+                38.0
+              ],
+              "xy": [
+                0.2814698983580923,
+                0.31154381084840055
+              ],
+              "output": [
+                78.79728207951638,
+                54.91439517526774,
+                39.04113376385763
+              ],
+              "jacobian": [
+                [
+                  0.9195032671932495,
+                  -0.0527694985223377,
+                  -0.009449710748867801
+                ],
+                [
+                  -0.05586845657077788,
+                  0.9626734956272003,
+                  -0.010944815080804915
+                ],
+                [
+                  0.004153996012306038,
+                  -0.0013225039369899605,
+                  0.9904099129529129
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.9209179282633784,
+            "min_active_column_singular": 0.8776365982956112,
+            "strict_rgb_interior_sample_count": 56937,
+            "strict_rgb_interior_min_singular": 0.8776365982956112,
+            "strict_rgb_interior_min_determinant": 0.8740163110970114,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.8207766784315959,
+            "max_change": 5.060099774476498,
+            "p99_change": 3.4291205243348464,
+            "worst_strict_rgb_interior": {
+              "input": [
+                100.0,
+                53.0,
+                21.0
+              ],
+              "xy": [
+                0.5347928068803753,
+                0.38386648122392214
+              ],
+              "output": [
+                97.3762149969565,
+                52.649307191509024,
+                22.03154434488626
+              ],
+              "jacobian": [
+                [
+                  0.932275662861116,
+                  -0.06346702058468168,
+                  -0.03712559657890324
+                ],
+                [
+                  -0.05868512492062905,
+                  0.9551957468122083,
+                  -0.021051481605681488
+                ],
+                [
+                  -0.0033426298167356094,
+                  -0.00026614892328780115,
+                  0.9977792428073897
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "3240",
+      "frame": 3240,
+      "model_sha256": "9d240c40e0dca9dd893cb3564cde03b337f5d32471f46485736e0354991d3ef5",
+      "sides": {
+        "left": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.7846412420964768,
+            "min_active_column_singular": 0.6583691243005978,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.6583691243005978,
+            "strict_rgb_interior_min_determinant": 0.6344529087608073,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.6105533832942031,
+            "max_change": 6.138301171124361,
+            "p99_change": 3.7204967349363978,
+            "worst_strict_rgb_interior": {
+              "input": [
+                8.0,
+                8.0,
+                8.0
+              ],
+              "xy": [
+                0.8333333333333333,
+                0.0
+              ],
+              "output": [
+                5.283381728705731,
+                4.8425176026174785,
+                6.223222734076511
+              ],
+              "jacobian": [
+                [
+                  0.8666542098329977,
+                  -0.11100114333736677,
+                  -0.11487438710413578
+                ],
+                [
+                  -0.12112303312010297,
+                  0.8335195113496301,
+                  -0.12634312135521775
+                ],
+                [
+                  -0.08013512018960789,
+                  -0.076248248103024,
+                  0.9206281774209586
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.7347222440108023,
+            "min_active_column_singular": 0.7231735702226193,
+            "strict_rgb_interior_sample_count": 53858,
+            "strict_rgb_interior_min_singular": 0.7231735702226193,
+            "strict_rgb_interior_min_determinant": 0.7113775977775234,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.06527640509070867,
+            "max_change": 5.85590840071842,
+            "p99_change": 3.3764534085350335,
+            "worst_strict_rgb_interior": {
+              "input": [
+                9.0,
+                8.0,
+                8.0
+              ],
+              "xy": [
+                0.6755277560594214,
+                0.03337969401947149
+              ],
+              "output": [
+                6.325398405141794,
+                5.114515027687,
+                6.605299913394564
+              ],
+              "jacobian": [
+                [
+                  0.8785118012587816,
+                  -0.09568290517473166,
+                  -0.10023253461032411
+                ],
+                [
+                  -0.107572013921164,
+                  0.8715084763777572,
+                  -0.0979059009744887
+                ],
+                [
+                  -0.061832941518812135,
+                  -0.04793994133933843,
+                  0.9558618257429448
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.7375727111624553,
+            "min_active_column_singular": 0.7501810665665942,
+            "strict_rgb_interior_sample_count": 54981,
+            "strict_rgb_interior_min_singular": 0.8436778635263675,
+            "strict_rgb_interior_min_determinant": 0.8378371515155086,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.09085861371979245,
+            "max_change": 5.733055822028685,
+            "p99_change": 3.04524696341385,
+            "worst_strict_rgb_interior": {
+              "input": [
+                10.0,
+                8.0,
+                13.0
+              ],
+              "xy": [
+                0.3408913213448006,
+                0.5062586926286509
+              ],
+              "output": [
+                8.587120149751401,
+                5.210106720947944,
+                9.663227241502803
+              ],
+              "jacobian": [
+                [
+                  0.9839003645310633,
+                  -0.018393298968909733,
+                  -0.04128315827670903
+                ],
+                [
+                  -0.038744771381528764,
+                  0.9404797164818994,
+                  -0.06335933715141095
+                ],
+                [
+                  -0.0686780439362984,
+                  -0.04554028043698466,
+                  0.912256145923731
+                ]
+              ]
+            }
+          }
+        },
+        "right": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.8687985413430397,
+            "min_active_column_singular": 0.8275640907278169,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.8275640907278169,
+            "strict_rgb_interior_min_determinant": 0.829841281625068,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.8317927034161839,
+            "max_change": 6.178514530362163,
+            "p99_change": 3.485866384943071,
+            "worst_strict_rgb_interior": {
+              "input": [
+                64.0,
+                192.0,
+                224.0
+              ],
+              "xy": [
+                0.5,
+                0.5
+              ],
+              "output": [
+                68.75761655651998,
+                195.59318200336557,
+                225.78630096326447
+              ],
+              "jacobian": [
+                [
+                  0.9043050059378288,
+                  -0.08974007432999542,
+                  -0.016200703171620034
+                ],
+                [
+                  -0.07299907749001022,
+                  0.9305660960916384,
+                  -0.013279335140794046
+                ],
+                [
+                  -0.037292235130507834,
+                  -0.03409104029640275,
+                  0.9951291339256159
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.9261724123898887,
+            "min_active_column_singular": 0.8671395429660713,
+            "strict_rgb_interior_sample_count": 51109,
+            "strict_rgb_interior_min_singular": 0.8671395429660713,
+            "strict_rgb_interior_min_determinant": 0.8603102523269466,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.8441328404858413,
+            "max_change": 6.017333393353263,
+            "p99_change": 3.2226213745097225,
+            "worst_strict_rgb_interior": {
+              "input": [
+                40.0,
+                26.0,
+                20.0
+              ],
+              "xy": [
+                0.9913995308835027,
+                0.0
+              ],
+              "output": [
+                41.21706411705489,
+                28.742183257456716,
+                21.764974706172104
+              ],
+              "jacobian": [
+                [
+                  0.9463898238046369,
+                  -0.039487449851279166,
+                  -0.02798446964446555
+                ],
+                [
+                  -0.07642936788636945,
+                  0.9442712650855825,
+                  -0.04052794295994033
+                ],
+                [
+                  -0.03025531016559313,
+                  -0.029693365334019006,
+                  0.968258287104085
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.9249485774383572,
+            "min_active_column_singular": 0.8985571163652291,
+            "strict_rgb_interior_sample_count": 49009,
+            "strict_rgb_interior_min_singular": 0.8985571163652291,
+            "strict_rgb_interior_min_determinant": 0.882775237145064,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.7864205825505223,
+            "max_change": 5.984388886121835,
+            "p99_change": 3.964133356233046,
+            "worst_strict_rgb_interior": {
+              "input": [
+                43.0,
+                35.0,
+                33.0
+              ],
+              "xy": [
+                0.9194683346364347,
+                0.0
+              ],
+              "output": [
+                44.055522892353224,
+                37.22657168644735,
+                34.409117360634305
+              ],
+              "jacobian": [
+                [
+                  0.9586549274534377,
+                  -0.03319388837877568,
+                  -0.02539380366941657
+                ],
+                [
+                  -0.049056774881165666,
+                  0.9572213974180528,
+                  -0.03735310105879819
+                ],
+                [
+                  -0.011699818169972787,
+                  -0.023598552240969184,
+                  0.9649918412933118
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "fine-3240",
+      "frame": 3240,
+      "model_sha256": "3256a198ecacf01b00b0d97489e2b294c6d8f932e87947574e6223b844701a33",
+      "sides": {
+        "left": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.5106713466273014,
+            "min_active_column_singular": 0.5106604122199502,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.5106604122199502,
+            "strict_rgb_interior_min_determinant": 0.5109397246680605,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.6309246512499018,
+            "max_change": 9.355375606590876,
+            "p99_change": 2.6243927407376866,
+            "worst_strict_rgb_interior": {
+              "input": [
+                8.0,
+                96.0,
+                160.0
+              ],
+              "xy": [
+                0.5,
+                0.5
+              ],
+              "output": [
+                1.2374628225316897,
+                90.3029940060236,
+                157.37408744864683
+              ],
+              "jacobian": [
+                [
+                  0.5106713466273014,
+                  0.0007330200122748209,
+                  0.0007319962915293132
+                ],
+                [
+                  0.00386017275511108,
+                  1.001105937733314,
+                  0.0010445114287449542
+                ],
+                [
+                  0.0011618195851497148,
+                  -0.00013739645186205962,
+                  0.9994272957285375
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.6419488176034633,
+            "min_active_column_singular": 0.6488504222165778,
+            "strict_rgb_interior_sample_count": 53858,
+            "strict_rgb_interior_min_singular": 0.6939775573452774,
+            "strict_rgb_interior_min_determinant": 0.6751844488550376,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.06439197713701285,
+            "max_change": 9.920424936428596,
+            "p99_change": 3.8631390609654654,
+            "worst_strict_rgb_interior": {
+              "input": [
+                9.0,
+                8.0,
+                8.0
+              ],
+              "xy": [
+                0.6755277560594214,
+                0.03337969401947149
+              ],
+              "output": [
+                6.196666875613015,
+                5.116589815897093,
+                6.654091515681219
+              ],
+              "jacobian": [
+                [
+                  0.8604089751428905,
+                  -0.10612623014833922,
+                  -0.10670533320911701
+                ],
+                [
+                  -0.11987325808368965,
+                  0.8613718876079037,
+                  -0.10666860147603785
+                ],
+                [
+                  -0.06279731299754054,
+                  -0.054595374278125774,
+                  0.9436661553108223
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.7353980260692019,
+            "min_active_column_singular": 0.7563176542311469,
+            "strict_rgb_interior_sample_count": 54981,
+            "strict_rgb_interior_min_singular": 0.7843590813391068,
+            "strict_rgb_interior_min_determinant": 0.7392045544252006,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.07655340759866025,
+            "max_change": 8.562459379909939,
+            "p99_change": 3.3932902483472764,
+            "worst_strict_rgb_interior": {
+              "input": [
+                9.0,
+                83.0,
+                141.0
+              ],
+              "xy": [
+                0.5535574667709148,
+                0.5563282336578581
+              ],
+              "output": [
+                3.945257720531556,
+                79.41050013679738,
+                139.37433506416522
+              ],
+              "jacobian": [
+                [
+                  0.8492648102929365,
+                  -0.08248657885627608,
+                  -0.09690836027819749
+                ],
+                [
+                  -0.02477432542139013,
+                  0.9203359224628684,
+                  -0.09383696106152684
+                ],
+                [
+                  -0.011683049454063621,
+                  -0.03847068610673432,
+                  0.9537303665559307
+                ]
+              ]
+            }
+          },
+          "native_motion": {
+            "16x8": {
+              "max": 0.7887692023415482,
+              "p99": 0.3418582672573029
+            },
+            "32x16": {
+              "max": 1.5768461082828846,
+              "p99": 0.6717058937889758
+            },
+            "max_quintic_weight_drift_byte_per_frame": 0.11071902830835487
+          },
+          "native_shadows": {
+            "min_own_derivative": 0.0,
+            "min_singular": 0.0,
+            "max_singular": 1.1472076085425909,
+            "min_determinant": 0.0,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0026397888168946484,
+            "max_abs_change": 5.170588191124141,
+            "p99_abs_change": 3.968298999621542,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                41.0,
+                9.0,
+                0.0
+              ],
+              "xy": [
+                0.5785770132916341,
+                0.43949930458970793
+              ],
+              "output_rgb": [
+                39.026902378540086,
+                6.213928786864763,
+                0.0
+              ],
+              "channel": 2,
+              "jacobian": [
+                [
+                  1.0204308706806273,
+                  0.012555343037817579,
+                  0.007376435707669771
+                ],
+                [
+                  0.023964879462603506,
+                  0.9990045331939399,
+                  0.014459075396157317
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                41.0,
+                9.0,
+                0.0
+              ],
+              "xy": [
+                0.5785770132916341,
+                0.43949930458970793
+              ],
+              "output_rgb": [
+                39.026902378540086,
+                6.213928786864763,
+                0.0
+              ],
+              "jacobian": [
+                [
+                  1.0204308706806273,
+                  0.012555343037817579,
+                  0.007376435707669771
+                ],
+                [
+                  0.023964879462603506,
+                  0.9990045331939399,
+                  0.014459075396157317
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.0,
+                "min_singular": 0.0,
+                "min_determinant": 0.0
+              },
+              "0.85": {
+                "min_own_derivative": 0.15000000000000002,
+                "min_singular": 0.14979692540607695,
+                "min_determinant": 0.017422282828102084
+              },
+              "0.75": {
+                "min_own_derivative": 0.25,
+                "min_singular": 0.24972036154440633,
+                "min_determinant": 0.04999942936529803
+              },
+              "0.5": {
+                "min_own_derivative": 0.5,
+                "min_singular": 0.499678373879721,
+                "min_determinant": 0.21655477417569632
+              }
+            },
+            "samples": 4167,
+            "median_luma_gain": 0.9190638767428403,
+            "p01_luma_gain": 0.6147116627164201,
+            "p99_luma_gain": 1.008125547221868,
+            "p99_abs_luma_change": 3.878898957128941
+          }
+        },
+        "right": {
+          "interior_grid": {
+            "sample_count": 35000,
+            "min_active_own_derivative": 0.7361649685023224,
+            "min_active_column_singular": 0.6968107510838509,
+            "strict_rgb_interior_sample_count": 35000,
+            "strict_rgb_interior_min_singular": 0.6968107510838509,
+            "strict_rgb_interior_min_determinant": 0.737054685120327,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.7319110696557825,
+            "max_change": 9.749521805626976,
+            "p99_change": 2.529414357062402,
+            "worst_strict_rgb_interior": {
+              "input": [
+                64.0,
+                160.0,
+                160.0
+              ],
+              "xy": [
+                0.5,
+                0.5
+              ],
+              "output": [
+                70.95183078680004,
+                164.0668893020486,
+                161.85282541952535
+              ],
+              "jacobian": [
+                [
+                  0.7624989619576468,
+                  -0.10932346394810111,
+                  0.1702991973544954
+                ],
+                [
+                  -0.1449798054017606,
+                  0.9313174127282196,
+                  0.10518919820663086
+                ],
+                [
+                  -0.07792402927276498,
+                  -0.03218402693147482,
+                  1.0559606959674852
+                ]
+              ]
+            }
+          },
+          "native_anchor": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.6591107091085746,
+            "min_active_column_singular": 0.6433274058947673,
+            "strict_rgb_interior_sample_count": 51109,
+            "strict_rgb_interior_min_singular": 0.6433274058947673,
+            "strict_rgb_interior_min_determinant": 0.7183175897847973,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.7682747616190875,
+            "max_change": 10.070446281569879,
+            "p99_change": 3.8521925247376863,
+            "worst_strict_rgb_interior": {
+              "input": [
+                80.0,
+                129.0,
+                166.0
+              ],
+              "xy": [
+                0.581704456606724,
+                0.4673157162726008
+              ],
+              "output": [
+                86.0748172609049,
+                132.49453461545136,
+                167.4021523284649
+              ],
+              "jacobian": [
+                [
+                  0.6591107091085746,
+                  -0.005464915800473591,
+                  0.20055441712517563
+                ],
+                [
+                  -0.196913154140816,
+                  0.996575920033024,
+                  0.11487571701303523
+                ],
+                [
+                  -0.10557262656760713,
+                  -0.0021734344609853906,
+                  1.0627081520071329
+                ]
+              ]
+            }
+          },
+          "native_away_full_strength": {
+            "sample_count": 57600,
+            "min_active_own_derivative": 0.6509751060515327,
+            "min_active_column_singular": 0.6460190903723824,
+            "strict_rgb_interior_sample_count": 49009,
+            "strict_rgb_interior_min_singular": 0.6460190903723824,
+            "strict_rgb_interior_min_determinant": 0.722197663396384,
+            "fraction_negative_own_derivative": 0.0,
+            "fraction_negative_determinant": 0.0,
+            "min_gray_direction_luma_derivative": 0.8154680740320887,
+            "max_change": 10.499896288280105,
+            "p99_change": 4.149836009212118,
+            "worst_strict_rgb_interior": {
+              "input": [
+                78.0,
+                119.0,
+                171.0
+              ],
+              "xy": [
+                0.5504300234558248,
+                0.4561891515994437
+              ],
+              "output": [
+                85.45309912422518,
+                123.2430475107021,
+                172.83742597659466
+              ],
+              "jacobian": [
+                [
+                  0.6509751060515327,
+                  0.028124146184296706,
+                  0.18897194105218773
+                ],
+                [
+                  -0.20730035727123663,
+                  1.017063858539558,
+                  0.11033112426335379
+                ],
+                [
+                  -0.10875565449600799,
+                  0.006594104926136879,
+                  1.0583169363968636
+                ]
+              ]
+            }
+          },
+          "native_motion": {
+            "16x8": {
+              "max": 0.9434369863411902,
+              "p99": 0.349294806780691
+            },
+            "32x16": {
+              "max": 1.6362557140813507,
+              "p99": 0.6932604784975842
+            },
+            "max_quintic_weight_drift_byte_per_frame": 0.11239337367823526
+          },
+          "native_shadows": {
+            "min_own_derivative": 0.1891668678982643,
+            "min_singular": 0.18916658519253254,
+            "max_singular": 1.3872479123088668,
+            "min_determinant": 0.21040356333730897,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0,
+            "max_abs_change": 5.4106216617800555,
+            "p99_abs_change": 4.037303126578319,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                18.0,
+                4.0,
+                0.0
+              ],
+              "xy": [
+                0.3346364347146208,
+                0.0
+              ],
+              "output_rgb": [
+                20.61360372297114,
+                5.827355147657776,
+                0.0
+              ],
+              "channel": 2,
+              "jacobian": [
+                [
+                  1.097407351513496,
+                  0.021299276036465642,
+                  0.0016824658369500867
+                ],
+                [
+                  0.06834079533567561,
+                  1.0148646788133924,
+                  0.0008888868983483178
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.1891668678982643
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                18.0,
+                4.0,
+                0.0
+              ],
+              "xy": [
+                0.3346364347146208,
+                0.0
+              ],
+              "output_rgb": [
+                20.61360372297114,
+                5.827355147657776,
+                0.0
+              ],
+              "jacobian": [
+                [
+                  1.097407351513496,
+                  0.021299276036465642,
+                  0.0016824658369500867
+                ],
+                [
+                  0.06834079533567561,
+                  1.0148646788133924,
+                  0.0008888868983483178
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.1891668678982643
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.1891668678982643,
+                "min_singular": 0.18916658519253254,
+                "min_determinant": 0.21040356333730897
+              },
+              "0.85": {
+                "min_own_derivative": 0.3107918377135247,
+                "min_singular": 0.31079147202627433,
+                "min_determinant": 0.34044935912097113
+              },
+              "0.75": {
+                "min_own_derivative": 0.3918751509236982,
+                "min_singular": 0.3918747631410412,
+                "min_determinant": 0.42487092204106786
+              },
+              "0.5": {
+                "min_own_derivative": 0.5945834339491322,
+                "min_singular": 0.5945830828296633,
+                "min_determinant": 0.6279598369431626
+              }
+            },
+            "samples": 5919,
+            "median_luma_gain": 1.098477332813141,
+            "p01_luma_gain": 0.9966585693340232,
+            "p99_luma_gain": 1.7574598233953975,
+            "p99_abs_luma_change": 4.043058987061395
+          }
+        }
+      }
+    }
+  ]
+}

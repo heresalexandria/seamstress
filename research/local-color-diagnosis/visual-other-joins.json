@@ -1,0 +1,1928 @@
+{
+  "measurement_only": true,
+  "method": "Visually selected native rectangles. Samples use existing correspondence-consistent flat matches with five-native-pixel contour exclusion, not fixed-rectangle pixel subtraction. RGB units are 8-bit; signed delta is incoming minus outgoing. No models fitted here.",
+  "cuts": [
+    {
+      "frame": 722,
+      "visual_observation": "Pale car paint darkens while neighboring pink/purple paint loses magenta. Hair shifts more yellow/orange. Teal panel changes much less. Texture/reflection streaks excluded.",
+      "regions": [
+        {
+          "id": "hair",
+          "material": "Woman brown hair",
+          "left_rect_xyxy": [
+            420,
+            80,
+            454,
+            125
+          ],
+          "accepted_matched_samples": 38,
+          "left_rgb_median": [
+            118.41986083984375,
+            70.13992309570312,
+            16.199310302734375
+          ],
+          "right_rgb_median": [
+            123.1993179321289,
+            72.56596374511719,
+            4.600257873535156
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            4.67531681060791,
+            2.16821551322937,
+            -11.109733581542969
+          ],
+          "signed_rgb_median_right_minus_left": [
+            4.380912780761719,
+            2.107818603515625,
+            -11.45361328125
+          ],
+          "residual_mad_about_signed_median": [
+            1.5034523010253906,
+            0.3979072570800781,
+            1.5593647956848145
+          ],
+          "rgb_mae": 5.984422206878662,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "car_pale",
+          "material": "Pale upper car paint",
+          "left_rect_xyxy": [
+            840,
+            458,
+            970,
+            477
+          ],
+          "accepted_matched_samples": 112,
+          "left_rgb_median": [
+            197.1921844482422,
+            193.09442138671875,
+            198.00543212890625
+          ],
+          "right_rgb_median": [
+            188.25692749023438,
+            186.51583862304688,
+            187.18035888671875
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -9.504958152770996,
+            -6.760885715484619,
+            -11.023651123046875
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -9.512458801269531,
+            -6.848388671875,
+            -11.183380126953125
+          ],
+          "residual_mad_about_signed_median": [
+            1.1127471923828125,
+            0.504425048828125,
+            0.8621597290039062
+          ],
+          "rgb_mae": 9.096498489379883,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "car_pink",
+          "material": "Pink car paint",
+          "left_rect_xyxy": [
+            355,
+            560,
+            425,
+            592
+          ],
+          "accepted_matched_samples": 61,
+          "left_rgb_median": [
+            178.4197540283203,
+            112.15489959716797,
+            136.04071044921875
+          ],
+          "right_rgb_median": [
+            180.04090881347656,
+            123.99752044677734,
+            135.99957275390625
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            0.20770969986915588,
+            6.9663825035095215,
+            -1.0832064151763916
+          ],
+          "signed_rgb_median_right_minus_left": [
+            0.4147300720214844,
+            11.166519165039062,
+            -0.755706787109375
+          ],
+          "residual_mad_about_signed_median": [
+            1.5791511535644531,
+            0.8291015625,
+            0.75677490234375
+          ],
+          "rgb_mae": 3.9382483959198,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "car_purple",
+          "material": "Purple car paint",
+          "left_rect_xyxy": [
+            680,
+            607,
+            780,
+            626
+          ],
+          "accepted_matched_samples": 72,
+          "left_rgb_median": [
+            92.81352233886719,
+            85.11187744140625,
+            149.72720336914062
+          ],
+          "right_rgb_median": [
+            96.56718444824219,
+            93.3783187866211,
+            151.60971069335938
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            4.030608177185059,
+            8.20835018157959,
+            1.4495645761489868
+          ],
+          "signed_rgb_median_right_minus_left": [
+            3.8594894409179688,
+            8.405593872070312,
+            1.3036270141601562
+          ],
+          "residual_mad_about_signed_median": [
+            0.9371490478515625,
+            0.662933349609375,
+            1.4681549072265625
+          ],
+          "rgb_mae": 4.704767227172852,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "car_teal",
+          "material": "Teal car paint",
+          "left_rect_xyxy": [
+            595,
+            548,
+            690,
+            575
+          ],
+          "accepted_matched_samples": 122,
+          "left_rgb_median": [
+            84.01083374023438,
+            131.0,
+            130.21746826171875
+          ],
+          "right_rgb_median": [
+            83.75556945800781,
+            127.22990417480469,
+            129.35923767089844
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -0.2553233206272125,
+            -3.4359183311462402,
+            -1.54606294631958
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -0.2722663879394531,
+            -3.736896514892578,
+            -1.6669235229492188
+          ],
+          "residual_mad_about_signed_median": [
+            0.4979209899902344,
+            0.6596412658691406,
+            1.3093032836914062
+          ],
+          "rgb_mae": 2.014054775238037,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "sky",
+          "material": "Night sky",
+          "left_rect_xyxy": [
+            540,
+            70,
+            670,
+            180
+          ],
+          "accepted_matched_samples": 859,
+          "left_rgb_median": [
+            20.983844757080078,
+            53.84414291381836,
+            114.65082550048828
+          ],
+          "right_rgb_median": [
+            19.883520126342773,
+            55.38645553588867,
+            117.09622955322266
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -1.5409659147262573,
+            1.3303889036178589,
+            2.135589599609375
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -1.5420894622802734,
+            1.2760200500488281,
+            2.2130813598632812
+          ],
+          "residual_mad_about_signed_median": [
+            1.0673294067382812,
+            0.7121009826660156,
+            1.0131683349609375
+          ],
+          "rgb_mae": 1.8013519048690796,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        }
+      ]
+    },
+    {
+      "frame": 1083,
+      "visual_observation": "Blue tracksuit and pale car paint darken while brown hair/fur warm. Adjacent teal/pink car regions respond differently. Strong evidence of color-conditioned grade residual.",
+      "regions": [
+        {
+          "id": "hair",
+          "material": "Woman brown hair",
+          "left_rect_xyxy": [
+            917,
+            202,
+            967,
+            228
+          ],
+          "accepted_matched_samples": 63,
+          "left_rgb_median": [
+            143.80780029296875,
+            71.84514617919922,
+            0.0
+          ],
+          "right_rgb_median": [
+            152.88583374023438,
+            73.08705139160156,
+            0.30889278650283813
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            9.556678771972656,
+            1.835015058517456,
+            0.5464268922805786
+          ],
+          "signed_rgb_median_right_minus_left": [
+            9.311325073242188,
+            1.8122711181640625,
+            0.30889278650283813
+          ],
+          "residual_mad_about_signed_median": [
+            1.448760986328125,
+            0.6746749877929688,
+            0.2853979170322418
+          ],
+          "rgb_mae": 3.9825401306152344,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "tracksuit",
+          "material": "Woman blue tracksuit",
+          "left_rect_xyxy": [
+            882,
+            450,
+            909,
+            533
+          ],
+          "accepted_matched_samples": 85,
+          "left_rgb_median": [
+            46.67078399658203,
+            136.69691467285156,
+            190.80999755859375
+          ],
+          "right_rgb_median": [
+            38.2745475769043,
+            133.54286193847656,
+            191.23768615722656
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -8.454744338989258,
+            -3.0314416885375977,
+            0.8400819897651672
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -8.530990600585938,
+            -3.049224853515625,
+            1.165283203125
+          ],
+          "residual_mad_about_signed_median": [
+            0.8109359741210938,
+            0.7519073486328125,
+            1.0341033935546875
+          ],
+          "rgb_mae": 4.330536842346191,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "car_pink",
+          "material": "Pink car paint",
+          "left_rect_xyxy": [
+            646,
+            467,
+            704,
+            494
+          ],
+          "accepted_matched_samples": 81,
+          "left_rgb_median": [
+            198.49929809570312,
+            135.8486785888672,
+            138.73057556152344
+          ],
+          "right_rgb_median": [
+            199.23037719726562,
+            142.95616149902344,
+            137.80841064453125
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            0.5650926828384399,
+            7.196185111999512,
+            -0.7899885773658752
+          ],
+          "signed_rgb_median_right_minus_left": [
+            0.3973541259765625,
+            7.2151947021484375,
+            -0.745269775390625
+          ],
+          "residual_mad_about_signed_median": [
+            1.0521087646484375,
+            0.4149322509765625,
+            0.8260345458984375
+          ],
+          "rgb_mae": 3.2027924060821533,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "car_teal",
+          "material": "Teal car paint",
+          "left_rect_xyxy": [
+            50,
+            480,
+            245,
+            507
+          ],
+          "accepted_matched_samples": 323,
+          "left_rgb_median": [
+            83.11418914794922,
+            127.0,
+            129.84739685058594
+          ],
+          "right_rgb_median": [
+            80.1897201538086,
+            125.57514953613281,
+            129.4824981689453
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -3.0624847412109375,
+            -1.6088327169418335,
+            0.3707832396030426
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -3.048614501953125,
+            -1.6131057739257812,
+            0.1790618896484375
+          ],
+          "residual_mad_about_signed_median": [
+            0.8206253051757812,
+            0.7619552612304688,
+            0.9001007080078125
+          ],
+          "rgb_mae": 1.9206995964050293,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "car_pale",
+          "material": "Pale car paint",
+          "left_rect_xyxy": [
+            350,
+            387,
+            495,
+            405
+          ],
+          "accepted_matched_samples": 107,
+          "left_rgb_median": [
+            208.0054168701172,
+            199.3525390625,
+            198.0031280517578
+          ],
+          "right_rgb_median": [
+            200.5921630859375,
+            195.75367736816406,
+            192.5474853515625
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -7.6494059562683105,
+            -4.024503707885742,
+            -5.103761672973633
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -7.496978759765625,
+            -4.027557373046875,
+            -5.23858642578125
+          ],
+          "residual_mad_about_signed_median": [
+            0.7626953125,
+            0.6903839111328125,
+            1.0546722412109375
+          ],
+          "rgb_mae": 5.592556476593018,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "fur",
+          "material": "Sloth brown fur",
+          "left_rect_xyxy": [
+            259,
+            296,
+            276,
+            332
+          ],
+          "accepted_matched_samples": 27,
+          "left_rgb_median": [
+            137.12973022460938,
+            106.60387420654297,
+            67.57920837402344
+          ],
+          "right_rgb_median": [
+            139.30711364746094,
+            108.40764617919922,
+            63.37091064453125
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            2.2014245986938477,
+            1.771397590637207,
+            -4.5536274909973145
+          ],
+          "signed_rgb_median_right_minus_left": [
+            2.21697998046875,
+            1.7751846313476562,
+            -4.677085876464844
+          ],
+          "residual_mad_about_signed_median": [
+            0.7091217041015625,
+            0.7214813232421875,
+            0.8066482543945312
+          ],
+          "rgb_mae": 2.9109017848968506,
+          "confidence": "limited sample count; corroborating only"
+        }
+      ]
+    },
+    {
+      "frame": 1444,
+      "visual_observation": "Pale trunk and blue tracksuit darken while pink bumper gets less magenta and brown hair shifts yellow. Truck panel and road are more stable than those material colors.",
+      "regions": [
+        {
+          "id": "hair",
+          "material": "Woman brown hair",
+          "left_rect_xyxy": [
+            233,
+            180,
+            289,
+            197
+          ],
+          "accepted_matched_samples": 43,
+          "left_rgb_median": [
+            134.6555938720703,
+            78.39527893066406,
+            16.693424224853516
+          ],
+          "right_rgb_median": [
+            138.63633728027344,
+            78.99818420410156,
+            6.267628192901611
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            3.9577481746673584,
+            0.29757601022720337,
+            -10.972596168518066
+          ],
+          "signed_rgb_median_right_minus_left": [
+            4.02874755859375,
+            0.256439208984375,
+            -11.037642478942871
+          ],
+          "residual_mad_about_signed_median": [
+            0.808349609375,
+            0.66522216796875,
+            0.9694814682006836
+          ],
+          "rgb_mae": 5.2183308601379395,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "tracksuit",
+          "material": "Woman blue tracksuit",
+          "left_rect_xyxy": [
+            228,
+            268,
+            269,
+            301
+          ],
+          "accepted_matched_samples": 67,
+          "left_rgb_median": [
+            57.966766357421875,
+            132.31727600097656,
+            182.99998474121094
+          ],
+          "right_rgb_median": [
+            52.563232421875,
+            128.00477600097656,
+            179.7355499267578
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -4.851203441619873,
+            -4.137789249420166,
+            -3.9254276752471924
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -5.003448486328125,
+            -4.245918273925781,
+            -3.2682647705078125
+          ],
+          "residual_mad_about_signed_median": [
+            0.9629020690917969,
+            0.6471099853515625,
+            0.739501953125
+          ],
+          "rgb_mae": 4.304807186126709,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "car_pale",
+          "material": "Pale trunk paint",
+          "left_rect_xyxy": [
+            505,
+            373,
+            580,
+            408
+          ],
+          "accepted_matched_samples": 124,
+          "left_rgb_median": [
+            189.23541259765625,
+            189.89334106445312,
+            195.97760009765625
+          ],
+          "right_rgb_median": [
+            182.09556579589844,
+            187.25790405273438,
+            192.69677734375
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -7.250748634338379,
+            -2.6030941009521484,
+            -3.589980125427246
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -7.2430572509765625,
+            -2.6127471923828125,
+            -3.4389572143554688
+          ],
+          "residual_mad_about_signed_median": [
+            0.9360733032226562,
+            0.5534210205078125,
+            0.8785018920898438
+          ],
+          "rgb_mae": 4.481344699859619,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "car_pink",
+          "material": "Pink lower car paint",
+          "left_rect_xyxy": [
+            536,
+            524,
+            685,
+            539
+          ],
+          "accepted_matched_samples": 57,
+          "left_rgb_median": [
+            173.26898193359375,
+            115.03539276123047,
+            136.54351806640625
+          ],
+          "right_rgb_median": [
+            177.73477172851562,
+            127.13275909423828,
+            137.79986572265625
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            4.087901592254639,
+            11.718454360961914,
+            0.9386987686157227
+          ],
+          "signed_rgb_median_right_minus_left": [
+            4.05926513671875,
+            11.816268920898438,
+            1.56298828125
+          ],
+          "residual_mad_about_signed_median": [
+            1.281341552734375,
+            0.6659927368164062,
+            1.28814697265625
+          ],
+          "rgb_mae": 5.832173824310303,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "truck_gray",
+          "material": "Gray flat truck panel",
+          "left_rect_xyxy": [
+            69,
+            115,
+            120,
+            250
+          ],
+          "accepted_matched_samples": 249,
+          "left_rgb_median": [
+            121.91324615478516,
+            126.0,
+            131.0
+          ],
+          "right_rgb_median": [
+            122.7379150390625,
+            126.29049682617188,
+            131.17286682128906
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            0.24916306138038635,
+            0.04816675931215286,
+            0.051328543573617935
+          ],
+          "signed_rgb_median_right_minus_left": [
+            0.4253692626953125,
+            -0.00243377685546875,
+            0.021453857421875
+          ],
+          "residual_mad_about_signed_median": [
+            1.012237548828125,
+            0.770843505859375,
+            0.8039703369140625
+          ],
+          "rgb_mae": 1.036749243736267,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "road_blue",
+          "material": "Blue asphalt",
+          "left_rect_xyxy": [
+            930,
+            535,
+            1000,
+            565
+          ],
+          "accepted_matched_samples": 71,
+          "left_rgb_median": [
+            28.999988555908203,
+            51.99791717529297,
+            72.99998474121094
+          ],
+          "right_rgb_median": [
+            27.0,
+            50.00333786010742,
+            72.99996948242188
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -2.0440192222595215,
+            -1.7898882627487183,
+            -0.19273000955581665
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -2.121610641479492,
+            -1.9095497131347656,
+            -0.00150299072265625
+          ],
+          "residual_mad_about_signed_median": [
+            0.5990638732910156,
+            0.4333839416503906,
+            0.12242889404296875
+          ],
+          "rgb_mae": 1.385196328163147,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "fur",
+          "material": "Sloth back fur",
+          "left_rect_xyxy": [
+            535,
+            279,
+            567,
+            320
+          ],
+          "accepted_matched_samples": 46,
+          "left_rgb_median": [
+            123.55801391601562,
+            101.00102233886719,
+            73.10948181152344
+          ],
+          "right_rgb_median": [
+            127.67667388916016,
+            104.92225646972656,
+            71.7911605834961
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            4.037132740020752,
+            3.99021053314209,
+            -1.83545982837677
+          ],
+          "signed_rgb_median_right_minus_left": [
+            3.6778335571289062,
+            3.977977752685547,
+            -1.8864402770996094
+          ],
+          "residual_mad_about_signed_median": [
+            1.155914306640625,
+            0.6532859802246094,
+            1.2448844909667969
+          ],
+          "rgb_mae": 3.358370542526245,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        }
+      ]
+    },
+    {
+      "frame": 1805,
+      "visual_observation": "Green foliage loses green brightness much more than blue asphalt/sky. Small distant character shapes are too small for trustworthy interior sampling here.",
+      "regions": [
+        {
+          "id": "foliage",
+          "material": "Near right tree green canopy",
+          "left_rect_xyxy": [
+            1160,
+            42,
+            1220,
+            115
+          ],
+          "accepted_matched_samples": 102,
+          "left_rgb_median": [
+            21.03518295288086,
+            65.00271606445312,
+            30.599822998046875
+          ],
+          "right_rgb_median": [
+            19.489368438720703,
+            57.88776397705078,
+            28.948619842529297
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -1.5271682739257812,
+            -6.818458080291748,
+            -1.828664779663086
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -1.559560775756836,
+            -6.986677169799805,
+            -1.8596038818359375
+          ],
+          "residual_mad_about_signed_median": [
+            1.6200666427612305,
+            0.6599979400634766,
+            0.9693679809570312
+          ],
+          "rgb_mae": 3.6268317699432373,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "foliage_mid",
+          "material": "Mid-distance tree canopy",
+          "left_rect_xyxy": [
+            356,
+            259,
+            390,
+            283
+          ],
+          "accepted_matched_samples": 42,
+          "left_rgb_median": [
+            21.001583099365234,
+            64.60969543457031,
+            30.303451538085938
+          ],
+          "right_rgb_median": [
+            20.39055633544922,
+            58.59203338623047,
+            27.85393524169922
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -0.9565051794052124,
+            -5.959383487701416,
+            -2.004392147064209
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -0.4264488220214844,
+            -6.378480911254883,
+            -1.768448829650879
+          ],
+          "residual_mad_about_signed_median": [
+            0.9138221740722656,
+            1.4282169342041016,
+            2.0460338592529297
+          ],
+          "rgb_mae": 3.303792715072632,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "blue_window",
+          "material": "Flat blue shop window",
+          "left_rect_xyxy": [
+            138,
+            321,
+            177,
+            363
+          ],
+          "accepted_matched_samples": 72,
+          "left_rgb_median": [
+            64.49504852294922,
+            104.00000762939453,
+            136.00379943847656
+          ],
+          "right_rgb_median": [
+            61.501548767089844,
+            103.04396057128906,
+            134.87884521484375
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -3.2007172107696533,
+            -0.7275298237800598,
+            -0.9666072130203247
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -3.4772071838378906,
+            -0.8476791381835938,
+            -0.6930313110351562
+          ],
+          "residual_mad_about_signed_median": [
+            0.9882125854492188,
+            0.7965316772460938,
+            1.0041961669921875
+          ],
+          "rgb_mae": 1.961543321609497,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "car_pale",
+          "material": "Pale trunk paint",
+          "left_rect_xyxy": [
+            578,
+            374,
+            611,
+            390
+          ],
+          "accepted_matched_samples": 31,
+          "left_rgb_median": [
+            203.24249267578125,
+            202.84841918945312,
+            208.36892700195312
+          ],
+          "right_rgb_median": [
+            197.01138305664062,
+            198.91268920898438,
+            200.6056365966797
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -6.563202857971191,
+            -3.1806821823120117,
+            -7.5148491859436035
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -6.7976531982421875,
+            -3.5732879638671875,
+            -7.42431640625
+          ],
+          "residual_mad_about_signed_median": [
+            1.7246246337890625,
+            0.907440185546875,
+            0.973602294921875
+          ],
+          "rgb_mae": 5.7529120445251465,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "sky",
+          "material": "Night sky",
+          "left_rect_xyxy": [
+            620,
+            25,
+            701,
+            65
+          ],
+          "accepted_matched_samples": 89,
+          "left_rgb_median": [
+            5.0900750160217285,
+            52.069419860839844,
+            133.68067932128906
+          ],
+          "right_rgb_median": [
+            5.768002986907959,
+            53.04536437988281,
+            133.86361694335938
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            0.22887606918811798,
+            1.1415190696716309,
+            0.4605094790458679
+          ],
+          "signed_rgb_median_right_minus_left": [
+            0.3895101547241211,
+            1.1391944885253906,
+            0.5677032470703125
+          ],
+          "residual_mad_about_signed_median": [
+            1.0642294883728027,
+            0.5700645446777344,
+            1.3320465087890625
+          ],
+          "rgb_mae": 1.3556342124938965,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "road_blue",
+          "material": "Blue asphalt",
+          "left_rect_xyxy": [
+            245,
+            515,
+            400,
+            595
+          ],
+          "accepted_matched_samples": 516,
+          "left_rgb_median": [
+            21.394189834594727,
+            49.673255920410156,
+            77.5186538696289
+          ],
+          "right_rgb_median": [
+            19.818199157714844,
+            50.59239196777344,
+            79.74464416503906
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -2.020796060562134,
+            0.7718684077262878,
+            2.4037349224090576
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -2.042037010192871,
+            0.9318695068359375,
+            2.3251953125
+          ],
+          "residual_mad_about_signed_median": [
+            1.2753019332885742,
+            0.8970012664794922,
+            1.0392799377441406
+          ],
+          "rgb_mae": 1.957215428352356,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        }
+      ]
+    },
+    {
+      "frame": 2166,
+      "visual_observation": "Upper sky/river shows broad darkening and loss of red/green. Skyline and small rooftops also redraw, so pixel differences in detailed city are not pure color. Largest all-frame color residual among joins.",
+      "regions": [
+        {
+          "id": "sky_left",
+          "material": "Blue sky left",
+          "left_rect_xyxy": [
+            100,
+            15,
+            270,
+            70
+          ],
+          "accepted_matched_samples": 1778,
+          "left_rgb_median": [
+            5.996816635131836,
+            59.99953079223633,
+            140.95733642578125
+          ],
+          "right_rgb_median": [
+            9.641777376501182e-10,
+            58.374813079833984,
+            136.52896118164062
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -6.07059383392334,
+            -1.639833927154541,
+            -4.343689441680908
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -5.863354682922363,
+            -1.7227840423583984,
+            -4.4019317626953125
+          ],
+          "residual_mad_about_signed_median": [
+            2.481241464614868,
+            0.78082275390625,
+            1.2427749633789062
+          ],
+          "rgb_mae": 4.062382698059082,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "sky_center",
+          "material": "Blue sky center",
+          "left_rect_xyxy": [
+            654,
+            15,
+            807,
+            73
+          ],
+          "accepted_matched_samples": 1298,
+          "left_rgb_median": [
+            7.210336685180664,
+            61.80181121826172,
+            139.21578979492188
+          ],
+          "right_rgb_median": [
+            0.0,
+            60.972286224365234,
+            136.71597290039062
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -6.879024505615234,
+            -0.6878694295883179,
+            -2.437303304672241
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -7.114726543426514,
+            -0.5728282928466797,
+            -2.5896835327148438
+          ],
+          "residual_mad_about_signed_median": [
+            1.0789680480957031,
+            0.7968406677246094,
+            1.4559783935546875
+          ],
+          "rgb_mae": 3.535287618637085,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "sky_right",
+          "material": "Blue sky right",
+          "left_rect_xyxy": [
+            908,
+            34,
+            1140,
+            89
+          ],
+          "accepted_matched_samples": 2528,
+          "left_rgb_median": [
+            11.802412033081055,
+            67.71116638183594,
+            138.18545532226562
+          ],
+          "right_rgb_median": [
+            0.1548556089401245,
+            64.9309310913086,
+            135.65689086914062
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -9.120774269104004,
+            -2.876398801803589,
+            -2.9457292556762695
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -10.345869064331055,
+            -2.891336441040039,
+            -2.9079742431640625
+          ],
+          "residual_mad_about_signed_median": [
+            2.063096523284912,
+            0.6730575561523438,
+            1.1663360595703125
+          ],
+          "rgb_mae": 5.008759498596191,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "skyline_dark",
+          "material": "Dark skyline building",
+          "left_rect_xyxy": [
+            383,
+            104,
+            399,
+            122
+          ],
+          "accepted_matched_samples": 2,
+          "left_rgb_median": [
+            7.287863731384277,
+            8.285163879394531,
+            19.95517349243164
+          ],
+          "right_rgb_median": [
+            0.1951257884502411,
+            0.0730595663189888,
+            10.358545303344727
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -7.092738151550293,
+            -8.212104797363281,
+            -9.596628189086914
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -7.092738151550293,
+            -8.212104797363281,
+            -9.596628189086914
+          ],
+          "residual_mad_about_signed_median": [
+            0.05548572540283203,
+            0.13936090469360352,
+            0.7067437171936035
+          ],
+          "rgb_mae": 8.300490379333496,
+          "confidence": "limited sample count; corroborating only"
+        },
+        {
+          "id": "river_dark",
+          "material": "Dark river",
+          "left_rect_xyxy": [
+            260,
+            202,
+            325,
+            226
+          ],
+          "accepted_matched_samples": 144,
+          "left_rgb_median": [
+            6.423288345336914,
+            19.78042984008789,
+            71.8072509765625
+          ],
+          "right_rgb_median": [
+            0.291206419467926,
+            16.296051025390625,
+            75.51724243164062
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -5.9525837898254395,
+            -3.9000320434570312,
+            3.9054713249206543
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -6.067917823791504,
+            -3.5524511337280273,
+            4.115039825439453
+          ],
+          "residual_mad_about_signed_median": [
+            0.5479156970977783,
+            0.7142105102539062,
+            1.3809967041015625
+          ],
+          "rgb_mae": 4.596277713775635,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "river_mid",
+          "material": "Dark river right",
+          "left_rect_xyxy": [
+            963,
+            211,
+            1075,
+            236
+          ],
+          "accepted_matched_samples": 20,
+          "left_rgb_median": [
+            7.787750244140625,
+            10.757915496826172,
+            39.94847106933594
+          ],
+          "right_rgb_median": [
+            0.22390732169151306,
+            5.030805587768555,
+            38.29065704345703
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -6.765805721282959,
+            -5.715188026428223,
+            -2.8402886390686035
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -6.9916229248046875,
+            -5.909706115722656,
+            -0.29758453369140625
+          ],
+          "residual_mad_about_signed_median": [
+            1.3744878768920898,
+            0.6534147262573242,
+            2.5795860290527344
+          ],
+          "rgb_mae": 5.3992838859558105,
+          "confidence": "limited sample count; corroborating only"
+        }
+      ]
+    },
+    {
+      "frame": 2527,
+      "visual_observation": "Cyan tracksuit saturates blue; gray tablet/wall/couch respond differently. Black underside of coffee table lifts to dark gray. Source-exact 0/255 preservation makes a symmetric midpoint grade unable to lift the zero side.",
+      "regions": [
+        {
+          "id": "tracksuit",
+          "material": "Woman cyan tracksuit",
+          "left_rect_xyxy": [
+            1174,
+            405,
+            1206,
+            447
+          ],
+          "accepted_matched_samples": 52,
+          "left_rgb_median": [
+            59.000038146972656,
+            145.4266357421875,
+            197.0662078857422
+          ],
+          "right_rgb_median": [
+            43.5681037902832,
+            141.8479461669922,
+            201.59384155273438
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -15.143301963806152,
+            -3.8558976650238037,
+            3.9370362758636475
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -15.387056350708008,
+            -3.5845718383789062,
+            3.992340087890625
+          ],
+          "residual_mad_about_signed_median": [
+            1.2178573608398438,
+            0.545196533203125,
+            1.5433731079101562
+          ],
+          "rgb_mae": 7.661345481872559,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "wall",
+          "material": "Cream apartment wall",
+          "left_rect_xyxy": [
+            210,
+            35,
+            330,
+            90
+          ],
+          "accepted_matched_samples": 192,
+          "left_rgb_median": [
+            226.002685546875,
+            215.99728393554688,
+            197.7393798828125
+          ],
+          "right_rgb_median": [
+            225.07652282714844,
+            215.74435424804688,
+            198.85064697265625
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -1.1006585359573364,
+            -0.11404839903116226,
+            0.43678244948387146
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -1.070037841796875,
+            -0.07382965087890625,
+            0.7377166748046875
+          ],
+          "residual_mad_about_signed_median": [
+            1.0613174438476562,
+            0.558685302734375,
+            1.4509506225585938
+          ],
+          "rgb_mae": 1.210907220840454,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "couch",
+          "material": "Cream couch upholstery",
+          "left_rect_xyxy": [
+            685,
+            336,
+            773,
+            385
+          ],
+          "accepted_matched_samples": 144,
+          "left_rgb_median": [
+            210.0,
+            198.99998474121094,
+            186.0
+          ],
+          "right_rgb_median": [
+            206.78001403808594,
+            199.00125122070312,
+            184.41873168945312
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -3.3620948791503906,
+            0.2719573974609375,
+            -1.6348909139633179
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -3.407745361328125,
+            0.1174774169921875,
+            -1.786773681640625
+          ],
+          "residual_mad_about_signed_median": [
+            1.2275314331054688,
+            0.21367645263671875,
+            0.8660049438476562
+          ],
+          "rgb_mae": 1.8537322282791138,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "fur",
+          "material": "Sloth brown body fur",
+          "left_rect_xyxy": [
+            500,
+            418,
+            539,
+            442
+          ],
+          "accepted_matched_samples": 22,
+          "left_rgb_median": [
+            119.31025695800781,
+            98.0966567993164,
+            69.18684387207031
+          ],
+          "right_rgb_median": [
+            121.01383972167969,
+            98.50141143798828,
+            69.82560729980469
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            2.041670322418213,
+            0.4184521734714508,
+            0.7249107360839844
+          ],
+          "signed_rgb_median_right_minus_left": [
+            2.0053558349609375,
+            0.3318443298339844,
+            0.5337371826171875
+          ],
+          "residual_mad_about_signed_median": [
+            0.798370361328125,
+            0.4163360595703125,
+            0.38529205322265625
+          ],
+          "rgb_mae": 1.1621124744415283,
+          "confidence": "limited sample count; corroborating only"
+        },
+        {
+          "id": "tablet",
+          "material": "Gray tablet",
+          "left_rect_xyxy": [
+            505,
+            330,
+            555,
+            375
+          ],
+          "accepted_matched_samples": 109,
+          "left_rgb_median": [
+            110.19326782226562,
+            110.99771881103516,
+            116.99998474121094
+          ],
+          "right_rgb_median": [
+            109.04011535644531,
+            111.21444702148438,
+            119.5918960571289
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -1.133446455001831,
+            0.797173261642456,
+            2.8666489124298096
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -1.2005615234375,
+            0.5230331420898438,
+            2.8651962280273438
+          ],
+          "residual_mad_about_signed_median": [
+            1.2993545532226562,
+            0.8631591796875,
+            0.8455963134765625
+          ],
+          "rgb_mae": 1.8878018856048584,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "table_shadow",
+          "material": "Black underside of table",
+          "left_rect_xyxy": [
+            390,
+            634,
+            698,
+            651
+          ],
+          "accepted_matched_samples": 235,
+          "left_rgb_median": [
+            0.0,
+            0.0,
+            8.911626537155826e-06
+          ],
+          "right_rgb_median": [
+            9.0,
+            6.000000476837158,
+            7.999999523162842
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            8.997159957885742,
+            5.999865531921387,
+            7.772343158721924
+          ],
+          "signed_rgb_median_right_minus_left": [
+            9.0,
+            6.000000476837158,
+            7.999990463256836
+          ],
+          "residual_mad_about_signed_median": [
+            0.0,
+            0.0,
+            9.059906005859375e-06
+          ],
+          "rgb_mae": 7.589788436889648,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "wood",
+          "material": "Warm wooden tabletop",
+          "left_rect_xyxy": [
+            330,
+            531,
+            494,
+            547
+          ],
+          "accepted_matched_samples": 131,
+          "left_rgb_median": [
+            133.57278442382812,
+            89.85051727294922,
+            57.00002670288086
+          ],
+          "right_rgb_median": [
+            138.25746154785156,
+            91.78876495361328,
+            56.425315856933594
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            4.977025032043457,
+            1.8874082565307617,
+            -0.5727939605712891
+          ],
+          "signed_rgb_median_right_minus_left": [
+            4.679595947265625,
+            1.8294143676757812,
+            -0.3592491149902344
+          ],
+          "residual_mad_about_signed_median": [
+            0.903839111328125,
+            0.501556396484375,
+            1.4128761291503906
+          ],
+          "rgb_mae": 2.8311359882354736,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        }
+      ]
+    },
+    {
+      "frame": 2888,
+      "visual_observation": "Sloth fur warms while daytime blue sky darkens slightly. Background changes relative scale at this unresolved geometry join; only flat correspondence-consistent surfaces retained. Fine city windows excluded.",
+      "regions": [
+        {
+          "id": "sky",
+          "material": "Daytime sky",
+          "left_rect_xyxy": [
+            915,
+            40,
+            1175,
+            250
+          ],
+          "accepted_matched_samples": 2158,
+          "left_rgb_median": [
+            111.70542907714844,
+            184.60043334960938,
+            254.99996948242188
+          ],
+          "right_rgb_median": [
+            109.33944702148438,
+            184.09251403808594,
+            253.3545379638672
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -3.089280128479004,
+            -0.6949519515037537,
+            -1.35526704788208
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -3.1681556701660156,
+            -0.8712692260742188,
+            -1.1784439086914062
+          ],
+          "residual_mad_about_signed_median": [
+            1.4501571655273438,
+            0.9541473388671875,
+            0.9252853393554688
+          ],
+          "rgb_mae": 1.9654974937438965,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "fur",
+          "material": "Sloth brown body fur",
+          "left_rect_xyxy": [
+            474,
+            379,
+            515,
+            425
+          ],
+          "accepted_matched_samples": 92,
+          "left_rgb_median": [
+            117.0022201538086,
+            96.18840026855469,
+            65.66307067871094
+          ],
+          "right_rgb_median": [
+            123.73773956298828,
+            99.4075927734375,
+            63.22050476074219
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            6.408143520355225,
+            3.516247272491455,
+            -2.229292869567871
+          ],
+          "signed_rgb_median_right_minus_left": [
+            6.0038299560546875,
+            3.3911056518554688,
+            -2.073301315307617
+          ],
+          "residual_mad_about_signed_median": [
+            1.0057907104492188,
+            0.4492950439453125,
+            1.7615032196044922
+          ],
+          "rgb_mae": 4.107113838195801,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "tracksuit",
+          "material": "Woman blue tracksuit",
+          "left_rect_xyxy": [
+            726,
+            413,
+            744,
+            452
+          ],
+          "accepted_matched_samples": 19,
+          "left_rgb_median": [
+            38.72123336791992,
+            142.19227600097656,
+            203.80340576171875
+          ],
+          "right_rgb_median": [
+            34.334877014160156,
+            136.06671142578125,
+            203.4423370361328
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -4.715965747833252,
+            -6.355001449584961,
+            -1.0146621465682983
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -4.819995880126953,
+            -6.6091766357421875,
+            -0.882537841796875
+          ],
+          "residual_mad_about_signed_median": [
+            0.6916847229003906,
+            0.993988037109375,
+            0.8482818603515625
+          ],
+          "rgb_mae": 4.092317581176758,
+          "confidence": "limited sample count; corroborating only"
+        },
+        {
+          "id": "water",
+          "material": "Pale blue river",
+          "left_rect_xyxy": [
+            943,
+            417,
+            988,
+            441
+          ],
+          "accepted_matched_samples": 7,
+          "left_rgb_median": [
+            148.93614196777344,
+            188.84951782226562,
+            224.5008087158203
+          ],
+          "right_rgb_median": [
+            149.5290985107422,
+            189.52932739257812,
+            225.6669158935547
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            0.3987884521484375,
+            0.2150464802980423,
+            0.7344294786453247
+          ],
+          "signed_rgb_median_right_minus_left": [
+            0.59295654296875,
+            0.6798095703125,
+            0.65667724609375
+          ],
+          "residual_mad_about_signed_median": [
+            0.5236053466796875,
+            0.401519775390625,
+            0.2798919677734375
+          ],
+          "rgb_mae": 0.7909596562385559,
+          "confidence": "limited sample count; corroborating only"
+        },
+        {
+          "id": "building_gray",
+          "material": "Broad gray building wall",
+          "left_rect_xyxy": [
+            232,
+            413,
+            276,
+            430
+          ],
+          "accepted_matched_samples": 36,
+          "left_rgb_median": [
+            87.94340515136719,
+            113.00794219970703,
+            143.0032196044922
+          ],
+          "right_rgb_median": [
+            91.00115966796875,
+            114.62857055664062,
+            144.80723571777344
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            3.289616584777832,
+            2.087218999862671,
+            1.8129158020019531
+          ],
+          "signed_rgb_median_right_minus_left": [
+            3.5764312744140625,
+            1.7993850708007812,
+            1.7188873291015625
+          ],
+          "residual_mad_about_signed_median": [
+            0.6912803649902344,
+            0.4802093505859375,
+            0.5879669189453125
+          ],
+          "rgb_mae": 2.3965837955474854,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        }
+      ]
+    },
+    {
+      "frame": 3240,
+      "visual_observation": "Brown hair/wood shift toward yellow/orange while cyan tracksuit darkens. Beige stone and broad cream ceiling remain much closer. Thin architectural contours/text excluded.",
+      "regions": [
+        {
+          "id": "hair",
+          "material": "Woman brown hair",
+          "left_rect_xyxy": [
+            708,
+            290,
+            732,
+            317
+          ],
+          "accepted_matched_samples": 127,
+          "left_rgb_median": [
+            141.95498657226562,
+            62.84636306762695,
+            0.0
+          ],
+          "right_rgb_median": [
+            146.74142456054688,
+            66.18533325195312,
+            0.016262948513031006
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            5.144957542419434,
+            3.4473915100097656,
+            0.0968722403049469
+          ],
+          "signed_rgb_median_right_minus_left": [
+            5.183990478515625,
+            3.5306434631347656,
+            0.016262948513031006
+          ],
+          "residual_mad_about_signed_median": [
+            0.9206695556640625,
+            0.7291259765625,
+            0.016262948513031006
+          ],
+          "rgb_mae": 2.896407127380371,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "tracksuit",
+          "material": "Woman blue tracksuit",
+          "left_rect_xyxy": [
+            704,
+            359,
+            730,
+            377
+          ],
+          "accepted_matched_samples": 26,
+          "left_rgb_median": [
+            28.351179122924805,
+            134.19158935546875,
+            197.44857788085938
+          ],
+          "right_rgb_median": [
+            11.854228019714355,
+            123.99578094482422,
+            192.8665771484375
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -17.628154754638672,
+            -9.90592098236084,
+            -4.658205032348633
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -16.89225959777832,
+            -10.13430404663086,
+            -4.4885406494140625
+          ],
+          "residual_mad_about_signed_median": [
+            1.485971450805664,
+            0.27996063232421875,
+            1.2066574096679688
+          ],
+          "rgb_mae": 10.730759620666504,
+          "confidence": "limited sample count; corroborating only"
+        },
+        {
+          "id": "fur",
+          "material": "Sloth brown fur",
+          "left_rect_xyxy": [
+            540,
+            400,
+            554,
+            433
+          ],
+          "accepted_matched_samples": 66,
+          "left_rgb_median": [
+            126.001220703125,
+            99.54082489013672,
+            70.08599090576172
+          ],
+          "right_rgb_median": [
+            130.0028533935547,
+            100.92770385742188,
+            69.31893920898438
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            3.7105255126953125,
+            1.2414127588272095,
+            -1.1876952648162842
+          ],
+          "signed_rgb_median_right_minus_left": [
+            3.752338409423828,
+            1.2089347839355469,
+            -0.8055343627929688
+          ],
+          "residual_mad_about_signed_median": [
+            0.9950294494628906,
+            0.6494064331054688,
+            0.834808349609375
+          ],
+          "rgb_mae": 2.1510016918182373,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "steps",
+          "material": "Beige stone steps",
+          "left_rect_xyxy": [
+            378,
+            624,
+            671,
+            639
+          ],
+          "accepted_matched_samples": 32,
+          "left_rgb_median": [
+            127.80073547363281,
+            117.03143310546875,
+            109.15143585205078
+          ],
+          "right_rgb_median": [
+            128.11257934570312,
+            117.88031005859375,
+            110.17327880859375
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            0.37235522270202637,
+            1.3190290927886963,
+            1.0358409881591797
+          ],
+          "signed_rgb_median_right_minus_left": [
+            0.28112030029296875,
+            1.0623397827148438,
+            1.2192344665527344
+          ],
+          "residual_mad_about_signed_median": [
+            0.3492889404296875,
+            0.35453033447265625,
+            0.8577232360839844
+          ],
+          "rgb_mae": 1.0763750076293945,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "stone",
+          "material": "Pale stone column base",
+          "left_rect_xyxy": [
+            193,
+            493,
+            270,
+            536
+          ],
+          "accepted_matched_samples": 518,
+          "left_rgb_median": [
+            192.8067626953125,
+            178.08920288085938,
+            165.99993896484375
+          ],
+          "right_rgb_median": [
+            193.0,
+            177.36114501953125,
+            165.44879150390625
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            -0.35285285115242004,
+            -0.8816119432449341,
+            -0.7702641487121582
+          ],
+          "signed_rgb_median_right_minus_left": [
+            0.0232086181640625,
+            -0.9955215454101562,
+            -0.8133544921875
+          ],
+          "residual_mad_about_signed_median": [
+            1.1483230590820312,
+            0.31208038330078125,
+            0.8452301025390625
+          ],
+          "rgb_mae": 1.1650638580322266,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        },
+        {
+          "id": "door_wood",
+          "material": "Dark brown door panel",
+          "left_rect_xyxy": [
+            890,
+            217,
+            902,
+            237
+          ],
+          "accepted_matched_samples": 0,
+          "confidence": "limited sample count; corroborating only"
+        },
+        {
+          "id": "ceiling",
+          "material": "Cream ceiling panel",
+          "left_rect_xyxy": [
+            598,
+            202,
+            727,
+            219
+          ],
+          "accepted_matched_samples": 205,
+          "left_rgb_median": [
+            187.08135986328125,
+            168.92298889160156,
+            137.66973876953125
+          ],
+          "right_rgb_median": [
+            186.78598022460938,
+            168.98226928710938,
+            137.92909240722656
+          ],
+          "signed_rgb_mean_right_minus_left": [
+            0.08714882284402847,
+            -0.2801249325275421,
+            -0.21879488229751587
+          ],
+          "signed_rgb_median_right_minus_left": [
+            -0.04840087890625,
+            -0.2810516357421875,
+            -0.1662750244140625
+          ],
+          "residual_mad_about_signed_median": [
+            0.726776123046875,
+            0.408721923828125,
+            0.546661376953125
+          ],
+          "rgb_mae": 0.7427365779876709,
+          "confidence": "good for signed regional bias; residual texture and flow uncertainty remain"
+        }
+      ]
+    }
+  ]
+}

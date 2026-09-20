@@ -1,0 +1,189 @@
+{
+  "source_frame": 2888,
+  "method": "one built-in static clean plate, fixed global affine registration, exact hole-mask copy only",
+  "feature_matches_visible": 718,
+  "sift_inliers": 691,
+  "chosen_registration": {
+    "method": "ecc_affine",
+    "matrix_generated_resized_to_source_roi": [
+      [
+        0.9998652082729484,
+        -8.576333236155643e-05,
+        0.0702112729903587
+      ],
+      [
+        -0.00018471705419074267,
+        1.002407028360718,
+        -0.06896761946078062
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "color_generated_to_source": {
+      "gain": [
+        0.9901096064659344,
+        1.012466600779373,
+        0.9981451556775052
+      ],
+      "bias": [
+        0.3227937991478607,
+        -2.0681660480044113,
+        -1.3528260084371893
+      ],
+      "confidence": 0.7484937284933801,
+      "residual_mae": 5.307677266674506,
+      "sample_count": 36344
+    },
+    "score": 4.642515758393244,
+    "visible_background_metrics": {
+      "rgb_mae": 5.314954683934007,
+      "pixel_fraction_rgb_mae_gt15": 0.02959722279545632,
+      "edge_symmetric_median_px": 0.0,
+      "edge_symmetric_p90_px": 1.0,
+      "edge_fraction_farther_than_2px": 0.03302843507655598,
+      "edge_fraction_farther_than_4px": 0.011811493338635912,
+      "overlap_fraction": 0.6654693603515625
+    },
+    "feature_residual_p50": 0.31608394790029176,
+    "feature_residual_p90": 0.8873776068774225
+  },
+  "candidates": [
+    {
+      "method": "sift_affine",
+      "matrix_generated_resized_to_source_roi": [
+        [
+          1.0000091021558817,
+          -0.00018421264661133422,
+          0.024610889758496
+        ],
+        [
+          -3.3357555981886774e-06,
+          1.0023994216721321,
+          -0.07303286303320368
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "color_generated_to_source": {
+        "gain": [
+          0.9910807462792378,
+          1.0125880074156466,
+          0.9985694308511978
+        ],
+        "bias": [
+          0.25238629601314727,
+          -2.096257333355468,
+          -1.4160322309666757
+        ],
+        "confidence": 0.7435831392773166,
+        "residual_mae": 5.368096750210098,
+        "sample_count": 36344
+      },
+      "score": 4.697059917502491,
+      "visible_background_metrics": {
+        "rgb_mae": 5.37506477545274,
+        "pixel_fraction_rgb_mae_gt15": 0.03194060377600763,
+        "edge_symmetric_median_px": 0.0,
+        "edge_symmetric_p90_px": 1.0,
+        "edge_fraction_farther_than_2px": 0.03356373125112045,
+        "edge_fraction_farther_than_4px": 0.011652690078282174,
+        "overlap_fraction": 0.6654693603515625
+      },
+      "feature_residual_p50": 0.3130205346229696,
+      "feature_residual_p90": 0.8660062866970999
+    },
+    {
+      "method": "ecc_affine",
+      "matrix_generated_resized_to_source_roi": [
+        [
+          0.9998652082729484,
+          -8.576333236155643e-05,
+          0.0702112729903587
+        ],
+        [
+          -0.00018471705419074267,
+          1.002407028360718,
+          -0.06896761946078062
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "color_generated_to_source": {
+        "gain": [
+          0.9901096064659344,
+          1.012466600779373,
+          0.9981451556775052
+        ],
+        "bias": [
+          0.3227937991478607,
+          -2.0681660480044113,
+          -1.3528260084371893
+        ],
+        "confidence": 0.7484937284933801,
+        "residual_mae": 5.307677266674506,
+        "sample_count": 36344
+      },
+      "score": 4.642515758393244,
+      "visible_background_metrics": {
+        "rgb_mae": 5.314954683934007,
+        "pixel_fraction_rgb_mae_gt15": 0.02959722279545632,
+        "edge_symmetric_median_px": 0.0,
+        "edge_symmetric_p90_px": 1.0,
+        "edge_fraction_farther_than_2px": 0.03302843507655598,
+        "edge_fraction_farther_than_4px": 0.011811493338635912,
+        "overlap_fraction": 0.6654693603515625
+      },
+      "feature_residual_p50": 0.31608394790029176,
+      "feature_residual_p90": 0.8873776068774225
+    }
+  ],
+  "matrix_generated_to_source_full": [
+    [
+      0.45642919635854995,
+      -3.91362087068778e-05,
+      288.0702112729904
+    ],
+    [
+      -8.432162245511791e-05,
+      0.45742638014321535,
+      159.93103238053922
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "matrix_generated_to_output": [
+    [
+      0.4597697881491417,
+      3.299911228462139e-05,
+      285.77102008970775
+    ],
+    [
+      -0.003944076255109504,
+      0.46461649748529954,
+      173.66818312169065
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "hole_pixels": 3189,
+  "filled_hole_pixels": 3189,
+  "remaining_uncovered_pixels": 0,
+  "changed_pixels_outside_holes": 0,
+  "foreground_source_pixels_unchanged": true,
+  "status": "Static clean plate registered successfully; final temporal layer proof rejected for matte/parallax artifacts. See README.md."
+}

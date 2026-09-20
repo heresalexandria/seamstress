@@ -1,0 +1,210 @@
+{
+  "chosen": "robust_photometric_similarity",
+  "matrix_right_to_left": [
+    [
+      1.0067859978764417,
+      0.0013519741852913623,
+      -4.214936353935855
+    ],
+    [
+      -0.0013519741852913623,
+      1.0067859978764417,
+      -0.3431927089280862
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "scale": 1.0067869056330938,
+  "rotation_degrees": -0.0769402518799472,
+  "color": {
+    "gain": [
+      0.9083424912605855,
+      0.9256282146065717,
+      0.9204937880166967
+    ],
+    "bias": [
+      6.985562733921681,
+      6.1476452677614235,
+      9.621970249604995
+    ],
+    "confidence": 0.6980191814044289,
+    "residual_mae": 9.37017635320068,
+    "sample_count": 38348
+  },
+  "raw": {
+    "rgb_mae": 14.287344671201813,
+    "pixel_fraction_rgb_mae_gt15": 0.17134920634920636,
+    "edge_symmetric_median_px": 1.399993896484375,
+    "edge_symmetric_p90_px": 5.5999755859375,
+    "edge_fraction_farther_than_2px": 0.3179781991936688,
+    "edge_fraction_farther_than_4px": 0.16245013758825913,
+    "overlap_fraction": 0.95703125
+  },
+  "geometry_only": {
+    "rgb_mae": 11.023901360544217,
+    "pixel_fraction_rgb_mae_gt15": 0.13479591836734695,
+    "edge_symmetric_median_px": 1.0,
+    "edge_symmetric_p90_px": 5.0,
+    "edge_fraction_farther_than_2px": 0.20914035836177475,
+    "edge_fraction_farther_than_4px": 0.12334684300341298,
+    "overlap_fraction": 0.95703125
+  },
+  "geometry_and_grade": {
+    "rgb_mae": 9.340384731670445,
+    "pixel_fraction_rgb_mae_gt15": 0.1297981859410431,
+    "edge_symmetric_median_px": 1.0,
+    "edge_symmetric_p90_px": 5.0,
+    "edge_fraction_farther_than_2px": 0.20766649040069932,
+    "edge_fraction_farther_than_4px": 0.12181776976786851,
+    "overlap_fraction": 0.95703125
+  },
+  "feature_matches": 827,
+  "feature_inlier_fraction": 0.558645707376058,
+  "feature_residual_p50": 1.9159633382335952,
+  "feature_residual_p90": 5.169553843269203,
+  "candidates": [
+    {
+      "method": "sift_similarity",
+      "score": 8.244031690991532
+    },
+    {
+      "method": "projected_ecc_similarity",
+      "score": 9.140856725905461
+    },
+    {
+      "method": "robust_photometric_similarity",
+      "score": 7.764692031762001
+    }
+  ],
+  "frame": 361,
+  "time_seconds": 15.056708333333333,
+  "neighbors": [
+    {
+      "frames": [
+        358,
+        359
+      ],
+      "rgb_mae": 1.8193711262282692,
+      "pixel_fraction_rgb_mae_gt15": 0.02171201814058957,
+      "edge_symmetric_median_px": 0.0,
+      "edge_symmetric_p90_px": 1.0,
+      "edge_fraction_farther_than_2px": 0.04389346416681269,
+      "edge_fraction_farther_than_4px": 0.024246539337655512,
+      "overlap_fraction": 0.95703125
+    },
+    {
+      "frames": [
+        359,
+        360
+      ],
+      "rgb_mae": 3.42231746031746,
+      "pixel_fraction_rgb_mae_gt15": 0.04443537414965986,
+      "edge_symmetric_median_px": 0.0,
+      "edge_symmetric_p90_px": 2.0,
+      "edge_fraction_farther_than_2px": 0.08958949096880131,
+      "edge_fraction_farther_than_4px": 0.07046524356869184,
+      "overlap_fraction": 0.95703125
+    },
+    {
+      "frames": [
+        361,
+        362
+      ],
+      "rgb_mae": 0.7162736205593349,
+      "pixel_fraction_rgb_mae_gt15": 0.00024263038548752835,
+      "edge_symmetric_median_px": 0.0,
+      "edge_symmetric_p90_px": 0.0,
+      "edge_fraction_farther_than_2px": 0.001627313672584489,
+      "edge_fraction_farther_than_4px": 0.0003254627345168978,
+      "overlap_fraction": 0.95703125
+    },
+    {
+      "frames": [
+        362,
+        363
+      ],
+      "rgb_mae": 2.7078269085411946,
+      "pixel_fraction_rgb_mae_gt15": 0.04252040816326531,
+      "edge_symmetric_median_px": 0.0,
+      "edge_symmetric_p90_px": 1.0,
+      "edge_fraction_farther_than_2px": 0.07877238389832292,
+      "edge_fraction_farther_than_4px": 0.06141236874776424,
+      "overlap_fraction": 0.95703125
+    }
+  ],
+  "regions": [
+    {
+      "label": "Woman face and hair",
+      "roi": [
+        650,
+        175,
+        1030,
+        520
+      ],
+      "metrics": {
+        "rgb_mae": 10.774040172896006,
+        "pixel_fraction_rgb_mae_gt15": 0.15398932112890923,
+        "edge_symmetric_median_px": 1.0,
+        "edge_symmetric_p90_px": 2.0,
+        "edge_fraction_farther_than_2px": 0.08846103811630025,
+        "edge_fraction_farther_than_4px": 0.0515589089805299,
+        "overlap_fraction": 1.0
+      }
+    },
+    {
+      "label": "Sloth and windshield",
+      "roi": [
+        170,
+        205,
+        615,
+        590
+      ],
+      "metrics": {
+        "rgb_mae": 10.845471083223893,
+        "pixel_fraction_rgb_mae_gt15": 0.1846782431052094,
+        "edge_symmetric_median_px": 1.0,
+        "edge_symmetric_p90_px": 4.0,
+        "edge_fraction_farther_than_2px": 0.17866166173392045,
+        "edge_fraction_farther_than_4px": 0.09149642676676532,
+        "overlap_fraction": 1.0
+      }
+    },
+    {
+      "label": "Windshield and hood",
+      "roi": [
+        200,
+        410,
+        1110,
+        690
+      ],
+      "metrics": {
+        "rgb_mae": 7.611487441130298,
+        "pixel_fraction_rgb_mae_gt15": 0.09974882260596546,
+        "edge_symmetric_median_px": 1.0,
+        "edge_symmetric_p90_px": 2.0,
+        "edge_fraction_farther_than_2px": 0.0907682579829276,
+        "edge_fraction_farther_than_4px": 0.037812203604173256,
+        "overlap_fraction": 1.0
+      }
+    }
+  ],
+  "flat_region_color_fit": {
+    "gain": [
+      0.9162448088421771,
+      0.9328066738401141,
+      0.9519526058761052
+    ],
+    "bias": [
+      7.2370001951338505,
+      5.713674397663431,
+      5.4036334251083105
+    ],
+    "confidence": 0.8773565402441577,
+    "residual_mae": 2.419652098302691,
+    "sample_count": 38912
+  },
+  "flat_region_fraction": 0.5488802083333333
+}

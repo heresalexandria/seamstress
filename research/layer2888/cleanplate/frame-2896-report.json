@@ -1,0 +1,53 @@
+{
+  "source_frame": 2896,
+  "plate_reference_frame": 2888,
+  "plate_reference_to_target_background_matrix": [
+    [
+      0.9998903040526902,
+      0.00012869322243376407,
+      0.0023235349113941172
+    ],
+    [
+      0.0016083379672419888,
+      0.9740147914442296,
+      -0.5044405059396834
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "background_matches": 2464,
+  "background_inliers": 1225,
+  "background_feature_residual_p50": 2.5303364429705253,
+  "background_feature_residual_p90": 7.827278391282034,
+  "matrix_generated_to_output": [
+    [
+      0.4597194589058269,
+      9.042005969516306e-05,
+      285.76159741197154
+    ],
+    [
+      -0.0031957965506752475,
+      0.45254278788816016,
+      169.40532158684638
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "hole_pixels": 6188,
+  "filled_hole_pixels": 5934,
+  "remaining_holes": 254,
+  "remaining_hole_bounds_xyxy": [
+    0,
+    0,
+    191,
+    2
+  ],
+  "changed_pixels_outside_holes": 0,
+  "status": "Single later-frame feasibility check; not certified temporal repair."
+}

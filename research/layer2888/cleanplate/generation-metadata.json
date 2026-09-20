@@ -1,0 +1,13 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "calls": 1,
+  "generated_original": "~/.codex/generated_images/01a0befc-94c0-7a02-b9e1-3f1e5ca96444/exec-85c356ac-63cf-4393-9a7e-ffd47a2ec289.png",
+  "workspace_copy": "research/layer2888/cleanplate/generated-roi.png",
+  "generated_size": [
+    1402,
+    1122
+  ],
+  "generated_sha256": "61e87f77b7bb948510440d74a70b77e8ad5be20c03dec60db4ccb48ed04abd35",
+  "prompt_path": "research/layer2888/cleanplate/prompt.txt",
+  "input_metadata": "research/layer2888/cleanplate/input-metadata.json"
+}

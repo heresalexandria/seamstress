@@ -1,0 +1,1549 @@
+{
+  "model_path": "research/local-color-fit/all-models.json",
+  "model_sha256": "32a197f67de80d914fb1256a743f0209c8e0f68f170b8f3fb9581adc9174ff9f",
+  "model_was_refit": false,
+  "geometry_or_timing_changed": false,
+  "finite_difference_byte_step": 0.5,
+  "cube_grid_size": [
+    13,
+    13,
+    13,
+    7,
+    5
+  ],
+  "native_palette_sampling": "Native original source, baseline geometry+LUT applied unchanged, every fourth row/column; no resizing before RGB sampling.",
+  "flag_thresholds": {
+    "min_own_channel_derivative": 0,
+    "min_color_jacobian_determinant": 0,
+    "min_color_jacobian_singular": 0.25
+  },
+  "reports": [
+    {
+      "frame": 361,
+      "sides": {
+        "left": {
+          "rgb_xy_grid": {
+            "all": {
+              "count": 76895,
+              "min_color_jacobian_diagonal": 0.8144240379333496,
+              "min_color_jacobian_singular": 0.8142535090446472,
+              "max_color_jacobian_singular": 1.2228881120681763,
+              "min_color_jacobian_determinant": 0.7320786118507385,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 7.1991424560546875,
+              "p99_abs_channel_change": 3.4746252441406282,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 32447,
+              "min_color_jacobian_diagonal": 0.8144240379333496,
+              "min_color_jacobian_singular": 0.8142535090446472,
+              "max_color_jacobian_singular": 1.2228881120681763,
+              "min_color_jacobian_determinant": 0.7320786118507385,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 7.1991424560546875,
+              "p99_abs_channel_change": 4.206713867187503,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 16007,
+              "min_color_jacobian_diagonal": 0.97760009765625,
+              "min_color_jacobian_singular": 0.9759893417358398,
+              "max_color_jacobian_singular": 1.029675841331482,
+              "min_color_jacobian_determinant": 0.9591385126113892,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.7223014831542969,
+              "p99_abs_channel_change": 0.2754287719726568,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "native_anchor_palette": {
+            "all": {
+              "count": 57600,
+              "min_color_jacobian_diagonal": 0.8532971143722534,
+              "min_color_jacobian_singular": 0.8512866497039795,
+              "max_color_jacobian_singular": 1.1754043102264404,
+              "min_color_jacobian_determinant": 0.8365684151649475,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 4.812980651855469,
+              "p99_abs_channel_change": 3.708318977355959,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 57512,
+              "min_color_jacobian_diagonal": 0.8532971143722534,
+              "min_color_jacobian_singular": 0.8512866497039795,
+              "max_color_jacobian_singular": 1.1754043102264404,
+              "min_color_jacobian_determinant": 0.8365684151649475,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 4.812980651855469,
+              "p99_abs_channel_change": 3.7089599609374995,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "black_white_exact": true,
+          "range_guarantee_applies": true
+        },
+        "right": {
+          "rgb_xy_grid": {
+            "all": {
+              "count": 76895,
+              "min_color_jacobian_diagonal": 0.8485107421875,
+              "min_color_jacobian_singular": 0.8135694265365601,
+              "max_color_jacobian_singular": 1.1859633922576904,
+              "min_color_jacobian_determinant": 0.8068816065788269,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 6.6692657470703125,
+              "p99_abs_channel_change": 3.28937469482422,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 32447,
+              "min_color_jacobian_diagonal": 0.8485107421875,
+              "min_color_jacobian_singular": 0.8135694265365601,
+              "max_color_jacobian_singular": 1.1859633922576904,
+              "min_color_jacobian_determinant": 0.8068816065788269,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 6.6692657470703125,
+              "p99_abs_channel_change": 3.888012695312516,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 16007,
+              "min_color_jacobian_diagonal": 0.9707489013671875,
+              "min_color_jacobian_singular": 0.9706681370735168,
+              "max_color_jacobian_singular": 1.0279150009155273,
+              "min_color_jacobian_determinant": 0.9660832285881042,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.6121292114257812,
+              "p99_abs_channel_change": 0.26907958984375013,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "native_anchor_palette": {
+            "all": {
+              "count": 57600,
+              "min_color_jacobian_diagonal": 0.8763275146484375,
+              "min_color_jacobian_singular": 0.846339762210846,
+              "max_color_jacobian_singular": 1.1663339138031006,
+              "min_color_jacobian_determinant": 0.8465265035629272,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 5.5791473388671875,
+              "p99_abs_channel_change": 3.578899841308594,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 57493,
+              "min_color_jacobian_diagonal": 0.8763275146484375,
+              "min_color_jacobian_singular": 0.846339762210846,
+              "max_color_jacobian_singular": 1.1663339138031006,
+              "min_color_jacobian_determinant": 0.8465265035629272,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 5.5791473388671875,
+              "p99_abs_channel_change": 3.5796982574462892,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 2,
+              "min_color_jacobian_diagonal": 1.00030517578125,
+              "min_color_jacobian_singular": 1.000001311302185,
+              "max_color_jacobian_singular": 1.0030657052993774,
+              "min_color_jacobian_determinant": 1.0043381452560425,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.0542449951171875,
+              "p99_abs_channel_change": 0.05416412353515625,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "black_white_exact": true,
+          "range_guarantee_applies": true
+        }
+      },
+      "flags": []
+    },
+    {
+      "frame": 722,
+      "sides": {
+        "left": {
+          "rgb_xy_grid": {
+            "all": {
+              "count": 76895,
+              "min_color_jacobian_diagonal": 0.7548109292984009,
+              "min_color_jacobian_singular": 0.754810094833374,
+              "max_color_jacobian_singular": 1.3048936128616333,
+              "min_color_jacobian_determinant": 0.6930508017539978,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 11.045616149902344,
+              "p99_abs_channel_change": 5.479035644531262,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 33633,
+              "min_color_jacobian_diagonal": 0.7548109292984009,
+              "min_color_jacobian_singular": 0.754810094833374,
+              "max_color_jacobian_singular": 1.3048936128616333,
+              "min_color_jacobian_determinant": 0.6930508017539978,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 11.045616149902344,
+              "p99_abs_channel_change": 6.280185852050795,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 14669,
+              "min_color_jacobian_diagonal": 0.9647715091705322,
+              "min_color_jacobian_singular": 0.9614248275756836,
+              "max_color_jacobian_singular": 1.0632556676864624,
+              "min_color_jacobian_determinant": 0.9553045034408569,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 1.7717819213867188,
+              "p99_abs_channel_change": 0.4891792297363282,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "native_anchor_palette": {
+            "all": {
+              "count": 57600,
+              "min_color_jacobian_diagonal": 0.7958707809448242,
+              "min_color_jacobian_singular": 0.7800931930541992,
+              "max_color_jacobian_singular": 1.2682644128799438,
+              "min_color_jacobian_determinant": 0.7861152291297913,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 9.5723876953125,
+              "p99_abs_channel_change": 5.0242027282714865,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 57450,
+              "min_color_jacobian_diagonal": 0.7958707809448242,
+              "min_color_jacobian_singular": 0.7800931930541992,
+              "max_color_jacobian_singular": 1.2682644128799438,
+              "min_color_jacobian_determinant": 0.7861152291297913,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 9.5723876953125,
+              "p99_abs_channel_change": 5.027776184082036,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 64,
+              "min_color_jacobian_diagonal": 0.9853057861328125,
+              "min_color_jacobian_singular": 0.9780784249305725,
+              "max_color_jacobian_singular": 1.009172797203064,
+              "min_color_jacobian_determinant": 0.9806990027427673,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.5986175537109375,
+              "p99_abs_channel_change": 0.5784288024902344,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "black_white_exact": true,
+          "range_guarantee_applies": true
+        },
+        "right": {
+          "rgb_xy_grid": {
+            "all": {
+              "count": 76895,
+              "min_color_jacobian_diagonal": 0.7622146606445312,
+              "min_color_jacobian_singular": 0.7274115681648254,
+              "max_color_jacobian_singular": 1.2388895750045776,
+              "min_color_jacobian_determinant": 0.6594772934913635,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 10.246261596679688,
+              "p99_abs_channel_change": 5.486272735595703,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 33633,
+              "min_color_jacobian_diagonal": 0.7622146606445312,
+              "min_color_jacobian_singular": 0.7274115681648254,
+              "max_color_jacobian_singular": 1.2388895750045776,
+              "min_color_jacobian_determinant": 0.6594772934913635,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 10.246261596679688,
+              "p99_abs_channel_change": 6.2750698852539095,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 14669,
+              "min_color_jacobian_diagonal": 0.9503326416015625,
+              "min_color_jacobian_singular": 0.9461705684661865,
+              "max_color_jacobian_singular": 1.0363764762878418,
+              "min_color_jacobian_determinant": 0.9523459672927856,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 1.5317001342773438,
+              "p99_abs_channel_change": 0.4674049377441416,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "native_anchor_palette": {
+            "all": {
+              "count": 57600,
+              "min_color_jacobian_diagonal": 0.8205490112304688,
+              "min_color_jacobian_singular": 0.808550238609314,
+              "max_color_jacobian_singular": 1.2236648797988892,
+              "min_color_jacobian_determinant": 0.6972703337669373,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 9.052558898925781,
+              "p99_abs_channel_change": 5.074342498779298,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 57433,
+              "min_color_jacobian_diagonal": 0.8205490112304688,
+              "min_color_jacobian_singular": 0.808550238609314,
+              "max_color_jacobian_singular": 1.2236648797988892,
+              "min_color_jacobian_determinant": 0.6972703337669373,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 9.052558898925781,
+              "p99_abs_channel_change": 5.075004730224605,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 56,
+              "min_color_jacobian_diagonal": 0.9911346435546875,
+              "min_color_jacobian_singular": 0.9907017946243286,
+              "max_color_jacobian_singular": 1.0225739479064941,
+              "min_color_jacobian_determinant": 0.9853805899620056,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.639373779296875,
+              "p99_abs_channel_change": 0.5853672790527344,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "black_white_exact": true,
+          "range_guarantee_applies": true
+        }
+      },
+      "flags": []
+    },
+    {
+      "frame": 1083,
+      "sides": {
+        "left": {
+          "rgb_xy_grid": {
+            "all": {
+              "count": 76895,
+              "min_color_jacobian_diagonal": 0.8559417724609375,
+              "min_color_jacobian_singular": 0.8193774223327637,
+              "max_color_jacobian_singular": 1.186570405960083,
+              "min_color_jacobian_determinant": 0.7020930051803589,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 9.37457275390625,
+              "p99_abs_channel_change": 3.8419601440429707,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 32803,
+              "min_color_jacobian_diagonal": 0.8559417724609375,
+              "min_color_jacobian_singular": 0.8193774223327637,
+              "max_color_jacobian_singular": 1.186570405960083,
+              "min_color_jacobian_determinant": 0.7020930051803589,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 9.37457275390625,
+              "p99_abs_channel_change": 4.594085693359375,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 14294,
+              "min_color_jacobian_diagonal": 0.9786148071289062,
+              "min_color_jacobian_singular": 0.9674561619758606,
+              "max_color_jacobian_singular": 1.034279227256775,
+              "min_color_jacobian_determinant": 0.9745179414749146,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.94378662109375,
+              "p99_abs_channel_change": 0.3712350463867189,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "native_anchor_palette": {
+            "all": {
+              "count": 57600,
+              "min_color_jacobian_diagonal": 0.8784129619598389,
+              "min_color_jacobian_singular": 0.8613462448120117,
+              "max_color_jacobian_singular": 1.1414395570755005,
+              "min_color_jacobian_determinant": 0.7019986510276794,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 5.149749755859375,
+              "p99_abs_channel_change": 3.605362243652344,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 57454,
+              "min_color_jacobian_diagonal": 0.8784129619598389,
+              "min_color_jacobian_singular": 0.8613462448120117,
+              "max_color_jacobian_singular": 1.1414395570755005,
+              "min_color_jacobian_determinant": 0.7019986510276794,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 5.149749755859375,
+              "p99_abs_channel_change": 3.606066246032708,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "black_white_exact": true,
+          "range_guarantee_applies": true
+        },
+        "right": {
+          "rgb_xy_grid": {
+            "all": {
+              "count": 76895,
+              "min_color_jacobian_diagonal": 0.8363113403320312,
+              "min_color_jacobian_singular": 0.8102049231529236,
+              "max_color_jacobian_singular": 1.1864317655563354,
+              "min_color_jacobian_determinant": 0.7998630404472351,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 9.459831237792969,
+              "p99_abs_channel_change": 3.8882080078125005,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 32803,
+              "min_color_jacobian_diagonal": 0.8363113403320312,
+              "min_color_jacobian_singular": 0.8102049231529236,
+              "max_color_jacobian_singular": 1.1864317655563354,
+              "min_color_jacobian_determinant": 0.7998630404472351,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 9.459831237792969,
+              "p99_abs_channel_change": 4.614578857421872,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 14294,
+              "min_color_jacobian_diagonal": 0.9658184051513672,
+              "min_color_jacobian_singular": 0.9655978083610535,
+              "max_color_jacobian_singular": 1.0338361263275146,
+              "min_color_jacobian_determinant": 0.9687076210975647,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.96197509765625,
+              "p99_abs_channel_change": 0.3776636505126958,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "native_anchor_palette": {
+            "all": {
+              "count": 57600,
+              "min_color_jacobian_diagonal": 0.905517578125,
+              "min_color_jacobian_singular": 0.8997111320495605,
+              "max_color_jacobian_singular": 1.129093885421753,
+              "min_color_jacobian_determinant": 0.832150936126709,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 5.205810546875,
+              "p99_abs_channel_change": 3.5801855468750006,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 57475,
+              "min_color_jacobian_diagonal": 0.905517578125,
+              "min_color_jacobian_singular": 0.8997111320495605,
+              "max_color_jacobian_singular": 1.129093885421753,
+              "min_color_jacobian_determinant": 0.832150936126709,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 5.205810546875,
+              "p99_abs_channel_change": 3.58085174560547,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "black_white_exact": true,
+          "range_guarantee_applies": true
+        }
+      },
+      "flags": []
+    },
+    {
+      "frame": 1444,
+      "sides": {
+        "left": {
+          "rgb_xy_grid": {
+            "all": {
+              "count": 76895,
+              "min_color_jacobian_diagonal": 0.795650839805603,
+              "min_color_jacobian_singular": 0.7956432104110718,
+              "max_color_jacobian_singular": 1.1859197616577148,
+              "min_color_jacobian_determinant": 0.7670945525169373,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 9.478645324707031,
+              "p99_abs_channel_change": 4.025432434082033,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 33878,
+              "min_color_jacobian_diagonal": 0.795650839805603,
+              "min_color_jacobian_singular": 0.7956432104110718,
+              "max_color_jacobian_singular": 1.1859197616577148,
+              "min_color_jacobian_determinant": 0.7670945525169373,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 9.478645324707031,
+              "p99_abs_channel_change": 5.233345336914058,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 14574,
+              "min_color_jacobian_diagonal": 0.964996337890625,
+              "min_color_jacobian_singular": 0.9562326669692993,
+              "max_color_jacobian_singular": 1.0323326587677002,
+              "min_color_jacobian_determinant": 0.9551530480384827,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 1.07720947265625,
+              "p99_abs_channel_change": 0.45935302734375005,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "native_anchor_palette": {
+            "all": {
+              "count": 57600,
+              "min_color_jacobian_diagonal": 0.8614959716796875,
+              "min_color_jacobian_singular": 0.8140712976455688,
+              "max_color_jacobian_singular": 1.1403547525405884,
+              "min_color_jacobian_determinant": 0.8076278567314148,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 8.369522094726562,
+              "p99_abs_channel_change": 3.4719093322753913,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 57378,
+              "min_color_jacobian_diagonal": 0.8614959716796875,
+              "min_color_jacobian_singular": 0.8140712976455688,
+              "max_color_jacobian_singular": 1.1403547525405884,
+              "min_color_jacobian_determinant": 0.8076278567314148,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 8.369522094726562,
+              "p99_abs_channel_change": 3.4746228027343875,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 19,
+              "min_color_jacobian_diagonal": 0.9901123046875,
+              "min_color_jacobian_singular": 0.9892329573631287,
+              "max_color_jacobian_singular": 1.0113881826400757,
+              "min_color_jacobian_determinant": 0.998643696308136,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.41617584228515625,
+              "p99_abs_channel_change": 0.31401702880859333,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "black_white_exact": true,
+          "range_guarantee_applies": true
+        },
+        "right": {
+          "rgb_xy_grid": {
+            "all": {
+              "count": 76895,
+              "min_color_jacobian_diagonal": 0.8252334594726562,
+              "min_color_jacobian_singular": 0.8157291412353516,
+              "max_color_jacobian_singular": 1.1898499727249146,
+              "min_color_jacobian_determinant": 0.8146589398384094,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 9.623039245605469,
+              "p99_abs_channel_change": 3.9543179321289066,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 33878,
+              "min_color_jacobian_diagonal": 0.8252334594726562,
+              "min_color_jacobian_singular": 0.8157291412353516,
+              "max_color_jacobian_singular": 1.1898499727249146,
+              "min_color_jacobian_determinant": 0.8146589398384094,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 9.623039245605469,
+              "p99_abs_channel_change": 5.214403533935543,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 14574,
+              "min_color_jacobian_diagonal": 0.9707717895507812,
+              "min_color_jacobian_singular": 0.9671228528022766,
+              "max_color_jacobian_singular": 1.040525197982788,
+              "min_color_jacobian_determinant": 0.9725742936134338,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 1.0951461791992188,
+              "p99_abs_channel_change": 0.4353181457519534,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "native_anchor_palette": {
+            "all": {
+              "count": 57600,
+              "min_color_jacobian_diagonal": 0.8530139923095703,
+              "min_color_jacobian_singular": 0.85301274061203,
+              "max_color_jacobian_singular": 1.171540379524231,
+              "min_color_jacobian_determinant": 0.8505401015281677,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 8.599143981933594,
+              "p99_abs_channel_change": 3.448335723876955,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 57375,
+              "min_color_jacobian_diagonal": 0.8530139923095703,
+              "min_color_jacobian_singular": 0.85301274061203,
+              "max_color_jacobian_singular": 1.171540379524231,
+              "min_color_jacobian_determinant": 0.8505401015281677,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 8.599143981933594,
+              "p99_abs_channel_change": 3.4490423583984438,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 32,
+              "min_color_jacobian_diagonal": 0.99432373046875,
+              "min_color_jacobian_singular": 0.9817075729370117,
+              "max_color_jacobian_singular": 1.020282506942749,
+              "min_color_jacobian_determinant": 0.9938767552375793,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.770660400390625,
+              "p99_abs_channel_change": 0.6109451293945307,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "black_white_exact": true,
+          "range_guarantee_applies": true
+        }
+      },
+      "flags": []
+    },
+    {
+      "frame": 1805,
+      "sides": {
+        "left": {
+          "rgb_xy_grid": {
+            "all": {
+              "count": 76895,
+              "min_color_jacobian_diagonal": 0.8390426635742188,
+              "min_color_jacobian_singular": 0.816583514213562,
+              "max_color_jacobian_singular": 1.1631706953048706,
+              "min_color_jacobian_determinant": 0.7749329805374146,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 6.4781494140625,
+              "p99_abs_channel_change": 3.3987280273437563,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 36142,
+              "min_color_jacobian_diagonal": 0.8390426635742188,
+              "min_color_jacobian_singular": 0.816583514213562,
+              "max_color_jacobian_singular": 1.1631706953048706,
+              "min_color_jacobian_determinant": 0.7749329805374146,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 6.4781494140625,
+              "p99_abs_channel_change": 4.136445999145508,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 12375,
+              "min_color_jacobian_diagonal": 0.9778518676757812,
+              "min_color_jacobian_singular": 0.9774793982505798,
+              "max_color_jacobian_singular": 1.0205082893371582,
+              "min_color_jacobian_determinant": 0.9714245200157166,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.627227783203125,
+              "p99_abs_channel_change": 0.27015350341796923,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "native_anchor_palette": {
+            "all": {
+              "count": 57600,
+              "min_color_jacobian_diagonal": 0.9050288200378418,
+              "min_color_jacobian_singular": 0.8624278903007507,
+              "max_color_jacobian_singular": 1.1224682331085205,
+              "min_color_jacobian_determinant": 0.8115434646606445,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 5.7438507080078125,
+              "p99_abs_channel_change": 3.3366950988769553,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 57473,
+              "min_color_jacobian_diagonal": 0.9050288200378418,
+              "min_color_jacobian_singular": 0.8624278903007507,
+              "max_color_jacobian_singular": 1.1224682331085205,
+              "min_color_jacobian_determinant": 0.8115434646606445,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 5.7438507080078125,
+              "p99_abs_channel_change": 3.3372433471679708,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 20,
+              "min_color_jacobian_diagonal": 1.0022735595703125,
+              "min_color_jacobian_singular": 1.0008569955825806,
+              "max_color_jacobian_singular": 1.0135929584503174,
+              "min_color_jacobian_determinant": 1.0159695148468018,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.4503631591796875,
+              "p99_abs_channel_change": 0.4490757751464844,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "black_white_exact": true,
+          "range_guarantee_applies": true
+        },
+        "right": {
+          "rgb_xy_grid": {
+            "all": {
+              "count": 76895,
+              "min_color_jacobian_diagonal": 0.875640869140625,
+              "min_color_jacobian_singular": 0.8258724808692932,
+              "max_color_jacobian_singular": 1.1735762357711792,
+              "min_color_jacobian_determinant": 0.765114963054657,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 6.5587615966796875,
+              "p99_abs_channel_change": 3.3104962158203137,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 36142,
+              "min_color_jacobian_diagonal": 0.875640869140625,
+              "min_color_jacobian_singular": 0.8258724808692932,
+              "max_color_jacobian_singular": 1.1735762357711792,
+              "min_color_jacobian_determinant": 0.765114963054657,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 6.5587615966796875,
+              "p99_abs_channel_change": 4.040302276611328,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 12375,
+              "min_color_jacobian_diagonal": 0.98193359375,
+              "min_color_jacobian_singular": 0.9783050417900085,
+              "max_color_jacobian_singular": 1.021162986755371,
+              "min_color_jacobian_determinant": 0.9745419025421143,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.587799072265625,
+              "p99_abs_channel_change": 0.2556311035156251,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "native_anchor_palette": {
+            "all": {
+              "count": 57600,
+              "min_color_jacobian_diagonal": 0.8894805908203125,
+              "min_color_jacobian_singular": 0.8797869086265564,
+              "max_color_jacobian_singular": 1.1526390314102173,
+              "min_color_jacobian_determinant": 0.7649900913238525,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 5.380157470703125,
+              "p99_abs_channel_change": 3.310708999633791,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 57481,
+              "min_color_jacobian_diagonal": 0.8894805908203125,
+              "min_color_jacobian_singular": 0.8797869086265564,
+              "max_color_jacobian_singular": 1.1526390314102173,
+              "min_color_jacobian_determinant": 0.7649900913238525,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 5.380157470703125,
+              "p99_abs_channel_change": 3.3115420532226545,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 17,
+              "min_color_jacobian_diagonal": 0.9892730712890625,
+              "min_color_jacobian_singular": 0.9879422187805176,
+              "max_color_jacobian_singular": 1.000872254371643,
+              "min_color_jacobian_determinant": 0.9793370962142944,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.434478759765625,
+              "p99_abs_channel_change": 0.43433380126953125,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "black_white_exact": true,
+          "range_guarantee_applies": true
+        }
+      },
+      "flags": []
+    },
+    {
+      "frame": 2166,
+      "sides": {
+        "left": {
+          "rgb_xy_grid": {
+            "all": {
+              "count": 76895,
+              "min_color_jacobian_diagonal": 0.7462899088859558,
+              "min_color_jacobian_singular": 0.7462698221206665,
+              "max_color_jacobian_singular": 1.2896544933319092,
+              "min_color_jacobian_determinant": 0.4853518009185791,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 13.3087158203125,
+              "p99_abs_channel_change": 6.671577148437502,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 23945,
+              "min_color_jacobian_diagonal": 0.7462899088859558,
+              "min_color_jacobian_singular": 0.7462698221206665,
+              "max_color_jacobian_singular": 1.2896544933319092,
+              "min_color_jacobian_determinant": 0.4853518009185791,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 13.3087158203125,
+              "p99_abs_channel_change": 8.933484878540062,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 27909,
+              "min_color_jacobian_diagonal": 0.9724290370941162,
+              "min_color_jacobian_singular": 0.9722545742988586,
+              "max_color_jacobian_singular": 1.0869266986846924,
+              "min_color_jacobian_determinant": 0.9718395471572876,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 1.825103759765625,
+              "p99_abs_channel_change": 0.31845413208007944,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "native_anchor_palette": {
+            "all": {
+              "count": 57600,
+              "min_color_jacobian_diagonal": 0.7536278367042542,
+              "min_color_jacobian_singular": 0.7535547018051147,
+              "max_color_jacobian_singular": 1.1868376731872559,
+              "min_color_jacobian_determinant": 0.5206825733184814,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 9.85186767578125,
+              "p99_abs_channel_change": 6.111770458221439,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 57492,
+              "min_color_jacobian_diagonal": 0.7536278367042542,
+              "min_color_jacobian_singular": 0.7535547018051147,
+              "max_color_jacobian_singular": 1.1868376731872559,
+              "min_color_jacobian_determinant": 0.5206825733184814,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 9.85186767578125,
+              "p99_abs_channel_change": 6.1172566413879395,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 12,
+              "min_color_jacobian_diagonal": 0.9993438720703125,
+              "min_color_jacobian_singular": 0.9990850687026978,
+              "max_color_jacobian_singular": 1.0053327083587646,
+              "min_color_jacobian_determinant": 0.999221682548523,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.065093994140625,
+              "p99_abs_channel_change": 0.060634613037109354,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "black_white_exact": true,
+          "range_guarantee_applies": true
+        },
+        "right": {
+          "rgb_xy_grid": {
+            "all": {
+              "count": 76895,
+              "min_color_jacobian_diagonal": 0.7998886108398438,
+              "min_color_jacobian_singular": 0.7624063491821289,
+              "max_color_jacobian_singular": 1.2198395729064941,
+              "min_color_jacobian_determinant": 0.8144630193710327,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 10.573783874511719,
+              "p99_abs_channel_change": 3.927441101074226,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 23945,
+              "min_color_jacobian_diagonal": 0.7998886108398438,
+              "min_color_jacobian_singular": 0.7624063491821289,
+              "max_color_jacobian_singular": 1.2198395729064941,
+              "min_color_jacobian_determinant": 0.8144630193710327,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 10.573783874511719,
+              "p99_abs_channel_change": 5.791464080810554,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 27909,
+              "min_color_jacobian_diagonal": 0.95367431640625,
+              "min_color_jacobian_singular": 0.9513019919395447,
+              "max_color_jacobian_singular": 1.0273276567459106,
+              "min_color_jacobian_determinant": 0.9609417915344238,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.8665847778320312,
+              "p99_abs_channel_change": 0.2399169921875004,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "native_anchor_palette": {
+            "all": {
+              "count": 57600,
+              "min_color_jacobian_diagonal": 0.8654556274414062,
+              "min_color_jacobian_singular": 0.8519447445869446,
+              "max_color_jacobian_singular": 1.216424584388733,
+              "min_color_jacobian_determinant": 0.8515364527702332,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 6.187492370605469,
+              "p99_abs_channel_change": 3.733044776916505,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 57509,
+              "min_color_jacobian_diagonal": 0.8654556274414062,
+              "min_color_jacobian_singular": 0.8519447445869446,
+              "max_color_jacobian_singular": 1.216424584388733,
+              "min_color_jacobian_determinant": 0.8515364527702332,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 6.187492370605469,
+              "p99_abs_channel_change": 3.7348062896728456,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 31,
+              "min_color_jacobian_diagonal": 0.99505615234375,
+              "min_color_jacobian_singular": 0.9935123920440674,
+              "max_color_jacobian_singular": 1.0061239004135132,
+              "min_color_jacobian_determinant": 0.9907732605934143,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.15606689453125,
+              "p99_abs_channel_change": 0.11706909179687493,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "black_white_exact": true,
+          "range_guarantee_applies": true
+        }
+      },
+      "flags": []
+    },
+    {
+      "frame": 2527,
+      "sides": {
+        "left": {
+          "rgb_xy_grid": {
+            "all": {
+              "count": 76895,
+              "min_color_jacobian_diagonal": 0.8314302563667297,
+              "min_color_jacobian_singular": 0.830998957157135,
+              "max_color_jacobian_singular": 1.2164727449417114,
+              "min_color_jacobian_determinant": 0.7645387053489685,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 8.04132080078125,
+              "p99_abs_channel_change": 3.5175961303710945,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 39762,
+              "min_color_jacobian_diagonal": 0.8314302563667297,
+              "min_color_jacobian_singular": 0.830998957157135,
+              "max_color_jacobian_singular": 1.2164727449417114,
+              "min_color_jacobian_determinant": 0.7645387053489685,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 8.04132080078125,
+              "p99_abs_channel_change": 4.404761886596673,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 10848,
+              "min_color_jacobian_diagonal": 0.9810339212417603,
+              "min_color_jacobian_singular": 0.9773522019386292,
+              "max_color_jacobian_singular": 1.0270130634307861,
+              "min_color_jacobian_determinant": 0.9732623100280762,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.8374824523925781,
+              "p99_abs_channel_change": 0.25201408386230467,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "native_anchor_palette": {
+            "all": {
+              "count": 57600,
+              "min_color_jacobian_diagonal": 0.884091854095459,
+              "min_color_jacobian_singular": 0.8754412531852722,
+              "max_color_jacobian_singular": 1.1966947317123413,
+              "min_color_jacobian_determinant": 0.8363110423088074,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 7.358467102050781,
+              "p99_abs_channel_change": 5.815209732055672,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 57478,
+              "min_color_jacobian_diagonal": 0.884091854095459,
+              "min_color_jacobian_singular": 0.8754412531852722,
+              "max_color_jacobian_singular": 1.1966947317123413,
+              "min_color_jacobian_determinant": 0.8363110423088074,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 7.358467102050781,
+              "p99_abs_channel_change": 5.831774826049836,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 38,
+              "min_color_jacobian_diagonal": 0.9954919815063477,
+              "min_color_jacobian_singular": 0.9954618811607361,
+              "max_color_jacobian_singular": 1.0028135776519775,
+              "min_color_jacobian_determinant": 0.98951655626297,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.11885833740234375,
+              "p99_abs_channel_change": 0.11615427017211916,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "black_white_exact": true,
+          "range_guarantee_applies": true
+        },
+        "right": {
+          "rgb_xy_grid": {
+            "all": {
+              "count": 76895,
+              "min_color_jacobian_diagonal": 0.7473797798156738,
+              "min_color_jacobian_singular": 0.7473797798156738,
+              "max_color_jacobian_singular": 1.298651099205017,
+              "min_color_jacobian_determinant": 0.4293861389160156,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 12.875747680664062,
+              "p99_abs_channel_change": 4.346789550781253,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 39762,
+              "min_color_jacobian_diagonal": 0.7473797798156738,
+              "min_color_jacobian_singular": 0.7473797798156738,
+              "max_color_jacobian_singular": 1.298651099205017,
+              "min_color_jacobian_determinant": 0.4293861389160156,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 12.875747680664062,
+              "p99_abs_channel_change": 5.8107776641845605,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 10848,
+              "min_color_jacobian_diagonal": 0.9726943969726562,
+              "min_color_jacobian_singular": 0.9679675102233887,
+              "max_color_jacobian_singular": 1.07743501663208,
+              "min_color_jacobian_determinant": 0.9727510809898376,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 1.179107666015625,
+              "p99_abs_channel_change": 0.27611698150634767,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "native_anchor_palette": {
+            "all": {
+              "count": 57600,
+              "min_color_jacobian_diagonal": 0.7579301595687866,
+              "min_color_jacobian_singular": 0.7579014897346497,
+              "max_color_jacobian_singular": 1.177271842956543,
+              "min_color_jacobian_determinant": 0.4628858268260956,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 8.482582092285156,
+              "p99_abs_channel_change": 6.096071052551275,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 57415,
+              "min_color_jacobian_diagonal": 0.7579301595687866,
+              "min_color_jacobian_singular": 0.7579014897346497,
+              "max_color_jacobian_singular": 1.177271842956543,
+              "min_color_jacobian_determinant": 0.4628858268260956,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 8.482582092285156,
+              "p99_abs_channel_change": 6.099501342773437,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 34,
+              "min_color_jacobian_diagonal": 0.9982070922851562,
+              "min_color_jacobian_singular": 0.9979727268218994,
+              "max_color_jacobian_singular": 1.0039477348327637,
+              "min_color_jacobian_determinant": 1.002879023551941,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.10478019714355469,
+              "p99_abs_channel_change": 0.10028215408325195,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "black_white_exact": true,
+          "range_guarantee_applies": true
+        }
+      },
+      "flags": []
+    },
+    {
+      "frame": 2888,
+      "sides": {
+        "left": {
+          "rgb_xy_grid": {
+            "all": {
+              "count": 76895,
+              "min_color_jacobian_diagonal": 0.8831839561462402,
+              "min_color_jacobian_singular": 0.8820885419845581,
+              "max_color_jacobian_singular": 1.125578761100769,
+              "min_color_jacobian_determinant": 0.8315026760101318,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 5.433769226074219,
+              "p99_abs_channel_change": 2.8287896728515625,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 31324,
+              "min_color_jacobian_diagonal": 0.8831839561462402,
+              "min_color_jacobian_singular": 0.8820885419845581,
+              "max_color_jacobian_singular": 1.125578761100769,
+              "min_color_jacobian_determinant": 0.8315026760101318,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 5.433769226074219,
+              "p99_abs_channel_change": 3.389631347656243,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 19322,
+              "min_color_jacobian_diagonal": 0.9838714599609375,
+              "min_color_jacobian_singular": 0.9803252816200256,
+              "max_color_jacobian_singular": 1.017419457435608,
+              "min_color_jacobian_determinant": 0.9788035154342651,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.5242462158203125,
+              "p99_abs_channel_change": 0.2691322326660154,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "native_anchor_palette": {
+            "all": {
+              "count": 57600,
+              "min_color_jacobian_diagonal": 0.9062511920928955,
+              "min_color_jacobian_singular": 0.8930987119674683,
+              "max_color_jacobian_singular": 1.1127779483795166,
+              "min_color_jacobian_determinant": 0.8802009224891663,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 4.1666412353515625,
+              "p99_abs_channel_change": 2.9208051300048883,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 57109,
+              "min_color_jacobian_diagonal": 0.9062511920928955,
+              "min_color_jacobian_singular": 0.8930987119674683,
+              "max_color_jacobian_singular": 1.1127779483795166,
+              "min_color_jacobian_determinant": 0.8802009224891663,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 4.1666412353515625,
+              "p99_abs_channel_change": 2.9262626647949137,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 82,
+              "min_color_jacobian_diagonal": 0.9913330078125,
+              "min_color_jacobian_singular": 0.9859799146652222,
+              "max_color_jacobian_singular": 1.003915786743164,
+              "min_color_jacobian_determinant": 0.9802724719047546,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.3249664306640625,
+              "p99_abs_channel_change": 0.31667594909667973,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "black_white_exact": true,
+          "range_guarantee_applies": true
+        },
+        "right": {
+          "rgb_xy_grid": {
+            "all": {
+              "count": 76895,
+              "min_color_jacobian_diagonal": 0.8491668701171875,
+              "min_color_jacobian_singular": 0.8491668701171875,
+              "max_color_jacobian_singular": 1.1515369415283203,
+              "min_color_jacobian_determinant": 0.8338279128074646,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 7.6184844970703125,
+              "p99_abs_channel_change": 3.3836532592773443,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 31324,
+              "min_color_jacobian_diagonal": 0.8491668701171875,
+              "min_color_jacobian_singular": 0.8491668701171875,
+              "max_color_jacobian_singular": 1.1515369415283203,
+              "min_color_jacobian_determinant": 0.8338279128074646,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 7.6184844970703125,
+              "p99_abs_channel_change": 4.151661987304687,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 19322,
+              "min_color_jacobian_diagonal": 0.98486328125,
+              "min_color_jacobian_singular": 0.98463374376297,
+              "max_color_jacobian_singular": 1.0398091077804565,
+              "min_color_jacobian_determinant": 0.9833523631095886,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.9336395263671875,
+              "p99_abs_channel_change": 0.326346588134765,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "native_anchor_palette": {
+            "all": {
+              "count": 57600,
+              "min_color_jacobian_diagonal": 0.858306884765625,
+              "min_color_jacobian_singular": 0.8583030700683594,
+              "max_color_jacobian_singular": 1.1483373641967773,
+              "min_color_jacobian_determinant": 0.8544257283210754,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 5.7350921630859375,
+              "p99_abs_channel_change": 3.212956848144536,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 57013,
+              "min_color_jacobian_diagonal": 0.858306884765625,
+              "min_color_jacobian_singular": 0.8583030700683594,
+              "max_color_jacobian_singular": 1.1483373641967773,
+              "min_color_jacobian_determinant": 0.8544257283210754,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 5.7350921630859375,
+              "p99_abs_channel_change": 3.216031036376953,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 90,
+              "min_color_jacobian_diagonal": 0.9981460571289062,
+              "min_color_jacobian_singular": 0.997037410736084,
+              "max_color_jacobian_singular": 1.0129005908966064,
+              "min_color_jacobian_determinant": 1.001644492149353,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.298309326171875,
+              "p99_abs_channel_change": 0.2904962158203125,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "black_white_exact": true,
+          "range_guarantee_applies": true
+        }
+      },
+      "flags": []
+    },
+    {
+      "frame": 3240,
+      "sides": {
+        "left": {
+          "rgb_xy_grid": {
+            "all": {
+              "count": 76895,
+              "min_color_jacobian_diagonal": 0.8418548107147217,
+              "min_color_jacobian_singular": 0.8418548107147217,
+              "max_color_jacobian_singular": 1.1979604959487915,
+              "min_color_jacobian_determinant": 0.7428417205810547,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 6.9560699462890625,
+              "p99_abs_channel_change": 2.609703369140628,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 36114,
+              "min_color_jacobian_diagonal": 0.8418548107147217,
+              "min_color_jacobian_singular": 0.8418548107147217,
+              "max_color_jacobian_singular": 1.1979604959487915,
+              "min_color_jacobian_determinant": 0.7428417205810547,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 6.9560699462890625,
+              "p99_abs_channel_change": 3.4518499755859366,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 12597,
+              "min_color_jacobian_diagonal": 0.9832823872566223,
+              "min_color_jacobian_singular": 0.9832823872566223,
+              "max_color_jacobian_singular": 1.025100827217102,
+              "min_color_jacobian_determinant": 0.9789294600486755,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.67889404296875,
+              "p99_abs_channel_change": 0.21570167541503868,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "native_anchor_palette": {
+            "all": {
+              "count": 57600,
+              "min_color_jacobian_diagonal": 0.8477574586868286,
+              "min_color_jacobian_singular": 0.8477525115013123,
+              "max_color_jacobian_singular": 1.1078860759735107,
+              "min_color_jacobian_determinant": 0.7481682300567627,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 5.473114013671875,
+              "p99_abs_channel_change": 2.3199148368835494,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 57587,
+              "min_color_jacobian_diagonal": 0.8477574586868286,
+              "min_color_jacobian_singular": 0.8477525115013123,
+              "max_color_jacobian_singular": 1.1078860759735107,
+              "min_color_jacobian_determinant": 0.7481682300567627,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 5.473114013671875,
+              "p99_abs_channel_change": 2.320101547241208,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "black_white_exact": true,
+          "range_guarantee_applies": true
+        },
+        "right": {
+          "rgb_xy_grid": {
+            "all": {
+              "count": 76895,
+              "min_color_jacobian_diagonal": 0.8170166015625,
+              "min_color_jacobian_singular": 0.7956947684288025,
+              "max_color_jacobian_singular": 1.1621100902557373,
+              "min_color_jacobian_determinant": 0.7764817476272583,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 7.3201446533203125,
+              "p99_abs_channel_change": 2.4634983825683605,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 36114,
+              "min_color_jacobian_diagonal": 0.8170166015625,
+              "min_color_jacobian_singular": 0.7956947684288025,
+              "max_color_jacobian_singular": 1.1621100902557373,
+              "min_color_jacobian_determinant": 0.7764817476272583,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 7.3201446533203125,
+              "p99_abs_channel_change": 3.2468634796142535,
+              "clipped_channel_fraction": 0.0
+            },
+            "weak_confidence_lt_0.1": {
+              "count": 12597,
+              "min_color_jacobian_diagonal": 0.975555419921875,
+              "min_color_jacobian_singular": 0.9732569456100464,
+              "max_color_jacobian_singular": 1.0178184509277344,
+              "min_color_jacobian_determinant": 0.9742775559425354,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 0.72393798828125,
+              "p99_abs_channel_change": 0.22276535034179673,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "native_anchor_palette": {
+            "all": {
+              "count": 57600,
+              "min_color_jacobian_diagonal": 0.922393798828125,
+              "min_color_jacobian_singular": 0.9075971245765686,
+              "max_color_jacobian_singular": 1.1585612297058105,
+              "min_color_jacobian_determinant": 0.9254087209701538,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 5.982566833496094,
+              "p99_abs_channel_change": 2.0279593276977623,
+              "clipped_channel_fraction": 0.0
+            },
+            "supported_confidence_gt_0.5": {
+              "count": 57501,
+              "min_color_jacobian_diagonal": 0.922393798828125,
+              "min_color_jacobian_singular": 0.9075971245765686,
+              "max_color_jacobian_singular": 1.1585612297058105,
+              "min_color_jacobian_determinant": 0.9254087209701538,
+              "fraction_nonpositive_diagonal": 0.0,
+              "fraction_nonpositive_determinant": 0.0,
+              "max_abs_channel_change": 5.982566833496094,
+              "p99_abs_channel_change": 2.030829048156743,
+              "clipped_channel_fraction": 0.0
+            }
+          },
+          "black_white_exact": true,
+          "range_guarantee_applies": true
+        }
+      },
+      "flags": []
+    }
+  ],
+  "summary": [
+    {
+      "frame": 361,
+      "grid_min_own_derivative": 0.8144240379333496,
+      "grid_min_singular": 0.8135694265365601,
+      "grid_min_determinant": 0.7320786118507385,
+      "native_min_singular": 0.846339762210846,
+      "native_max_change": 5.5791473388671875,
+      "native_p99_change": 3.708318977355959,
+      "flags": []
+    },
+    {
+      "frame": 722,
+      "grid_min_own_derivative": 0.7548109292984009,
+      "grid_min_singular": 0.7274115681648254,
+      "grid_min_determinant": 0.6594772934913635,
+      "native_min_singular": 0.7800931930541992,
+      "native_max_change": 9.5723876953125,
+      "native_p99_change": 5.074342498779298,
+      "flags": []
+    },
+    {
+      "frame": 1083,
+      "grid_min_own_derivative": 0.8363113403320312,
+      "grid_min_singular": 0.8102049231529236,
+      "grid_min_determinant": 0.7020930051803589,
+      "native_min_singular": 0.8613462448120117,
+      "native_max_change": 5.205810546875,
+      "native_p99_change": 3.605362243652344,
+      "flags": []
+    },
+    {
+      "frame": 1444,
+      "grid_min_own_derivative": 0.795650839805603,
+      "grid_min_singular": 0.7956432104110718,
+      "grid_min_determinant": 0.7670945525169373,
+      "native_min_singular": 0.8140712976455688,
+      "native_max_change": 8.599143981933594,
+      "native_p99_change": 3.4719093322753913,
+      "flags": []
+    },
+    {
+      "frame": 1805,
+      "grid_min_own_derivative": 0.8390426635742188,
+      "grid_min_singular": 0.816583514213562,
+      "grid_min_determinant": 0.765114963054657,
+      "native_min_singular": 0.8624278903007507,
+      "native_max_change": 5.7438507080078125,
+      "native_p99_change": 3.3366950988769553,
+      "flags": []
+    },
+    {
+      "frame": 2166,
+      "grid_min_own_derivative": 0.7462899088859558,
+      "grid_min_singular": 0.7462698221206665,
+      "grid_min_determinant": 0.4853518009185791,
+      "native_min_singular": 0.7535547018051147,
+      "native_max_change": 9.85186767578125,
+      "native_p99_change": 6.111770458221439,
+      "flags": []
+    },
+    {
+      "frame": 2527,
+      "grid_min_own_derivative": 0.7473797798156738,
+      "grid_min_singular": 0.7473797798156738,
+      "grid_min_determinant": 0.4293861389160156,
+      "native_min_singular": 0.7579014897346497,
+      "native_max_change": 8.482582092285156,
+      "native_p99_change": 6.096071052551275,
+      "flags": []
+    },
+    {
+      "frame": 2888,
+      "grid_min_own_derivative": 0.8491668701171875,
+      "grid_min_singular": 0.8491668701171875,
+      "grid_min_determinant": 0.8315026760101318,
+      "native_min_singular": 0.8583030700683594,
+      "native_max_change": 5.7350921630859375,
+      "native_p99_change": 3.212956848144536,
+      "flags": []
+    },
+    {
+      "frame": 3240,
+      "grid_min_own_derivative": 0.8170166015625,
+      "grid_min_singular": 0.7956947684288025,
+      "grid_min_determinant": 0.7428417205810547,
+      "native_min_singular": 0.8477525115013123,
+      "native_max_change": 5.982566833496094,
+      "native_p99_change": 2.3199148368835494,
+      "flags": []
+    }
+  ],
+  "runtime_seconds": 32.52065708395094
+}

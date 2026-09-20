@@ -1,0 +1,120 @@
+{
+  "schema_version": 2,
+  "method": "rife_bridge",
+  "source": {
+    "path": "IYTYT.mp4",
+    "width": 1280,
+    "height": 720,
+    "fps": 23.976023976023978,
+    "fps_fraction": "24000/1001",
+    "frame_count": 3347,
+    "frame_count_estimated": false,
+    "duration": 139.597792,
+    "has_audio": true,
+    "codec_name": "h264",
+    "pix_fmt": "yuv420p",
+    "color_space": "bt709",
+    "color_transfer": "bt709",
+    "color_primaries": "bt709",
+    "color_range": "tv"
+  },
+  "source_sha256": "c64928f7c72aee57d4a536d1af711d354a0358109510b175407d011621e855ca",
+  "seams": [
+    {
+      "frame": 361,
+      "time": 15.056708333333333,
+      "bridge_start": 349,
+      "bridge_end": 365,
+      "start_slope": 1.0,
+      "end_slope": 1.0,
+      "camera_control": true,
+      "rationale": "Incoming zoom eases into the near-stationary continuation. Starting twelve frames early provides enough net magnification to match incoming velocity without a zoom reversal. End before the larger mouth/face change later in the continuation."
+    },
+    {
+      "frame": 722,
+      "time": 30.113416666666666,
+      "bridge_start": 714,
+      "bridge_end": 726,
+      "start_slope": 1.0,
+      "end_slope": 1.0,
+      "camera_control": true,
+      "rationale": "Track the moving car and retain the separate lateral bridge/skyline motion. End at the beginning of the woman\u2019s turn, leaving the turn itself in the source."
+    },
+    {
+      "frame": 1083,
+      "time": 45.170125,
+      "bridge_start": 1073,
+      "bridge_end": 1087,
+      "start_slope": 1.0,
+      "end_slope": 1.0,
+      "camera_control": true,
+      "rationale": "Native-resolution coverage validation shifts the bridge two frames earlier, retaining the car/skateboard contact and original camera trend."
+    },
+    {
+      "frame": 1444,
+      "time": 60.22683333333333,
+      "bridge_start": 1436,
+      "bridge_end": 1448,
+      "start_slope": 1.0,
+      "end_slope": 1.0,
+      "camera_control": true,
+      "rationale": "Cover the foreground redraw and car/skateboarder proportion shift. End before the next conspicuous leg push around frame 1452. Two source endpoints constrain the bridge; intermediate gestures require visual review."
+    },
+    {
+      "frame": 1805,
+      "time": 75.28354166666666,
+      "bridge_start": 1797,
+      "bridge_end": 1811,
+      "start_slope": 1.0,
+      "end_slope": 1.0,
+      "camera_control": true,
+      "rationale": "Bridge the cadence/appearance reset while continuing forward street travel and depth parallax. Distant car, near shops, trees, poles, and road markings must move at different speeds."
+    },
+    {
+      "frame": 2166,
+      "time": 90.34025,
+      "bridge_start": 2158,
+      "bridge_end": 2174,
+      "start_slope": 1.0,
+      "end_slope": 1.0,
+      "camera_control": true,
+      "rationale": "Native-resolution camera and source-coverage validation selects 2158\u20132174: smoothly reduces pullout speed while retaining complete endpoint/handle coverage."
+    },
+    {
+      "frame": 2527,
+      "time": 105.39695833333333,
+      "bridge_start": 2519,
+      "bridge_end": 2537,
+      "start_slope": 1.0,
+      "end_slope": 1.0,
+      "camera_control": true,
+      "rationale": "Extend ten frames after the cut to clear the seven held startup intervals and reach real action. Keep the apartment background fixed while continuing the woman\u2019s gesture and sloth tablet motion."
+    },
+    {
+      "frame": 2888,
+      "time": 120.45366666666666,
+      "bridge_start": 2880,
+      "bridge_end": 2892,
+      "start_slope": 1.0,
+      "end_slope": 1.0,
+      "camera_control": true,
+      "rationale": "Use a short asymmetric window before the continuation pose changes. Preserve forward flight and separate character/Empire State Building/distant-river trajectories; smooth the strong grading reset."
+    },
+    {
+      "frame": 3240,
+      "time": 135.135,
+      "bridge_start": 3228,
+      "bridge_end": 3244,
+      "start_slope": 1.0,
+      "end_slope": 1.0,
+      "camera_control": true,
+      "rationale": "Start twelve frames before the join so the push-in can decelerate without backing away. End after initial holds but before the woman turns around at approximately 3245; retain that natural turn untouched."
+    }
+  ],
+  "notes": [
+    "Original endpoint images are retained exactly before encoding.",
+    "All generated frames replace existing samples; duration and audio timing remain unchanged.",
+    "No global crop or long-lived geometry correction.",
+    "Camera-controlled RIFE bridges; appearance/motion synthesis still requires visual review."
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "frame": 2166,
+  "limit": 18.0,
+  "checks": [
+    {
+      "samples": 17428,
+      "mae_before": 4.1564812660217285,
+      "mae_after": 1.7731420916875755,
+      "regional_signed_bias_before": 2.493420124053955,
+      "regional_signed_bias_after": 0.9140021285765211,
+      "peak_matched_channel_change": 5.222263129209066
+    },
+    {
+      "samples": 27244,
+      "mae_before": 4.447150230407715,
+      "mae_after": 1.940414840071654,
+      "regional_signed_bias_before": 2.6092653274536133,
+      "regional_signed_bias_after": 0.8552698614834919,
+      "peak_matched_channel_change": 5.27404254046012
+    },
+    {
+      "samples": 25959,
+      "mae_before": 4.497201442718506,
+      "mae_after": 2.0252555937151473,
+      "regional_signed_bias_before": 2.590024948120117,
+      "regional_signed_bias_after": 0.8977007058763755,
+      "peak_matched_channel_change": 5.2884051653012385
+    }
+  ],
+  "maximum_coefficient": 28.488404759631262,
+  "training": "Adjacent pair alternating spatial tiles only; palette-balanced; nonlinear Huber+ridge, shared RGB midpoint",
+  "status": "Research only; requires native ROI and color Jacobian review"
+}

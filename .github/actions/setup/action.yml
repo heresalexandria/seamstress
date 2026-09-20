@@ -1,0 +1,37 @@
+name: Set up Seamstress
+description: Install the pinned native engine, FFmpeg, and Electron dependencies
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+      with:
+        python-version: '3.13'
+        cache: pip
+        cache-dependency-path: scripts/release/requirements.txt
+    - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      with:
+        node-version: '22'
+        cache: npm
+        cache-dependency-path: app/package-lock.json
+    - name: Install FFmpeg
+      shell: bash
+      env:
+        HOMEBREW_NO_AUTO_UPDATE: '1'
+        HOMEBREW_NO_INSTALL_CLEANUP: '1'
+      run: |
+        if [[ "$RUNNER_OS" == macOS ]]; then
+          brew list ffmpeg >/dev/null 2>&1 || brew install ffmpeg
+        else
+          sudo apt-get update -qq
+          sudo apt-get install --yes --no-install-recommends ffmpeg
+        fi
+    - name: Install pinned Python runtime dependencies
+      shell: bash
+      run: |
+        python -m venv .venv
+        .venv/bin/python -m pip install -r scripts/release/requirements.txt
+        .venv/bin/python -m pip install --no-deps -e .
+    - name: Install Electron dependencies
+      shell: bash
+      working-directory: app
+      run: npm ci --no-audit --no-fund

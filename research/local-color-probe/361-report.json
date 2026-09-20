@@ -1,0 +1,32 @@
+[
+  {
+    "mode": "color",
+    "sample_count": 66650,
+    "heldout_count": 33274,
+    "baseline_heldout_mae": 2.3992559909820557,
+    "candidate_heldout_mae": 1.683517575263977,
+    "baseline_heldout_p90": 4.815035820007324,
+    "candidate_heldout_p90": 3.5366973876953125,
+    "peak_channel_change": 3.6752243041992188
+  },
+  {
+    "mode": "spatial",
+    "sample_count": 66650,
+    "heldout_count": 33274,
+    "baseline_heldout_mae": 2.3992559909820557,
+    "candidate_heldout_mae": 2.0798237323760986,
+    "baseline_heldout_p90": 4.815035820007324,
+    "candidate_heldout_p90": 4.299813270568848,
+    "peak_channel_change": 2.0910491943359375
+  },
+  {
+    "mode": "hybrid",
+    "sample_count": 66650,
+    "heldout_count": 33274,
+    "baseline_heldout_mae": 2.3992559909820557,
+    "candidate_heldout_mae": 1.5508031845092773,
+    "baseline_heldout_p90": 4.815035820007324,
+    "candidate_heldout_p90": 3.3330581188201904,
+    "peak_channel_change": 3.997894287109375
+  }
+]

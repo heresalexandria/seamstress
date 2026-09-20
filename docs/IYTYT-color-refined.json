@@ -1,0 +1,71 @@
+{
+  "status": "Color-refinement candidate; small residual differences and frame 2888 geometry remain. Playback review required.",
+  "files": {
+    "source": {
+      "path": "IYTYT.mp4",
+      "sha256": "c64928f7c72aee57d4a536d1af711d354a0358109510b175407d011621e855ca",
+      "bytes": 212196089
+    },
+    "baseline_video": {
+      "path": "output/IYTYT-source-conform-eight-joins.mp4",
+      "sha256": "d91a6813e4c22e4216e976aa0fa4ec70d87b35673fbe43bf84d01e737a70d24a",
+      "bytes": 143903624
+    },
+    "candidate_video": {
+      "path": "output/IYTYT-source-conform-color-refined.mp4",
+      "sha256": "b15c4732a6eddd5bf103efdca916f9f88795bc5a19cc738e73d1285f5c75aca3",
+      "bytes": 144987530
+    },
+    "plan": {
+      "path": "plans/IYTYT-color-refined.json",
+      "sha256": "2da908ac836608663fe695d33e8ae447de831e9e96eaa2d3f4cceee383b5d9c8",
+      "bytes": 1731053,
+      "before_path_normalization_sha256": "f2e2e4ebe9d37cb0d01e740fb527cde4a2c11aabb4f85f1bf3d8762bbf8b687f",
+      "before_path_normalization_bytes": 1731095
+    },
+    "calibration": {
+      "path": "plans/IYTYT-color-refined-calibration.json",
+      "sha256": "bce757ec41cf2b51fd24883fe263bf8b35fcc0b7803310b7253ef36e4e2d7b9c",
+      "bytes": 885070,
+      "before_path_normalization_sha256": "38dc89d880ee7cada0720868d60c8d6baa235443903a2ac4b3a93ded82a14ed5",
+      "before_path_normalization_bytes": 885112
+    }
+  },
+  "render_report": "output/IYTYT-source-conform-color-refined.repair.json",
+  "tests": {
+    "passed": 96,
+    "log": "research/color-refined-tests.log"
+  },
+  "rebuild_report": "output/local-color/rebuild-validation.json",
+  "verification": {
+    "report": "output/color-refined-verification/report.json",
+    "audio_bitstream_preserved": true,
+    "frame_count_preserved": true,
+    "fps_preserved": true,
+    "dimensions_preserved": true,
+    "duration_difference": 0.0
+  },
+  "encoded_color_audit": "research/local-color-diagnosis/encoded-candidate/native-material-evaluation.json",
+  "baseline_comparison_player": "output/color-refined-review/baseline-comparison.html",
+  "encoded_color_summary": {
+    "frozen": {
+      "regions": 59,
+      "baseline_mean_absolute_signed_bias": 3.337343020964477,
+      "candidate_mean_absolute_signed_bias": 0.7523486091423843,
+      "reduction_fraction": 0.7745665925209693,
+      "regions_improved": 54,
+      "minimum_accepted_pixels": 30,
+      "scope": "Original independently selected regions; overlapping extra trouser/full-outfit diagnostics excluded"
+    },
+    "joint": {
+      "regions": 54,
+      "baseline_mean_absolute_signed_bias": 3.4067236897018223,
+      "candidate_mean_absolute_signed_bias": 0.7884371596629973,
+      "reduction_fraction": 0.7685643945687869,
+      "regions_improved": 51,
+      "minimum_accepted_pixels": 30,
+      "scope": "Original independently selected regions; overlapping extra trouser/full-outfit diagnostics excluded"
+    }
+  },
+  "path_normalization": "Published recipe paths are relative to the repository root. Plan/calibration checksums describe these portable files; before_path_normalization values identify historical local reports. Source and movie checksums, calibration numbers, geometry, color models, timing, and audio are unchanged."
+}

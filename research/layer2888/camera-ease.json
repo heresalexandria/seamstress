@@ -1,0 +1,3382 @@
+{
+  "source": "IYTYT.mp4",
+  "frame_indexing": "zero-based source/output frame identity",
+  "range_inclusive": [
+    2864,
+    2911
+  ],
+  "cut": 2888,
+  "background_only": true,
+  "foreground_policy": "Do not apply these matrices to foreground. Its source poses retain the separately fitted foreground transform.",
+  "base_policy": "Identity before2888; fixed background incoming-to-outgoing affine at2888 onward. Camera extra is identity outside local support.",
+  "view_matrix_assumed": [
+    [
+      1.06,
+      -0.0,
+      -38.370000000000005
+    ],
+    [
+      0.0,
+      1.06,
+      -21.569999999999993
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "view_enlargement_assumed": 1.06,
+  "interpolation_guard_native_px": 2,
+  "half_window_frames": 5,
+  "chosen_half_window_reason": "Longest tested window with all output corners at least2 native source pixels inside the original rectangle under1.06 view.",
+  "outer_source_coverage_pass": true,
+  "minimum_outer_source_clearance_native_px": 4.547033397875111,
+  "maximum_outer_source_extension_native_px": 0,
+  "rate_parameter_units": [
+    "log scale per frame",
+    "radians per frame",
+    "native center x px per frame",
+    "native center y px per frame"
+  ],
+  "incoming_background_rate": [
+    0.01671593630507057,
+    -2.8866895119617108e-05,
+    3.0936900375514256,
+    4.584733735597823
+  ],
+  "outgoing_background_rate_in_aligned_coordinates": [
+    -7.299069761246766e-05,
+    0.00037052058390396023,
+    0.040904127185740435,
+    -1.335891806995382
+  ],
+  "desired_cut_rate": [
+    0.008321472803729052,
+    0.00017082684439217156,
+    1.567297082368583,
+    1.6244209643012204
+  ],
+  "measurement_evidence": [
+    {
+      "frames": [
+        2883,
+        2885
+      ],
+      "background_only": true,
+      "features": 688,
+      "inliers": 616,
+      "inlier_fraction": 0.8953488372093024,
+      "grid_coverage": 0.875,
+      "median_inlier_residual_native_px": 0.537707348917897,
+      "p90_all_residual_native_px": 2.0730309581031348,
+      "forward_matrix": [
+        [
+          1.035035880027112,
+          9.619614645707212e-05,
+          -16.003211805599147
+        ],
+        [
+          -9.619614645707212e-05,
+          1.035035880027112,
+          -3.248905591313219
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "velocity_common_output_coordinates": [
+        0.017218048564116108,
+        -4.64699572432103e-05,
+        3.2184079931951715,
+        4.642487921387101
+      ]
+    },
+    {
+      "frames": [
+        2885,
+        2887
+      ],
+      "background_only": true,
+      "features": 680,
+      "inliers": 623,
+      "inlier_fraction": 0.9161764705882353,
+      "grid_coverage": 0.875,
+      "median_inlier_residual_native_px": 0.5399256694542457,
+      "p90_all_residual_native_px": 1.5668723752025455,
+      "forward_matrix": [
+        [
+          1.0329591536125124,
+          2.3270158799947614e-05,
+          -15.147800193474897
+        ],
+        [
+          -2.3270158799947614e-05,
+          1.0329591536125124,
+          -2.7799753575285826
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "velocity_common_output_coordinates": [
+        0.016213824046025033,
+        -1.1263832996023916e-05,
+        2.9689720819076797,
+        4.526979549808544
+      ]
+    },
+    {
+      "frames": [
+        2888,
+        2890
+      ],
+      "background_only": true,
+      "features": 737,
+      "inliers": 721,
+      "inlier_fraction": 0.9782903663500678,
+      "grid_coverage": 0.875,
+      "median_inlier_residual_native_px": 0.5323174038129583,
+      "p90_all_residual_native_px": 1.0051282489116742,
+      "forward_matrix": [
+        [
+          0.9997879213557751,
+          -0.0003971584534923284,
+          0.302085942680159
+        ],
+        [
+          0.0003971584534923284,
+          0.9997879213557751,
+          -2.0861016726122372
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "velocity_common_output_coordinates": [
+        -0.00010601111222955926,
+        0.0001986348655951788,
+        0.014548018438119925,
+        -0.9678876277783388
+      ]
+    },
+    {
+      "frames": [
+        2890,
+        2892
+      ],
+      "background_only": true,
+      "features": 740,
+      "inliers": 633,
+      "inlier_fraction": 0.8554054054054054,
+      "grid_coverage": 0.9375,
+      "median_inlier_residual_native_px": 0.911717295001053,
+      "p90_all_residual_native_px": 1.8163903982072191,
+      "forward_matrix": [
+        [
+          0.9999435625500714,
+          -0.0014507178616171967,
+          0.7301935556704965
+        ],
+        [
+          0.0014507178616171967,
+          0.9999435625500714,
+          -5.008822804069756
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "velocity_common_output_coordinates": [
+        -2.769324520187191e-05,
+        0.0007254487606189275,
+        0.0966029706848417,
+        -2.0835637090777936
+      ]
+    },
+    {
+      "frames": [
+        2892,
+        2894
+      ],
+      "background_only": true,
+      "features": 749,
+      "inliers": 730,
+      "inlier_fraction": 0.9746328437917223,
+      "grid_coverage": 0.9375,
+      "median_inlier_residual_native_px": 0.5709074832431564,
+      "p90_all_residual_native_px": 1.052241041113123,
+      "forward_matrix": [
+        [
+          0.9998294087854277,
+          -0.00037486677620027285,
+          0.26192505683722067
+        ],
+        [
+          0.00037486677620027285,
+          0.9998294087854277,
+          -2.0632828577688507
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "velocity_common_output_coordinates": [
+        -8.526773540597183e-05,
+        0.00018747812549777437,
+        0.011561392434259687,
+        -0.9562240841300138
+      ]
+    }
+  ],
+  "candidate_coverage": [
+    {
+      "half_window_frames": 6,
+      "minimum_source_corner_clearance_native_px": 1.4786870708991273,
+      "maximum_outer_source_extension_native_px": 0
+    },
+    {
+      "half_window_frames": 5,
+      "minimum_source_corner_clearance_native_px": 4.547033397875111,
+      "maximum_outer_source_extension_native_px": 0
+    },
+    {
+      "half_window_frames": 4,
+      "minimum_source_corner_clearance_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0
+    }
+  ],
+  "frames": [
+    {
+      "frame": 2864,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2865,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2866,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2867,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2868,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2869,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2870,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2871,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2872,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2873,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2874,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2875,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2876,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2877,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2878,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2879,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2880,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2881,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2882,
+      "background_matrix_source_to_output": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.349056603773576,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2883,
+      "background_matrix_source_to_output": [
+        [
+          0.999506856395379,
+          -1.0536492153706424e-06,
+          0.2244831337739015
+        ],
+        [
+          1.0536492153706424e-06,
+          0.999506856395379,
+          0.0406030140469511
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          0.999506856395379,
+          -1.0536492153706424e-06,
+          0.2244831337739015
+        ],
+        [
+          1.0536492153706424e-06,
+          0.999506856395379,
+          0.0406030140469511
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 20.045012358811846,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2884,
+      "background_matrix_source_to_output": [
+        [
+          0.996867748687659,
+          -1.60454113795436e-05,
+          1.4298027803838522
+        ],
+        [
+          1.60454113795436e-05,
+          0.996867748687659,
+          0.21740669224800513
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          0.996867748687659,
+          -1.60454113795436e-05,
+          1.4298027803838522
+        ],
+        [
+          1.60454113795436e-05,
+          0.996867748687659,
+          0.21740669224800513
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 18.37248163784568,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2885,
+      "background_matrix_source_to_output": [
+        [
+          0.9917451567479986,
+          -7.073980108323129e-05,
+          3.7786794708667912
+        ],
+        [
+          7.073980108323129e-05,
+          0.9917451567479986,
+          0.4463501040826827
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          0.9917451567479986,
+          -7.073980108323129e-05,
+          3.7786794708667912
+        ],
+        [
+          7.073980108323129e-05,
+          0.9917451567479986,
+          0.4463501040826827
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 14.98619911970286,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2886,
+      "background_matrix_source_to_output": [
+        [
+          0.984893562886976,
+          -0.0001855466732237509,
+          6.933942443480305
+        ],
+        [
+          0.0001855466732237509,
+          0.984893562886976,
+          0.5613045673124475
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          0.984893562886976,
+          -0.0001855466732237509,
+          6.933942443480305
+        ],
+        [
+          0.0001855466732237509,
+          0.984893562886976,
+          0.5613045673124475
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 10.208586181875262,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2887,
+      "background_matrix_source_to_output": [
+        [
+          0.9771828822213985,
+          -0.0003563641156855515,
+          10.49560632015789
+        ],
+        [
+          0.0003563641156855515,
+          0.9771828822213985,
+          0.4902681061564067
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          0.9771828822213985,
+          -0.0003563641156855515,
+          10.49560632015789
+        ],
+        [
+          0.0003563641156855515,
+          0.9771828822213985,
+          0.4902681061564067
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 4.547033397875111,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2888,
+      "background_matrix_source_to_output": [
+        [
+          0.9925645595020363,
+          -0.00037995503398054095,
+          2.52752374259879
+        ],
+        [
+          -0.007798125171665715,
+          1.0008360343465994,
+          12.525775403096961
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          0.9853483347286612,
+          -0.0005276659163648529,
+          6.90267952147633
+        ],
+        [
+          0.0005276659163648529,
+          0.9853483347286612,
+          -0.9303386074377613
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 8.081083661335123,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2889,
+      "background_matrix_source_to_output": [
+        [
+          0.9999130293185138,
+          -0.00019504622955971714,
+          -0.8936128106500494
+        ],
+        [
+          -0.00804204114959096,
+          1.0082472882930786,
+          12.758506332556586
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          0.99264493009113,
+          -0.0003467558688317016,
+          3.511417057602557
+        ],
+        [
+          0.0003467558688317016,
+          0.99264493009113,
+          -0.7980707211232243
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 7.824351990718672,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2890,
+      "background_matrix_source_to_output": [
+        [
+          1.0046956995087952,
+          -3.247277592967256e-05,
+          -3.146054864690111
+        ],
+        [
+          -0.00824267248561978,
+          1.0130711686341805,
+          13.071810977820777
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          0.9973941872610745,
+          -0.00018743847491081174,
+          1.2778519275373128
+        ],
+        [
+          0.00018743847491081174,
+          0.9973941872610745,
+          -0.5503403938873817
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 7.501973452920938,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2891,
+      "background_matrix_source_to_output": [
+        [
+          1.0068204891486063,
+          8.685291536671139e-05,
+          -4.171052052968109
+        ],
+        [
+          -0.008378519860885175,
+          1.0152146545657834,
+          13.401949532637113
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          0.9995045216945101,
+          -7.028825758391851e-05,
+          0.2606095315401262
+        ],
+        [
+          7.028825758391851e-05,
+          0.9995045216945101,
+          -0.24954531295486504
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 7.17389609539815,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2892,
+      "background_matrix_source_to_output": [
+        [
+          1.0073077240993518,
+          0.00014720219566174292,
+          -4.4223275803519195
+        ],
+        [
+          -0.008442387219983078,
+          1.0157064484437657,
+          13.6135051225804
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          0.9999887144691763,
+          -1.0948336340556712e-05,
+          0.010669882612774018
+        ],
+        [
+          1.0948336340556712e-05,
+          0.9999887144691763,
+          -0.04486615364737645
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.966568445864471,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2893,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2894,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2895,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2896,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2897,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2898,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2899,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2900,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2901,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2902,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2903,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2904,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2905,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2906,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2907,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2908,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2909,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2910,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    },
+    {
+      "frame": 2911,
+      "background_matrix_source_to_output": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "extra_camera_matrix": [
+        [
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "base_matrix": [
+        [
+          1.0073189996770893,
+          0.00015832440373839577,
+          -4.432897951909595
+        ],
+        [
+          -0.008453511089553745,
+          1.0157179096261542,
+          13.658573953342875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_corner_clearance_with_view_native_px": 6.922643052291852,
+      "maximum_outer_source_extension_native_px": 0.0
+    }
+  ],
+  "limitations": [
+    "Foreground mask union plus20px dilation excludes characters, jetpacks and flames from rate fitting; no global foreground-contaminated rate used.",
+    "Background depth-dependent redraw remains; similarity rate is a shared camera approximation, not a complete per-building motion model.",
+    "Coverage check proves only outer source rectangle support. Masked foreground removal creates interior disocclusion holes; layer compositor must explicitly expose unsupported pixels and may only fill from justified source/plate coverage.",
+    "No reflection, edge extrapolation, neural interpolation or pose generation is authorized by this matrix file.",
+    "No video rendered by this task; normal-speed layer preview must be reviewed."
+  ],
+  "idealized_camera_velocity_check": [
+    {
+      "frame": 2865,
+      "modeled_rate_parameters": [
+        0.016715936305070768,
+        -2.8866895119617104e-05,
+        3.0936900375513687,
+        4.584733735597808
+      ]
+    },
+    {
+      "frame": 2866,
+      "modeled_rate_parameters": [
+        0.016715936305070768,
+        -2.8866895119617104e-05,
+        3.0936900375513687,
+        4.584733735597808
+      ]
+    },
+    {
+      "frame": 2867,
+      "modeled_rate_parameters": [
+        0.016715936305070768,
+        -2.8866895119617104e-05,
+        3.0936900375513687,
+        4.584733735597808
+      ]
+    },
+    {
+      "frame": 2868,
+      "modeled_rate_parameters": [
+        0.016715936305070768,
+        -2.8866895119617104e-05,
+        3.0936900375513687,
+        4.584733735597808
+      ]
+    },
+    {
+      "frame": 2869,
+      "modeled_rate_parameters": [
+        0.016715936305070768,
+        -2.8866895119617104e-05,
+        3.0936900375513687,
+        4.584733735597808
+      ]
+    },
+    {
+      "frame": 2870,
+      "modeled_rate_parameters": [
+        0.016715936305070768,
+        -2.8866895119617104e-05,
+        3.0936900375513687,
+        4.584733735597808
+      ]
+    },
+    {
+      "frame": 2871,
+      "modeled_rate_parameters": [
+        0.016715936305070768,
+        -2.8866895119617104e-05,
+        3.0936900375513687,
+        4.584733735597808
+      ]
+    },
+    {
+      "frame": 2872,
+      "modeled_rate_parameters": [
+        0.016715936305070768,
+        -2.8866895119617104e-05,
+        3.0936900375513687,
+        4.584733735597808
+      ]
+    },
+    {
+      "frame": 2873,
+      "modeled_rate_parameters": [
+        0.016715936305070768,
+        -2.8866895119617104e-05,
+        3.0936900375513687,
+        4.584733735597808
+      ]
+    },
+    {
+      "frame": 2874,
+      "modeled_rate_parameters": [
+        0.016715936305070768,
+        -2.8866895119617104e-05,
+        3.0936900375513687,
+        4.584733735597808
+      ]
+    },
+    {
+      "frame": 2875,
+      "modeled_rate_parameters": [
+        0.016715936305070768,
+        -2.8866895119617104e-05,
+        3.0936900375513687,
+        4.584733735597808
+      ]
+    },
+    {
+      "frame": 2876,
+      "modeled_rate_parameters": [
+        0.016715936305070768,
+        -2.8866895119617104e-05,
+        3.0936900375513687,
+        4.584733735597808
+      ]
+    },
+    {
+      "frame": 2877,
+      "modeled_rate_parameters": [
+        0.016715936305070768,
+        -2.8866895119617104e-05,
+        3.0936900375513687,
+        4.584733735597808
+      ]
+    },
+    {
+      "frame": 2878,
+      "modeled_rate_parameters": [
+        0.016715936305070768,
+        -2.8866895119617104e-05,
+        3.0936900375513687,
+        4.584733735597808
+      ]
+    },
+    {
+      "frame": 2879,
+      "modeled_rate_parameters": [
+        0.016715936305070768,
+        -2.8866895119617104e-05,
+        3.0936900375513687,
+        4.584733735597808
+      ]
+    },
+    {
+      "frame": 2880,
+      "modeled_rate_parameters": [
+        0.016715936305070768,
+        -2.8866895119617104e-05,
+        3.0936900375513687,
+        4.584733735597808
+      ]
+    },
+    {
+      "frame": 2881,
+      "modeled_rate_parameters": [
+        0.016715936305070768,
+        -2.8866895119617104e-05,
+        3.0936900375513687,
+        4.584733735597808
+      ]
+    },
+    {
+      "frame": 2882,
+      "modeled_rate_parameters": [
+        0.016715936305070768,
+        -2.8866895119617104e-05,
+        3.0936900375513687,
+        4.584733735597808
+      ]
+    },
+    {
+      "frame": 2883,
+      "modeled_rate_parameters": [
+        0.016222671065707083,
+        -2.7812726047510752e-05,
+        3.00089858511933,
+        4.446467760000246
+      ]
+    },
+    {
+      "frame": 2884,
+      "modeled_rate_parameters": [
+        0.014072034594860667,
+        -1.3825236636582719e-05,
+        2.597442201109743,
+        3.809980689713484
+      ]
+    },
+    {
+      "frame": 2885,
+      "modeled_rate_parameters": [
+        0.01156400265769068,
+        2.636588476228046e-05,
+        2.1278552270243836,
+        2.979919570174161
+      ]
+    },
+    {
+      "frame": 2886,
+      "modeled_rate_parameters": [
+        0.009783353016414248,
+        8.819710962037915e-05,
+        1.7932797672383458,
+        2.2657528482890257
+      ]
+    },
+    {
+      "frame": 2887,
+      "modeled_rate_parameters": [
+        0.008856229766257957,
+        0.00014742565693503558,
+        1.6148834063412778,
+        1.7901138784332602
+      ]
+    },
+    {
+      "frame": 2888,
+      "modeled_rate_parameters": [
+        0.008321472803729146,
+        0.0001708268443921715,
+        1.6013047705389454,
+        1.6876911477562544
+      ]
+    },
+    {
+      "frame": 2889,
+      "modeled_rate_parameters": [
+        0.00730473613640812,
+        0.0001843337410221131,
+        1.399403701070014,
+        1.357106841349605
+      ]
+    },
+    {
+      "frame": 2890,
+      "modeled_rate_parameters": [
+        0.004700003969019774,
+        0.00020912359650730752,
+        0.9074342658549313,
+        0.5362501908753643
+      ]
+    },
+    {
+      "frame": 2891,
+      "modeled_rate_parameters": [
+        0.0020406067996698793,
+        0.000252915506597593,
+        0.4159945753666534,
+        -0.3477758771614958
+      ]
+    },
+    {
+      "frame": 2892,
+      "modeled_rate_parameters": [
+        0.0004113223905734336,
+        0.00031114594276426946,
+        0.12186702552764928,
+        -0.9948948911590492
+      ]
+    },
+    {
+      "frame": 2893,
+      "modeled_rate_parameters": [
+        -6.170516304095296e-05,
+        0.0003595721240046593,
+        0.041372165611619494,
+        -1.2939723818174116
+      ]
+    },
+    {
+      "frame": 2894,
+      "modeled_rate_parameters": [
+        -7.299069761251699e-05,
+        0.00037052058390396023,
+        0.040904127185740435,
+        -1.3358918069953916
+      ]
+    },
+    {
+      "frame": 2895,
+      "modeled_rate_parameters": [
+        -7.299069761251699e-05,
+        0.00037052058390396023,
+        0.040904127185740435,
+        -1.3358918069953916
+      ]
+    },
+    {
+      "frame": 2896,
+      "modeled_rate_parameters": [
+        -7.299069761251699e-05,
+        0.00037052058390396023,
+        0.040904127185740435,
+        -1.3358918069953916
+      ]
+    },
+    {
+      "frame": 2897,
+      "modeled_rate_parameters": [
+        -7.299069761251699e-05,
+        0.00037052058390396023,
+        0.040904127185740435,
+        -1.3358918069953916
+      ]
+    },
+    {
+      "frame": 2898,
+      "modeled_rate_parameters": [
+        -7.299069761251699e-05,
+        0.00037052058390396023,
+        0.040904127185740435,
+        -1.3358918069953916
+      ]
+    },
+    {
+      "frame": 2899,
+      "modeled_rate_parameters": [
+        -7.299069761251699e-05,
+        0.00037052058390396023,
+        0.040904127185740435,
+        -1.3358918069953916
+      ]
+    },
+    {
+      "frame": 2900,
+      "modeled_rate_parameters": [
+        -7.299069761251699e-05,
+        0.00037052058390396023,
+        0.040904127185740435,
+        -1.3358918069953916
+      ]
+    },
+    {
+      "frame": 2901,
+      "modeled_rate_parameters": [
+        -7.299069761251699e-05,
+        0.00037052058390396023,
+        0.040904127185740435,
+        -1.3358918069953916
+      ]
+    },
+    {
+      "frame": 2902,
+      "modeled_rate_parameters": [
+        -7.299069761251699e-05,
+        0.00037052058390396023,
+        0.040904127185740435,
+        -1.3358918069953916
+      ]
+    },
+    {
+      "frame": 2903,
+      "modeled_rate_parameters": [
+        -7.299069761251699e-05,
+        0.00037052058390396023,
+        0.040904127185740435,
+        -1.3358918069953916
+      ]
+    },
+    {
+      "frame": 2904,
+      "modeled_rate_parameters": [
+        -7.299069761251699e-05,
+        0.00037052058390396023,
+        0.040904127185740435,
+        -1.3358918069953916
+      ]
+    },
+    {
+      "frame": 2905,
+      "modeled_rate_parameters": [
+        -7.299069761251699e-05,
+        0.00037052058390396023,
+        0.040904127185740435,
+        -1.3358918069953916
+      ]
+    },
+    {
+      "frame": 2906,
+      "modeled_rate_parameters": [
+        -7.299069761251699e-05,
+        0.00037052058390396023,
+        0.040904127185740435,
+        -1.3358918069953916
+      ]
+    },
+    {
+      "frame": 2907,
+      "modeled_rate_parameters": [
+        -7.299069761251699e-05,
+        0.00037052058390396023,
+        0.040904127185740435,
+        -1.3358918069953916
+      ]
+    },
+    {
+      "frame": 2908,
+      "modeled_rate_parameters": [
+        -7.299069761251699e-05,
+        0.00037052058390396023,
+        0.040904127185740435,
+        -1.3358918069953916
+      ]
+    },
+    {
+      "frame": 2909,
+      "modeled_rate_parameters": [
+        -7.299069761251699e-05,
+        0.00037052058390396023,
+        0.040904127185740435,
+        -1.3358918069953916
+      ]
+    },
+    {
+      "frame": 2910,
+      "modeled_rate_parameters": [
+        -7.299069761251699e-05,
+        0.00037052058390396023,
+        0.040904127185740435,
+        -1.3358918069953916
+      ]
+    },
+    {
+      "frame": 2911,
+      "modeled_rate_parameters": [
+        -7.299069761251699e-05,
+        0.00037052058390396023,
+        0.040904127185740435,
+        -1.3358918069953916
+      ]
+    }
+  ],
+  "idealized_camera_velocity_check_note": "Applies measured constant pre/post background similarities and an identity base-aligned cut step, then exact extra matrices. This checks the designed camera path only; original cadence, depth residuals and compositor holes still require native preview."
+}

@@ -1,0 +1,893 @@
+[
+  {
+    "frame": 2515,
+    "whole": {
+      "mean": 2.388396739959717,
+      "p99": 41.19630432128906,
+      "fraction_over5": 0.10058159722222222,
+      "held_drawing": false
+    },
+    "woman": {
+      "mean": 6.797186374664307,
+      "p99": 84.35289001464844,
+      "fraction_over5": 0.2491607142857143,
+      "held_drawing": false
+    },
+    "sloth": {
+      "mean": 0.7185118198394775,
+      "p99": 10.199753761291504,
+      "fraction_over5": 0.03182352941176471,
+      "held_drawing": false
+    },
+    "furniture": {
+      "mean": 0.3244324326515198,
+      "p99": 3.3189494609832764,
+      "fraction_over5": 0.00445,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2516,
+    "whole": {
+      "mean": 2.1811673641204834,
+      "p99": 35.01776123046875,
+      "fraction_over5": 0.0996875,
+      "held_drawing": false
+    },
+    "woman": {
+      "mean": 5.871343612670898,
+      "p99": 76.93301391601562,
+      "fraction_over5": 0.23780357142857142,
+      "held_drawing": false
+    },
+    "sloth": {
+      "mean": 0.7325627207756042,
+      "p99": 11.931445121765137,
+      "fraction_over5": 0.03508823529411765,
+      "held_drawing": false
+    },
+    "furniture": {
+      "mean": 0.32475215196609497,
+      "p99": 3.3180806636810303,
+      "fraction_over5": 0.0038833333333333333,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2517,
+    "whole": {
+      "mean": 0.8957752585411072,
+      "p99": 11.516585350036621,
+      "fraction_over5": 0.04685329861111111,
+      "held_drawing": false
+    },
+    "woman": {
+      "mean": 0.9979645609855652,
+      "p99": 10.396387100219727,
+      "fraction_over5": 0.05151785714285714,
+      "held_drawing": false
+    },
+    "sloth": {
+      "mean": 0.5877188444137573,
+      "p99": 9.41193962097168,
+      "fraction_over5": 0.025529411764705884,
+      "held_drawing": false
+    },
+    "furniture": {
+      "mean": 0.28094810247421265,
+      "p99": 3.0642035007476807,
+      "fraction_over5": 0.0026333333333333334,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2518,
+    "whole": {
+      "mean": 1.0842666625976562,
+      "p99": 14.136696815490723,
+      "fraction_over5": 0.06251736111111111,
+      "held_drawing": false
+    },
+    "woman": {
+      "mean": 1.1825202703475952,
+      "p99": 12.709183692932129,
+      "fraction_over5": 0.06869642857142857,
+      "held_drawing": false
+    },
+    "sloth": {
+      "mean": 0.7659007906913757,
+      "p99": 12.606277465820312,
+      "fraction_over5": 0.03832352941176471,
+      "held_drawing": false
+    },
+    "furniture": {
+      "mean": 0.30560925602912903,
+      "p99": 3.7218143939971924,
+      "fraction_over5": 0.005083333333333333,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2519,
+    "whole": {
+      "mean": 1.8558052778244019,
+      "p99": 24.555999755859375,
+      "fraction_over5": 0.10048611111111111,
+      "held_drawing": false
+    },
+    "woman": {
+      "mean": 2.0088119506835938,
+      "p99": 21.689809799194336,
+      "fraction_over5": 0.11746428571428572,
+      "held_drawing": false
+    },
+    "sloth": {
+      "mean": 1.2383325099945068,
+      "p99": 20.485637664794922,
+      "fraction_over5": 0.06326470588235295,
+      "held_drawing": false
+    },
+    "furniture": {
+      "mean": 0.5482317805290222,
+      "p99": 6.075732707977295,
+      "fraction_over5": 0.015716666666666667,
+      "held_drawing": false
+    }
+  },
+  {
+    "frame": 2520,
+    "whole": {
+      "mean": 0.29518866539001465,
+      "p99": 2.8030803203582764,
+      "fraction_over5": 0.0014670138888888888,
+      "held_drawing": true
+    },
+    "woman": {
+      "mean": 0.3723076283931732,
+      "p99": 3.438678503036499,
+      "fraction_over5": 0.004071428571428571,
+      "held_drawing": true
+    },
+    "sloth": {
+      "mean": 0.2348005175590515,
+      "p99": 2.3004236221313477,
+      "fraction_over5": 0.0005294117647058823,
+      "held_drawing": true
+    },
+    "furniture": {
+      "mean": 0.178482785820961,
+      "p99": 1.3233602046966553,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2521,
+    "whole": {
+      "mean": 1.145452857017517,
+      "p99": 14.698537826538086,
+      "fraction_over5": 0.06451822916666666,
+      "held_drawing": false
+    },
+    "woman": {
+      "mean": 1.619710087776184,
+      "p99": 16.24525260925293,
+      "fraction_over5": 0.09298214285714286,
+      "held_drawing": false
+    },
+    "sloth": {
+      "mean": 0.6832402348518372,
+      "p99": 11.46270751953125,
+      "fraction_over5": 0.03464705882352941,
+      "held_drawing": false
+    },
+    "furniture": {
+      "mean": 0.31176862120628357,
+      "p99": 3.5806844234466553,
+      "fraction_over5": 0.00495,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2522,
+    "whole": {
+      "mean": 1.3029872179031372,
+      "p99": 17.21185874938965,
+      "fraction_over5": 0.07356336805555555,
+      "held_drawing": false
+    },
+    "woman": {
+      "mean": 2.103773355484009,
+      "p99": 22.984743118286133,
+      "fraction_over5": 0.118125,
+      "held_drawing": false
+    },
+    "sloth": {
+      "mean": 0.7063860893249512,
+      "p99": 12.117804527282715,
+      "fraction_over5": 0.03491176470588235,
+      "held_drawing": false
+    },
+    "furniture": {
+      "mean": 0.29596957564353943,
+      "p99": 3.211599826812744,
+      "fraction_over5": 0.004783333333333333,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2523,
+    "whole": {
+      "mean": 1.9997777938842773,
+      "p99": 28.733688354492188,
+      "fraction_over5": 0.09033854166666666,
+      "held_drawing": false
+    },
+    "woman": {
+      "mean": 4.659120559692383,
+      "p99": 74.39735412597656,
+      "fraction_over5": 0.1876607142857143,
+      "held_drawing": false
+    },
+    "sloth": {
+      "mean": 0.7837016582489014,
+      "p99": 12.329919815063477,
+      "fraction_over5": 0.03494117647058823,
+      "held_drawing": false
+    },
+    "furniture": {
+      "mean": 0.3506517708301544,
+      "p99": 3.148984670639038,
+      "fraction_over5": 0.004733333333333333,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2524,
+    "whole": {
+      "mean": 3.5175893306732178,
+      "p99": 46.11408233642578,
+      "fraction_over5": 0.15900173611111112,
+      "held_drawing": false
+    },
+    "woman": {
+      "mean": 6.79934024810791,
+      "p99": 85.34447479248047,
+      "fraction_over5": 0.27355357142857145,
+      "held_drawing": false
+    },
+    "sloth": {
+      "mean": 1.6751787662506104,
+      "p99": 28.164392471313477,
+      "fraction_over5": 0.08902941176470588,
+      "held_drawing": false
+    },
+    "furniture": {
+      "mean": 0.710182785987854,
+      "p99": 8.694794654846191,
+      "fraction_over5": 0.02905,
+      "held_drawing": false
+    }
+  },
+  {
+    "frame": 2525,
+    "whole": {
+      "mean": 0.28657078742980957,
+      "p99": 3.028580904006958,
+      "fraction_over5": 0.0022222222222222222,
+      "held_drawing": true
+    },
+    "woman": {
+      "mean": 0.3939442038536072,
+      "p99": 4.022236347198486,
+      "fraction_over5": 0.005660714285714285,
+      "held_drawing": true
+    },
+    "sloth": {
+      "mean": 0.1635185033082962,
+      "p99": 1.8558857440948486,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    },
+    "furniture": {
+      "mean": 0.16638889908790588,
+      "p99": 1.5392022132873535,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2526,
+    "whole": {
+      "mean": 2.8127524852752686,
+      "p99": 36.68010330200195,
+      "fraction_over5": 0.140390625,
+      "held_drawing": false
+    },
+    "woman": {
+      "mean": 4.481894016265869,
+      "p99": 44.3359375,
+      "fraction_over5": 0.23117857142857143,
+      "held_drawing": false
+    },
+    "sloth": {
+      "mean": 1.4220696687698364,
+      "p99": 25.402009963989258,
+      "fraction_over5": 0.07517647058823529,
+      "held_drawing": false
+    },
+    "furniture": {
+      "mean": 0.5843437314033508,
+      "p99": 6.789770126342773,
+      "fraction_over5": 0.020116666666666668,
+      "held_drawing": false
+    }
+  },
+  {
+    "frame": 2527,
+    "whole": {
+      "mean": 8.973708152770996,
+      "p99": 97.08201599121094,
+      "fraction_over5": 0.36188368055555553,
+      "held_drawing": false
+    },
+    "woman": {
+      "mean": 7.468057632446289,
+      "p99": 57.695228576660156,
+      "fraction_over5": 0.40055357142857145,
+      "held_drawing": false
+    },
+    "sloth": {
+      "mean": 7.49676513671875,
+      "p99": 70.35372161865234,
+      "fraction_over5": 0.2913823529411765,
+      "held_drawing": false
+    },
+    "furniture": {
+      "mean": 4.974685192108154,
+      "p99": 44.173221588134766,
+      "fraction_over5": 0.2821,
+      "held_drawing": false
+    }
+  },
+  {
+    "frame": 2528,
+    "whole": {
+      "mean": 0.4344101846218109,
+      "p99": 2.446322441101074,
+      "fraction_over5": 0.0001953125,
+      "held_drawing": true
+    },
+    "woman": {
+      "mean": 0.43581584095954895,
+      "p99": 2.3050737380981445,
+      "fraction_over5": 1.785714285714286e-05,
+      "held_drawing": true
+    },
+    "sloth": {
+      "mean": 0.4258614480495453,
+      "p99": 2.189263105392456,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    },
+    "furniture": {
+      "mean": 0.3630809783935547,
+      "p99": 2.18853759765625,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2529,
+    "whole": {
+      "mean": 0.240159273147583,
+      "p99": 1.7570207118988037,
+      "fraction_over5": 0.00012586805555555555,
+      "held_drawing": true
+    },
+    "woman": {
+      "mean": 0.28077074885368347,
+      "p99": 1.9033842086791992,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    },
+    "sloth": {
+      "mean": 0.20994743704795837,
+      "p99": 1.3868769407272339,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    },
+    "furniture": {
+      "mean": 0.22211897373199463,
+      "p99": 1.523371934890747,
+      "fraction_over5": 5e-05,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2530,
+    "whole": {
+      "mean": 0.23001906275749207,
+      "p99": 1.5897256135940552,
+      "fraction_over5": 0.0003385416666666667,
+      "held_drawing": true
+    },
+    "woman": {
+      "mean": 0.2862137258052826,
+      "p99": 1.7641264200210571,
+      "fraction_over5": 0.001392857142857143,
+      "held_drawing": true
+    },
+    "sloth": {
+      "mean": 0.1861594319343567,
+      "p99": 1.384440541267395,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    },
+    "furniture": {
+      "mean": 0.2422615885734558,
+      "p99": 1.5881415605545044,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2531,
+    "whole": {
+      "mean": 0.2348017394542694,
+      "p99": 1.5339053869247437,
+      "fraction_over5": 0.00010850694444444444,
+      "held_drawing": true
+    },
+    "woman": {
+      "mean": 0.24822841584682465,
+      "p99": 1.4295148849487305,
+      "fraction_over5": 0.00041071428571428574,
+      "held_drawing": true
+    },
+    "sloth": {
+      "mean": 0.22046887874603271,
+      "p99": 1.426754117012024,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    },
+    "furniture": {
+      "mean": 0.22196751832962036,
+      "p99": 1.3671034574508667,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2532,
+    "whole": {
+      "mean": 0.27908384799957275,
+      "p99": 1.5898746252059937,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    },
+    "woman": {
+      "mean": 0.3092743456363678,
+      "p99": 1.5779683589935303,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    },
+    "sloth": {
+      "mean": 0.3058087229728699,
+      "p99": 2.2822563648223877,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    },
+    "furniture": {
+      "mean": 0.2515179514884949,
+      "p99": 1.479217529296875,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2533,
+    "whole": {
+      "mean": 0.1379951387643814,
+      "p99": 1.1002662181854248,
+      "fraction_over5": 0.00033420138888888887,
+      "held_drawing": true
+    },
+    "woman": {
+      "mean": 0.19122184813022614,
+      "p99": 1.5247302055358887,
+      "fraction_over5": 0.001375,
+      "held_drawing": true
+    },
+    "sloth": {
+      "mean": 0.1311231553554535,
+      "p99": 1.040565013885498,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    },
+    "furniture": {
+      "mean": 0.10207708179950714,
+      "p99": 0.8550280928611755,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2534,
+    "whole": {
+      "mean": 0.10681701451539993,
+      "p99": 1.2021960020065308,
+      "fraction_over5": 0.00036024305555555554,
+      "held_drawing": true
+    },
+    "woman": {
+      "mean": 0.1848590224981308,
+      "p99": 2.097881317138672,
+      "fraction_over5": 0.0014821428571428572,
+      "held_drawing": true
+    },
+    "sloth": {
+      "mean": 0.10580477118492126,
+      "p99": 1.1182143688201904,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    },
+    "furniture": {
+      "mean": 0.06004653498530388,
+      "p99": 0.7823944687843323,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2535,
+    "whole": {
+      "mean": 0.996023952960968,
+      "p99": 25.56316375732422,
+      "fraction_over5": 0.03536024305555555,
+      "held_drawing": false
+    },
+    "woman": {
+      "mean": 3.4799935817718506,
+      "p99": 59.701576232910156,
+      "fraction_over5": 0.13448214285714286,
+      "held_drawing": false
+    },
+    "sloth": {
+      "mean": 0.2707761228084564,
+      "p99": 3.097008228302002,
+      "fraction_over5": 0.006970588235294117,
+      "held_drawing": true
+    },
+    "furniture": {
+      "mean": 0.09817871451377869,
+      "p99": 0.9442698955535889,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2536,
+    "whole": {
+      "mean": 0.23308269679546356,
+      "p99": 1.8211560249328613,
+      "fraction_over5": 0.00043402777777777775,
+      "held_drawing": true
+    },
+    "woman": {
+      "mean": 0.3412224054336548,
+      "p99": 3.030482530593872,
+      "fraction_over5": 0.001642857142857143,
+      "held_drawing": true
+    },
+    "sloth": {
+      "mean": 0.20939037203788757,
+      "p99": 1.394157886505127,
+      "fraction_over5": 0.00017647058823529413,
+      "held_drawing": true
+    },
+    "furniture": {
+      "mean": 0.1631125807762146,
+      "p99": 1.1871353387832642,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2537,
+    "whole": {
+      "mean": 1.251708984375,
+      "p99": 29.441205978393555,
+      "fraction_over5": 0.03945746527777778,
+      "held_drawing": false
+    },
+    "woman": {
+      "mean": 3.9139740467071533,
+      "p99": 63.920047760009766,
+      "fraction_over5": 0.143875,
+      "held_drawing": false
+    },
+    "sloth": {
+      "mean": 0.4995175898075104,
+      "p99": 5.572948932647705,
+      "fraction_over5": 0.010588235294117647,
+      "held_drawing": false
+    },
+    "furniture": {
+      "mean": 0.25914305448532104,
+      "p99": 1.217290997505188,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2538,
+    "whole": {
+      "mean": 0.15608440339565277,
+      "p99": 1.530540943145752,
+      "fraction_over5": 0.00034288194444444443,
+      "held_drawing": true
+    },
+    "woman": {
+      "mean": 0.2262328863143921,
+      "p99": 2.391519784927368,
+      "fraction_over5": 0.0010892857142857143,
+      "held_drawing": true
+    },
+    "sloth": {
+      "mean": 0.17350882291793823,
+      "p99": 1.39682137966156,
+      "fraction_over5": 5.882352941176471e-05,
+      "held_drawing": true
+    },
+    "furniture": {
+      "mean": 0.10848046839237213,
+      "p99": 1.04571533203125,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2539,
+    "whole": {
+      "mean": 0.8257427215576172,
+      "p99": 20.176300048828125,
+      "fraction_over5": 0.03542534722222222,
+      "held_drawing": false
+    },
+    "woman": {
+      "mean": 2.288330554962158,
+      "p99": 41.12486267089844,
+      "fraction_over5": 0.10564285714285715,
+      "held_drawing": false
+    },
+    "sloth": {
+      "mean": 0.9270217418670654,
+      "p99": 20.735239028930664,
+      "fraction_over5": 0.04535294117647059,
+      "held_drawing": false
+    },
+    "furniture": {
+      "mean": 0.10175706446170807,
+      "p99": 0.9912850856781006,
+      "fraction_over5": 0.0009666666666666667,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2540,
+    "whole": {
+      "mean": 0.16563338041305542,
+      "p99": 1.5556050539016724,
+      "fraction_over5": 6.076388888888889e-05,
+      "held_drawing": true
+    },
+    "woman": {
+      "mean": 0.22650443017482758,
+      "p99": 1.9790430068969727,
+      "fraction_over5": 0.00017857142857142857,
+      "held_drawing": true
+    },
+    "sloth": {
+      "mean": 0.2090277224779129,
+      "p99": 1.8188862800598145,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    },
+    "furniture": {
+      "mean": 0.1073412299156189,
+      "p99": 1.059799313545227,
+      "fraction_over5": 0.0,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2541,
+    "whole": {
+      "mean": 3.0814931392669678,
+      "p99": 75.20928192138672,
+      "fraction_over5": 0.08888888888888889,
+      "held_drawing": false
+    },
+    "woman": {
+      "mean": 4.896318435668945,
+      "p99": 77.47445678710938,
+      "fraction_over5": 0.16328571428571428,
+      "held_drawing": false
+    },
+    "sloth": {
+      "mean": 8.997391700744629,
+      "p99": 110.75700378417969,
+      "fraction_over5": 0.25223529411764706,
+      "held_drawing": false
+    },
+    "furniture": {
+      "mean": 3.048600435256958,
+      "p99": 80.25530242919922,
+      "fraction_over5": 0.08071666666666667,
+      "held_drawing": false
+    }
+  },
+  {
+    "frame": 2542,
+    "whole": {
+      "mean": 0.15148450434207916,
+      "p99": 1.4959440231323242,
+      "fraction_over5": 0.00040364583333333333,
+      "held_drawing": true
+    },
+    "woman": {
+      "mean": 0.18343043327331543,
+      "p99": 1.9383600950241089,
+      "fraction_over5": 0.00048214285714285715,
+      "held_drawing": true
+    },
+    "sloth": {
+      "mean": 0.25587213039398193,
+      "p99": 2.568418025970459,
+      "fraction_over5": 0.0014705882352941176,
+      "held_drawing": true
+    },
+    "furniture": {
+      "mean": 0.13965584337711334,
+      "p99": 1.548118233680725,
+      "fraction_over5": 0.0005,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2543,
+    "whole": {
+      "mean": 2.2114598751068115,
+      "p99": 56.66358947753906,
+      "fraction_over5": 0.0675390625,
+      "held_drawing": false
+    },
+    "woman": {
+      "mean": 3.1910812854766846,
+      "p99": 60.30079650878906,
+      "fraction_over5": 0.12426785714285714,
+      "held_drawing": false
+    },
+    "sloth": {
+      "mean": 7.2793498039245605,
+      "p99": 92.61991882324219,
+      "fraction_over5": 0.19970588235294118,
+      "held_drawing": false
+    },
+    "furniture": {
+      "mean": 2.8093082904815674,
+      "p99": 68.17326354980469,
+      "fraction_over5": 0.0798,
+      "held_drawing": false
+    }
+  },
+  {
+    "frame": 2544,
+    "whole": {
+      "mean": 0.18075869977474213,
+      "p99": 2.0003364086151123,
+      "fraction_over5": 0.0011241319444444445,
+      "held_drawing": true
+    },
+    "woman": {
+      "mean": 0.2573503851890564,
+      "p99": 2.6140756607055664,
+      "fraction_over5": 0.0016785714285714286,
+      "held_drawing": true
+    },
+    "sloth": {
+      "mean": 0.30117395520210266,
+      "p99": 3.455162763595581,
+      "fraction_over5": 0.003852941176470588,
+      "held_drawing": true
+    },
+    "furniture": {
+      "mean": 0.1542970985174179,
+      "p99": 2.0059823989868164,
+      "fraction_over5": 0.00038333333333333334,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2545,
+    "whole": {
+      "mean": 2.2217419147491455,
+      "p99": 58.872554779052734,
+      "fraction_over5": 0.06431423611111112,
+      "held_drawing": false
+    },
+    "woman": {
+      "mean": 2.972862482070923,
+      "p99": 62.796512603759766,
+      "fraction_over5": 0.113375,
+      "held_drawing": false
+    },
+    "sloth": {
+      "mean": 7.9664082527160645,
+      "p99": 94.9689712524414,
+      "fraction_over5": 0.20597058823529413,
+      "held_drawing": false
+    },
+    "furniture": {
+      "mean": 2.9744069576263428,
+      "p99": 66.26115417480469,
+      "fraction_over5": 0.0798,
+      "held_drawing": false
+    }
+  },
+  {
+    "frame": 2546,
+    "whole": {
+      "mean": 0.1368151754140854,
+      "p99": 1.4378561973571777,
+      "fraction_over5": 0.00024739583333333335,
+      "held_drawing": true
+    },
+    "woman": {
+      "mean": 0.16221004724502563,
+      "p99": 1.7663310766220093,
+      "fraction_over5": 0.0003392857142857143,
+      "held_drawing": true
+    },
+    "sloth": {
+      "mean": 0.24921387434005737,
+      "p99": 2.4446799755096436,
+      "fraction_over5": 0.0010588235294117646,
+      "held_drawing": true
+    },
+    "furniture": {
+      "mean": 0.13564230501651764,
+      "p99": 1.6989104747772217,
+      "fraction_over5": 0.00016666666666666666,
+      "held_drawing": true
+    }
+  },
+  {
+    "frame": 2547,
+    "whole": {
+      "mean": 3.0229685306549072,
+      "p99": 76.70271301269531,
+      "fraction_over5": 0.07747395833333333,
+      "held_drawing": false
+    },
+    "woman": {
+      "mean": 4.813562393188477,
+      "p99": 79.55238342285156,
+      "fraction_over5": 0.15792857142857142,
+      "held_drawing": false
+    },
+    "sloth": {
+      "mean": 9.034952163696289,
+      "p99": 111.33517456054688,
+      "fraction_over5": 0.21111764705882352,
+      "held_drawing": false
+    },
+    "furniture": {
+      "mean": 3.022581100463867,
+      "p99": 73.7505874633789,
+      "fraction_over5": 0.07646666666666667,
+      "held_drawing": false
+    }
+  }
+]

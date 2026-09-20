@@ -1,0 +1,110 @@
+[
+  {
+    "frame": 361,
+    "raw_heldout_mae": 4.451297283172607,
+    "corrected_heldout_mae": 2.478494365510987,
+    "raw_heldout_p90": 8.23829460144043,
+    "corrected_heldout_p90": 5.142162631593195,
+    "new_clipping_fraction": 0.0,
+    "min_lut_increment": 0.7379940344057161,
+    "max_lut_roundtrip_consistency_error": 0.009825805109244357,
+    "peak_added_byte_change_per_frame": 0.08109465850347684,
+    "continuous_consistency_max_byte_error": 0.0
+  },
+  {
+    "frame": 722,
+    "raw_heldout_mae": 4.458266258239746,
+    "corrected_heldout_mae": 2.48044035984216,
+    "raw_heldout_p90": 8.614270210266113,
+    "corrected_heldout_p90": 5.083418896093887,
+    "new_clipping_fraction": 0.0,
+    "min_lut_increment": 0.6590297941823451,
+    "max_lut_roundtrip_consistency_error": 0.019406245524180576,
+    "peak_added_byte_change_per_frame": 0.15143659719083097,
+    "continuous_consistency_max_byte_error": 0.0
+  },
+  {
+    "frame": 1083,
+    "raw_heldout_mae": 3.2584738731384277,
+    "corrected_heldout_mae": 2.4787802088168642,
+    "raw_heldout_p90": 7.114805221557617,
+    "corrected_heldout_p90": 5.273870696985015,
+    "new_clipping_fraction": 0.0,
+    "min_lut_increment": 0.7556233578119702,
+    "max_lut_roundtrip_consistency_error": 0.008042832204040451,
+    "peak_added_byte_change_per_frame": 0.07257766689137603,
+    "continuous_consistency_max_byte_error": 0.0
+  },
+  {
+    "frame": 1444,
+    "raw_heldout_mae": 3.7113490104675293,
+    "corrected_heldout_mae": 2.322821741052542,
+    "raw_heldout_p90": 7.529285907745361,
+    "corrected_heldout_p90": 5.016714695932064,
+    "new_clipping_fraction": 0.0,
+    "min_lut_increment": 0.6933740452204802,
+    "max_lut_roundtrip_consistency_error": 0.013248600282480538,
+    "peak_added_byte_change_per_frame": 0.1150928828735699,
+    "continuous_consistency_max_byte_error": 0.0
+  },
+  {
+    "frame": 1805,
+    "raw_heldout_mae": 4.229567050933838,
+    "corrected_heldout_mae": 2.4584658503695302,
+    "raw_heldout_p90": 8.258541107177734,
+    "corrected_heldout_p90": 5.273737347264743,
+    "new_clipping_fraction": 0.0,
+    "min_lut_increment": 0.7050410328539556,
+    "max_lut_roundtrip_consistency_error": 0.012438863423028579,
+    "peak_added_byte_change_per_frame": 0.10507815693519516,
+    "continuous_consistency_max_byte_error": 0.0
+  },
+  {
+    "frame": 2166,
+    "raw_heldout_mae": 5.958373546600342,
+    "corrected_heldout_mae": 3.189475299251607,
+    "raw_heldout_p90": 10.912148475646973,
+    "corrected_heldout_p90": 6.59636920295743,
+    "new_clipping_fraction": 0.0,
+    "min_lut_increment": 0.7509895136153091,
+    "max_lut_roundtrip_consistency_error": 0.007771724487326992,
+    "peak_added_byte_change_per_frame": 0.07297616432673805,
+    "continuous_consistency_max_byte_error": 0.0
+  },
+  {
+    "frame": 2527,
+    "raw_heldout_mae": 3.7833003997802734,
+    "corrected_heldout_mae": 2.6518600204991314,
+    "raw_heldout_p90": 6.929854869842529,
+    "corrected_heldout_p90": 5.589706196185021,
+    "new_clipping_fraction": 0.0,
+    "min_lut_increment": 0.8214865596776539,
+    "max_lut_roundtrip_consistency_error": 0.004360714394209708,
+    "peak_added_byte_change_per_frame": 0.04097619107396128,
+    "continuous_consistency_max_byte_error": 0.0
+  },
+  {
+    "frame": 2888,
+    "raw_heldout_mae": 4.953807830810547,
+    "corrected_heldout_mae": 2.43717158262183,
+    "raw_heldout_p90": 10.242721557617188,
+    "corrected_heldout_p90": 5.287479899969379,
+    "new_clipping_fraction": 0.0,
+    "min_lut_increment": 0.7427980198780693,
+    "max_lut_roundtrip_consistency_error": 0.007021816332198227,
+    "peak_added_byte_change_per_frame": 0.07653900647294687,
+    "continuous_consistency_max_byte_error": 0.0
+  },
+  {
+    "frame": 3240,
+    "raw_heldout_mae": 4.087910175323486,
+    "corrected_heldout_mae": 2.1463726715320197,
+    "raw_heldout_p90": 9.817399978637695,
+    "corrected_heldout_p90": 4.663249756101709,
+    "new_clipping_fraction": 0.0,
+    "min_lut_increment": 0.7681375423255667,
+    "max_lut_roundtrip_consistency_error": 0.006528309255951825,
+    "peak_added_byte_change_per_frame": 0.061648612474547754,
+    "continuous_consistency_max_byte_error": 0.0
+  }
+]

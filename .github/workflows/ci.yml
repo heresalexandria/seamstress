@@ -1,0 +1,72 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled, ready_for_review]
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+env:
+  OPENBLAS_NUM_THREADS: '2'
+  OMP_NUM_THREADS: '2'
+jobs:
+  release-label:
+    name: release label
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Require exactly one release decision
+        env:
+          LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
+        run: python3 scripts/release/select_bump.py
+  test:
+    name: engine, desktop and release tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+      - name: Version files agree
+        run: .venv/bin/python scripts/release/bump_version.py --check
+      - name: Engine tests
+        run: .venv/bin/python -m unittest discover -s tests -v
+      - name: Release tests
+        run: .venv/bin/python -m unittest discover -s scripts/release -p 'test_*.py' -v
+      - name: Desktop and updater tests
+        working-directory: app
+        run: |
+          npm test
+          node --test ../scripts/signing/*.test.cjs
+      - name: Typecheck and production renderer
+        working-directory: app
+        run: npm run build
+  smoke:
+    name: real Electron import to export
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+      - name: Build renderer
+        working-directory: app
+        run: npm run build
+      - name: Exercise real media and the complete workflow
+        working-directory: app
+        run: npm run test:e2e
+      - name: Screenshots and workflow logs
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        if: failure()
+        with:
+          name: electron-smoke-failure
+          path: output/app-ui-smoke/
+          retention-days: 7

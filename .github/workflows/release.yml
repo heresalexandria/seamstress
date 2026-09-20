@@ -1,0 +1,240 @@
+name: Release
+on:
+  # Only merged, reviewed code from main is checked out. Using the base context
+  # makes release secrets available after merging a contributor's fork PR too.
+  pull_request_target:
+    types: [closed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: Version change, or current to retry an unpublished version
+        type: choice
+        options: [patch, minor, major, current]
+        default: patch
+permissions:
+  contents: read
+concurrency:
+  group: release
+  cancel-in-progress: false
+env:
+  OPENBLAS_NUM_THREADS: '2'
+  OMP_NUM_THREADS: '2'
+jobs:
+  prepare:
+    name: prepare release version
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      tag: ${{ steps.version.outputs.tag }}
+      sha: ${{ steps.commit.outputs.sha }}
+      previous: ${{ steps.previous.outputs.tag }}
+      skip: ${{ steps.kind.outputs.skip }}
+    steps:
+      - name: Manual releases must run from main
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          RELEASE_REF: ${{ github.ref }}
+        run: test "$RELEASE_REF" = refs/heads/main
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Select the version change
+        id: kind
+        env:
+          LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
+          DISPATCH: ${{ inputs.bump }}
+        run: |
+          kind="${DISPATCH:-$(python3 scripts/release/select_bump.py)}"
+          echo "kind=$kind" >> "$GITHUB_OUTPUT"
+          if [[ "$kind" == none ]]; then
+            echo 'skip=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'skip=false' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Require all signing credentials before changing the version
+        if: steps.kind.outputs.skip != 'true'
+        env:
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          APPLE_API_KEY: ${{ secrets.APPLE_API_KEY }}
+          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
+          APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          for name in CSC_LINK CSC_KEY_PASSWORD APPLE_API_KEY APPLE_API_KEY_ID APPLE_API_ISSUER APPLE_TEAM_ID; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Required signing secret $name is missing. No unsigned release will be published."
+              exit 1
+            fi
+          done
+      - name: Previous published release
+        if: steps.kind.outputs.skip != 'true'
+        id: previous
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          tag="$(gh api "repos/$GH_REPO/releases/latest" --jq .tag_name 2>/dev/null || true)"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+      - name: Update every version file
+        if: steps.kind.outputs.skip != 'true'
+        id: version
+        env:
+          KIND: ${{ steps.kind.outputs.kind }}
+        run: python3 scripts/release/bump_version.py "$KIND"
+      - name: Do not reuse a published version
+        if: steps.kind.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          if gh release view "$TAG" --json isDraft --jq '.isDraft' > release-state.txt 2>/dev/null; then
+            test "$(cat release-state.txt)" = true || { echo '::error::This version has already been published.'; exit 1; }
+          fi
+      - name: Commit the version, without creating a release tag
+        if: steps.kind.outputs.skip != 'true'
+        id: commit
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add pyproject.toml seamstress/__init__.py app/package.json app/package-lock.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Release $TAG"
+            git push origin HEAD:main
+          fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+  build:
+    name: signed mac-${{ matrix.arch }}
+    needs: prepare
+    if: needs.prepare.outputs.skip != 'true'
+    runs-on: ${{ matrix.arch == 'x64' && 'macos-15-intel' || 'macos-15' }}
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [arm64, x64]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.prepare.outputs.sha }}
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+      - name: Validate this exact release commit
+        run: |
+          .venv/bin/python scripts/release/bump_version.py --check
+          .venv/bin/python -m unittest discover -s tests -v
+          .venv/bin/python -m unittest discover -s scripts/release -p 'test_*.py' -v
+          npm --prefix app test
+          node --test scripts/signing/*.test.cjs
+      - name: Build renderer and native backend
+        working-directory: app
+        run: |
+          npm run build
+          npm run package:backend
+      - name: Sign, notarize, staple, and verify the app and installers
+        working-directory: app
+        env:
+          SEAMSTRESS_RELEASE: '1'
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          APPLE_KEY_CONTENT: ${{ secrets.APPLE_API_KEY }}
+          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
+          APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          umask 077
+          export APPLE_API_KEY="$RUNNER_TEMP/AuthKey_${APPLE_API_KEY_ID}.p8"
+          trap 'rm -f "$APPLE_API_KEY"' EXIT
+          printf '%s' "$APPLE_KEY_CONTENT" > "$APPLE_API_KEY"
+          unset APPLE_KEY_CONTENT
+          npx electron-builder --config electron-builder.release.cjs --mac dmg zip --${{ matrix.arch }} --publish never
+          node ../scripts/signing/finalize-release.cjs release
+      - name: Test the actual signed package, including correction and export
+        working-directory: app
+        run: |
+          executable="$(find "$PWD/release" -path '*/Seamstress.app/Contents/MacOS/Seamstress' -type f -print -quit)"
+          test -n "$executable"
+          SEAMSTRESS_TEST_APP="$executable" npm run test:e2e
+      - name: Stage only finalized release files
+        env:
+          ARCH: ${{ matrix.arch }}
+          VERSION: ${{ needs.prepare.outputs.version }}
+        run: |
+          mkdir out-dist
+          cp "app/release/Seamstress-$VERSION-$ARCH.dmg" out-dist/
+          cp "app/release/Seamstress-$VERSION-$ARCH.zip" out-dist/
+          cp app/release/latest-mac.yml out-dist/
+          cp "app/release/verification-$ARCH.json" out-dist/
+          for file in app/release/*.zip.blockmap; do
+            [[ ! -f "$file" ]] || cp "$file" out-dist/
+          done
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: build-mac-${{ matrix.arch }}
+          path: out-dist/*
+          retention-days: 7
+          if-no-files-found: error
+          compression-level: 0
+      - name: Attach diagnostics on failure
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        if: failure()
+        with:
+          name: release-diagnostics-${{ matrix.arch }}
+          path: |
+            output/app-ui-smoke/
+            build/backend/pyinstaller.log
+          retention-days: 7
+  publish:
+    name: publish complete signed release
+    needs: [prepare, build]
+    if: always() && needs.prepare.result == 'success' && needs.build.result == 'success' && needs.prepare.outputs.skip != 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.prepare.outputs.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.13'
+      - run: python -m pip install PyYAML==6.0.3
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          pattern: build-mac-*
+          path: incoming
+      - name: Verify updater files, combine architectures, and create stable download aliases
+        env:
+          VERSION: ${{ needs.prepare.outputs.version }}
+        run: python scripts/release/collect_artifacts.py --incoming incoming --output release --version "$VERSION"
+      - name: Prepare release notes from the merged PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+          VERSION: ${{ needs.prepare.outputs.version }}
+          PREVIOUS: ${{ needs.prepare.outputs.previous }}
+        run: |
+          args=()
+          if [[ -n "$PR" ]]; then
+            gh api "repos/$GH_REPO/pulls/$PR" > pr.json
+            args=(--pr pr.json)
+          fi
+          python scripts/release/release_notes.py --version "$VERSION" --files release --previous "$PREVIOUS" --output notes.md "${args[@]}"
+      - name: Upload a draft and publish only after all assets are present
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          VERSION: ${{ needs.prepare.outputs.version }}
+          RELEASE_SHA: ${{ needs.prepare.outputs.sha }}
+        run: python scripts/release/publish.py --version "$VERSION" --sha "$RELEASE_SHA" --files release --notes notes.md

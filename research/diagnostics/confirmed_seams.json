@@ -1,0 +1,322 @@
+{
+  "source": "IYTYT.mp4",
+  "frame_indexing": "zero-based; frame is first frame of new generated segment",
+  "fps": "24000/1001",
+  "seams": [
+    {
+      "frame": 361,
+      "time": 15.056708333333333,
+      "raw": 13.210439814814816,
+      "color": [
+        -0.25763117283950615,
+        0.1844212962962963,
+        -0.48277006172839504
+      ],
+      "valid": 0.9004854368932039,
+      "inlier": 0.7547169811320755,
+      "scale": 0.9930568541552788,
+      "tx": 1.4973723116221715,
+      "ty": 0.3313208218806916,
+      "angle": 0.0009089716273234896,
+      "warped_color": [
+        1.0,
+        1.0,
+        -3.0
+      ],
+      "warped_mae": 10.998702841246523,
+      "matrix": [
+        [
+          0.9930564439089131,
+          -0.0009026603804454967,
+          1.4973723116221715
+        ],
+        [
+          0.0009026603804454967,
+          0.9930564439089131,
+          0.3313208218806916
+        ]
+      ],
+      "assessment": "Subtle foreground size contraction and per-channel color change; streetlight/background position mismatch. First new generation frame then nearly held frame."
+    },
+    {
+      "frame": 722,
+      "time": 30.113416666666666,
+      "raw": 14.067677469135802,
+      "color": [
+        0.29949845679012344,
+        -0.22875771604938272,
+        -0.02613425925925926
+      ],
+      "valid": 0.9955555555555555,
+      "inlier": 0.6741071428571429,
+      "scale": 0.9950025785393457,
+      "tx": 1.5162093267985266,
+      "ty": -1.5394579064631533,
+      "angle": 0.00423881147265834,
+      "warped_color": [
+        2.0,
+        -1.0,
+        -3.0
+      ],
+      "warped_mae": 12.122757974466092,
+      "matrix": [
+        [
+          0.9949936396870213,
+          -0.00421761571519305,
+          1.5162093267985266
+        ],
+        [
+          0.00421761571519305,
+          0.9949936396870213,
+          -1.5394579064631533
+        ]
+      ],
+      "assessment": "Car and standing character slightly contract/reposition upward; sky and costume shift color. Background motion does not share the same foreground warp."
+    },
+    {
+      "frame": 1083,
+      "time": 45.170125,
+      "raw": 11.610671296296296,
+      "color": [
+        -0.15675925925925926,
+        0.38165123456790123,
+        -0.10395061728395062
+      ],
+      "valid": 1.0,
+      "inlier": 0.7555555555555555,
+      "scale": 0.9964090673547032,
+      "tx": 0.7689776539284107,
+      "ty": 0.6736433213695521,
+      "angle": 0.0003124826167861703,
+      "warped_color": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "warped_mae": 11.207820690298798,
+      "matrix": [
+        [
+          0.9964090187073298,
+          -0.00031136050768931225,
+          0.7689776539284107
+        ],
+        [
+          0.00031136050768931225,
+          0.9964090187073298,
+          0.6736433213695521
+        ]
+      ],
+      "assessment": "Small contraction plus nonuniform redraw of car and skateboarder; slight grade and line/texture change; first new frame held."
+    },
+    {
+      "frame": 1444,
+      "time": 60.22683333333333,
+      "raw": 12.469189814814815,
+      "color": [
+        0.23292438271604937,
+        -0.042214506172839505,
+        -0.25374228395061726
+      ],
+      "valid": 0.9777777777777777,
+      "inlier": 0.8090909090909091,
+      "scale": 0.9908935187062701,
+      "tx": 1.8919378295894695,
+      "ty": 2.1894649376212834,
+      "angle": -0.00197970971912248,
+      "warped_color": [
+        1.0,
+        1.0,
+        -1.0
+      ],
+      "warped_mae": 9.809600473295951,
+      "matrix": [
+        [
+          0.9908915769269092,
+          0.0019616802482116174,
+          1.8919378295894695
+        ],
+        [
+          -0.0019616802482116174,
+          0.9908915769269092,
+          2.1894649376212834
+        ]
+      ],
+      "assessment": "Foreground contracts/repositions while relative car/skateboarder alignment changes; small cool channel shift."
+    },
+    {
+      "frame": 1805,
+      "time": 75.28354166666666,
+      "raw": 12.369128086419753,
+      "color": [
+        0.631820987654321,
+        0.034151234567901236,
+        0.10747685185185185
+      ],
+      "valid": 1.0,
+      "inlier": 0.9844444444444445,
+      "scale": 0.9943919212307765,
+      "tx": 1.218229642130461,
+      "ty": 1.9455528307714012,
+      "angle": -0.00044712240487322364,
+      "warped_color": [
+        1.0,
+        0.0,
+        -1.0
+      ],
+      "warped_mae": 9.43723849372385,
+      "matrix": [
+        [
+          0.9943918218321348,
+          0.0004446148923927566,
+          1.218229642130461
+        ],
+        [
+          -0.0004446148923927566,
+          0.9943918218321348,
+          1.9455528307714012
+        ]
+      ],
+      "assessment": "City street wide shot: contraction breaks the preceding strong camera scale change. Geometry match is relatively coherent, color change mild."
+    },
+    {
+      "frame": 2166,
+      "time": 90.34025,
+      "raw": 16.63627314814815,
+      "color": [
+        -4.511612654320988,
+        -5.605972222222222,
+        -5.567831790123456
+      ],
+      "valid": 1.0,
+      "inlier": 0.7733333333333333,
+      "scale": 1.0006963246388638,
+      "tx": -0.5902442476884088,
+      "ty": -0.9435230920132146,
+      "angle": -0.0014399271872169606,
+      "warped_color": [
+        -5.0,
+        -8.0,
+        -7.0
+      ],
+      "warped_mae": 14.627873296158612,
+      "matrix": [
+        [
+          1.0006952872220145,
+          0.0014409293460606468,
+          -0.5902442476884088
+        ],
+        [
+          -0.0014409293460606468,
+          1.0006952872220145,
+          -0.9435230920132146
+        ]
+      ],
+      "assessment": "Aerial city: global darkening and small crop/geometry reset interrupts pullout/tilt; new clip begins with much slower motion."
+    },
+    {
+      "frame": 2527,
+      "time": 105.39695833333333,
+      "raw": 13.115270061728395,
+      "color": [
+        -0.27143518518518517,
+        -0.5262654320987654,
+        -0.4407793209876543
+      ],
+      "valid": 0.9888888888888889,
+      "inlier": 0.701123595505618,
+      "scale": 0.9975937258186761,
+      "tx": 0.4368987289634586,
+      "ty": 1.712688570612508,
+      "angle": -0.0004518278765502909,
+      "warped_color": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "warped_mae": 13.286504062504873,
+      "matrix": [
+        [
+          0.9975936239900814,
+          0.0004507406394602129,
+          0.4368987289634586
+        ],
+        [
+          -0.0004507406394602129,
+          0.9975936239900814,
+          1.712688570612508
+        ]
+      ],
+      "assessment": "Apartment: whole-frame lightening, shelf/furniture/background proportions change slightly, main subjects redraw; starts with multiple held frames."
+    },
+    {
+      "frame": 2888,
+      "time": 120.45366666666666,
+      "raw": 21.67909722222222,
+      "color": [
+        -8.097098765432099,
+        -6.517939814814815,
+        -6.625416666666666
+      ],
+      "valid": 0.9311111111111111,
+      "inlier": 0.4677804295942721,
+      "scale": 0.9909245046028046,
+      "tx": 0.5276994312900741,
+      "ty": -2.8718464627054794,
+      "angle": -0.00786505759103103,
+      "warped_color": [
+        -4.0,
+        -6.0,
+        -8.0
+      ],
+      "warped_mae": 18.270853500806698,
+      "matrix": [
+        [
+          0.9908938558964707,
+          0.0077935979456191335,
+          0.5276994312900741
+        ],
+        [
+          -0.0077935979456191335,
+          0.9908938558964707,
+          -2.8718464627054794
+        ]
+      ],
+      "assessment": "Daylight flight: strong darkening/color shift and local skyline/building/character composition reset. Only 47% of tracked features support one global similarity, so one affine crop cannot reconcile it."
+    },
+    {
+      "frame": 3240,
+      "time": 135.135,
+      "raw": 30.905223765432098,
+      "color": [
+        -4.335077160493827,
+        -5.765756172839506,
+        -6.886358024691358
+      ],
+      "valid": 0.9955555555555555,
+      "inlier": 0.6116071428571429,
+      "scale": 0.9833348300444732,
+      "tx": 3.9596341436464884,
+      "ty": 2.792109976042298,
+      "angle": 0.00351347306711731,
+      "warped_color": [
+        -2.0,
+        -3.0,
+        -3.0
+      ],
+      "warped_mae": 18.683374018114034,
+      "matrix": [
+        [
+          0.983328760665757,
+          -0.003454913333117158,
+          3.9596341436464884
+        ],
+        [
+          0.003454913333117158,
+          0.983328760665757,
+          2.792109976042298
+        ]
+      ],
+      "assessment": "Library steps: strong geometric redraw and contraction despite preceding forward zoom, plus darker grade. Door/columns/lions require different local corrections. Starts with multiple held frames."
+    }
+  ]
+}

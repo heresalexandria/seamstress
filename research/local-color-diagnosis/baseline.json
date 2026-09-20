@@ -1,0 +1,7 @@
+{
+  "commit": "f4ea566",
+  "plan": "plans/IYTYT-eight-joins.json",
+  "plan_sha256": "4ada0a2f9b9b678904e0c2c0150395373bc89c527206559b7d4c9c3a04ccebf0",
+  "source": "IYTYT.mp4",
+  "method": "Existing conform_frame geometry and protected tone_lut_at reproduced without edits; no new pixel correction or temporal rendering."
+}

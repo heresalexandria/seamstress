@@ -1,0 +1,46 @@
+{
+  "frame": 3240,
+  "limit": 18.0,
+  "fit_parameters": {
+    "centers": 96,
+    "feature_scale": [
+      36.0,
+      36.0,
+      36.0,
+      0.08,
+      0.08
+    ],
+    "balance_exponent": 0.5,
+    "balance_cap": 8,
+    "ridge_factor": 0.003
+  },
+  "checks": [
+    {
+      "samples": 15985,
+      "mae_before": 2.0350143909454346,
+      "mae_after": 1.5227582610484152,
+      "regional_signed_bias_before": 1.386073350906372,
+      "regional_signed_bias_after": 0.7471952052294375,
+      "peak_matched_channel_change": 9.056815109919155
+    },
+    {
+      "samples": 29115,
+      "mae_before": 2.1653575897216797,
+      "mae_after": 1.6694747854116747,
+      "regional_signed_bias_before": 1.2017135620117188,
+      "regional_signed_bias_after": 0.8905519020973839,
+      "peak_matched_channel_change": 9.062014621757271
+    },
+    {
+      "samples": 26231,
+      "mae_before": 2.17490553855896,
+      "mae_after": 1.6710212242080595,
+      "regional_signed_bias_before": 1.3533387184143066,
+      "regional_signed_bias_after": 0.8761576983058487,
+      "peak_matched_channel_change": 9.138682501102064
+    }
+  ],
+  "maximum_coefficient": 15.432171773116425,
+  "training": "Adjacent pair alternating spatial tiles only; palette-balanced; nonlinear Huber+ridge, shared RGB midpoint",
+  "status": "Research only; requires native ROI and color Jacobian review"
+}

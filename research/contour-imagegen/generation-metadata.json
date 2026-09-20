@@ -1,0 +1,17 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "call_count": 1,
+  "generated_source": "~/.codex/generated_images/01a0befc-94c0-7a02-b9e1-3f1e5ca96444/exec-df4cabb8-f1c2-499e-b47f-cdf0928ee29e.png",
+  "native_target_dimensions": [
+    384,
+    384
+  ],
+  "generated_dimensions": [
+    1254,
+    1254
+  ],
+  "all_pixels_mae": 6.271269621672453,
+  "architecture_preservation_mae": 4.856425526945758,
+  "outside_broad_edit_boxes_mae": 5.728073480923221,
+  "outside_broad_edit_boxes_fraction_changed_gt10": 0.2213063275239441
+}

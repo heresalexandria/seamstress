@@ -1,0 +1,210 @@
+{
+  "chosen": "sift_similarity",
+  "matrix_right_to_left": [
+    [
+      1.0075380710277253,
+      -0.0005396392356492041,
+      -4.487944598935583
+    ],
+    [
+      0.0005396392356492041,
+      1.0075380710277253,
+      -3.978947241509406
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "scale": 1.0075382155435963,
+  "rotation_degrees": 0.030687721481582664,
+  "color": {
+    "gain": [
+      0.9074690887141219,
+      0.9239036003009885,
+      0.9272218967433123
+    ],
+    "bias": [
+      4.685955018427885,
+      5.000357576739363,
+      6.97009846007382
+    ],
+    "confidence": 0.695800275218696,
+    "residual_mae": 8.359312050986047,
+    "sample_count": 38348
+  },
+  "raw": {
+    "rgb_mae": 13.862509070294784,
+    "pixel_fraction_rgb_mae_gt15": 0.18482766439909298,
+    "edge_symmetric_median_px": 1.0,
+    "edge_symmetric_p90_px": 4.0,
+    "edge_fraction_farther_than_2px": 0.24377083403481598,
+    "edge_fraction_farther_than_4px": 0.0804404188693222,
+    "overlap_fraction": 0.95703125
+  },
+  "geometry_only": {
+    "rgb_mae": 9.486883219954649,
+    "pixel_fraction_rgb_mae_gt15": 0.12243877551020409,
+    "edge_symmetric_median_px": 1.0,
+    "edge_symmetric_p90_px": 3.0,
+    "edge_fraction_farther_than_2px": 0.13573358095559682,
+    "edge_fraction_farther_than_4px": 0.04517136586189431,
+    "overlap_fraction": 0.95703125
+  },
+  "geometry_and_grade": {
+    "rgb_mae": 8.366095238095237,
+    "pixel_fraction_rgb_mae_gt15": 0.11429024943310657,
+    "edge_symmetric_median_px": 1.0,
+    "edge_symmetric_p90_px": 3.0,
+    "edge_fraction_farther_than_2px": 0.13209295209601196,
+    "edge_fraction_farther_than_4px": 0.04158875327236256,
+    "overlap_fraction": 0.95703125
+  },
+  "feature_matches": 1541,
+  "feature_inlier_fraction": 0.5042180402336145,
+  "feature_residual_p50": 1.7839921970524468,
+  "feature_residual_p90": 5.1494604365069225,
+  "candidates": [
+    {
+      "method": "sift_similarity",
+      "score": 6.608153746768614
+    },
+    {
+      "method": "projected_ecc_similarity",
+      "score": 7.65757296714566
+    },
+    {
+      "method": "robust_photometric_similarity",
+      "score": 6.686855069414546
+    }
+  ],
+  "frame": 1444,
+  "time_seconds": 60.22683333333333,
+  "neighbors": [
+    {
+      "frames": [
+        1441,
+        1442
+      ],
+      "rgb_mae": 0.6869032501889645,
+      "pixel_fraction_rgb_mae_gt15": 0.005216553287981859,
+      "edge_symmetric_median_px": 0.0,
+      "edge_symmetric_p90_px": 0.0,
+      "edge_fraction_farther_than_2px": 0.0038432639242747457,
+      "edge_fraction_farther_than_4px": 0.0016927634363097758,
+      "overlap_fraction": 0.95703125
+    },
+    {
+      "frames": [
+        1442,
+        1443
+      ],
+      "rgb_mae": 5.818772486772486,
+      "pixel_fraction_rgb_mae_gt15": 0.09029024943310658,
+      "edge_symmetric_median_px": 0.0,
+      "edge_symmetric_p90_px": 2.1968994140625,
+      "edge_fraction_farther_than_2px": 0.1030481334173087,
+      "edge_fraction_farther_than_4px": 0.05513903388061118,
+      "overlap_fraction": 0.95703125
+    },
+    {
+      "frames": [
+        1444,
+        1445
+      ],
+      "rgb_mae": 5.682030234315948,
+      "pixel_fraction_rgb_mae_gt15": 0.08336621315192744,
+      "edge_symmetric_median_px": 0.0,
+      "edge_symmetric_p90_px": 4.99688720703125,
+      "edge_fraction_farther_than_2px": 0.15713392522195824,
+      "edge_fraction_farther_than_4px": 0.10701513067400276,
+      "overlap_fraction": 0.95703125
+    },
+    {
+      "frames": [
+        1445,
+        1446
+      ],
+      "rgb_mae": 5.081563869992441,
+      "pixel_fraction_rgb_mae_gt15": 0.07801700680272108,
+      "edge_symmetric_median_px": 0.0,
+      "edge_symmetric_p90_px": 4.99688720703125,
+      "edge_fraction_farther_than_2px": 0.15340638803941556,
+      "edge_fraction_farther_than_4px": 0.10569996602106693,
+      "overlap_fraction": 0.95703125
+    }
+  ],
+  "regions": [
+    {
+      "label": "Woman and hand",
+      "roi": [
+        110,
+        180,
+        450,
+        670
+      ],
+      "metrics": {
+        "rgb_mae": 11.847290916366546,
+        "pixel_fraction_rgb_mae_gt15": 0.18151860744297718,
+        "edge_symmetric_median_px": 1.0,
+        "edge_symmetric_p90_px": 2.0,
+        "edge_fraction_farther_than_2px": 0.09819374137137597,
+        "edge_fraction_farther_than_4px": 0.034456971928209845,
+        "overlap_fraction": 1.0
+      }
+    },
+    {
+      "label": "Convertible rear",
+      "roi": [
+        370,
+        315,
+        920,
+        690
+      ],
+      "metrics": {
+        "rgb_mae": 10.211345454545455,
+        "pixel_fraction_rgb_mae_gt15": 0.13558303030303032,
+        "edge_symmetric_median_px": 1.0,
+        "edge_symmetric_p90_px": 3.0,
+        "edge_fraction_farther_than_2px": 0.13311363122354689,
+        "edge_fraction_farther_than_4px": 0.024361086879260765,
+        "overlap_fraction": 1.0
+      }
+    },
+    {
+      "label": "Background vehicles",
+      "roi": [
+        850,
+        200,
+        1240,
+        610
+      ],
+      "metrics": {
+        "rgb_mae": 5.545930790077131,
+        "pixel_fraction_rgb_mae_gt15": 0.07614759224515322,
+        "edge_symmetric_median_px": 1.0,
+        "edge_symmetric_p90_px": 2.0,
+        "edge_fraction_farther_than_2px": 0.05682363723650329,
+        "edge_fraction_farther_than_4px": 0.019639505957316807,
+        "overlap_fraction": 1.0
+      }
+    }
+  ],
+  "flat_region_color_fit": {
+    "gain": [
+      0.9154811810013941,
+      0.9445409573296468,
+      0.9506345038825117
+    ],
+    "bias": [
+      4.6485416850570065,
+      3.4724449362038055,
+      4.402650547895248
+    ],
+    "confidence": 0.844165109135454,
+    "residual_mae": 2.72912586278659,
+    "sample_count": 39305
+  },
+  "flat_region_fraction": 0.46912760416666666
+}

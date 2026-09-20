@@ -1,0 +1,51 @@
+[
+  {
+    "cut": 361,
+    "corner_center_rms_native_px": 0.6676558623249117,
+    "max_native_px": 1.1617449460727893,
+    "our_axis_y_over_x": 1.019157519718518,
+    "root_axis_y_over_x": 1.0201686347496977
+  },
+  {
+    "cut": 1083,
+    "corner_center_rms_native_px": 0.015043313732664848,
+    "max_native_px": 0.022155412615299932,
+    "our_axis_y_over_x": 1.0190546642443472,
+    "root_axis_y_over_x": 1.0190632344861257
+  },
+  {
+    "cut": 1805,
+    "corner_center_rms_native_px": 0.29013796426368066,
+    "max_native_px": 0.4245061039410287,
+    "our_axis_y_over_x": 1.0134063307363428,
+    "root_axis_y_over_x": 1.0129006390612008
+  },
+  {
+    "cut": 2166,
+    "corner_center_rms_native_px": 0.115262966680876,
+    "max_native_px": 0.2015785572400648,
+    "our_axis_y_over_x": 1.019161517336493,
+    "root_axis_y_over_x": 1.0193109294364437
+  },
+  {
+    "cut": 2527,
+    "corner_center_rms_native_px": 0.03974544176800918,
+    "max_native_px": 0.06400562931200549,
+    "our_axis_y_over_x": 1.0204367993991903,
+    "root_axis_y_over_x": 1.020331657140561
+  },
+  {
+    "cut": 2888,
+    "corner_center_rms_native_px": 0.07228352036886908,
+    "max_native_px": 0.11734770468315332,
+    "our_axis_y_over_x": 1.0335206904512844,
+    "root_axis_y_over_x": 1.0336444770691544
+  },
+  {
+    "cut": 3240,
+    "corner_center_rms_native_px": 0.017263652479082185,
+    "max_native_px": 0.029964666034742092,
+    "our_axis_y_over_x": 1.0182788346224712,
+    "root_axis_y_over_x": 1.0183221290547484
+  }
+]
