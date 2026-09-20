@@ -22,6 +22,26 @@ def gh(*args: str, missing_ok: bool = False):
     return result.stdout
 
 
+def release_for_tag(tag: str):
+    # The tag endpoint does not expose a draft whose tag is not public yet.
+    # Authenticated release listings include drafts; retain its numeric ID for
+    # verification after upload instead of depending on tag publication.
+    pages = json.loads(gh('api', f'repos/{REPOSITORY}/releases?per_page=100', '--paginate', '--slurp'))
+    matches = [release for page in pages for release in page if release.get('tag_name') == tag]
+    if len(matches) > 1:
+        raise ValueError(f'Multiple releases claim {tag}; resolve the drafts before retrying.')
+    return matches[0] if matches else None
+
+
+def require_draft(release, tag: str, sha: str):
+    if release is None or release.get('tag_name') != tag or type(release.get('id')) is not int:
+        raise ValueError('The expected release draft could not be identified.')
+    if not release.get('draft'):
+        raise ValueError(f'{tag} is already public. Published versions are immutable; increment the version.')
+    if release.get('target_commitish') != sha:
+        raise ValueError('The existing draft targets a different commit; resolve that draft before retrying.')
+
+
 def publish(version: str, sha: str, files: Path, notes: Path) -> str:
     parse(version)
     if not re.fullmatch(r'[0-9a-f]{40}', sha):
@@ -35,13 +55,9 @@ def publish(version: str, sha: str, files: Path, notes: Path) -> str:
     if not required.issubset({path.name for path in paths}) or any(path.is_symlink() for path in paths):
         raise ValueError('Only a complete validated release directory can be published')
     tag = f'v{version}'
-    prior = gh('api', f'repos/{REPOSITORY}/releases/tags/{tag}', missing_ok=True)
-    if prior:
-        release = json.loads(prior)
-        if not release.get('draft'):
-            raise ValueError(f'{tag} is already public. Published versions are immutable; increment the version.')
-        if release.get('target_commitish') != sha:
-            raise ValueError('The existing draft targets a different commit; resolve that draft before retrying.')
+    release = release_for_tag(tag)
+    if release is not None:
+        require_draft(release, tag, sha)
     reference = gh('api', f'repos/{REPOSITORY}/git/ref/tags/{tag}', missing_ok=True)
     if reference:
         target = json.loads(reference)['object']
@@ -51,13 +67,17 @@ def publish(version: str, sha: str, files: Path, notes: Path) -> str:
             target = json.loads(gh('api', f'repos/{REPOSITORY}/git/tags/{target["sha"]}'))['object']
         if target.get('type') != 'commit' or target.get('sha') != sha:
             raise ValueError('The existing version tag targets a different commit; refusing to reuse or move it.')
-    if not prior:
+    if release is None:
         gh('release', 'create', tag, '--repo', REPOSITORY, '--target', sha,
            '--title', tag, '--notes-file', str(notes), '--draft')
+        release = release_for_tag(tag)
+    require_draft(release, tag, sha)
+    release_id = release['id']
     # Idempotent recovery may replace assets only while this release is a draft.
     gh('release', 'upload', tag, '--repo', REPOSITORY, '--clobber', *map(str, paths))
-    release = json.loads(gh('api', f'repos/{REPOSITORY}/releases/tags/{tag}'))
-    if not release.get('draft') or release.get('target_commitish') != sha:
+    release = json.loads(gh('api', f'repos/{REPOSITORY}/releases/{release_id}'))
+    if (release.get('id') != release_id or release.get('tag_name') != tag
+            or not release.get('draft') or release.get('target_commitish') != sha):
         raise ValueError('Release state changed during upload; refusing publication')
     assets = {item['name']: item['size'] for item in release.get('assets', [])}
     expected = {path.name: path.stat().st_size for path in paths}
