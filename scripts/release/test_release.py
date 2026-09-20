@@ -74,6 +74,9 @@ class ReleaseRulesTests(unittest.TestCase):
 
 class ArtifactTests(unittest.TestCase):
     def setUp(self):
+        sleep = patch.object(publish.time, 'sleep')
+        self.sleep = sleep.start()
+        self.addCleanup(sleep.stop)
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
@@ -152,10 +155,12 @@ class ArtifactTests(unittest.TestCase):
         notes = self.root/'notes.md'; notes.write_text('Changes')
         sha = 'a'*40
         state = {'id': 42, 'tag_name': 'v1.2.3', 'draft': True, 'target_commitish': sha, 'assets': []}
-        with patch.object(publish, 'gh', side_effect=[json.dumps([[state]]), None, '', json.dumps(state)]) as call:
+        with patch.object(publish, 'gh', side_effect=[json.dumps([[state]]), None, ''] +
+                          [json.dumps(state)] * publish.VISIBILITY_ATTEMPTS) as call:
             with self.assertRaisesRegex(ValueError, 'Uploaded release assets'):
                 publish.publish('1.2.3', sha, self.output, notes)
-        self.assertFalse(any('edit' in args.args for args in call.call_args_list))
+        self.assertFalse(any('PATCH' in args.args for args in call.call_args_list))
+        self.assertEqual(self.sleep.call_count, publish.VISIBILITY_ATTEMPTS - 1)
 
     def test_an_existing_tag_cannot_point_elsewhere(self):
         collect_artifacts.assemble(self.incoming, self.output, '1.2.3')
@@ -164,7 +169,7 @@ class ArtifactTests(unittest.TestCase):
         with patch.object(publish, 'gh', side_effect=['[[]]', json.dumps(reference)]) as call:
             with self.assertRaisesRegex(ValueError, 'version tag'):
                 publish.publish('1.2.3', 'a'*40, self.output, notes)
-        self.assertFalse(any('create' in args.args for args in call.call_args_list))
+        self.assertFalse(any('POST' in args.args for args in call.call_args_list))
 
     def test_complete_draft_is_published_only_after_verified_upload(self):
         collect_artifacts.assemble(self.incoming, self.output, '1.2.3')
@@ -173,14 +178,20 @@ class ArtifactTests(unittest.TestCase):
         assets = [{'name': path.name, 'size': path.stat().st_size} for path in self.output.iterdir()]
         state = {'id': 42, 'tag_name': 'v1.2.3', 'draft': True, 'target_commitish': sha, 'assets': assets}
         with patch.object(publish, 'gh', side_effect=[
-            '[[]]', None, '', json.dumps([[state]]), '', json.dumps(state), '',
+            '[[]]', None, json.dumps(state), '', json.dumps(state), '',
         ]) as call:
             url = publish.publish('1.2.3', sha, self.output, notes)
         self.assertTrue(url.endswith('/v1.2.3'))
-        self.assertIn('edit', call.call_args.args)
-        self.assertIn('--draft=false', call.call_args.args)
+        self.assertIn('PATCH', call.call_args.args)
+        self.assertIn('draft=false', call.call_args.args)
+        self.assertIn(f'repos/{publish.REPOSITORY}/releases/42', call.call_args.args)
         self.assertIn(('api', f'repos/{publish.REPOSITORY}/releases/42'), [item.args for item in call.call_args_list])
         self.assertFalse(any('/releases/tags/' in str(item) for item in call.call_args_list))
+        self.assertEqual(sum('--paginate' in item.args for item in call.call_args_list), 1)
+        creation = call.call_args_list[2].args
+        self.assertIn('POST', creation)
+        self.assertIn('draft=true', creation)
+        self.assertIn(f'body=@{notes}', creation)
 
     def test_draft_recovery_uses_paginated_listing_and_numeric_id(self):
         collect_artifacts.assemble(self.incoming, self.output, '1.2.3')
@@ -193,7 +204,7 @@ class ArtifactTests(unittest.TestCase):
             publish.publish('1.2.3', sha, self.output, notes)
         self.assertIn('--paginate', call.call_args_list[0].args)
         self.assertIn('--slurp', call.call_args_list[0].args)
-        self.assertFalse(any('create' in item.args for item in call.call_args_list))
+        self.assertFalse(any('POST' in item.args for item in call.call_args_list))
         self.assertIn(('api', f'repos/{publish.REPOSITORY}/releases/42'), [item.args for item in call.call_args_list])
 
     def test_changed_draft_is_not_published(self):
@@ -207,13 +218,38 @@ class ArtifactTests(unittest.TestCase):
             ]) as call:
                 with self.assertRaisesRegex(ValueError, 'state changed'):
                     publish.publish('1.2.3', sha, self.output, notes)
-                self.assertFalse(any('edit' in item.args for item in call.call_args_list))
+                self.assertFalse(any('PATCH' in item.args for item in call.call_args_list))
 
     def test_conflicting_drafts_are_rejected(self):
         state = {'id': 42, 'tag_name': 'v1.2.3'}
         with patch.object(publish, 'gh', return_value=json.dumps([[state], [state | {'id': 43}]])):
             with self.assertRaisesRegex(ValueError, 'Multiple releases'):
                 publish.release_for_tag('v1.2.3')
+
+    def test_visibility_delay_and_stale_asset_listing_are_retried(self):
+        sha = 'a'*40
+        state = {'id': 42, 'tag_name': 'v1.2.3', 'draft': True, 'target_commitish': sha, 'assets': []}
+        complete = state | {'assets': [{'name': 'app.zip', 'size': 123}]}
+        with patch.object(publish, 'gh', side_effect=[None, json.dumps(state), json.dumps(complete)]) as call:
+            publish.verify_uploaded_draft(42, 'v1.2.3', sha, {'app.zip': 123})
+        self.assertEqual(call.call_count, 3)
+        self.assertEqual(self.sleep.call_count, 2)
+        self.assertTrue(all(item.kwargs['missing_ok'] for item in call.call_args_list))
+
+    def test_invisible_draft_times_out_without_publication(self):
+        with patch.object(publish, 'gh', return_value=None) as call:
+            with self.assertRaisesRegex(ValueError, 'remain unavailable'):
+                publish.verify_uploaded_draft(42, 'v1.2.3', 'a'*40, {'app.zip': 123})
+        self.assertEqual(call.call_count, publish.VISIBILITY_ATTEMPTS)
+        self.assertTrue(all(item.args[0] == 'api' for item in call.call_args_list))
+
+    def test_unexpected_assets_fail_without_waiting(self):
+        state = {'id': 42, 'tag_name': 'v1.2.3', 'draft': True, 'target_commitish': 'a'*40,
+                 'assets': [{'name': 'extra.zip', 'size': 123}]}
+        with patch.object(publish, 'gh', return_value=json.dumps(state)):
+            with self.assertRaisesRegex(ValueError, 'unexpected'):
+                publish.verify_uploaded_draft(42, 'v1.2.3', 'a'*40, {'app.zip': 123})
+        self.sleep.assert_not_called()
 
 
 if __name__ == '__main__':

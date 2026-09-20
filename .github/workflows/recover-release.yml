@@ -1,0 +1,77 @@
+name: Recover verified release
+on:
+  workflow_dispatch:
+    inputs:
+      source_run:
+        description: Completed Release run with both signed native builds successful
+        required: true
+        type: string
+      source_sha:
+        description: Exact 40-character prepared commit checked out by those builds
+        required: true
+        type: string
+      version:
+        description: Unpublished app version in those builds (for example 0.2.3)
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: release
+  cancel-in-progress: false
+jobs:
+  publish:
+    name: recover and publish verified installers
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      actions: read
+      pull-requests: read
+    env:
+      SOURCE_RUN: ${{ inputs.source_run }}
+      RELEASE_SHA: ${{ inputs.source_sha }}
+      VERSION: ${{ inputs.version }}
+    steps:
+      - name: Recovery must run from main
+        env:
+          RELEASE_REF: ${{ github.ref }}
+        run: test "$RELEASE_REF" = refs/heads/main
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.13'
+      - name: Check release and recovery rules
+        run: |
+          python -m pip install PyYAML==6.0.3
+          python -m unittest discover -s scripts/release -p 'test_*.py' -v
+      - name: Prove native build provenance and download exact verified artifacts
+        id: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          python scripts/release/recover_build.py \
+            --run-id "$SOURCE_RUN" --sha "$RELEASE_SHA" --version "$VERSION" \
+            --incoming incoming --pr-output recovery-pr.json
+      - name: Verify updater files and combine signed architectures
+        run: python scripts/release/collect_artifacts.py --incoming incoming --output release --version "$VERSION"
+      - name: Prepare notes with the verified source PR and current downloads
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          if ! previous="$(gh api "repos/$GH_REPO/releases/latest" --jq .tag_name 2>/dev/null)"; then
+            previous=''
+          fi
+          python scripts/release/release_notes.py --version "$VERSION" --files release \
+            --previous "$previous" --pr recovery-pr.json --output notes.md
+      - name: Publish only the complete verified release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: python scripts/release/publish.py --version "$VERSION" --sha "$RELEASE_SHA" --files release --notes notes.md

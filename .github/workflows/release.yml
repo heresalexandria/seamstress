@@ -79,7 +79,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          tag="$(gh api "repos/$GH_REPO/releases/latest" --jq .tag_name 2>/dev/null || true)"
+          if ! tag="$(gh api "repos/$GH_REPO/releases/latest" --jq .tag_name 2>/dev/null)"; then
+            tag=''
+          fi
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
       - name: Update every version file
         if: steps.kind.outputs.skip != 'true'
