@@ -7,10 +7,13 @@ import os
 from pathlib import Path
 import re
 import subprocess
+import time
 
 from bump_version import parse
 
 REPOSITORY = 'heresalexandria/seamstress'
+VISIBILITY_ATTEMPTS = 7
+VISIBILITY_DELAY = 5
 
 
 def gh(*args: str, missing_ok: bool = False):
@@ -42,6 +45,28 @@ def require_draft(release, tag: str, sha: str):
         raise ValueError('The existing draft targets a different commit; resolve that draft before retrying.')
 
 
+def verify_uploaded_draft(release_id: int, tag: str, sha: str, expected: dict[str, int]):
+    # A newly created draft or its uploaded assets may not be visible to REST
+    # reads immediately. Retry only absence/incomplete assets, never a changed
+    # identity or publication state, and never publish on a timeout.
+    for attempt in range(VISIBILITY_ATTEMPTS):
+        raw = gh('api', f'repos/{REPOSITORY}/releases/{release_id}', missing_ok=True)
+        if raw is not None:
+            release = json.loads(raw)
+            if (release.get('id') != release_id or release.get('tag_name') != tag
+                    or not release.get('draft') or release.get('target_commitish') != sha):
+                raise ValueError('Release state changed during upload; refusing publication')
+            rows = release.get('assets', [])
+            assets = {item['name']: item['size'] for item in rows}
+            if len(assets) != len(rows) or set(assets) - set(expected):
+                raise ValueError('Uploaded release assets contain unexpected or duplicate files')
+            if assets == expected:
+                return
+        if attempt + 1 < VISIBILITY_ATTEMPTS:
+            time.sleep(VISIBILITY_DELAY)
+    raise ValueError('Uploaded release assets do not match the complete local set or remain unavailable after waiting')
+
+
 def publish(version: str, sha: str, files: Path, notes: Path) -> str:
     parse(version)
     if not re.fullmatch(r'[0-9a-f]{40}', sha):
@@ -68,22 +93,19 @@ def publish(version: str, sha: str, files: Path, notes: Path) -> str:
         if target.get('type') != 'commit' or target.get('sha') != sha:
             raise ValueError('The existing version tag targets a different commit; refusing to reuse or move it.')
     if release is None:
-        gh('release', 'create', tag, '--repo', REPOSITORY, '--target', sha,
-           '--title', tag, '--notes-file', str(notes), '--draft')
-        release = release_for_tag(tag)
+        # Use the response from creation. An immediate list/tag lookup may
+        # still return the pre-creation state, even to the creating token.
+        release = json.loads(gh('api', '--method', 'POST', f'repos/{REPOSITORY}/releases',
+                                '-f', f'tag_name={tag}', '-f', f'target_commitish={sha}',
+                                '-f', f'name={tag}', '-F', 'draft=true', '-F', f'body=@{notes}'))
     require_draft(release, tag, sha)
     release_id = release['id']
     # Idempotent recovery may replace assets only while this release is a draft.
     gh('release', 'upload', tag, '--repo', REPOSITORY, '--clobber', *map(str, paths))
-    release = json.loads(gh('api', f'repos/{REPOSITORY}/releases/{release_id}'))
-    if (release.get('id') != release_id or release.get('tag_name') != tag
-            or not release.get('draft') or release.get('target_commitish') != sha):
-        raise ValueError('Release state changed during upload; refusing publication')
-    assets = {item['name']: item['size'] for item in release.get('assets', [])}
     expected = {path.name: path.stat().st_size for path in paths}
-    if assets != expected:
-        raise ValueError('Uploaded release assets do not match the complete local set')
-    gh('release', 'edit', tag, '--repo', REPOSITORY, '--notes-file', str(notes), '--draft=false', '--latest')
+    verify_uploaded_draft(release_id, tag, sha, expected)
+    gh('api', '--method', 'PATCH', f'repos/{REPOSITORY}/releases/{release_id}',
+       '-F', 'draft=false', '-f', 'make_latest=true', '-F', f'body=@{notes}')
     url = f'https://github.com/{REPOSITORY}/releases/tag/{tag}'
     if os.environ.get('GITHUB_STEP_SUMMARY'):
         with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:

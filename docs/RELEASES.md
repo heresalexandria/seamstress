@@ -143,6 +143,33 @@ A draft for another commit must be explicitly resolved before reusing its
 version. This prevents a partly uploaded release from becoming visible to app
 update checks.
 
+### Recover publication without rebuilding
+
+If both signed native jobs passed and only publication failed, run **Recover
+verified release** from Actions on `main`. Supply the original Release run's
+numeric `source_run`, the exact 40-character prepared `source_sha` checked out
+by both native jobs, and its stable `version` (for example `0.2.3`). The prepared
+SHA appears in each native checkout log; a PR-triggered run's displayed head SHA
+can be different, because preparation creates the version commit afterward.
+
+Recovery uses the current `main` publication scripts with the original signed
+bytes. It checks the canonical Release workflow, the merged PR targeting `main`
+or manual dispatch on `main`, successful preparation and both native jobs in
+the same completed attempt, and the exact checkout SHA in both job logs. The
+prepared commit must be on `main` ancestry and all four version files must agree
+with the requested version. Each artifact's immutable ID, size, and SHA-256
+must match its successful native upload log and the API; the downloaded ZIP is
+hashed again before only the expected native files are extracted. The existing
+collector then checks both architectures' signing reports and updater hashes
+before publication can proceed.
+
+This workflow needs no signing secrets and runs no native build or app. It uses
+the same release concurrency lock and refuses to replace a public release.
+Both artifacts and their job logs must still be available; artifacts expire
+after seven days. Missing evidence, mixed attempts or commits, failed signing
+or packaged tests, and changed archive bytes block recovery. Use the ordinary
+Release workflow to rebuild if those checks cannot be satisfied.
+
 The in-app updater reads GitHub release metadata, chooses the matching native
 ZIP, verifies its digest, and uses macOS's signed-app update mechanism. The
 installer links keep pointing to the last completely published release while a
