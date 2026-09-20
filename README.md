@@ -2,20 +2,24 @@
 
 # Seamstress
 
-A local video studio for making stitched continuous shots feel continuous. Drop in a video, review detected joins, match framing and color, and export a high-quality corrected movie.
+**Many generations. One continuous shot.**
+
+Seamstress is a local studio for **AI-generated oners**: continuous single shots built by generating a clip, extending the same shot through subsequent AI video generations, and stitching them together.
+
+Each continuation can introduce a slight inconsistency—a changed crop, a small scale or composition shift, or colors that no longer match. Those seams interrupt the feeling of one unbroken take. Seamstress helps you find and smooth them in the already-stitched video while preserving its original frames and timing.
 
 **[Download for Apple silicon](https://github.com/heresalexandria/seamstress/releases/latest/download/Seamstress-mac-arm64.dmg)** · **[Download for Intel Mac](https://github.com/heresalexandria/seamstress/releases/latest/download/Seamstress-mac-x64.dmg)** · [Release notes](https://github.com/heresalexandria/seamstress/releases/latest)
 
 Release installers are built by GitHub Actions, signed with Developer ID, notarized by Apple, and verified before publication. Open the DMG and drag **Seamstress** into Applications. The app includes its processing engine and FFmpeg; no Python installation or API key is needed. Download links resolve after the first signed release is published.
 
-## In the app
+## Refine your oner
 
-1. Drop a video onto Seamstress. It scans the entire timeline for candidate seams; common 10-, 15-, and 30-second spacing helps detection without restricting marker positions.
-2. Review, add, remove, or drag markers. Enter a timecode for precise placement.
-3. Run analysis and correction, then compare the original and corrected seam previews or the full movie.
-4. Export at the original resolution and frame rate, with original audio preserved.
+1. **Bring the stitched shot.** Drop in the single video file containing your sequential generations. You do not need the separate source clips. Seamstress scans the whole timeline for candidate seams; common 10-, 15-, and 30-second generation lengths help detection without restricting marker positions.
+2. **Review the joins.** Check where one generation continues into the next. Add, remove, or drag markers, or enter a precise timecode.
+3. **Match continuity.** Analyze framing and color differences, apply supported corrections, and compare the original and corrected seam previews. Watch the full shot to judge how each correction feels in motion.
+4. **Export your oner.** Save at the original resolution and frame rate, with original audio preserved.
 
-Seamstress applies gradual, bounded framing and color corrections to original frames. The desktop workflow never morphs drawings, crossfades poses, or generates replacement frames. It skips corrections that lack reliable evidence. A redraw, changed gesture, or intentional edit may still be visible; inspect previews before exporting.
+Seamstress is designed for small continuity mismatches between generations of the same shot. It applies gradual, bounded framing and color corrections to original frames. The desktop workflow never morphs drawings, crossfades poses, or generates replacement frames. It skips corrections that lack reliable evidence. A changed character, gesture, or scene may still be visible; inspect previews before exporting.
 
 The installed app checks GitHub Releases for updates. Click the version button or **Seamstress → Check for Updates…** to download an update and restart when ready. Processing must finish or be cancelled before installation. See [how updates work](docs/updates.md).
 
@@ -28,7 +32,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.lock
 python -m pip install --no-deps -e .
-seamstress process input.mp4 --work-dir input.seamstress --output corrected.mp4
+seamstress process oner.mp4 --work-dir oner.seamstress --output oner-corrected.mp4
 ```
 
 One command runs detection, analysis, correction previews, and export. The same stages can run separately with `detect`, `mark`, `calibrate`, `preview`, and `export`. Projects save markers, analysis, correction plans, and revision-specific artifacts for repeatable review.

@@ -2,7 +2,7 @@
   "name": "seamstress",
   "productName": "Seamstress",
   "version": "0.2.0",
-  "description": "A thoughtful desktop studio for repairing seams in continuous video.",
+  "description": "A local studio for smoothing continuity seams in AI-generated oners.",
   "private": true,
   "author": "Seamstress",
   "license": "UNLICENSED",

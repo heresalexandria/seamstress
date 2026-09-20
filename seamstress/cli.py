@@ -38,7 +38,7 @@ def _seams(value: str) -> list[int]:
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(
         prog="seamstress",
-        description="Analyze, repair, and verify seams in a stitched continuous shot.",
+        description="Refine AI-generated oners: review and correct seams between sequential generations of one continuous shot.",
         epilog="FFmpeg and ffprobe must be installed and available on PATH. Original media is preserved.",
     )
     result.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
