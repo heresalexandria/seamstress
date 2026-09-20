@@ -25,6 +25,8 @@ runs:
           sudo apt-get update -qq
           sudo apt-get install --yes --no-install-recommends ffmpeg
         fi
+        ffmpeg -version | sed -n '1p'
+        ffprobe -version | sed -n '1p'
     - name: Install pinned Python runtime dependencies
       shell: bash
       run: |

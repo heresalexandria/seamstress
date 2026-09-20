@@ -205,11 +205,24 @@ class VideoWriter:
         self.frames_written = 0
         self._closed = False
         self.output.parent.mkdir(parents=True, exist_ok=True)
+        # FFmpeg 9 derives encoder color properties from filtered AVFrames, so
+        # output stream flags alone no longer retain primaries/transfer for raw
+        # RGB input. Label the already-converted YUV frames without changing
+        # their pixels. setparams uses older names for the gamma22/28 values.
+        frame_transfer = {"gamma22": "bt470m", "gamma28": "bt470bg"}.get(
+            tags["color_transfer"], tags["color_transfer"])
+        # The BT.470 BG matrix is BT.601; older scale filters expose only this
+        # alias even though ffprobe reports the standardized bt470bg name.
+        scale_matrix = "bt601" if tags["color_space"] == "bt470bg" else tags["color_space"]
+        video_filter = (
+            f"scale=in_range=pc:out_range={tags['color_range']}:out_color_matrix={scale_matrix}:flags=accurate_rnd+full_chroma_int,"
+            f"setparams=range={tags['color_range']}:color_primaries={tags['color_primaries']}:color_trc={frame_transfer}:colorspace={tags['color_space']}"
+        )
         self.process = subprocess.Popen([
             _tool("ffmpeg"), "-v", "error", "-nostdin", "-n", "-f", "rawvideo",
             "-pix_fmt", "rgb24", "-video_size", f"{width}x{height}", "-framerate", str(fps),
             "-i", "pipe:0", "-an", "-vf",
-            f"scale=in_range=pc:out_range={tags['color_range']}:out_color_matrix={tags['color_space']}:flags=accurate_rnd+full_chroma_int",
+            video_filter,
             "-c:v", "libx264", "-preset", preset,
             "-crf", str(crf), "-pix_fmt", "yuv420p",
             "-color_primaries", tags["color_primaries"], "-color_trc", tags["color_transfer"],
