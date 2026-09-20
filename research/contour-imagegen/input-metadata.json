@@ -1,0 +1,19 @@
+{
+  "target_source": "research/rife/native-checked/seam-3240-middle.png",
+  "target_frame": 3236,
+  "source_endpoint_frames": [
+    3228,
+    3244
+  ],
+  "roi_xyxy": [
+    448,
+    192,
+    832,
+    576
+  ],
+  "roi_dimensions": [
+    384,
+    384
+  ],
+  "mode": "built-in imagegen; one edit request; no API key used"
+}

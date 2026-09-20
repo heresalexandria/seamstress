@@ -1,0 +1,959 @@
+{
+  "model_path": "research/local-color-probe/361-tuning-models.json",
+  "model_key": "local-light-prior",
+  "model_was_refit": false,
+  "mapping": "pointwiseRGB+normalizedXY; no output sampling or convolution",
+  "finite_difference_byte_step": 0.5,
+  "grid_size": [
+    13,
+    13,
+    13,
+    7,
+    5
+  ],
+  "sides": {
+    "left": {
+      "cube_and_spatial_grid": {
+        "all": {
+          "count": 76895,
+          "min_color_jacobian_diagonal": 0.8144240379333496,
+          "min_color_jacobian_singular": 0.8142535090446472,
+          "max_color_jacobian_singular": 1.2228881120681763,
+          "min_color_jacobian_determinant": 0.7320786118507385,
+          "fraction_nonpositive_diagonal": 0.0,
+          "fraction_nonpositive_determinant": 0.0,
+          "max_abs_channel_change": 7.1991424560546875,
+          "p99_abs_channel_change": 3.4746252441406282,
+          "clipped_channel_fraction": 0.0
+        },
+        "supported_confidence_gt_0.5": {
+          "count": 32447,
+          "min_color_jacobian_diagonal": 0.8144240379333496,
+          "min_color_jacobian_singular": 0.8142535090446472,
+          "max_color_jacobian_singular": 1.2228881120681763,
+          "min_color_jacobian_determinant": 0.7320786118507385,
+          "fraction_nonpositive_diagonal": 0.0,
+          "fraction_nonpositive_determinant": 0.0,
+          "max_abs_channel_change": 7.1991424560546875,
+          "p99_abs_channel_change": 4.206713867187503,
+          "clipped_channel_fraction": 0.0
+        },
+        "weak_confidence_lt_0.1": {
+          "count": 16007,
+          "min_color_jacobian_diagonal": 0.97760009765625,
+          "min_color_jacobian_singular": 0.9759893417358398,
+          "max_color_jacobian_singular": 1.029675841331482,
+          "min_color_jacobian_determinant": 0.9591385126113892,
+          "fraction_nonpositive_diagonal": 0.0,
+          "fraction_nonpositive_determinant": 0.0,
+          "max_abs_channel_change": 0.7223014831542969,
+          "p99_abs_channel_change": 0.2754287719726568,
+          "clipped_channel_fraction": 0.0
+        },
+        "pan16x8": {
+          "p95_abs_channel_change": 0.079071044921875,
+          "p99_abs_channel_change": 0.152496337890625,
+          "max_abs_channel_change": 0.5191650390625
+        },
+        "pan32x16": {
+          "p95_abs_channel_change": 0.15825195610523224,
+          "p99_abs_channel_change": 0.3036981225013733,
+          "max_abs_channel_change": 1.0656890869140625
+        },
+        "maximum_168frame_quintic_weight_change_byte_per_frame": 0.08034757205418178
+      },
+      "black_at_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "white_at_positions": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "actual_frames": {
+        "276": {
+          "point_count": 57600,
+          "p05_confidence": 1.0,
+          "fraction_confidence_lt_0.1": 0.00022569444444444443,
+          "max_abs_channel_change": 5.003093719482422,
+          "p99_abs_channel_change": 3.4733205413818364
+        },
+        "360": {
+          "point_count": 57600,
+          "p05_confidence": 1.0,
+          "fraction_confidence_lt_0.1": 0.0,
+          "max_abs_channel_change": 4.732627868652344,
+          "p99_abs_channel_change": 3.7065294647216813
+        },
+        "444": {
+          "point_count": 57600,
+          "p05_confidence": 1.0,
+          "fraction_confidence_lt_0.1": 1.736111111111111e-05,
+          "max_abs_channel_change": 5.966316223144531,
+          "p99_abs_channel_change": 3.776434669494635
+        }
+      },
+      "anchor_palette": {
+        "all": {
+          "count": 57600,
+          "min_color_jacobian_diagonal": 0.8569693565368652,
+          "min_color_jacobian_singular": 0.8569554686546326,
+          "max_color_jacobian_singular": 1.169306755065918,
+          "min_color_jacobian_determinant": 0.8361034393310547,
+          "fraction_nonpositive_diagonal": 0.0,
+          "fraction_nonpositive_determinant": 0.0,
+          "max_abs_channel_change": 4.732627868652344,
+          "p99_abs_channel_change": 3.7065294647216813,
+          "clipped_channel_fraction": 0.0
+        },
+        "supported_confidence_gt_0.5": {
+          "count": 57518,
+          "min_color_jacobian_diagonal": 0.8569693565368652,
+          "min_color_jacobian_singular": 0.8569554686546326,
+          "max_color_jacobian_singular": 1.169306755065918,
+          "min_color_jacobian_determinant": 0.8361034393310547,
+          "fraction_nonpositive_diagonal": 0.0,
+          "fraction_nonpositive_determinant": 0.0,
+          "max_abs_channel_change": 4.732627868652344,
+          "p99_abs_channel_change": 3.7068897438049317,
+          "clipped_channel_fraction": 0.0
+        },
+        "pan16x8": {
+          "p95_abs_channel_change": 0.07875128090381622,
+          "p99_abs_channel_change": 0.12623603641986847,
+          "max_abs_channel_change": 0.3085823059082031
+        },
+        "pan32x16": {
+          "p95_abs_channel_change": 0.154998779296875,
+          "p99_abs_channel_change": 0.2491493672132492,
+          "max_abs_channel_change": 0.5903587341308594
+        },
+        "maximum_168frame_quintic_weight_change_byte_per_frame": 0.05281950746263776
+      }
+    },
+    "right": {
+      "cube_and_spatial_grid": {
+        "all": {
+          "count": 76895,
+          "min_color_jacobian_diagonal": 0.8485107421875,
+          "min_color_jacobian_singular": 0.8135694265365601,
+          "max_color_jacobian_singular": 1.1859633922576904,
+          "min_color_jacobian_determinant": 0.8068816065788269,
+          "fraction_nonpositive_diagonal": 0.0,
+          "fraction_nonpositive_determinant": 0.0,
+          "max_abs_channel_change": 6.6692657470703125,
+          "p99_abs_channel_change": 3.28937469482422,
+          "clipped_channel_fraction": 0.0
+        },
+        "supported_confidence_gt_0.5": {
+          "count": 32447,
+          "min_color_jacobian_diagonal": 0.8485107421875,
+          "min_color_jacobian_singular": 0.8135694265365601,
+          "max_color_jacobian_singular": 1.1859633922576904,
+          "min_color_jacobian_determinant": 0.8068816065788269,
+          "fraction_nonpositive_diagonal": 0.0,
+          "fraction_nonpositive_determinant": 0.0,
+          "max_abs_channel_change": 6.6692657470703125,
+          "p99_abs_channel_change": 3.888012695312516,
+          "clipped_channel_fraction": 0.0
+        },
+        "weak_confidence_lt_0.1": {
+          "count": 16007,
+          "min_color_jacobian_diagonal": 0.9707489013671875,
+          "min_color_jacobian_singular": 0.9706681370735168,
+          "max_color_jacobian_singular": 1.0279150009155273,
+          "min_color_jacobian_determinant": 0.9660832285881042,
+          "fraction_nonpositive_diagonal": 0.0,
+          "fraction_nonpositive_determinant": 0.0,
+          "max_abs_channel_change": 0.6121292114257812,
+          "p99_abs_channel_change": 0.26907958984375013,
+          "clipped_channel_fraction": 0.0
+        },
+        "pan16x8": {
+          "p95_abs_channel_change": 0.07818450778722763,
+          "p99_abs_channel_change": 0.14699845016002655,
+          "max_abs_channel_change": 0.405609130859375
+        },
+        "pan32x16": {
+          "p95_abs_channel_change": 0.1562347412109375,
+          "p99_abs_channel_change": 0.292226105928421,
+          "max_abs_channel_change": 0.8361968994140625
+        },
+        "maximum_168frame_quintic_weight_change_byte_per_frame": 0.0744337694985526
+      },
+      "black_at_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "white_at_positions": [
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ],
+        [
+          255.0,
+          255.0,
+          255.0
+        ]
+      ],
+      "actual_frames": {
+        "277": {
+          "point_count": 57600,
+          "p05_confidence": 1.0,
+          "fraction_confidence_lt_0.1": 0.00024305555555555555,
+          "max_abs_channel_change": 5.035087585449219,
+          "p99_abs_channel_change": 3.264402694702154
+        },
+        "361": {
+          "point_count": 57600,
+          "p05_confidence": 1.0,
+          "fraction_confidence_lt_0.1": 1.736111111111111e-05,
+          "max_abs_channel_change": 5.5287017822265625,
+          "p99_abs_channel_change": 3.587633285522463
+        },
+        "445": {
+          "point_count": 57600,
+          "p05_confidence": 1.0,
+          "fraction_confidence_lt_0.1": 1.736111111111111e-05,
+          "max_abs_channel_change": 5.528175354003906,
+          "p99_abs_channel_change": 3.6430080032348693
+        }
+      },
+      "anchor_palette": {
+        "all": {
+          "count": 57600,
+          "min_color_jacobian_diagonal": 0.8884735107421875,
+          "min_color_jacobian_singular": 0.8706012964248657,
+          "max_color_jacobian_singular": 1.1447174549102783,
+          "min_color_jacobian_determinant": 0.8469154238700867,
+          "fraction_nonpositive_diagonal": 0.0,
+          "fraction_nonpositive_determinant": 0.0,
+          "max_abs_channel_change": 5.5287017822265625,
+          "p99_abs_channel_change": 3.587633285522463,
+          "clipped_channel_fraction": 0.0
+        },
+        "supported_confidence_gt_0.5": {
+          "count": 57506,
+          "min_color_jacobian_diagonal": 0.8884735107421875,
+          "min_color_jacobian_singular": 0.8706012964248657,
+          "max_color_jacobian_singular": 1.1447174549102783,
+          "min_color_jacobian_determinant": 0.8469154238700867,
+          "fraction_nonpositive_diagonal": 0.0,
+          "fraction_nonpositive_determinant": 0.0,
+          "max_abs_channel_change": 5.5287017822265625,
+          "p99_abs_channel_change": 3.5879107666015617,
+          "clipped_channel_fraction": 0.0
+        },
+        "weak_confidence_lt_0.1": {
+          "count": 1,
+          "min_color_jacobian_diagonal": 0.9978790283203125,
+          "min_color_jacobian_singular": 0.9975988864898682,
+          "max_color_jacobian_singular": 1.0013866424560547,
+          "min_color_jacobian_determinant": 0.9980295896530151,
+          "fraction_nonpositive_diagonal": 0.0,
+          "fraction_nonpositive_determinant": 0.0,
+          "max_abs_channel_change": 0.0264129638671875,
+          "p99_abs_channel_change": 0.0260980224609375,
+          "clipped_channel_fraction": 0.0
+        },
+        "pan16x8": {
+          "p95_abs_channel_change": 0.07846450805664062,
+          "p99_abs_channel_change": 0.12446986883878708,
+          "max_abs_channel_change": 0.40277099609375
+        },
+        "pan32x16": {
+          "p95_abs_channel_change": 0.15416383743286133,
+          "p99_abs_channel_change": 0.24272170662879944,
+          "max_abs_channel_change": 0.632598876953125
+        },
+        "maximum_168frame_quintic_weight_change_byte_per_frame": 0.06170426096235003
+      }
+    }
+  },
+  "runtime_seconds": 3.598786541959271
+}

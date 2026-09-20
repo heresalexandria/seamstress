@@ -1,0 +1,617 @@
+{
+  "source_window": [
+    2864,
+    2912
+  ],
+  "frame_count": 48,
+  "view_matrix": [
+    [
+      1.06,
+      0.0,
+      -38.37
+    ],
+    [
+      0.0,
+      1.06,
+      -21.57
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "background_ease_file": "research/layer2888/camera-ease.json",
+  "background_ease_half_window": 5,
+  "foreground": "one current original source drawing per frame, independent transform; no pose synthesis or crossfade",
+  "cleanplate_generation_calls": 1,
+  "return_to_source": {
+    "neutralization_frames": [
+      2900,
+      2910
+    ],
+    "exact_source_frames": [
+      2910,
+      2911
+    ],
+    "curve": "quintic zero endpoint velocity; geometry and local grade return toidentity"
+  },
+  "frames": [
+    {
+      "frame": 2864,
+      "active": false,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0
+    },
+    {
+      "frame": 2865,
+      "active": false,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 17.508045789930556,
+      "original_mean_rgb_change": 17.508045789930556
+    },
+    {
+      "frame": 2866,
+      "active": false,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 1.5302712673611112,
+      "original_mean_rgb_change": 1.5302712673611112
+    },
+    {
+      "frame": 2867,
+      "active": false,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 21.669056712962963,
+      "original_mean_rgb_change": 21.669056712962963
+    },
+    {
+      "frame": 2868,
+      "active": false,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 16.836461588541667,
+      "original_mean_rgb_change": 16.836461588541667
+    },
+    {
+      "frame": 2869,
+      "active": false,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 16.814710286458332,
+      "original_mean_rgb_change": 16.814710286458332
+    },
+    {
+      "frame": 2870,
+      "active": false,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 1.5501982060185184,
+      "original_mean_rgb_change": 1.5501982060185184
+    },
+    {
+      "frame": 2871,
+      "active": false,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 21.050085358796295,
+      "original_mean_rgb_change": 21.050085358796295
+    },
+    {
+      "frame": 2872,
+      "active": false,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 15.750640552662038,
+      "original_mean_rgb_change": 15.750640552662038
+    },
+    {
+      "frame": 2873,
+      "active": false,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 16.15529911747685,
+      "original_mean_rgb_change": 16.15529911747685
+    },
+    {
+      "frame": 2874,
+      "active": false,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 1.3043948929398148,
+      "original_mean_rgb_change": 1.3043948929398148
+    },
+    {
+      "frame": 2875,
+      "active": false,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 19.90012333622685,
+      "original_mean_rgb_change": 19.90012333622685
+    },
+    {
+      "frame": 2876,
+      "active": false,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 15.075904947916667,
+      "original_mean_rgb_change": 15.075904947916667
+    },
+    {
+      "frame": 2877,
+      "active": false,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 14.376206958912038,
+      "original_mean_rgb_change": 14.376206958912038
+    },
+    {
+      "frame": 2878,
+      "active": false,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 1.233562282986111,
+      "original_mean_rgb_change": 1.233562282986111
+    },
+    {
+      "frame": 2879,
+      "active": false,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 18.977900028935185,
+      "original_mean_rgb_change": 18.977900028935185
+    },
+    {
+      "frame": 2880,
+      "active": false,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 14.574949001736112,
+      "original_mean_rgb_change": 14.574949001736112
+    },
+    {
+      "frame": 2881,
+      "active": false,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 14.646961443865742,
+      "original_mean_rgb_change": 14.646961443865742
+    },
+    {
+      "frame": 2882,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 61953,
+      "modified_background_support_pixels": 26482,
+      "plate_to_visible_bg_boundary_mae": 19.46660011512422,
+      "plate_to_visible_bg_boundary_p90": 47.506440526687996,
+      "mean_rgb_change": 1.9142903645833333,
+      "original_mean_rgb_change": 1.428097873263889
+    },
+    {
+      "frame": 2883,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 61093,
+      "modified_background_support_pixels": 26800,
+      "plate_to_visible_bg_boundary_mae": 17.583797339215717,
+      "plate_to_visible_bg_boundary_p90": 42.246952177363674,
+      "mean_rgb_change": 19.23863353587963,
+      "original_mean_rgb_change": 19.28074363425926
+    },
+    {
+      "frame": 2884,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 61070,
+      "modified_background_support_pixels": 25603,
+      "plate_to_visible_bg_boundary_mae": 19.027637433645797,
+      "plate_to_visible_bg_boundary_p90": 44.888758094545416,
+      "mean_rgb_change": 13.87880027488426,
+      "original_mean_rgb_change": 14.576778428819445
+    },
+    {
+      "frame": 2885,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 61228,
+      "modified_background_support_pixels": 25182,
+      "plate_to_visible_bg_boundary_mae": 18.772905474796982,
+      "plate_to_visible_bg_boundary_p90": 45.33995176536563,
+      "mean_rgb_change": 12.949480613425926,
+      "original_mean_rgb_change": 14.696235894097223
+    },
+    {
+      "frame": 2886,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 61269,
+      "modified_background_support_pixels": 23522,
+      "plate_to_visible_bg_boundary_mae": 15.789175168622794,
+      "plate_to_visible_bg_boundary_p90": 37.364580454090294,
+      "mean_rgb_change": 9.708263165509258,
+      "original_mean_rgb_change": 1.365119357638889
+    },
+    {
+      "frame": 2887,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 61393,
+      "modified_background_support_pixels": 24034,
+      "plate_to_visible_bg_boundary_mae": 33.08223008654391,
+      "plate_to_visible_bg_boundary_p90": 90.97621762453349,
+      "mean_rgb_change": 17.624819516782406,
+      "original_mean_rgb_change": 19.25990306712963
+    },
+    {
+      "frame": 2888,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 60251,
+      "modified_background_support_pixels": 26477,
+      "plate_to_visible_bg_boundary_mae": 10.984620523032994,
+      "plate_to_visible_bg_boundary_p90": 24.23898570972904,
+      "mean_rgb_change": 14.734916087962963,
+      "original_mean_rgb_change": 21.917987919560186
+    },
+    {
+      "frame": 2889,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 60109,
+      "modified_background_support_pixels": 28815,
+      "plate_to_visible_bg_boundary_mae": 11.068007968097843,
+      "plate_to_visible_bg_boundary_p90": 23.607996348909687,
+      "mean_rgb_change": 10.600697699652779,
+      "original_mean_rgb_change": 2.0033528645833334
+    },
+    {
+      "frame": 2890,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 59979,
+      "modified_background_support_pixels": 30210,
+      "plate_to_visible_bg_boundary_mae": 12.504263172872628,
+      "plate_to_visible_bg_boundary_p90": 27.48286064966132,
+      "mean_rgb_change": 6.883519965277777,
+      "original_mean_rgb_change": 6.21953956886574
+    },
+    {
+      "frame": 2891,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 59919,
+      "modified_background_support_pixels": 31161,
+      "plate_to_visible_bg_boundary_mae": 14.511465859007203,
+      "plate_to_visible_bg_boundary_p90": 35.46837673757294,
+      "mean_rgb_change": 6.028793764467593,
+      "original_mean_rgb_change": 7.968958333333333
+    },
+    {
+      "frame": 2892,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 59935,
+      "modified_background_support_pixels": 31418,
+      "plate_to_visible_bg_boundary_mae": 14.476084546336839,
+      "plate_to_visible_bg_boundary_p90": 35.44441566914387,
+      "mean_rgb_change": 5.160780888310185,
+      "original_mean_rgb_change": 6.6125303819444445
+    },
+    {
+      "frame": 2893,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 60110,
+      "modified_background_support_pixels": 31333,
+      "plate_to_visible_bg_boundary_mae": 14.53204053753522,
+      "plate_to_visible_bg_boundary_p90": 34.11105998304174,
+      "mean_rgb_change": 1.6363910590277777,
+      "original_mean_rgb_change": 1.8742006655092593
+    },
+    {
+      "frame": 2894,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 60172,
+      "modified_background_support_pixels": 31375,
+      "plate_to_visible_bg_boundary_mae": 14.499223692112166,
+      "plate_to_visible_bg_boundary_p90": 33.767114690466364,
+      "mean_rgb_change": 5.54533275462963,
+      "original_mean_rgb_change": 6.223228443287037
+    },
+    {
+      "frame": 2895,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 60059,
+      "modified_background_support_pixels": 31515,
+      "plate_to_visible_bg_boundary_mae": 14.968159760511561,
+      "plate_to_visible_bg_boundary_p90": 37.72981545486705,
+      "mean_rgb_change": 7.527636357060185,
+      "original_mean_rgb_change": 8.502860243055556
+    },
+    {
+      "frame": 2896,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 60182,
+      "modified_background_support_pixels": 31519,
+      "plate_to_visible_bg_boundary_mae": 13.990004620913147,
+      "plate_to_visible_bg_boundary_p90": 30.867527182556927,
+      "mean_rgb_change": 6.116476779513889,
+      "original_mean_rgb_change": 7.02870044849537
+    },
+    {
+      "frame": 2897,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 60075,
+      "modified_background_support_pixels": 31237,
+      "plate_to_visible_bg_boundary_mae": 15.215339254647873,
+      "plate_to_visible_bg_boundary_p90": 39.914512013513395,
+      "mean_rgb_change": 2.496945529513889,
+      "original_mean_rgb_change": 2.5122956452546297
+    },
+    {
+      "frame": 2898,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 59900,
+      "modified_background_support_pixels": 31198,
+      "plate_to_visible_bg_boundary_mae": 15.631565493883288,
+      "plate_to_visible_bg_boundary_p90": 39.66277217634711,
+      "mean_rgb_change": 5.811601924189815,
+      "original_mean_rgb_change": 6.68378978587963
+    },
+    {
+      "frame": 2899,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 59723,
+      "modified_background_support_pixels": 31314,
+      "plate_to_visible_bg_boundary_mae": 18.664596456331893,
+      "plate_to_visible_bg_boundary_p90": 52.58437176180259,
+      "mean_rgb_change": 7.809093967013889,
+      "original_mean_rgb_change": 8.657901475694445
+    },
+    {
+      "frame": 2900,
+      "active": true,
+      "return_weight": 1.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 59493,
+      "modified_background_support_pixels": 31220,
+      "plate_to_visible_bg_boundary_mae": 19.308288227089363,
+      "plate_to_visible_bg_boundary_p90": 55.0522405136645,
+      "mean_rgb_change": 6.477861328125,
+      "original_mean_rgb_change": 7.266670283564815
+    },
+    {
+      "frame": 2901,
+      "active": true,
+      "return_weight": 0.99144,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 59497,
+      "modified_background_support_pixels": 31264,
+      "plate_to_visible_bg_boundary_mae": 19.460139730952697,
+      "plate_to_visible_bg_boundary_p90": 56.02091832757656,
+      "mean_rgb_change": 2.1790596064814816,
+      "original_mean_rgb_change": 1.877953197337963
+    },
+    {
+      "frame": 2902,
+      "active": true,
+      "return_weight": 0.94208,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 59433,
+      "modified_background_support_pixels": 30534,
+      "plate_to_visible_bg_boundary_mae": 13.789819214782252,
+      "plate_to_visible_bg_boundary_p90": 29.717843216063464,
+      "mean_rgb_change": 7.965071252893519,
+      "original_mean_rgb_change": 6.948663917824074
+    },
+    {
+      "frame": 2903,
+      "active": true,
+      "return_weight": 0.83692,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 59241,
+      "modified_background_support_pixels": 29821,
+      "plate_to_visible_bg_boundary_mae": 24.007641055242033,
+      "plate_to_visible_bg_boundary_p90": 75.3173843104009,
+      "mean_rgb_change": 10.905581597222222,
+      "original_mean_rgb_change": 9.11335033275463
+    },
+    {
+      "frame": 2904,
+      "active": true,
+      "return_weight": 0.68256,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 59470,
+      "modified_background_support_pixels": 28864,
+      "plate_to_visible_bg_boundary_mae": 26.22579680061991,
+      "plate_to_visible_bg_boundary_p90": 81.59950459443212,
+      "mean_rgb_change": 10.923306568287037,
+      "original_mean_rgb_change": 7.606664134837963
+    },
+    {
+      "frame": 2905,
+      "active": true,
+      "return_weight": 0.5,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 58839,
+      "modified_background_support_pixels": 26667,
+      "plate_to_visible_bg_boundary_mae": 28.29726763054217,
+      "plate_to_visible_bg_boundary_p90": 85.61581283401226,
+      "mean_rgb_change": 9.955554832175926,
+      "original_mean_rgb_change": 2.0812586805555555
+    },
+    {
+      "frame": 2906,
+      "active": true,
+      "return_weight": 0.31743999999999994,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 58577,
+      "modified_background_support_pixels": 26032,
+      "plate_to_visible_bg_boundary_mae": 18.28652176425005,
+      "plate_to_visible_bg_boundary_p90": 51.77602011182655,
+      "mean_rgb_change": 11.75639937789352,
+      "original_mean_rgb_change": 7.220409794560185
+    },
+    {
+      "frame": 2907,
+      "active": true,
+      "return_weight": 0.1630800000000001,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 58232,
+      "modified_background_support_pixels": 25845,
+      "plate_to_visible_bg_boundary_mae": 19.684843153170036,
+      "plate_to_visible_bg_boundary_p90": 59.75352196355585,
+      "mean_rgb_change": 12.434945746527777,
+      "original_mean_rgb_change": 9.54562789351852
+    },
+    {
+      "frame": 2908,
+      "active": true,
+      "return_weight": 0.05791999999999986,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 58286,
+      "modified_background_support_pixels": 25449,
+      "plate_to_visible_bg_boundary_mae": 19.92402757885947,
+      "plate_to_visible_bg_boundary_p90": 59.086257630378725,
+      "mean_rgb_change": 10.815768952546296,
+      "original_mean_rgb_change": 8.207146629050927
+    },
+    {
+      "frame": 2909,
+      "active": true,
+      "return_weight": 0.008560000000000234,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "original_foreground_core_pixels": 57831,
+      "modified_background_support_pixels": 25509,
+      "plate_to_visible_bg_boundary_mae": 20.198741378549474,
+      "plate_to_visible_bg_boundary_p90": 58.293644840338025,
+      "mean_rgb_change": 5.679100477430556,
+      "original_mean_rgb_change": 2.4656123408564814
+    },
+    {
+      "frame": 2910,
+      "active": false,
+      "return_weight": 0.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 8.137553168402778,
+      "original_mean_rgb_change": 7.800616319444444
+    },
+    {
+      "frame": 2911,
+      "active": false,
+      "return_weight": 0.0,
+      "uncovered_pixels": 0,
+      "changed_original_foreground_core_pixels": 0,
+      "mean_rgb_change": 10.143592303240741,
+      "original_mean_rgb_change": 10.143592303240741
+    }
+  ],
+  "status": "REJECTED for integration: temporally moving matte/plate boundaries create visible duplicate contours and city/sky halos.",
+  "verdict": {
+    "pass": false,
+    "visual_failures": [
+      {
+        "frame": 2887,
+        "region": "above the sloth head and around raised arms",
+        "defect": "Visible city/sky band follows the removal boundary and moves against existing scenery."
+      },
+      {
+        "frame": 2904,
+        "region_xyxy": [
+          810,
+          355,
+          875,
+          385
+        ],
+        "defect": "Duplicate pale contour under woman extended right forearm/hand."
+      },
+      {
+        "frame": 2904,
+        "region": "woman shoes and sloth feet",
+        "defect": "Pale repeated boundary fragments and background strip discontinuities."
+      }
+    ],
+    "coverage_summary": {
+      "uncovered_pixels_all_48_frames": 0,
+      "changed_identified_foreground_core_pixels_all_frames": 0
+    },
+    "color_confound": "This proof returns its local incoming gain toidentity over10frames. That introduces brightening which is absent from the intended protected full8 grading. The rejection is based on directly visible matte/parallax defects independent of this grade confound; no further render was performed.",
+    "production_integration": false,
+    "additional_generations": 0,
+    "stop_reason": "Bounded native proof failed visible boundary continuity despite complete pixel coverage; 2888 remains unresolved."
+  }
+}

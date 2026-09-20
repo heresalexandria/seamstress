@@ -1,0 +1,115 @@
+{
+  "knots": [
+    0.0,
+    16.0,
+    48.0,
+    96.0,
+    144.0,
+    192.0,
+    240.0,
+    255.0
+  ],
+  "seam_errors": [
+    {
+      "cut": 361,
+      "raw_heldout_mae": 4.451297283172607,
+      "symmetric_affine_heldout_mae": 2.587263226097123,
+      "protected_tone_heldout_mae": 2.4144974490655686,
+      "tone_min_derivative": 0.4165984160396752
+    },
+    {
+      "cut": 722,
+      "raw_heldout_mae": 4.458266258239746,
+      "symmetric_affine_heldout_mae": 2.791888873541648,
+      "protected_tone_heldout_mae": 2.4580688695281903,
+      "tone_min_derivative": 0.0
+    },
+    {
+      "cut": 1083,
+      "raw_heldout_mae": 3.2584738731384277,
+      "symmetric_affine_heldout_mae": 2.597024787448971,
+      "protected_tone_heldout_mae": 2.4682714780363235,
+      "tone_min_derivative": 0.5034170944607554
+    },
+    {
+      "cut": 1444,
+      "raw_heldout_mae": 3.7113490104675293,
+      "symmetric_affine_heldout_mae": 2.5368877977320814,
+      "protected_tone_heldout_mae": 2.3289319666336636,
+      "tone_min_derivative": 0.15600954648486695
+    },
+    {
+      "cut": 1805,
+      "raw_heldout_mae": 4.229567050933838,
+      "symmetric_affine_heldout_mae": 2.6331117408538276,
+      "protected_tone_heldout_mae": 2.43945057743204,
+      "tone_min_derivative": 0.2365912942041073
+    },
+    {
+      "cut": 2166,
+      "raw_heldout_mae": 5.958373546600342,
+      "symmetric_affine_heldout_mae": 2.6795978968785255,
+      "protected_tone_heldout_mae": 2.99362877295764,
+      "tone_min_derivative": 0.473024932852109
+    },
+    {
+      "cut": 2527,
+      "raw_heldout_mae": 3.7833003997802734,
+      "symmetric_affine_heldout_mae": 2.6814958709111556,
+      "protected_tone_heldout_mae": 2.660608571639273,
+      "tone_min_derivative": 0.708492071641161
+    },
+    {
+      "cut": 2888,
+      "raw_heldout_mae": 4.953807830810547,
+      "symmetric_affine_heldout_mae": 2.3602116660639845,
+      "protected_tone_heldout_mae": 2.4326449573225086,
+      "tone_min_derivative": 0.4515074404165825
+    },
+    {
+      "cut": 3240,
+      "raw_heldout_mae": 4.087910175323486,
+      "symmetric_affine_heldout_mae": 2.1793884474026775,
+      "protected_tone_heldout_mae": 2.1006780742286706,
+      "tone_min_derivative": 0.5478519561090128
+    }
+  ],
+  "track_peaks": [
+    {
+      "cut": 361,
+      "peak_per_frame_tone_change": 0.09937789243130624
+    },
+    {
+      "cut": 722,
+      "peak_per_frame_tone_change": 0.2168768046339835
+    },
+    {
+      "cut": 1083,
+      "peak_per_frame_tone_change": 0.08496198502297148
+    },
+    {
+      "cut": 1444,
+      "peak_per_frame_tone_change": 0.15015959784102506
+    },
+    {
+      "cut": 1805,
+      "peak_per_frame_tone_change": 0.13419905905826113
+    },
+    {
+      "cut": 2166,
+      "peak_per_frame_tone_change": 0.0885666122790667
+    },
+    {
+      "cut": 2527,
+      "peak_per_frame_tone_change": 0.046052090402099566
+    },
+    {
+      "cut": 2888,
+      "peak_per_frame_tone_change": 0.0852966521280436
+    },
+    {
+      "cut": 3240,
+      "peak_per_frame_tone_change": 0.06868207949782246
+    }
+  ]
+}

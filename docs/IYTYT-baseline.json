@@ -1,0 +1,50 @@
+{
+  "checkpoint": "Source-frame conform baseline before local color refinements",
+  "source_frame_count": 3347,
+  "fps_fraction": "24000/1001",
+  "width": 1280,
+  "height": 720,
+  "crf": 14,
+  "runtime": {
+    "python": "3.13.15",
+    "ffmpeg": "7.0.2"
+  },
+  "full_render_audio": "Original compressed stream copied unchanged",
+  "files": [
+    {
+      "path": "IYTYT.mp4",
+      "sha256": "c64928f7c72aee57d4a536d1af711d354a0358109510b175407d011621e855ca",
+      "bytes": 212196089,
+      "included_in_git": false
+    },
+    {
+      "path": "output/IYTYT-source-conform-eight-joins.mp4",
+      "sha256": "d91a6813e4c22e4216e976aa0fa4ec70d87b35673fbe43bf84d01e737a70d24a",
+      "bytes": 143903624,
+      "included_in_git": false
+    },
+    {
+      "path": "plans/IYTYT-eight-joins.json",
+      "sha256": "df5f4dd7ea5f34b992fb88e70092d6e6d976dd793003da8bb0a1393d7d1719c8",
+      "bytes": 1353551,
+      "included_in_git": true,
+      "before_path_normalization_sha256": "4ada0a2f9b9b678904e0c2c0150395373bc89c527206559b7d4c9c3a04ccebf0",
+      "before_path_normalization_bytes": 1353593
+    },
+    {
+      "path": "plans/IYTYT-calibration.json",
+      "sha256": "e0c1115372071eb454946cbbfc5452225daa479cb9a503d44a2282277bcdfb03",
+      "bytes": 507606,
+      "included_in_git": true,
+      "before_path_normalization_sha256": "5131659ebb4ab9905f0e2df829afd21a297937164a2ce6dfd6b4df5efff08008",
+      "before_path_normalization_bytes": 507648
+    }
+  ],
+  "reproduction_guide": "docs/REPRODUCE-IYTYT.md",
+  "limitations": [
+    "Local color changes at joins remain visible",
+    "Geometry at source frame2888 is unresolved"
+  ],
+  "note": "These hashes identify the existing local files. Reproduction across different environments need not produce byte-identical MP4 containers.",
+  "path_normalization": "Published recipe paths are relative to the repository root. Plan/calibration checksums describe these portable files; before_path_normalization values identify historical local reports. Source and movie checksums, calibration numbers, geometry, color models, timing, and audio are unchanged."
+}

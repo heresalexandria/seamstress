@@ -1,0 +1,2068 @@
+{
+  "offset_frames": 84,
+  "effective_residual_weight": 0.5,
+  "note": "Halfway through168frame quintic support. Raw full-strength diagnostics expose extrapolation; effective diagnostics apply the actual0.5 residual weight.",
+  "reports": [
+    {
+      "frame": 361,
+      "sides": {
+        "left": {
+          "source_frame": 276,
+          "full_strength": {
+            "min_own_derivative": 0.4439201354980469,
+            "min_singular": 0.44233018159866333,
+            "max_singular": 1.3029868602752686,
+            "min_determinant": 0.4817846715450287,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0,
+            "max_abs_change": 13.030303955078125,
+            "p99_abs_change": 4.977466812133811,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                95.0,
+                47.0,
+                7.0
+              ],
+              "xy": [
+                0.584831899921814,
+                0.25034770514603616
+              ],
+              "output_rgb": [
+                99.52015686035156,
+                47.52870559692383,
+                2.691577434539795
+              ],
+              "channel": 2,
+              "jacobian": [
+                [
+                  1.05999755859375,
+                  0.0019073486328125,
+                  -0.0506439208984375
+                ],
+                [
+                  0.0457763671875,
+                  1.025543212890625,
+                  -0.0094146728515625
+                ],
+                [
+                  -0.016587257385253906,
+                  0.014476776123046875,
+                  0.4439201354980469
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                95.0,
+                47.0,
+                7.0
+              ],
+              "xy": [
+                0.584831899921814,
+                0.25034770514603616
+              ],
+              "output_rgb": [
+                99.52015686035156,
+                47.52870559692383,
+                2.691577434539795
+              ],
+              "jacobian": [
+                [
+                  1.05999755859375,
+                  0.0019073486328125,
+                  -0.0506439208984375
+                ],
+                [
+                  0.0457763671875,
+                  1.025543212890625,
+                  -0.0094146728515625
+                ],
+                [
+                  -0.016587257385253906,
+                  0.014476776123046875,
+                  0.4439201354980469
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.4439201354980469,
+                "min_singular": 0.44233019112663857,
+                "min_determinant": 0.4817846748276577
+              },
+              "0.85": {
+                "min_own_derivative": 0.5273321151733399,
+                "min_singular": 0.5259383055703702,
+                "min_determinant": 0.5656878337170278
+              },
+              "0.75": {
+                "min_own_derivative": 0.5829401016235352,
+                "min_singular": 0.5816871937246739,
+                "min_determinant": 0.6203973591399687
+              },
+              "0.5": {
+                "min_own_derivative": 0.7219600677490234,
+                "min_singular": 0.7210900398397506,
+                "min_determinant": 0.7529176705549262
+              }
+            }
+          },
+          "effective_half_strength": {
+            "min_own_derivative": 0.7219600677490234,
+            "min_singular": 0.7210900398397506,
+            "min_determinant": 0.7529176705549262
+          },
+          "effective_max_change": 6.5151519775390625,
+          "effective_p99_change": 2.4887334060669053,
+          "effective_shadow_median_luma_gain": 1.00523154735777,
+          "fraction_confidence_lt_0.1": 0.00026041666666666666
+        },
+        "right": {
+          "source_frame": 445,
+          "full_strength": {
+            "min_own_derivative": 0.7518152594566345,
+            "min_singular": 0.7518152594566345,
+            "max_singular": 1.5327444076538086,
+            "min_determinant": 0.7074159383773804,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0,
+            "max_abs_change": 10.993492126464844,
+            "p99_abs_change": 5.318300933837893,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "xy": [
+                0.47849882720875686,
+                0.8567454798331016
+              ],
+              "output_rgb": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "channel": 1,
+              "jacobian": [
+                [
+                  0.7683906555175781,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.7518152594566345,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.5266927480697632
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "xy": [
+                0.47849882720875686,
+                0.8567454798331016
+              ],
+              "output_rgb": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "jacobian": [
+                [
+                  0.7683906555175781,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.7518152594566345,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.5266927480697632
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.7518152594566345,
+                "min_singular": 0.7518152594566345,
+                "min_determinant": 0.7074159586049262
+              },
+              "0.85": {
+                "min_own_derivative": 0.7890429705381393,
+                "min_singular": 0.7890429705381393,
+                "min_determinant": 0.7488089086662795
+              },
+              "0.75": {
+                "min_own_derivative": 0.8138614445924759,
+                "min_singular": 0.8138614445924759,
+                "min_determinant": 0.776896070083856
+              },
+              "0.5": {
+                "min_own_derivative": 0.8759076297283173,
+                "min_singular": 0.8759076297283173,
+                "min_determinant": 0.8488291578506075
+              }
+            }
+          },
+          "effective_half_strength": {
+            "min_own_derivative": 0.8759076297283173,
+            "min_singular": 0.8759076297283173,
+            "min_determinant": 0.8488291578506075
+          },
+          "effective_max_change": 5.496746063232422,
+          "effective_p99_change": 2.6591504669189465,
+          "effective_shadow_median_luma_gain": 0.9965820123214316,
+          "fraction_confidence_lt_0.1": 1.736111111111111e-05
+        }
+      }
+    },
+    {
+      "frame": 722,
+      "sides": {
+        "left": {
+          "source_frame": 637,
+          "full_strength": {
+            "min_own_derivative": 0.62841796875,
+            "min_singular": 0.626445472240448,
+            "max_singular": 1.2873185873031616,
+            "min_determinant": 0.6535254716873169,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0,
+            "max_abs_change": 13.708324432373047,
+            "p99_abs_change": 5.574471282959006,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                117.0,
+                72.0,
+                14.0
+              ],
+              "xy": [
+                0.32525410476935107,
+                0.07788595271210014
+              ],
+              "output_rgb": [
+                119.39344024658203,
+                73.29022979736328,
+                8.024328231811523
+              ],
+              "channel": 2,
+              "jacobian": [
+                [
+                  1.027618408203125,
+                  0.003875732421875,
+                  -0.0267181396484375
+                ],
+                [
+                  0.0076446533203125,
+                  1.013275146484375,
+                  -0.0041961669921875
+                ],
+                [
+                  -0.028936386108398438,
+                  -0.00476837158203125,
+                  0.62841796875
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                117.0,
+                72.0,
+                14.0
+              ],
+              "xy": [
+                0.32525410476935107,
+                0.07788595271210014
+              ],
+              "output_rgb": [
+                119.39344024658203,
+                73.29022979736328,
+                8.024328231811523
+              ],
+              "jacobian": [
+                [
+                  1.027618408203125,
+                  0.003875732421875,
+                  -0.0267181396484375
+                ],
+                [
+                  0.0076446533203125,
+                  1.013275146484375,
+                  -0.0041961669921875
+                ],
+                [
+                  -0.028936386108398438,
+                  -0.00476837158203125,
+                  0.62841796875
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.62841796875,
+                "min_singular": 0.6264454621676966,
+                "min_determinant": 0.6535254896003853
+              },
+              "0.85": {
+                "min_own_derivative": 0.6841552734375,
+                "min_singular": 0.6824785205028654,
+                "min_determinant": 0.7075239725562977
+              },
+              "0.75": {
+                "min_own_derivative": 0.7213134765625,
+                "min_singular": 0.7198339202438646,
+                "min_determinant": 0.7431229264189757
+              },
+              "0.5": {
+                "min_own_derivative": 0.814208984375,
+                "min_singular": 0.8132225069025779,
+                "min_determinant": 0.8307260780365626
+              }
+            }
+          },
+          "effective_half_strength": {
+            "min_own_derivative": 0.814208984375,
+            "min_singular": 0.8132225069025779,
+            "min_determinant": 0.8307260780365626
+          },
+          "effective_max_change": 6.854162216186523,
+          "effective_p99_change": 2.787235641479503,
+          "effective_shadow_median_luma_gain": 0.9867590291228183,
+          "fraction_confidence_lt_0.1": 0.00017361111111111112
+        },
+        "right": {
+          "source_frame": 806,
+          "full_strength": {
+            "min_own_derivative": 0.206573486328125,
+            "min_singular": 0.2069438248872757,
+            "max_singular": 1.8020418882369995,
+            "min_determinant": 0.22759844362735748,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0,
+            "max_abs_change": 32.193511962890625,
+            "p99_abs_change": 5.70599563598633,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                156.0,
+                112.0,
+                87.0
+              ],
+              "xy": [
+                0.3127443315089914,
+                0.09457579972183588
+              ],
+              "output_rgb": [
+                155.90350341796875,
+                111.39192199707031,
+                109.24671936035156
+              ],
+              "channel": 2,
+              "jacobian": [
+                [
+                  1.01446533203125,
+                  0.029937744140625,
+                  0.05010986328125
+                ],
+                [
+                  0.0248260498046875,
+                  1.0308837890625,
+                  0.0319366455078125
+                ],
+                [
+                  -0.0269775390625,
+                  -0.3322296142578125,
+                  0.206573486328125
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                156.0,
+                112.0,
+                87.0
+              ],
+              "xy": [
+                0.3127443315089914,
+                0.09457579972183588
+              ],
+              "output_rgb": [
+                155.90350341796875,
+                111.39192199707031,
+                109.24671936035156
+              ],
+              "jacobian": [
+                [
+                  1.01446533203125,
+                  0.029937744140625,
+                  0.05010986328125
+                ],
+                [
+                  0.0248260498046875,
+                  1.0308837890625,
+                  0.0319366455078125
+                ],
+                [
+                  -0.0269775390625,
+                  -0.3322296142578125,
+                  0.206573486328125
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.206573486328125,
+                "min_singular": 0.2069438195953495,
+                "min_determinant": 0.22759843962010964
+              },
+              "0.85": {
+                "min_own_derivative": 0.3255874633789063,
+                "min_singular": 0.3209503722329417,
+                "min_determinant": 0.3465609394054443
+              },
+              "0.75": {
+                "min_own_derivative": 0.40493011474609375,
+                "min_singular": 0.3982634252042506,
+                "min_determinant": 0.42526082354853517
+              },
+              "0.5": {
+                "min_own_derivative": 0.6032867431640625,
+                "min_singular": 0.5951929825617642,
+                "min_determinant": 0.6198813394232712
+              }
+            }
+          },
+          "effective_half_strength": {
+            "min_own_derivative": 0.6032867431640625,
+            "min_singular": 0.5951929825617642,
+            "min_determinant": 0.6198813394232712
+          },
+          "effective_max_change": 16.096755981445312,
+          "effective_p99_change": 2.852997817993165,
+          "effective_shadow_median_luma_gain": 1.014229319754691,
+          "fraction_confidence_lt_0.1": 8.680555555555556e-05
+        }
+      }
+    },
+    {
+      "frame": 1083,
+      "sides": {
+        "left": {
+          "source_frame": 998,
+          "full_strength": {
+            "min_own_derivative": 0.8092041015625,
+            "min_singular": 0.6847599744796753,
+            "max_singular": 1.20920729637146,
+            "min_determinant": 0.6236644983291626,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0,
+            "max_abs_change": 10.503250122070312,
+            "p99_abs_change": 3.9504554748535163,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                161.0,
+                155.0,
+                149.0
+              ],
+              "xy": [
+                0.8256450351837373,
+                0.22253129346314326
+              ],
+              "output_rgb": [
+                155.8084259033203,
+                155.2696990966797,
+                148.17015075683594
+              ],
+              "channel": 0,
+              "jacobian": [
+                [
+                  0.8092041015625,
+                  -0.103546142578125,
+                  -0.020172119140625
+                ],
+                [
+                  0.00616455078125,
+                  0.9888916015625,
+                  -0.01318359375
+                ],
+                [
+                  -0.0577392578125,
+                  -0.0323486328125,
+                  0.988433837890625
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                185.0,
+                92.0,
+                18.0
+              ],
+              "xy": [
+                0.5723221266614542,
+                0.5674547983310153
+              ],
+              "output_rgb": [
+                190.21095275878906,
+                99.17571258544922,
+                20.405132293701172
+              ],
+              "jacobian": [
+                [
+                  0.85693359375,
+                  -0.137237548828125,
+                  -0.05889892578125
+                ],
+                [
+                  -0.12750244140625,
+                  0.814849853515625,
+                  -0.0811614990234375
+                ],
+                [
+                  -0.031520843505859375,
+                  -0.060394287109375,
+                  1.0855903625488281
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.8092041015625,
+                "min_singular": 0.6847600037538865,
+                "min_determinant": 0.6236644812743888
+              },
+              "0.85": {
+                "min_own_derivative": 0.837823486328125,
+                "min_singular": 0.7320210407792356,
+                "min_determinant": 0.6727482058205956
+              },
+              "0.75": {
+                "min_own_derivative": 0.856903076171875,
+                "min_singular": 0.7635337675657345,
+                "min_determinant": 0.7068576285034182
+              },
+              "0.5": {
+                "min_own_derivative": 0.90460205078125,
+                "min_singular": 0.8423331961365113,
+                "min_determinant": 0.7971196228331524
+              }
+            }
+          },
+          "effective_half_strength": {
+            "min_own_derivative": 0.90460205078125,
+            "min_singular": 0.8423331961365113,
+            "min_determinant": 0.7971196228331524
+          },
+          "effective_max_change": 5.251625061035156,
+          "effective_p99_change": 1.9752277374267582,
+          "effective_shadow_median_luma_gain": 0.9598173884051412,
+          "fraction_confidence_lt_0.1": 0.0
+        },
+        "right": {
+          "source_frame": 1167,
+          "full_strength": {
+            "min_own_derivative": 0.5453827381134033,
+            "min_singular": 0.5453070998191833,
+            "max_singular": 1.4560465812683105,
+            "min_determinant": 0.5555669069290161,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0,
+            "max_abs_change": 15.28277587890625,
+            "p99_abs_change": 3.8846516799926833,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                143.0,
+                77.0,
+                4.0
+              ],
+              "xy": [
+                0.7068021892103206,
+                0.25034770514603616
+              ],
+              "output_rgb": [
+                137.90711975097656,
+                75.828125,
+                2.126688241958618
+              ],
+              "channel": 2,
+              "jacobian": [
+                [
+                  1.009857177734375,
+                  0.007354736328125,
+                  0.000518798828125
+                ],
+                [
+                  0.011749267578125,
+                  1.0088348388671875,
+                  -0.003936767578125
+                ],
+                [
+                  -0.011470794677734375,
+                  -0.004231452941894531,
+                  0.5453827381134033
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                143.0,
+                77.0,
+                4.0
+              ],
+              "xy": [
+                0.7068021892103206,
+                0.25034770514603616
+              ],
+              "output_rgb": [
+                137.90711975097656,
+                75.828125,
+                2.126688241958618
+              ],
+              "jacobian": [
+                [
+                  1.009857177734375,
+                  0.007354736328125,
+                  0.000518798828125
+                ],
+                [
+                  0.011749267578125,
+                  1.0088348388671875,
+                  -0.003936767578125
+                ],
+                [
+                  -0.011470794677734375,
+                  -0.004231452941894531,
+                  0.5453827381134033
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.5453827381134033,
+                "min_singular": 0.5453071236084946,
+                "min_determinant": 0.5555668962862665
+              },
+              "0.85": {
+                "min_own_derivative": 0.6135753273963929,
+                "min_singular": 0.6135074442151639,
+                "min_determinant": 0.6233166258900338
+              },
+              "0.75": {
+                "min_own_derivative": 0.6590370535850525,
+                "min_singular": 0.6589751741840404,
+                "min_determinant": 0.6682704113669428
+              },
+              "0.5": {
+                "min_own_derivative": 0.7726913690567017,
+                "min_singular": 0.7726471010001923,
+                "min_determinant": 0.7799104267030741
+              }
+            }
+          },
+          "effective_half_strength": {
+            "min_own_derivative": 0.7726913690567017,
+            "min_singular": 0.7726471010001923,
+            "min_determinant": 0.7799104267030741
+          },
+          "effective_max_change": 7.641387939453125,
+          "effective_p99_change": 1.9423258399963417,
+          "effective_shadow_median_luma_gain": 1.0429098824524843,
+          "fraction_confidence_lt_0.1": 0.0
+        }
+      }
+    },
+    {
+      "frame": 1444,
+      "sides": {
+        "left": {
+          "source_frame": 1359,
+          "full_strength": {
+            "min_own_derivative": 0.30230712890625,
+            "min_singular": 0.30230265855789185,
+            "max_singular": 2.1672539710998535,
+            "min_determinant": 0.19036413729190826,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0,
+            "max_abs_change": 33.1507568359375,
+            "p99_abs_change": 5.727669754028321,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                235.0,
+                117.0,
+                21.0
+              ],
+              "xy": [
+                0.0875684128225176,
+                0.9680111265646731
+              ],
+              "output_rgb": [
+                250.36712646484375,
+                121.97430419921875,
+                12.292905807495117
+              ],
+              "channel": 0,
+              "jacobian": [
+                [
+                  0.30230712890625,
+                  0.00152587890625,
+                  -0.0023193359375
+                ],
+                [
+                  9.1552734375e-05,
+                  1.0070037841796875,
+                  0.002532958984375
+                ],
+                [
+                  -0.000244140625,
+                  0.000438690185546875,
+                  0.6253280639648438
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                235.0,
+                117.0,
+                21.0
+              ],
+              "xy": [
+                0.0875684128225176,
+                0.9680111265646731
+              ],
+              "output_rgb": [
+                250.36712646484375,
+                121.97430419921875,
+                12.292905807495117
+              ],
+              "jacobian": [
+                [
+                  0.30230712890625,
+                  0.00152587890625,
+                  -0.0023193359375
+                ],
+                [
+                  9.1552734375e-05,
+                  1.0070037841796875,
+                  0.002532958984375
+                ],
+                [
+                  -0.000244140625,
+                  0.000438690185546875,
+                  0.6253280639648438
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.30230712890625,
+                "min_singular": 0.3023026548150026,
+                "min_determinant": 0.19036414040584757
+              },
+              "0.85": {
+                "min_own_derivative": 0.4069610595703125,
+                "min_singular": 0.40695691333056233,
+                "min_determinant": 0.2790060555819008
+              },
+              "0.75": {
+                "min_own_derivative": 0.4767303466796875,
+                "min_singular": 0.47672652719681524,
+                "min_determinant": 0.3445670609184353
+              },
+              "0.5": {
+                "min_own_derivative": 0.651153564453125,
+                "min_singular": 0.6511508119354971,
+                "min_determinant": 0.531021822691379
+              }
+            }
+          },
+          "effective_half_strength": {
+            "min_own_derivative": 0.651153564453125,
+            "min_singular": 0.6511508119354971,
+            "min_determinant": 0.531021822691379
+          },
+          "effective_max_change": 16.57537841796875,
+          "effective_p99_change": 2.8638348770141606,
+          "effective_shadow_median_luma_gain": 0.9821369788983462,
+          "fraction_confidence_lt_0.1": 0.0008854166666666666
+        },
+        "right": {
+          "source_frame": 1528,
+          "full_strength": {
+            "min_own_derivative": 0.10247802734375,
+            "min_singular": 0.0348292738199234,
+            "max_singular": 1.681274175643921,
+            "min_determinant": -0.17516839504241943,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 3.472222222222222e-05,
+            "max_abs_change": 30.0633544921875,
+            "p99_abs_change": 4.62278991699219,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                205.0,
+                138.0,
+                87.0
+              ],
+              "xy": [
+                0.14698983580922595,
+                0.9123783031988874
+              ],
+              "output_rgb": [
+                194.66995239257812,
+                129.4699249267578,
+                105.05357360839844
+              ],
+              "channel": 2,
+              "jacobian": [
+                [
+                  0.87744140625,
+                  0.055023193359375,
+                  0.472625732421875
+                ],
+                [
+                  -0.062347412109375,
+                  1.06353759765625,
+                  0.090087890625
+                ],
+                [
+                  0.565338134765625,
+                  -0.094146728515625,
+                  0.10247802734375
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                190.0,
+                133.0,
+                83.0
+              ],
+              "xy": [
+                0.1313526192337764,
+                0.9179415855354659
+              ],
+              "output_rgb": [
+                179.8091583251953,
+                125.31494903564453,
+                97.52867126464844
+              ],
+              "jacobian": [
+                [
+                  0.75640869140625,
+                  0.0316162109375,
+                  0.453857421875
+                ],
+                [
+                  -0.1104888916015625,
+                  1.0354766845703125,
+                  0.0722198486328125
+                ],
+                [
+                  0.536346435546875,
+                  -0.059478759765625,
+                  0.26171875
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.10247802734375,
+                "min_singular": 0.034829274122021935,
+                "min_determinant": -0.17516838899334175
+              },
+              "0.85": {
+                "min_own_derivative": 0.2371063232421875,
+                "min_singular": 0.02518172594801522,
+                "min_determinant": 0.029906013027376135
+              },
+              "0.75": {
+                "min_own_derivative": 0.3268585205078125,
+                "min_singular": 0.13827293457703374,
+                "min_determinant": 0.160815458881101
+              },
+              "0.5": {
+                "min_own_derivative": 0.551239013671875,
+                "min_singular": 0.4235271469300992,
+                "min_determinant": 0.4681383688579252
+              }
+            }
+          },
+          "effective_half_strength": {
+            "min_own_derivative": 0.551239013671875,
+            "min_singular": 0.4235271469300992,
+            "min_determinant": 0.4681383688579252
+          },
+          "effective_max_change": 15.03167724609375,
+          "effective_p99_change": 2.311394958496095,
+          "effective_shadow_median_luma_gain": 1.0114421629050103,
+          "fraction_confidence_lt_0.1": 0.0
+        }
+      }
+    },
+    {
+      "frame": 1805,
+      "sides": {
+        "left": {
+          "source_frame": 1720,
+          "full_strength": {
+            "min_own_derivative": 0.8275198936462402,
+            "min_singular": 0.8275271058082581,
+            "max_singular": 1.1801236867904663,
+            "min_determinant": 0.798939049243927,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0,
+            "max_abs_change": 6.7322235107421875,
+            "p99_abs_change": 4.611694793701172,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                3.0,
+                57.0,
+                153.0
+              ],
+              "xy": [
+                0.5285379202501954,
+                0.07788595271210014
+              ],
+              "output_rgb": [
+                2.4668972492218018,
+                57.801353454589844,
+                153.56568908691406
+              ],
+              "channel": 0,
+              "jacobian": [
+                [
+                  0.8275198936462402,
+                  -0.0007190704345703125,
+                  -0.0055217742919921875
+                ],
+                [
+                  -0.00022125244140625,
+                  1.0089569091796875,
+                  0.00644683837890625
+                ],
+                [
+                  0.003875732421875,
+                  0.006134033203125,
+                  1.009063720703125
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                3.0,
+                57.0,
+                153.0
+              ],
+              "xy": [
+                0.5285379202501954,
+                0.07788595271210014
+              ],
+              "output_rgb": [
+                2.4668972492218018,
+                57.801353454589844,
+                153.56568908691406
+              ],
+              "jacobian": [
+                [
+                  0.8275198936462402,
+                  -0.0007190704345703125,
+                  -0.0055217742919921875
+                ],
+                [
+                  -0.00022125244140625,
+                  1.0089569091796875,
+                  0.00644683837890625
+                ],
+                [
+                  0.003875732421875,
+                  0.006134033203125,
+                  1.009063720703125
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.8275198936462402,
+                "min_singular": 0.8275271353189886,
+                "min_determinant": 0.79893904554324
+              },
+              "0.85": {
+                "min_own_derivative": 0.8533919095993042,
+                "min_singular": 0.853396414604206,
+                "min_determinant": 0.8272349584932605
+              },
+              "0.75": {
+                "min_own_derivative": 0.8706399202346802,
+                "min_singular": 0.8706429454430492,
+                "min_determinant": 0.846457602681973
+              },
+              "0.5": {
+                "min_own_derivative": 0.9137599468231201,
+                "min_singular": 0.9137604276392755,
+                "min_determinant": 0.8957851573493573
+              }
+            }
+          },
+          "effective_half_strength": {
+            "min_own_derivative": 0.9137599468231201,
+            "min_singular": 0.9137604276392755,
+            "min_determinant": 0.8957851573493573
+          },
+          "effective_max_change": 3.3661117553710938,
+          "effective_p99_change": 2.305847396850586,
+          "effective_shadow_median_luma_gain": 1.0200028160548527,
+          "fraction_confidence_lt_0.1": 0.0
+        },
+        "right": {
+          "source_frame": 1889,
+          "full_strength": {
+            "min_own_derivative": 0.8585205078125,
+            "min_singular": 0.8481221199035645,
+            "max_singular": 1.180643081665039,
+            "min_determinant": 0.6851781606674194,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0,
+            "max_abs_change": 7.3159332275390625,
+            "p99_abs_change": 3.665970954895024,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                254.0,
+                243.0,
+                255.0
+              ],
+              "xy": [
+                0.5691946833463644,
+                0.5785813630041725
+              ],
+              "output_rgb": [
+                254.14208984375,
+                243.9663543701172,
+                255.0
+              ],
+              "channel": 0,
+              "jacobian": [
+                [
+                  0.8585205078125,
+                  9.1552734375e-05,
+                  0.000152587890625
+                ],
+                [
+                  0.000640869140625,
+                  0.9246826171875,
+                  0.001495361328125
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.86309814453125
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                89.0,
+                54.0,
+                30.0
+              ],
+              "xy": [
+                0.0,
+                0.5618915159944368
+              ],
+              "output_rgb": [
+                82.8872299194336,
+                53.05280685424805,
+                28.5883846282959
+              ],
+              "jacobian": [
+                [
+                  0.8680572509765625,
+                  -0.02093505859375,
+                  -0.031494140625
+                ],
+                [
+                  -0.04329681396484375,
+                  0.9934539794921875,
+                  -0.05472564697265625
+                ],
+                [
+                  -0.02435302734375,
+                  0.011501312255859375,
+                  0.9320106506347656
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.8585205078125,
+                "min_singular": 0.8481221132685184,
+                "min_determinant": 0.6851781707107989
+              },
+              "0.85": {
+                "min_own_derivative": 0.879742431640625,
+                "min_singular": 0.8708582865145507,
+                "min_determinant": 0.7276027376177693
+              },
+              "0.75": {
+                "min_own_derivative": 0.893890380859375,
+                "min_singular": 0.8860251757195409,
+                "min_determinant": 0.7567993527651984
+              },
+              "0.5": {
+                "min_own_derivative": 0.92926025390625,
+                "min_singular": 0.9239741889977606,
+                "min_determinant": 0.8330522100189697
+              }
+            }
+          },
+          "effective_half_strength": {
+            "min_own_derivative": 0.92926025390625,
+            "min_singular": 0.9239741889977606,
+            "min_determinant": 0.8330522100189697
+          },
+          "effective_max_change": 3.6579666137695312,
+          "effective_p99_change": 1.832985477447512,
+          "effective_shadow_median_luma_gain": 1.0040358560408584,
+          "fraction_confidence_lt_0.1": 8.680555555555556e-05
+        }
+      }
+    },
+    {
+      "frame": 2166,
+      "sides": {
+        "left": {
+          "source_frame": 2081,
+          "full_strength": {
+            "min_own_derivative": 0.18548202514648438,
+            "min_singular": 0.1854708343744278,
+            "max_singular": 1.8117231130599976,
+            "min_determinant": 0.04077904671430588,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0,
+            "max_abs_change": 33.41391372680664,
+            "p99_abs_change": 20.61001197814948,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                0.0,
+                8.0,
+                13.0
+              ],
+              "xy": [
+                0.012509773260359656,
+                0.027816411682892908
+              ],
+              "output_rgb": [
+                0.0,
+                1.7936768531799316,
+                10.628280639648438
+              ],
+              "channel": 0,
+              "jacobian": [
+                [
+                  0.18548202514648438,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0019731521606445312,
+                  0.2574634552001953,
+                  0.022139549255371094
+                ],
+                [
+                  0.0007171630859375,
+                  0.007152557373046875,
+                  0.8545398712158203
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                0.0,
+                8.0,
+                13.0
+              ],
+              "xy": [
+                0.012509773260359656,
+                0.027816411682892908
+              ],
+              "output_rgb": [
+                0.0,
+                1.7936768531799316,
+                10.628280639648438
+              ],
+              "jacobian": [
+                [
+                  0.18548202514648438,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0019731521606445312,
+                  0.2574634552001953,
+                  0.022139549255371094
+                ],
+                [
+                  0.0007171630859375,
+                  0.007152557373046875,
+                  0.8545398712158203
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.18548202514648438,
+                "min_singular": 0.1854708336629598,
+                "min_determinant": 0.040779045554349684
+              },
+              "0.85": {
+                "min_own_derivative": 0.3076597213745117,
+                "min_singular": 0.3076493532568865,
+                "min_determinant": 0.09941262508800901
+              },
+              "0.75": {
+                "min_own_derivative": 0.3891115188598633,
+                "min_singular": 0.38910209478978697,
+                "min_determinant": 0.1535701538486563
+              },
+              "0.5": {
+                "min_own_derivative": 0.5927410125732422,
+                "min_singular": 0.5927344666641332,
+                "min_determinant": 0.34554693244042656
+              }
+            }
+          },
+          "effective_half_strength": {
+            "min_own_derivative": 0.5927410125732422,
+            "min_singular": 0.5927344666641332,
+            "min_determinant": 0.34554693244042656
+          },
+          "effective_max_change": 16.70695686340332,
+          "effective_p99_change": 10.30500598907474,
+          "effective_shadow_median_luma_gain": 0.8621378613677692,
+          "fraction_confidence_lt_0.1": 0.002951388888888889
+        },
+        "right": {
+          "source_frame": 2250,
+          "full_strength": {
+            "min_own_derivative": 0.6675872802734375,
+            "min_singular": 0.5344827771186829,
+            "max_singular": 1.658238410949707,
+            "min_determinant": 0.6027469038963318,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0,
+            "max_abs_change": 17.919662475585938,
+            "p99_abs_change": 6.746644706726083,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                105.0,
+                105.0,
+                135.0
+              ],
+              "xy": [
+                0.800625488663018,
+                0.022253129346314324
+              ],
+              "output_rgb": [
+                99.58968353271484,
+                104.31283569335938,
+                135.53770446777344
+              ],
+              "channel": 0,
+              "jacobian": [
+                [
+                  0.6675872802734375,
+                  -0.2531890869140625,
+                  -0.1307525634765625
+                ],
+                [
+                  -0.018646240234375,
+                  0.9852752685546875,
+                  -0.011474609375
+                ],
+                [
+                  0.002288818359375,
+                  -0.00030517578125,
+                  1.006103515625
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                69.0,
+                49.0,
+                40.0
+              ],
+              "xy": [
+                0.23455824863174354,
+                0.07232267037552156
+              ],
+              "output_rgb": [
+                79.62101745605469,
+                58.62901306152344,
+                41.66407775878906
+              ],
+              "jacobian": [
+                [
+                  0.78338623046875,
+                  -0.24139404296875,
+                  -0.1255950927734375
+                ],
+                [
+                  -0.260711669921875,
+                  0.89666748046875,
+                  -0.23339080810546875
+                ],
+                [
+                  -0.0451812744140625,
+                  -0.04354095458984375,
+                  0.9691390991210938
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.6675872802734375,
+                "min_singular": 0.5344827836162245,
+                "min_determinant": 0.602746901382929
+              },
+              "0.85": {
+                "min_own_derivative": 0.7174491882324219,
+                "min_singular": 0.6034261305620239,
+                "min_determinant": 0.6682493648767559
+              },
+              "0.75": {
+                "min_own_derivative": 0.7506904602050781,
+                "min_singular": 0.6495928553026056,
+                "min_determinant": 0.7107592406765815
+              },
+              "0.5": {
+                "min_own_derivative": 0.8337936401367188,
+                "min_singular": 0.7656449204937247,
+                "min_determinant": 0.8129764449827787
+              }
+            }
+          },
+          "effective_half_strength": {
+            "min_own_derivative": 0.8337936401367188,
+            "min_singular": 0.7656449204937247,
+            "min_determinant": 0.8129764449827787
+          },
+          "effective_max_change": 8.959831237792969,
+          "effective_p99_change": 3.3733223533630414,
+          "effective_shadow_median_luma_gain": 1.0935090975820427,
+          "fraction_confidence_lt_0.1": 0.03310763888888889
+        }
+      }
+    },
+    {
+      "frame": 2527,
+      "sides": {
+        "left": {
+          "source_frame": 2442,
+          "full_strength": {
+            "min_own_derivative": 0.6856796145439148,
+            "min_singular": 0.685677170753479,
+            "max_singular": 1.4853366613388062,
+            "min_determinant": 0.5522774457931519,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0,
+            "max_abs_change": 13.4281005859375,
+            "p99_abs_change": 4.656347351074224,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                2.0,
+                0.0,
+                23.0
+              ],
+              "xy": [
+                0.6755277560594214,
+                0.0890125173852573
+              ],
+              "output_rgb": [
+                1.722459316253662,
+                0.0,
+                21.123451232910156
+              ],
+              "channel": 1,
+              "jacobian": [
+                [
+                  0.8645956516265869,
+                  0.0013494491577148438,
+                  0.00039315223693847656
+                ],
+                [
+                  0.0,
+                  0.6856796145439148,
+                  0.0
+                ],
+                [
+                  -0.00597381591796875,
+                  -0.00049591064453125,
+                  0.9315834045410156
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                2.0,
+                0.0,
+                23.0
+              ],
+              "xy": [
+                0.6755277560594214,
+                0.0890125173852573
+              ],
+              "output_rgb": [
+                1.722459316253662,
+                0.0,
+                21.123451232910156
+              ],
+              "jacobian": [
+                [
+                  0.8645956516265869,
+                  0.0013494491577148438,
+                  0.00039315223693847656
+                ],
+                [
+                  0.0,
+                  0.6856796145439148,
+                  0.0
+                ],
+                [
+                  -0.00597381591796875,
+                  -0.00049591064453125,
+                  0.9315834045410156
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.6856796145439148,
+                "min_singular": 0.6856771711995894,
+                "min_determinant": 0.5522774292257672
+              },
+              "0.85": {
+                "min_own_derivative": 0.7328276723623276,
+                "min_singular": 0.7328255436666423,
+                "min_determinant": 0.6107730731500468
+              },
+              "0.75": {
+                "min_own_derivative": 0.7642597109079361,
+                "min_singular": 0.7642578041626519,
+                "min_determinant": 0.6514141351720103
+              },
+              "0.5": {
+                "min_own_derivative": 0.8428398072719574,
+                "min_singular": 0.8428384927558253,
+                "min_determinant": 0.7588980965168605
+              }
+            }
+          },
+          "effective_half_strength": {
+            "min_own_derivative": 0.8428398072719574,
+            "min_singular": 0.8428384927558253,
+            "min_determinant": 0.7588980965168605
+          },
+          "effective_max_change": 6.71405029296875,
+          "effective_p99_change": 2.328173675537112,
+          "effective_shadow_median_luma_gain": 1.0270970257568628,
+          "fraction_confidence_lt_0.1": 0.00012152777777777777
+        },
+        "right": {
+          "source_frame": 2611,
+          "full_strength": {
+            "min_own_derivative": 0.10881257057189941,
+            "min_singular": 0.10870198160409927,
+            "max_singular": 1.6264406442642212,
+            "min_determinant": 0.003087749006226659,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0,
+            "max_abs_change": 27.580154418945312,
+            "p99_abs_change": 8.182258834838875,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                13.0,
+                4.0,
+                0.0
+              ],
+              "xy": [
+                0.2689601250977326,
+                0.9179415855354659
+              ],
+              "output_rgb": [
+                2.140361785888672,
+                0.553095817565918,
+                0.0
+              ],
+              "channel": 2,
+              "jacobian": [
+                [
+                  0.2410907745361328,
+                  0.019472122192382812,
+                  0.009031295776367188
+                ],
+                [
+                  0.010593414306640625,
+                  0.15853595733642578,
+                  0.003009796142578125
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.10881257057189941
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                13.0,
+                4.0,
+                0.0
+              ],
+              "xy": [
+                0.2689601250977326,
+                0.9179415855354659
+              ],
+              "output_rgb": [
+                2.140361785888672,
+                0.553095817565918,
+                0.0
+              ],
+              "jacobian": [
+                [
+                  0.2410907745361328,
+                  0.019472122192382812,
+                  0.009031295776367188
+                ],
+                [
+                  0.010593414306640625,
+                  0.15853595733642578,
+                  0.003009796142578125
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.10881257057189941
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.10881257057189941,
+                "min_singular": 0.10870198103488363,
+                "min_determinant": 0.0030877489197713706
+              },
+              "0.85": {
+                "min_own_derivative": 0.24249068498611448,
+                "min_singular": 0.24236940931955642,
+                "min_determinant": 0.021068978247472513
+              },
+              "0.75": {
+                "min_own_derivative": 0.33160942792892456,
+                "min_singular": 0.3314950775793217,
+                "min_determinant": 0.04742657579502003
+              },
+              "0.5": {
+                "min_own_derivative": 0.5544062852859497,
+                "min_singular": 0.5543238329655459,
+                "min_determinant": 0.1902745399622166
+              }
+            }
+          },
+          "effective_half_strength": {
+            "min_own_derivative": 0.5544062852859497,
+            "min_singular": 0.5543238329655459,
+            "min_determinant": 0.1902745399622166
+          },
+          "effective_max_change": 13.790077209472656,
+          "effective_p99_change": 4.091129417419437,
+          "effective_shadow_median_luma_gain": 0.7705275572317184,
+          "fraction_confidence_lt_0.1": 0.0008159722222222223
+        }
+      }
+    },
+    {
+      "frame": 2888,
+      "sides": {
+        "left": {
+          "source_frame": 2803,
+          "full_strength": {
+            "min_own_derivative": 0.4884033203125,
+            "min_singular": 0.4881434142589569,
+            "max_singular": 1.2449370622634888,
+            "min_determinant": 0.46385249495506287,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0,
+            "max_abs_change": 7.2396392822265625,
+            "p99_abs_change": 3.4919986724853533,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                255.0,
+                194.0,
+                124.0
+              ],
+              "xy": [
+                0.6286161063330727,
+                0.5897079276773296
+              ],
+              "output_rgb": [
+                255.0,
+                198.27670288085938,
+                127.11389923095703
+              ],
+              "channel": 0,
+              "jacobian": [
+                [
+                  0.4884033203125,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.018463134765625,
+                  0.96063232421875,
+                  0.00286865234375
+                ],
+                [
+                  0.0210723876953125,
+                  0.0072174072265625,
+                  1.0008544921875
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                255.0,
+                194.0,
+                124.0
+              ],
+              "xy": [
+                0.6286161063330727,
+                0.5897079276773296
+              ],
+              "output_rgb": [
+                255.0,
+                198.27670288085938,
+                127.11389923095703
+              ],
+              "jacobian": [
+                [
+                  0.4884033203125,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.018463134765625,
+                  0.96063232421875,
+                  0.00286865234375
+                ],
+                [
+                  0.0210723876953125,
+                  0.0072174072265625,
+                  1.0008544921875
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.4884033203125,
+                "min_singular": 0.488143407114675,
+                "min_determinant": 0.46385250629020897
+              },
+              "0.85": {
+                "min_own_derivative": 0.565142822265625,
+                "min_singular": 0.5649001079432964,
+                "min_determinant": 0.538988564833559
+              },
+              "0.75": {
+                "min_own_derivative": 0.616302490234375,
+                "min_singular": 0.6160765579969033,
+                "min_determinant": 0.5901117287666064
+              },
+              "0.5": {
+                "min_own_derivative": 0.74420166015625,
+                "min_singular": 0.7440334864446058,
+                "min_determinant": 0.7215426345554903
+              }
+            }
+          },
+          "effective_half_strength": {
+            "min_own_derivative": 0.74420166015625,
+            "min_singular": 0.7440334864446058,
+            "min_determinant": 0.7215426345554903
+          },
+          "effective_max_change": 3.6198196411132812,
+          "effective_p99_change": 1.7459993362426767,
+          "effective_shadow_median_luma_gain": 0.9626718239434935,
+          "fraction_confidence_lt_0.1": 0.00421875
+        },
+        "right": {
+          "source_frame": 2972,
+          "full_strength": {
+            "min_own_derivative": 0.558013916015625,
+            "min_singular": 0.5580784678459167,
+            "max_singular": 1.4789451360702515,
+            "min_determinant": 0.5417931079864502,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0,
+            "max_abs_change": 21.943161010742188,
+            "p99_abs_change": 12.772642517089857,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                172.0,
+                202.0,
+                242.0
+              ],
+              "xy": [
+                0.8600469116497264,
+                0.03894297635605007
+              ],
+              "output_rgb": [
+                172.72317504882812,
+                201.7615966796875,
+                248.1642303466797
+              ],
+              "channel": 2,
+              "jacobian": [
+                [
+                  0.975433349609375,
+                  -0.00421142578125,
+                  0.008392333984375
+                ],
+                [
+                  -0.017333984375,
+                  0.9952392578125,
+                  0.00146484375
+                ],
+                [
+                  -0.01373291015625,
+                  -0.003143310546875,
+                  0.558013916015625
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                172.0,
+                202.0,
+                242.0
+              ],
+              "xy": [
+                0.8600469116497264,
+                0.03894297635605007
+              ],
+              "output_rgb": [
+                172.72317504882812,
+                201.7615966796875,
+                248.1642303466797
+              ],
+              "jacobian": [
+                [
+                  0.975433349609375,
+                  -0.00421142578125,
+                  0.008392333984375
+                ],
+                [
+                  -0.017333984375,
+                  0.9952392578125,
+                  0.00146484375
+                ],
+                [
+                  -0.01373291015625,
+                  -0.003143310546875,
+                  0.558013916015625
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.558013916015625,
+                "min_singular": 0.5580784664385563,
+                "min_determinant": 0.5417930859861144
+              },
+              "0.85": {
+                "min_own_derivative": 0.6243118286132813,
+                "min_singular": 0.6243533913312518,
+                "min_determinant": 0.6088551547886769
+              },
+              "0.75": {
+                "min_own_derivative": 0.6685104370117188,
+                "min_singular": 0.6685398412527078,
+                "min_determinant": 0.6538900828336428
+              },
+              "0.5": {
+                "min_own_derivative": 0.7790069580078125,
+                "min_singular": 0.7790155747226755,
+                "min_determinant": 0.7676223457531677
+              }
+            }
+          },
+          "effective_half_strength": {
+            "min_own_derivative": 0.7790069580078125,
+            "min_singular": 0.7790155747226755,
+            "min_determinant": 0.7676223457531677
+          },
+          "effective_max_change": 10.971580505371094,
+          "effective_p99_change": 6.386321258544928,
+          "effective_shadow_median_luma_gain": 1.0524392641771034,
+          "fraction_confidence_lt_0.1": 0.001267361111111111
+        }
+      }
+    },
+    {
+      "frame": 3240,
+      "sides": {
+        "left": {
+          "source_frame": 3155,
+          "full_strength": {
+            "min_own_derivative": 0.2837788164615631,
+            "min_singular": 0.2834145724773407,
+            "max_singular": 1.3739378452301025,
+            "min_determinant": 0.2500779330730438,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0,
+            "max_abs_change": 19.80323028564453,
+            "p99_abs_change": 4.996932334899916,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                196.0,
+                81.0,
+                0.0
+              ],
+              "xy": [
+                0.72869429241595,
+                0.7510431154381085
+              ],
+              "output_rgb": [
+                196.88084411621094,
+                80.15768432617188,
+                0.0
+              ],
+              "channel": 2,
+              "jacobian": [
+                [
+                  0.986907958984375,
+                  -0.011749267578125,
+                  0.0162353515625
+                ],
+                [
+                  3.0517578125e-05,
+                  0.97601318359375,
+                  0.0443572998046875
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.2837788164615631
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                196.0,
+                81.0,
+                0.0
+              ],
+              "xy": [
+                0.72869429241595,
+                0.7510431154381085
+              ],
+              "output_rgb": [
+                196.88084411621094,
+                80.15768432617188,
+                0.0
+              ],
+              "jacobian": [
+                [
+                  0.986907958984375,
+                  -0.011749267578125,
+                  0.0162353515625
+                ],
+                [
+                  3.0517578125e-05,
+                  0.97601318359375,
+                  0.0443572998046875
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.2837788164615631
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.2837788164615631,
+                "min_singular": 0.28341456032520074,
+                "min_determinant": 0.25007792216997426
+              },
+              "0.85": {
+                "min_own_derivative": 0.39121199399232864,
+                "min_singular": 0.3908197917704442,
+                "min_determinant": 0.3257493179600607
+              },
+              "0.75": {
+                "min_own_derivative": 0.46283411234617233,
+                "min_singular": 0.4624457104362903,
+                "min_determinant": 0.38282036092712984
+              },
+              "0.5": {
+                "min_own_derivative": 0.6418894082307816,
+                "min_singular": 0.641571152776773,
+                "min_determinant": 0.5500696623481408
+              }
+            }
+          },
+          "effective_half_strength": {
+            "min_own_derivative": 0.6418894082307816,
+            "min_singular": 0.641571152776773,
+            "min_determinant": 0.5500696623481408
+          },
+          "effective_max_change": 9.901615142822266,
+          "effective_p99_change": 2.498466167449958,
+          "effective_shadow_median_luma_gain": 0.9485982640860491,
+          "fraction_confidence_lt_0.1": 0.0009375
+        },
+        "right": {
+          "source_frame": 3324,
+          "full_strength": {
+            "min_own_derivative": 0.86553955078125,
+            "min_singular": 0.8507784605026245,
+            "max_singular": 1.4418971538543701,
+            "min_determinant": 0.8503130078315735,
+            "negative_own_derivative_fraction": 0.0,
+            "nonpositive_determinant_fraction": 0.0,
+            "max_abs_change": 6.699653625488281,
+            "p99_abs_change": 3.7053891563415546,
+            "clip_fraction": 0.0,
+            "worst_own_derivative": {
+              "input_rgb": [
+                98.0,
+                150.0,
+                205.0
+              ],
+              "xy": [
+                0.5723221266614542,
+                0.5563282336578581
+              ],
+              "output_rgb": [
+                102.66094207763672,
+                151.70835876464844,
+                205.85057067871094
+              ],
+              "channel": 0,
+              "jacobian": [
+                [
+                  0.86553955078125,
+                  -0.01043701171875,
+                  0.091461181640625
+                ],
+                [
+                  -0.05291748046875,
+                  0.989776611328125,
+                  0.029754638671875
+                ],
+                [
+                  -0.02099609375,
+                  0.000335693359375,
+                  1.004241943359375
+                ]
+              ]
+            },
+            "worst_singular": {
+              "input_rgb": [
+                98.0,
+                150.0,
+                205.0
+              ],
+              "xy": [
+                0.5723221266614542,
+                0.5563282336578581
+              ],
+              "output_rgb": [
+                102.66094207763672,
+                151.70835876464844,
+                205.85057067871094
+              ],
+              "jacobian": [
+                [
+                  0.86553955078125,
+                  -0.01043701171875,
+                  0.091461181640625
+                ],
+                [
+                  -0.05291748046875,
+                  0.989776611328125,
+                  0.029754638671875
+                ],
+                [
+                  -0.02099609375,
+                  0.000335693359375,
+                  1.004241943359375
+                ]
+              ]
+            },
+            "attenuation_diagnostics": {
+              "1.0": {
+                "min_own_derivative": 0.86553955078125,
+                "min_singular": 0.8507784408877113,
+                "min_determinant": 0.8503130190444974
+              },
+              "0.85": {
+                "min_own_derivative": 0.8857086181640625,
+                "min_singular": 0.8728860270319088,
+                "min_determinant": 0.872061260373022
+              },
+              "0.75": {
+                "min_own_derivative": 0.8991546630859375,
+                "min_singular": 0.8876812433186425,
+                "min_determinant": 0.8866990127527854
+              },
+              "0.5": {
+                "min_own_derivative": 0.932769775390625,
+                "min_singular": 0.9248615281294786,
+                "min_determinant": 0.9237779328442162
+              }
+            }
+          },
+          "effective_half_strength": {
+            "min_own_derivative": 0.932769775390625,
+            "min_singular": 0.9248615281294786,
+            "min_determinant": 0.9237779328442162
+          },
+          "effective_max_change": 3.3498268127441406,
+          "effective_p99_change": 1.8526945781707773,
+          "effective_shadow_median_luma_gain": 1.0346234967689953,
+          "fraction_confidence_lt_0.1": 0.0
+        }
+      }
+    }
+  ]
+}

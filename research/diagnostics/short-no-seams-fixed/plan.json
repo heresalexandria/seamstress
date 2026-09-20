@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "source": {
+    "path": "research/diagnostics/short-no-seams.mp4",
+    "width": 160,
+    "height": 90,
+    "fps": 24.0,
+    "fps_fraction": "24/1",
+    "frame_count": 24,
+    "frame_count_estimated": false,
+    "duration": 1.0,
+    "has_audio": false,
+    "codec_name": "h264",
+    "pix_fmt": "yuv420p",
+    "color_space": null,
+    "color_transfer": null,
+    "color_primaries": null,
+    "color_range": null
+  },
+  "source_sha256": "cb7a86b5861025539961b8ad41994b6cbb7c87507fbac32a7db59aedc4d0ab8c",
+  "detection": "automatic candidates; inspect contact sheet",
+  "config": {
+    "flow_width": 160,
+    "max_displacement": 0.045,
+    "color_spatial_sigma": 24,
+    "local_color_strength": 0.8,
+    "geometry_strength": 1.0,
+    "color_strength": 1.0,
+    "crop_fraction": 0.0,
+    "max_crop_fraction": 0.04
+  },
+  "seams": [],
+  "notes": [
+    "Frame indices are zero based, and identify the first frame after the edit.",
+    "Candidate detection is heuristic, not proof of an edit.",
+    "No image-generation service is called. Reproduction uses only local deterministic processing.",
+    "Output quality requires visual review; numerical improvement is not perceptual certification."
+  ]
+}

@@ -1,0 +1,1157 @@
+[
+  {
+    "seam": 361,
+    "left": 357,
+    "right": 367,
+    "intervals": 10,
+    "incoming": {
+      "scale_pct_per_frame": 0.2666926089080812,
+      "dx_per_frame": 0.46850531514722604,
+      "dy_per_frame": 0.06806519893844865,
+      "nonrigid_p90": 1.7849630555210902,
+      "inlier_fraction": 0.8992042440318302,
+      "point_count": 377,
+      "motion_p50_per_frame": 0.4541257619857788
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.0009577158889273463,
+      "dx_per_frame": -0.00039934982640943417,
+      "dy_per_frame": -0.004450756197719841,
+      "nonrigid_p90": 0.20558249091462857,
+      "inlier_fraction": 0.9511568123393316,
+      "point_count": 389,
+      "motion_p50_per_frame": 0.006669824477285147
+    },
+    "average": {
+      "scale_pct_per_frame": 0.03470588075189518,
+      "dx_per_frame": 0.12035578869324012,
+      "dy_per_frame": 0.000526714325036437,
+      "nonrigid_p90": 2.553499991273003,
+      "inlier_fraction": 0.683076923076923,
+      "point_count": 325,
+      "motion_p50_per_frame": 0.15276071429252625
+    }
+  },
+  {
+    "seam": 361,
+    "left": 355,
+    "right": 369,
+    "intervals": 14,
+    "incoming": {
+      "scale_pct_per_frame": 0.27913449338119456,
+      "dx_per_frame": 0.5147790548432738,
+      "dy_per_frame": 0.05970292722687276,
+      "nonrigid_p90": 1.4187289039243363,
+      "inlier_fraction": 0.8934426229508197,
+      "point_count": 366,
+      "motion_p50_per_frame": 0.4988390803337097
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.00045965462622810094,
+      "dx_per_frame": 0.0009981531009373157,
+      "dy_per_frame": -0.004796791375348164,
+      "nonrigid_p90": 0.3143351650976646,
+      "inlier_fraction": 0.9341772151898734,
+      "point_count": 395,
+      "motion_p50_per_frame": 0.006756910122931004
+    },
+    "average": {
+      "scale_pct_per_frame": 0.05252601613550123,
+      "dx_per_frame": 0.1541590176938103,
+      "dy_per_frame": 0.00786572936987844,
+      "nonrigid_p90": 2.593858791758191,
+      "inlier_fraction": 0.6824925816023739,
+      "point_count": 337,
+      "motion_p50_per_frame": 0.14909420907497406
+    }
+  },
+  {
+    "seam": 361,
+    "left": 353,
+    "right": 369,
+    "intervals": 16,
+    "incoming": {
+      "scale_pct_per_frame": 0.29059572106415743,
+      "dx_per_frame": 0.5335315807587335,
+      "dy_per_frame": 0.0648391806145554,
+      "nonrigid_p90": 1.6428206635315983,
+      "inlier_fraction": 0.8917378917378918,
+      "point_count": 351,
+      "motion_p50_per_frame": 0.5471079349517822
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.00045965462622810094,
+      "dx_per_frame": 0.0009981531009373157,
+      "dy_per_frame": -0.004796791375348164,
+      "nonrigid_p90": 0.3143351650976646,
+      "inlier_fraction": 0.9341772151898734,
+      "point_count": 395,
+      "motion_p50_per_frame": 0.006756910122931004
+    },
+    "average": {
+      "scale_pct_per_frame": 0.08290436725990613,
+      "dx_per_frame": 0.1981774065375852,
+      "dy_per_frame": 0.02147622724191578,
+      "nonrigid_p90": 2.706680679932943,
+      "inlier_fraction": 0.6257142857142857,
+      "point_count": 350,
+      "motion_p50_per_frame": 0.1755216121673584
+    }
+  },
+  {
+    "seam": 361,
+    "left": 355,
+    "right": 371,
+    "intervals": 16,
+    "incoming": {
+      "scale_pct_per_frame": 0.27913449338119456,
+      "dx_per_frame": 0.5147790548432738,
+      "dy_per_frame": 0.05970292722687276,
+      "nonrigid_p90": 1.4187289039243363,
+      "inlier_fraction": 0.8934426229508197,
+      "point_count": 366,
+      "motion_p50_per_frame": 0.4988390803337097
+    },
+    "outgoing": {
+      "scale_pct_per_frame": 0.0015540732563046333,
+      "dx_per_frame": -0.0037698840430664404,
+      "dy_per_frame": -0.0016531064148352925,
+      "nonrigid_p90": 0.35109021569931104,
+      "inlier_fraction": 0.9436274509803921,
+      "point_count": 408,
+      "motion_p50_per_frame": 0.004355244338512421
+    },
+    "average": {
+      "scale_pct_per_frame": 0.0517434047745402,
+      "dx_per_frame": 0.132620862045286,
+      "dy_per_frame": -0.007475929568999007,
+      "nonrigid_p90": 2.6413551854516935,
+      "inlier_fraction": 0.6550724637681159,
+      "point_count": 345,
+      "motion_p50_per_frame": 0.13052619993686676
+    }
+  },
+  {
+    "seam": 361,
+    "left": 357,
+    "right": 373,
+    "intervals": 16,
+    "incoming": {
+      "scale_pct_per_frame": 0.2666926089080812,
+      "dx_per_frame": 0.46850531514722604,
+      "dy_per_frame": 0.06806519893844865,
+      "nonrigid_p90": 1.7849630555210902,
+      "inlier_fraction": 0.8992042440318302,
+      "point_count": 377,
+      "motion_p50_per_frame": 0.4541257619857788
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.001435246232428522,
+      "dx_per_frame": -0.003508500844560558,
+      "dy_per_frame": -0.001261015961503631,
+      "nonrigid_p90": 0.4234934679721127,
+      "inlier_fraction": 0.9255583126550868,
+      "point_count": 403,
+      "motion_p50_per_frame": 0.004136736039072275
+    },
+    "average": {
+      "scale_pct_per_frame": 0.0215299301993932,
+      "dx_per_frame": 0.07607443982021067,
+      "dy_per_frame": -0.02148135493798442,
+      "nonrigid_p90": 2.6857305450131412,
+      "inlier_fraction": 0.6342182890855457,
+      "point_count": 339,
+      "motion_p50_per_frame": 0.09727978706359863
+    }
+  },
+  {
+    "seam": 2166,
+    "left": 2162,
+    "right": 2172,
+    "intervals": 10,
+    "incoming": {
+      "scale_pct_per_frame": -1.2869647900595527,
+      "dx_per_frame": -0.04066311535949296,
+      "dy_per_frame": 3.8675479977155476,
+      "nonrigid_p90": 0.8078611700466278,
+      "inlier_fraction": 0.9755025125628141,
+      "point_count": 1592,
+      "motion_p50_per_frame": 4.334864139556885
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.4191533895648192,
+      "dx_per_frame": -0.031836942984242,
+      "dy_per_frame": -0.34776701177042213,
+      "nonrigid_p90": 0.1549521400348618,
+      "inlier_fraction": 1.0,
+      "point_count": 1600,
+      "motion_p50_per_frame": 0.9421178102493286
+    },
+    "average": {
+      "scale_pct_per_frame": -0.6178185779082246,
+      "dx_per_frame": -0.07415105919531015,
+      "dy_per_frame": 0.7785036129610716,
+      "nonrigid_p90": 2.0730365846753216,
+      "inlier_fraction": 0.6660389202762084,
+      "point_count": 1593,
+      "motion_p50_per_frame": 1.2924174070358276
+    }
+  },
+  {
+    "seam": 2166,
+    "left": 2160,
+    "right": 2174,
+    "intervals": 14,
+    "incoming": {
+      "scale_pct_per_frame": -1.3665713758276743,
+      "dx_per_frame": -0.07189959902260057,
+      "dy_per_frame": 4.160759242721454,
+      "nonrigid_p90": 0.5957216508036177,
+      "inlier_fraction": 0.993581514762516,
+      "point_count": 1558,
+      "motion_p50_per_frame": 4.643426895141602
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.4128428235304016,
+      "dx_per_frame": -0.029347439886564075,
+      "dy_per_frame": -0.34789985751630326,
+      "nonrigid_p90": 0.14613814530284186,
+      "inlier_fraction": 1.0,
+      "point_count": 1597,
+      "motion_p50_per_frame": 0.9259524345397949
+    },
+    "average": {
+      "scale_pct_per_frame": -0.7711593517234827,
+      "dx_per_frame": -0.07091793513109224,
+      "dy_per_frame": 1.2150559518119255,
+      "nonrigid_p90": 1.7427808554476036,
+      "inlier_fraction": 0.7217261904761905,
+      "point_count": 1344,
+      "motion_p50_per_frame": 1.5729472637176514
+    }
+  },
+  {
+    "seam": 2166,
+    "left": 2158,
+    "right": 2174,
+    "intervals": 16,
+    "incoming": {
+      "scale_pct_per_frame": -1.376984635027989,
+      "dx_per_frame": -0.06864324191343485,
+      "dy_per_frame": 4.217385878834222,
+      "nonrigid_p90": 0.5574483662300012,
+      "inlier_fraction": 0.9993606138107417,
+      "point_count": 1564,
+      "motion_p50_per_frame": 4.761775970458984
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.4128428235304016,
+      "dx_per_frame": -0.029347439886564075,
+      "dy_per_frame": -0.34789985751630326,
+      "nonrigid_p90": 0.14613814530284186,
+      "inlier_fraction": 1.0,
+      "point_count": 1597,
+      "motion_p50_per_frame": 0.9259524345397949
+    },
+    "average": {
+      "scale_pct_per_frame": -0.779187094727074,
+      "dx_per_frame": -0.043299455514603125,
+      "dy_per_frame": 1.327473406714649,
+      "nonrigid_p90": 1.8498085665578734,
+      "inlier_fraction": 0.7465587044534413,
+      "point_count": 1235,
+      "motion_p50_per_frame": 1.5953121185302734
+    }
+  },
+  {
+    "seam": 2166,
+    "left": 2160,
+    "right": 2176,
+    "intervals": 16,
+    "incoming": {
+      "scale_pct_per_frame": -1.3665713758276743,
+      "dx_per_frame": -0.07189959902260057,
+      "dy_per_frame": 4.160759242721454,
+      "nonrigid_p90": 0.5957216508036177,
+      "inlier_fraction": 0.993581514762516,
+      "point_count": 1558,
+      "motion_p50_per_frame": 4.643426895141602
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.4072902489790198,
+      "dx_per_frame": -0.02601292075881645,
+      "dy_per_frame": -0.35190161323475166,
+      "nonrigid_p90": 0.15428180854802107,
+      "inlier_fraction": 1.0,
+      "point_count": 1594,
+      "motion_p50_per_frame": 0.9266284704208374
+    },
+    "average": {
+      "scale_pct_per_frame": -0.729079308285796,
+      "dx_per_frame": -0.05963224008238299,
+      "dy_per_frame": 0.9894288936998876,
+      "nonrigid_p90": 1.8355484162920979,
+      "inlier_fraction": 0.801665404996215,
+      "point_count": 1321,
+      "motion_p50_per_frame": 1.3659106492996216
+    }
+  },
+  {
+    "seam": 2166,
+    "left": 2162,
+    "right": 2178,
+    "intervals": 16,
+    "incoming": {
+      "scale_pct_per_frame": -1.2869647900595527,
+      "dx_per_frame": -0.04066311535949296,
+      "dy_per_frame": 3.8675479977155476,
+      "nonrigid_p90": 0.8078611700466278,
+      "inlier_fraction": 0.9755025125628141,
+      "point_count": 1592,
+      "motion_p50_per_frame": 4.334864139556885
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.40476579191486284,
+      "dx_per_frame": -0.021868024808242126,
+      "dy_per_frame": -0.3517892127050075,
+      "nonrigid_p90": 0.15554999701919114,
+      "inlier_fraction": 0.9987301587301587,
+      "point_count": 1575,
+      "motion_p50_per_frame": 0.9223830699920654
+    },
+    "average": {
+      "scale_pct_per_frame": -0.5362634089208673,
+      "dx_per_frame": -0.056984472899486605,
+      "dy_per_frame": 0.3554864172273984,
+      "nonrigid_p90": 2.3737815455472497,
+      "inlier_fraction": 0.6261558784676354,
+      "point_count": 1514,
+      "motion_p50_per_frame": 0.9729630351066589
+    }
+  },
+  {
+    "seam": 3240,
+    "left": 3236,
+    "right": 3246,
+    "intervals": 10,
+    "incoming": {
+      "scale_pct_per_frame": 0.8801261264672178,
+      "dx_per_frame": 0.0685852366107298,
+      "dy_per_frame": 0.38156001210069235,
+      "nonrigid_p90": 1.3356782035757109,
+      "inlier_fraction": 0.898936170212766,
+      "point_count": 564,
+      "motion_p50_per_frame": 1.4142799377441406
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.0001609105969802016,
+      "dx_per_frame": -0.0025277048278411485,
+      "dy_per_frame": -0.001234733046977965,
+      "nonrigid_p90": 0.052644609567399435,
+      "inlier_fraction": 0.9601181683899557,
+      "point_count": 677,
+      "motion_p50_per_frame": 0.0023504700511693954
+    },
+    "average": {
+      "scale_pct_per_frame": 0.08792049725594442,
+      "dx_per_frame": -0.00252075982151041,
+      "dy_per_frame": 0.3482113362273765,
+      "nonrigid_p90": 3.9167441186662684,
+      "inlier_fraction": 0.4895470383275261,
+      "point_count": 574,
+      "motion_p50_per_frame": 0.2734844982624054
+    }
+  },
+  {
+    "seam": 3240,
+    "left": 3234,
+    "right": 3248,
+    "intervals": 14,
+    "incoming": {
+      "scale_pct_per_frame": 0.8992778741543583,
+      "dx_per_frame": 0.08754939500913395,
+      "dy_per_frame": 0.39331447124228447,
+      "nonrigid_p90": 2.589160448179693,
+      "inlier_fraction": 0.8230383973288815,
+      "point_count": 599,
+      "motion_p50_per_frame": 1.5475202798843384
+    },
+    "outgoing": {
+      "scale_pct_per_frame": 6.609853866468285e-05,
+      "dx_per_frame": -0.004258262638273891,
+      "dy_per_frame": -0.00038348945298594117,
+      "nonrigid_p90": 0.0405652656465418,
+      "inlier_fraction": 0.9698340874811463,
+      "point_count": 663,
+      "motion_p50_per_frame": 0.0022049874532967806
+    },
+    "average": {
+      "scale_pct_per_frame": 0.1410591158390817,
+      "dx_per_frame": 0.08526538640138272,
+      "dy_per_frame": 0.25880253597661557,
+      "nonrigid_p90": 4.895827904645947,
+      "inlier_fraction": 0.4594594594594595,
+      "point_count": 555,
+      "motion_p50_per_frame": 0.30797263979911804
+    }
+  },
+  {
+    "seam": 3240,
+    "left": 3232,
+    "right": 3248,
+    "intervals": 16,
+    "incoming": {
+      "scale_pct_per_frame": 0.9121743554816764,
+      "dx_per_frame": 0.08425902553422304,
+      "dy_per_frame": 0.4154242933330252,
+      "nonrigid_p90": 4.085097099655542,
+      "inlier_fraction": 0.8129251700680272,
+      "point_count": 588,
+      "motion_p50_per_frame": 1.6843843460083008
+    },
+    "outgoing": {
+      "scale_pct_per_frame": 6.609853866468285e-05,
+      "dx_per_frame": -0.004258262638273891,
+      "dy_per_frame": -0.00038348945298594117,
+      "nonrigid_p90": 0.0405652656465418,
+      "inlier_fraction": 0.9698340874811463,
+      "point_count": 663,
+      "motion_p50_per_frame": 0.0022049874532967806
+    },
+    "average": {
+      "scale_pct_per_frame": 0.22318662509923648,
+      "dx_per_frame": 0.08626021953633867,
+      "dy_per_frame": 0.2699903852880361,
+      "nonrigid_p90": 5.101414368401996,
+      "inlier_fraction": 0.4357429718875502,
+      "point_count": 498,
+      "motion_p50_per_frame": 0.405326783657074
+    }
+  },
+  {
+    "seam": 3240,
+    "left": 3234,
+    "right": 3250,
+    "intervals": 16,
+    "incoming": {
+      "scale_pct_per_frame": 0.8992778741543583,
+      "dx_per_frame": 0.08754939500913395,
+      "dy_per_frame": 0.39331447124228447,
+      "nonrigid_p90": 2.589160448179693,
+      "inlier_fraction": 0.8230383973288815,
+      "point_count": 599,
+      "motion_p50_per_frame": 1.5475202798843384
+    },
+    "outgoing": {
+      "scale_pct_per_frame": 0.0001934962456706657,
+      "dx_per_frame": -0.001686138011294247,
+      "dy_per_frame": -0.0013879945991419618,
+      "nonrigid_p90": 0.03625881431802598,
+      "inlier_fraction": 0.9566517189835575,
+      "point_count": 669,
+      "motion_p50_per_frame": 0.0022213992197066545
+    },
+    "average": {
+      "scale_pct_per_frame": 0.13815673779242754,
+      "dx_per_frame": 0.030990767012585962,
+      "dy_per_frame": 0.17441865495482034,
+      "nonrigid_p90": 3.353808836638093,
+      "inlier_fraction": 0.4413919413919414,
+      "point_count": 546,
+      "motion_p50_per_frame": 0.26943981647491455
+    }
+  },
+  {
+    "seam": 3240,
+    "left": 3236,
+    "right": 3252,
+    "intervals": 16,
+    "incoming": {
+      "scale_pct_per_frame": 0.8801261264672178,
+      "dx_per_frame": 0.0685852366107298,
+      "dy_per_frame": 0.38156001210069235,
+      "nonrigid_p90": 1.3356782035757109,
+      "inlier_fraction": 0.898936170212766,
+      "point_count": 564,
+      "motion_p50_per_frame": 1.4142799377441406
+    },
+    "outgoing": {
+      "scale_pct_per_frame": 0.0004865059466840904,
+      "dx_per_frame": 0.0009983076111836908,
+      "dy_per_frame": 0.0005774787708787699,
+      "nonrigid_p90": 0.037467474455116195,
+      "inlier_fraction": 0.956390977443609,
+      "point_count": 665,
+      "motion_p50_per_frame": 0.0020889812149107456
+    },
+    "average": {
+      "scale_pct_per_frame": 0.05504019961093398,
+      "dx_per_frame": 0.004868530452476705,
+      "dy_per_frame": 0.21352701336139823,
+      "nonrigid_p90": 3.7849156946813687,
+      "inlier_fraction": 0.48269581056466304,
+      "point_count": 549,
+      "motion_p50_per_frame": 0.1706167757511139
+    }
+  },
+  {
+    "seam": 361,
+    "left": 349,
+    "right": 365,
+    "intervals": 16,
+    "incoming": {
+      "scale_pct_per_frame": 0.3009977129633912,
+      "dx_per_frame": 0.5312587892182563,
+      "dy_per_frame": 0.06950389649529853,
+      "nonrigid_p90": 0.7032010494346277,
+      "inlier_fraction": 0.9277456647398844,
+      "point_count": 346,
+      "motion_p50_per_frame": 0.5929971933364868
+    },
+    "average": {
+      "scale_pct_per_frame": 0.15661481439483982,
+      "dx_per_frame": 0.33508049514824734,
+      "dy_per_frame": 0.026146723493058133,
+      "nonrigid_p90": 2.941405399057222,
+      "inlier_fraction": 0.580441640378549,
+      "point_count": 317,
+      "motion_p50_per_frame": 0.2443351149559021
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.0015859916247196182,
+      "dx_per_frame": 0.0016614986297582846,
+      "dy_per_frame": -0.004340994562653577,
+      "nonrigid_p90": 0.5622602828787439,
+      "inlier_fraction": 0.9223057644110275,
+      "point_count": 399,
+      "motion_p50_per_frame": 0.00773376040160656
+    }
+  },
+  {
+    "seam": 361,
+    "left": 351,
+    "right": 365,
+    "intervals": 14,
+    "incoming": {
+      "scale_pct_per_frame": 0.3003804767225393,
+      "dx_per_frame": 0.5221984807267006,
+      "dy_per_frame": 0.061781682872293686,
+      "nonrigid_p90": 1.416079556694122,
+      "inlier_fraction": 0.9,
+      "point_count": 340,
+      "motion_p50_per_frame": 0.5524316430091858
+    },
+    "average": {
+      "scale_pct_per_frame": 0.13650317166542525,
+      "dx_per_frame": 0.30244106921726044,
+      "dy_per_frame": 0.006808920468947528,
+      "nonrigid_p90": 3.0641057167167256,
+      "inlier_fraction": 0.6242603550295858,
+      "point_count": 338,
+      "motion_p50_per_frame": 0.2639107406139374
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.0015859916247196182,
+      "dx_per_frame": 0.0016614986297582846,
+      "dy_per_frame": -0.004340994562653577,
+      "nonrigid_p90": 0.5622602828787439,
+      "inlier_fraction": 0.9223057644110275,
+      "point_count": 399,
+      "motion_p50_per_frame": 0.00773376040160656
+    }
+  },
+  {
+    "seam": 361,
+    "left": 353,
+    "right": 365,
+    "intervals": 12,
+    "incoming": {
+      "scale_pct_per_frame": 0.29059572106415743,
+      "dx_per_frame": 0.5335315807587335,
+      "dy_per_frame": 0.0648391806145554,
+      "nonrigid_p90": 1.6428206635315983,
+      "inlier_fraction": 0.8917378917378918,
+      "point_count": 351,
+      "motion_p50_per_frame": 0.5471079349517822
+    },
+    "average": {
+      "scale_pct_per_frame": 0.11463742795847498,
+      "dx_per_frame": 0.2732500087275156,
+      "dy_per_frame": -0.019215295617710144,
+      "nonrigid_p90": 2.734471975688226,
+      "inlier_fraction": 0.5479041916167665,
+      "point_count": 334,
+      "motion_p50_per_frame": 0.21354703605175018
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.0015859916247196182,
+      "dx_per_frame": 0.0016614986297582846,
+      "dy_per_frame": -0.004340994562653577,
+      "nonrigid_p90": 0.5622602828787439,
+      "inlier_fraction": 0.9223057644110275,
+      "point_count": 399,
+      "motion_p50_per_frame": 0.00773376040160656
+    }
+  },
+  {
+    "seam": 361,
+    "left": 349,
+    "right": 363,
+    "intervals": 14,
+    "incoming": {
+      "scale_pct_per_frame": 0.3009977129633912,
+      "dx_per_frame": 0.5312587892182563,
+      "dy_per_frame": 0.06950389649529853,
+      "nonrigid_p90": 0.7032010494346277,
+      "inlier_fraction": 0.9277456647398844,
+      "point_count": 346,
+      "motion_p50_per_frame": 0.5929971933364868
+    },
+    "average": {
+      "scale_pct_per_frame": 0.18608311596612914,
+      "dx_per_frame": 0.38354280858215717,
+      "dy_per_frame": 0.007297119746025617,
+      "nonrigid_p90": 3.2289112917827487,
+      "inlier_fraction": 0.551829268292683,
+      "point_count": 328,
+      "motion_p50_per_frame": 0.31036779284477234
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.0014686282514220217,
+      "dx_per_frame": 0.0007877031352592212,
+      "dy_per_frame": -0.0012509425446225464,
+      "nonrigid_p90": 0.2525693831481506,
+      "inlier_fraction": 0.9444444444444444,
+      "point_count": 414,
+      "motion_p50_per_frame": 0.00869431160390377
+    }
+  },
+  {
+    "seam": 361,
+    "left": 353,
+    "right": 369,
+    "intervals": 16,
+    "incoming": {
+      "scale_pct_per_frame": 0.29059572106415743,
+      "dx_per_frame": 0.5335315807587335,
+      "dy_per_frame": 0.0648391806145554,
+      "nonrigid_p90": 1.6428206635315983,
+      "inlier_fraction": 0.8917378917378918,
+      "point_count": 351,
+      "motion_p50_per_frame": 0.5471079349517822
+    },
+    "average": {
+      "scale_pct_per_frame": 0.08290436725990613,
+      "dx_per_frame": 0.1981774065375852,
+      "dy_per_frame": 0.02147622724191578,
+      "nonrigid_p90": 2.706680679932943,
+      "inlier_fraction": 0.6257142857142857,
+      "point_count": 350,
+      "motion_p50_per_frame": 0.1755216121673584
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.00045965462622810094,
+      "dx_per_frame": 0.0009981531009373157,
+      "dy_per_frame": -0.004796791375348164,
+      "nonrigid_p90": 0.3143351650976646,
+      "inlier_fraction": 0.9341772151898734,
+      "point_count": 395,
+      "motion_p50_per_frame": 0.006756910122931004
+    }
+  },
+  {
+    "seam": 2166,
+    "left": 2154,
+    "right": 2170,
+    "intervals": 16,
+    "incoming": {
+      "scale_pct_per_frame": -1.47348899188946,
+      "dx_per_frame": -0.09149895227662341,
+      "dy_per_frame": 4.470061967490494,
+      "nonrigid_p90": 0.5324645510793248,
+      "inlier_fraction": 0.9951823812801102,
+      "point_count": 1453,
+      "motion_p50_per_frame": 5.068009376525879
+    },
+    "average": {
+      "scale_pct_per_frame": -1.0157009092483293,
+      "dx_per_frame": -0.04809618921242631,
+      "dy_per_frame": 2.38889150203347,
+      "nonrigid_p90": 3.1653785970458523,
+      "inlier_fraction": 0.8159675236806495,
+      "point_count": 739,
+      "motion_p50_per_frame": 2.7134897708892822
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.42009892869783183,
+      "dx_per_frame": -0.038716961151266105,
+      "dy_per_frame": -0.34806347543439387,
+      "nonrigid_p90": 0.15298767545077802,
+      "inlier_fraction": 1.0,
+      "point_count": 1599,
+      "motion_p50_per_frame": 0.9441935420036316
+    }
+  },
+  {
+    "seam": 2166,
+    "left": 2156,
+    "right": 2170,
+    "intervals": 14,
+    "incoming": {
+      "scale_pct_per_frame": -1.441907043305779,
+      "dx_per_frame": -0.09753604865920806,
+      "dy_per_frame": 4.410024580194069,
+      "nonrigid_p90": 0.6100681534953729,
+      "inlier_fraction": 0.9945242984257358,
+      "point_count": 1461,
+      "motion_p50_per_frame": 5.001340389251709
+    },
+    "average": {
+      "scale_pct_per_frame": -1.0523023162422263,
+      "dx_per_frame": -0.051211048087891085,
+      "dy_per_frame": 2.398408118148331,
+      "nonrigid_p90": 1.9176610898532658,
+      "inlier_fraction": 0.6550632911392406,
+      "point_count": 948,
+      "motion_p50_per_frame": 2.6960651874542236
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.42009892869783183,
+      "dx_per_frame": -0.038716961151266105,
+      "dy_per_frame": -0.34806347543439387,
+      "nonrigid_p90": 0.15298767545077802,
+      "inlier_fraction": 1.0,
+      "point_count": 1599,
+      "motion_p50_per_frame": 0.9441935420036316
+    }
+  },
+  {
+    "seam": 2166,
+    "left": 2158,
+    "right": 2170,
+    "intervals": 12,
+    "incoming": {
+      "scale_pct_per_frame": -1.376984635027989,
+      "dx_per_frame": -0.06864324191343485,
+      "dy_per_frame": 4.217385878834222,
+      "nonrigid_p90": 0.5574483662300012,
+      "inlier_fraction": 0.9993606138107417,
+      "point_count": 1564,
+      "motion_p50_per_frame": 4.761775970458984
+    },
+    "average": {
+      "scale_pct_per_frame": -0.8971668441641323,
+      "dx_per_frame": -0.05360873679039457,
+      "dy_per_frame": 1.9100184296667067,
+      "nonrigid_p90": 1.418056592151201,
+      "inlier_fraction": 0.7623211446740858,
+      "point_count": 1258,
+      "motion_p50_per_frame": 2.1610801219940186
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.42009892869783183,
+      "dx_per_frame": -0.038716961151266105,
+      "dy_per_frame": -0.34806347543439387,
+      "nonrigid_p90": 0.15298767545077802,
+      "inlier_fraction": 1.0,
+      "point_count": 1599,
+      "motion_p50_per_frame": 0.9441935420036316
+    }
+  },
+  {
+    "seam": 2166,
+    "left": 2154,
+    "right": 2168,
+    "intervals": 14,
+    "incoming": {
+      "scale_pct_per_frame": -1.47348899188946,
+      "dx_per_frame": -0.09149895227662341,
+      "dy_per_frame": 4.470061967490494,
+      "nonrigid_p90": 0.5324645510793248,
+      "inlier_fraction": 0.9951823812801102,
+      "point_count": 1453,
+      "motion_p50_per_frame": 5.068009376525879
+    },
+    "average": {
+      "scale_pct_per_frame": -1.1074773778222191,
+      "dx_per_frame": -0.052280387593762204,
+      "dy_per_frame": 2.7908508478075595,
+      "nonrigid_p90": 38.47084293820066,
+      "inlier_fraction": 0.8237704918032787,
+      "point_count": 732,
+      "motion_p50_per_frame": 3.267972230911255
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.4164081128960162,
+      "dx_per_frame": -0.04169202651486614,
+      "dy_per_frame": -0.3403115183730492,
+      "nonrigid_p90": 0.15561716801520797,
+      "inlier_fraction": 1.0,
+      "point_count": 1600,
+      "motion_p50_per_frame": 0.9259841442108154
+    }
+  },
+  {
+    "seam": 2166,
+    "left": 2158,
+    "right": 2174,
+    "intervals": 16,
+    "incoming": {
+      "scale_pct_per_frame": -1.376984635027989,
+      "dx_per_frame": -0.06864324191343485,
+      "dy_per_frame": 4.217385878834222,
+      "nonrigid_p90": 0.5574483662300012,
+      "inlier_fraction": 0.9993606138107417,
+      "point_count": 1564,
+      "motion_p50_per_frame": 4.761775970458984
+    },
+    "average": {
+      "scale_pct_per_frame": -0.779187094727074,
+      "dx_per_frame": -0.043299455514603125,
+      "dy_per_frame": 1.327473406714649,
+      "nonrigid_p90": 1.8498085665578734,
+      "inlier_fraction": 0.7465587044534413,
+      "point_count": 1235,
+      "motion_p50_per_frame": 1.5953121185302734
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.4128428235304016,
+      "dx_per_frame": -0.029347439886564075,
+      "dy_per_frame": -0.34789985751630326,
+      "nonrigid_p90": 0.14613814530284186,
+      "inlier_fraction": 1.0,
+      "point_count": 1597,
+      "motion_p50_per_frame": 0.9259524345397949
+    }
+  },
+  {
+    "seam": 3240,
+    "left": 3228,
+    "right": 3244,
+    "intervals": 16,
+    "incoming": {
+      "scale_pct_per_frame": 0.898016239246302,
+      "dx_per_frame": 0.0755759048209228,
+      "dy_per_frame": 0.40429051002647753,
+      "nonrigid_p90": 3.506366684428225,
+      "inlier_fraction": 0.8661567877629063,
+      "point_count": 523,
+      "motion_p50_per_frame": 1.878958821296692
+    },
+    "average": {
+      "scale_pct_per_frame": 0.4144433635814293,
+      "dx_per_frame": -0.02703131839137285,
+      "dy_per_frame": 0.35512139168342927,
+      "nonrigid_p90": 6.782356042607761,
+      "inlier_fraction": 0.3510392609699769,
+      "point_count": 433,
+      "motion_p50_per_frame": 0.8121058940887451
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -8.612155585341341e-05,
+      "dx_per_frame": -0.0029233960076169296,
+      "dy_per_frame": -0.0018447190307213646,
+      "nonrigid_p90": 0.07538760679658045,
+      "inlier_fraction": 0.9448584202682563,
+      "point_count": 671,
+      "motion_p50_per_frame": 0.0030863285064697266
+    }
+  },
+  {
+    "seam": 3240,
+    "left": 3230,
+    "right": 3244,
+    "intervals": 14,
+    "incoming": {
+      "scale_pct_per_frame": 0.9111309653812016,
+      "dx_per_frame": 0.08742325378237581,
+      "dy_per_frame": 0.4082983085616618,
+      "nonrigid_p90": 3.9567825291534,
+      "inlier_fraction": 0.8472468916518651,
+      "point_count": 563,
+      "motion_p50_per_frame": 1.8392831087112427
+    },
+    "average": {
+      "scale_pct_per_frame": 0.37945051034886657,
+      "dx_per_frame": -0.029385637721925865,
+      "dy_per_frame": 0.3611679344783901,
+      "nonrigid_p90": 5.073112355768283,
+      "inlier_fraction": 0.432,
+      "point_count": 500,
+      "motion_p50_per_frame": 0.6820696592330933
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -8.612155585341341e-05,
+      "dx_per_frame": -0.0029233960076169296,
+      "dy_per_frame": -0.0018447190307213646,
+      "nonrigid_p90": 0.07538760679658045,
+      "inlier_fraction": 0.9448584202682563,
+      "point_count": 671,
+      "motion_p50_per_frame": 0.0030863285064697266
+    }
+  },
+  {
+    "seam": 3240,
+    "left": 3232,
+    "right": 3244,
+    "intervals": 12,
+    "incoming": {
+      "scale_pct_per_frame": 0.9121743554816764,
+      "dx_per_frame": 0.08425902553422304,
+      "dy_per_frame": 0.4154242933330252,
+      "nonrigid_p90": 4.085097099655542,
+      "inlier_fraction": 0.8129251700680272,
+      "point_count": 588,
+      "motion_p50_per_frame": 1.6843843460083008
+    },
+    "average": {
+      "scale_pct_per_frame": 0.28749648926484905,
+      "dx_per_frame": -0.07177358872302382,
+      "dy_per_frame": 0.35669941520032705,
+      "nonrigid_p90": 5.555545661073716,
+      "inlier_fraction": 0.42857142857142855,
+      "point_count": 518,
+      "motion_p50_per_frame": 0.5420785546302795
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -8.612155585341341e-05,
+      "dx_per_frame": -0.0029233960076169296,
+      "dy_per_frame": -0.0018447190307213646,
+      "nonrigid_p90": 0.07538760679658045,
+      "inlier_fraction": 0.9448584202682563,
+      "point_count": 671,
+      "motion_p50_per_frame": 0.0030863285064697266
+    }
+  },
+  {
+    "seam": 3240,
+    "left": 3228,
+    "right": 3242,
+    "intervals": 14,
+    "incoming": {
+      "scale_pct_per_frame": 0.898016239246302,
+      "dx_per_frame": 0.0755759048209228,
+      "dy_per_frame": 0.40429051002647753,
+      "nonrigid_p90": 3.506366684428225,
+      "inlier_fraction": 0.8661567877629063,
+      "point_count": 523,
+      "motion_p50_per_frame": 1.878958821296692
+    },
+    "average": {
+      "scale_pct_per_frame": 0.49655329049433927,
+      "dx_per_frame": -0.028927457840150543,
+      "dy_per_frame": 0.41439965857699895,
+      "nonrigid_p90": 6.260761686129137,
+      "inlier_fraction": 0.38687782805429866,
+      "point_count": 442,
+      "motion_p50_per_frame": 0.9295458197593689
+    },
+    "outgoing": {
+      "scale_pct_per_frame": 0.0006966967359911536,
+      "dx_per_frame": -0.0021399409017703874,
+      "dy_per_frame": 0.0006823688373103209,
+      "nonrigid_p90": 0.1408404181542528,
+      "inlier_fraction": 0.937950937950938,
+      "point_count": 693,
+      "motion_p50_per_frame": 0.00484016677364707
+    }
+  },
+  {
+    "seam": 3240,
+    "left": 3232,
+    "right": 3248,
+    "intervals": 16,
+    "incoming": {
+      "scale_pct_per_frame": 0.9121743554816764,
+      "dx_per_frame": 0.08425902553422304,
+      "dy_per_frame": 0.4154242933330252,
+      "nonrigid_p90": 4.085097099655542,
+      "inlier_fraction": 0.8129251700680272,
+      "point_count": 588,
+      "motion_p50_per_frame": 1.6843843460083008
+    },
+    "average": {
+      "scale_pct_per_frame": 0.22318662509923648,
+      "dx_per_frame": 0.08626021953633867,
+      "dy_per_frame": 0.2699903852880361,
+      "nonrigid_p90": 5.101414368401996,
+      "inlier_fraction": 0.4357429718875502,
+      "point_count": 498,
+      "motion_p50_per_frame": 0.405326783657074
+    },
+    "outgoing": {
+      "scale_pct_per_frame": 6.609853866468285e-05,
+      "dx_per_frame": -0.004258262638273891,
+      "dy_per_frame": -0.00038348945298594117,
+      "nonrigid_p90": 0.0405652656465418,
+      "inlier_fraction": 0.9698340874811463,
+      "point_count": 663,
+      "motion_p50_per_frame": 0.0022049874532967806
+    }
+  },
+  {
+    "seam": 2888,
+    "left": 2876,
+    "right": 2892,
+    "intervals": 16,
+    "incoming": {
+      "scale_pct_per_frame": 1.468338667514768,
+      "dx_per_frame": 1.505856062392425,
+      "dy_per_frame": 2.2221702284526756,
+      "nonrigid_p90": 11.112580319093857,
+      "inlier_fraction": 0.8235294117647058,
+      "point_count": 680,
+      "motion_p50_per_frame": 3.8976945877075195
+    },
+    "average": {
+      "scale_pct_per_frame": -0.11179624857228232,
+      "dx_per_frame": 0.017707550055817478,
+      "dy_per_frame": 0.49188882851314375,
+      "nonrigid_p90": 34.62095419316572,
+      "inlier_fraction": 0.37668161434977576,
+      "point_count": 223,
+      "motion_p50_per_frame": 0.6753571033477783
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.022089586858509147,
+      "dx_per_frame": -0.029955929276169968,
+      "dy_per_frame": -0.7623620727266811,
+      "nonrigid_p90": 3.385868965923542,
+      "inlier_fraction": 0.5591677503250976,
+      "point_count": 769,
+      "motion_p50_per_frame": 0.7396714687347412
+    }
+  },
+  {
+    "seam": 2888,
+    "left": 2878,
+    "right": 2892,
+    "intervals": 14,
+    "incoming": {
+      "scale_pct_per_frame": 1.4737262970440979,
+      "dx_per_frame": 1.4909658883316865,
+      "dy_per_frame": 2.2327225862464246,
+      "nonrigid_p90": 9.533574371013623,
+      "inlier_fraction": 0.8303571428571429,
+      "point_count": 672,
+      "motion_p50_per_frame": 3.971496105194092
+    },
+    "average": {
+      "scale_pct_per_frame": 0.99395201475041,
+      "dx_per_frame": 1.0137984401734335,
+      "dy_per_frame": 0.8792610117768963,
+      "nonrigid_p90": 22.251383318199988,
+      "inlier_fraction": 0.24848484848484848,
+      "point_count": 330,
+      "motion_p50_per_frame": 1.774840235710144
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.022089586858509147,
+      "dx_per_frame": -0.029955929276169968,
+      "dy_per_frame": -0.7623620727266811,
+      "nonrigid_p90": 3.385868965923542,
+      "inlier_fraction": 0.5591677503250976,
+      "point_count": 769,
+      "motion_p50_per_frame": 0.7396714687347412
+    }
+  },
+  {
+    "seam": 2888,
+    "left": 2880,
+    "right": 2892,
+    "intervals": 12,
+    "incoming": {
+      "scale_pct_per_frame": 1.5420130387370445,
+      "dx_per_frame": 1.5834736768913018,
+      "dy_per_frame": 2.317001585222222,
+      "nonrigid_p90": 8.109552558516198,
+      "inlier_fraction": 0.8168389955686853,
+      "point_count": 677,
+      "motion_p50_per_frame": 4.098455429077148
+    },
+    "average": {
+      "scale_pct_per_frame": 0.8694300482553041,
+      "dx_per_frame": 1.1062090556318651,
+      "dy_per_frame": 0.5735387937571303,
+      "nonrigid_p90": 11.392220047787616,
+      "inlier_fraction": 0.2761061946902655,
+      "point_count": 565,
+      "motion_p50_per_frame": 1.6625252962112427
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.022089586858509147,
+      "dx_per_frame": -0.029955929276169968,
+      "dy_per_frame": -0.7623620727266811,
+      "nonrigid_p90": 3.385868965923542,
+      "inlier_fraction": 0.5591677503250976,
+      "point_count": 769,
+      "motion_p50_per_frame": 0.7396714687347412
+    }
+  },
+  {
+    "seam": 2888,
+    "left": 2876,
+    "right": 2890,
+    "intervals": 14,
+    "incoming": {
+      "scale_pct_per_frame": 1.468338667514768,
+      "dx_per_frame": 1.505856062392425,
+      "dy_per_frame": 2.2221702284526756,
+      "nonrigid_p90": 11.112580319093857,
+      "inlier_fraction": 0.8235294117647058,
+      "point_count": 680,
+      "motion_p50_per_frame": 3.8976945877075195
+    },
+    "average": {
+      "scale_pct_per_frame": -0.12116623814735217,
+      "dx_per_frame": 0.02619923883371809,
+      "dy_per_frame": 0.5703718636373603,
+      "nonrigid_p90": 31.425505330195247,
+      "inlier_fraction": 0.2796208530805687,
+      "point_count": 211,
+      "motion_p50_per_frame": 0.7403659224510193
+    },
+    "outgoing": {
+      "scale_pct_per_frame": -0.01763165754143925,
+      "dx_per_frame": -0.02571733429761025,
+      "dy_per_frame": -0.7324781455359073,
+      "nonrigid_p90": 3.378339378137604,
+      "inlier_fraction": 0.5814266487213997,
+      "point_count": 743,
+      "motion_p50_per_frame": 0.690620481967926
+    }
+  },
+  {
+    "seam": 2888,
+    "left": 2880,
+    "right": 2896,
+    "intervals": 16,
+    "incoming": {
+      "scale_pct_per_frame": 1.5420130387370445,
+      "dx_per_frame": 1.5834736768913018,
+      "dy_per_frame": 2.317001585222222,
+      "nonrigid_p90": 8.109552558516198,
+      "inlier_fraction": 0.8168389955686853,
+      "point_count": 677,
+      "motion_p50_per_frame": 4.098455429077148
+    },
+    "average": {
+      "scale_pct_per_frame": 0.6737328548154231,
+      "dx_per_frame": 0.7544187741269184,
+      "dy_per_frame": -0.09486821871315776,
+      "nonrigid_p90": 14.832034129935304,
+      "inlier_fraction": 0.2457627118644068,
+      "point_count": 590,
+      "motion_p50_per_frame": 1.1003468036651611
+    },
+    "outgoing": {
+      "scale_pct_per_frame": 0.0011190671176608546,
+      "dx_per_frame": 0.05190685831672681,
+      "dy_per_frame": -1.0501254212772793,
+      "nonrigid_p90": 4.353151225908089,
+      "inlier_fraction": 0.5500667556742324,
+      "point_count": 749,
+      "motion_p50_per_frame": 0.8096853494644165
+    }
+  }
+]

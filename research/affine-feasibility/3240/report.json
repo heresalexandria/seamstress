@@ -1,0 +1,336 @@
+{
+  "method": "ecc_affine",
+  "accepted": true,
+  "bounds": {
+    "singular_values": [
+      1.0323688997600113,
+      1.0137858346707247
+    ],
+    "anisotropy": 1.0183303656983158,
+    "determinant": 1.046600966731301
+  },
+  "matrix_right_to_left": [
+    [
+      1.0137900090570482,
+      -0.0005674893365930409,
+      -8.159327436630246
+    ],
+    [
+      7.822924906208898e-06,
+      1.0323646444941241,
+      -12.554678268080151
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "color": {
+    "gain": [
+      0.9256475743025199,
+      0.917580525545929,
+      0.9279774545993146
+    ],
+    "bias": [
+      13.151119394453358,
+      12.178644559294375,
+      9.230098050980084
+    ],
+    "confidence": 0.7128688100016961,
+    "residual_mae": 4.690846865570306,
+    "sample_count": 38348
+  },
+  "score": 4.086570023210286,
+  "raw": {
+    "rgb_mae": 31.787042705971277,
+    "pixel_fraction_rgb_mae_gt15": 0.49799773242630385,
+    "edge_symmetric_median_px": 2.0,
+    "edge_symmetric_p90_px": 6.0,
+    "edge_fraction_farther_than_2px": 0.3912865179818622,
+    "edge_fraction_farther_than_4px": 0.18018599127712018,
+    "overlap_fraction": 0.95703125
+  },
+  "geometry_only": {
+    "rgb_mae": 6.486000755857898,
+    "pixel_fraction_rgb_mae_gt15": 0.08568027210884353,
+    "edge_symmetric_median_px": 0.0,
+    "edge_symmetric_p90_px": 1.0,
+    "edge_fraction_farther_than_2px": 0.010210492573992948,
+    "edge_fraction_farther_than_4px": 0.0024105139437974143,
+    "overlap_fraction": 0.95703125
+  },
+  "geometry_and_grade": {
+    "rgb_mae": 4.673079365079365,
+    "pixel_fraction_rgb_mae_gt15": 0.048563492063492066,
+    "edge_symmetric_median_px": 0.0,
+    "edge_symmetric_p90_px": 1.0,
+    "edge_fraction_farther_than_2px": 0.009414548821895257,
+    "edge_fraction_farther_than_4px": 0.0024651027197585486,
+    "overlap_fraction": 0.95703125
+  },
+  "candidates": [
+    {
+      "method": "native_sift_affine",
+      "accepted": true,
+      "bounds": {
+        "singular_values": [
+          1.032298914336833,
+          1.0138396142843311
+        ],
+        "anisotropy": 1.0182073177970388,
+        "determinant": 1.0465855331373886
+      },
+      "matrix_right_to_left": [
+        [
+          1.0138407164179994,
+          -0.000291316588144953,
+          -8.306939375766403
+        ],
+        [
+          4.674142667377353e-06,
+          1.0322977907944204,
+          -12.579334021212398
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "color": {
+        "gain": [
+          0.9249943528747737,
+          0.9175036722376532,
+          0.9281555438622245
+        ],
+        "bias": [
+          13.21709719185016,
+          12.188160064356772,
+          9.206991399768265
+        ],
+        "confidence": 0.7081884172344404,
+        "residual_mae": 4.79783113904823,
+        "sample_count": 38348
+      },
+      "score": 4.1630371452854344,
+      "raw": {
+        "rgb_mae": 31.787042705971277,
+        "pixel_fraction_rgb_mae_gt15": 0.49799773242630385,
+        "edge_symmetric_median_px": 2.0,
+        "edge_symmetric_p90_px": 6.0,
+        "edge_fraction_farther_than_2px": 0.3912865179818622,
+        "edge_fraction_farther_than_4px": 0.18018599127712018,
+        "overlap_fraction": 0.95703125
+      },
+      "geometry_only": {
+        "rgb_mae": 6.576222978080121,
+        "pixel_fraction_rgb_mae_gt15": 0.08975736961451247,
+        "edge_symmetric_median_px": 0.0,
+        "edge_symmetric_p90_px": 1.0,
+        "edge_fraction_farther_than_2px": 0.01023050691007923,
+        "edge_fraction_farther_than_4px": 0.0023418202952061058,
+        "overlap_fraction": 0.95703125
+      },
+      "geometry_and_grade": {
+        "rgb_mae": 4.781706349206349,
+        "pixel_fraction_rgb_mae_gt15": 0.05215192743764172,
+        "edge_symmetric_median_px": 0.0,
+        "edge_symmetric_p90_px": 1.0,
+        "edge_fraction_farther_than_2px": 0.010244293598281325,
+        "edge_fraction_farther_than_4px": 0.002444222415663606,
+        "overlap_fraction": 0.95703125
+      }
+    },
+    {
+      "method": "ecc_affine",
+      "accepted": true,
+      "bounds": {
+        "singular_values": [
+          1.0323688997600113,
+          1.0137858346707247
+        ],
+        "anisotropy": 1.0183303656983158,
+        "determinant": 1.046600966731301
+      },
+      "matrix_right_to_left": [
+        [
+          1.0137900090570482,
+          -0.0005674893365930409,
+          -8.159327436630246
+        ],
+        [
+          7.822924906208898e-06,
+          1.0323646444941241,
+          -12.554678268080151
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "color": {
+        "gain": [
+          0.9256475743025199,
+          0.917580525545929,
+          0.9279774545993146
+        ],
+        "bias": [
+          13.151119394453358,
+          12.178644559294375,
+          9.230098050980084
+        ],
+        "confidence": 0.7128688100016961,
+        "residual_mae": 4.690846865570306,
+        "sample_count": 38348
+      },
+      "score": 4.086570023210286,
+      "raw": {
+        "rgb_mae": 31.787042705971277,
+        "pixel_fraction_rgb_mae_gt15": 0.49799773242630385,
+        "edge_symmetric_median_px": 2.0,
+        "edge_symmetric_p90_px": 6.0,
+        "edge_fraction_farther_than_2px": 0.3912865179818622,
+        "edge_fraction_farther_than_4px": 0.18018599127712018,
+        "overlap_fraction": 0.95703125
+      },
+      "geometry_only": {
+        "rgb_mae": 6.486000755857898,
+        "pixel_fraction_rgb_mae_gt15": 0.08568027210884353,
+        "edge_symmetric_median_px": 0.0,
+        "edge_symmetric_p90_px": 1.0,
+        "edge_fraction_farther_than_2px": 0.010210492573992948,
+        "edge_fraction_farther_than_4px": 0.0024105139437974143,
+        "overlap_fraction": 0.95703125
+      },
+      "geometry_and_grade": {
+        "rgb_mae": 4.673079365079365,
+        "pixel_fraction_rgb_mae_gt15": 0.048563492063492066,
+        "edge_symmetric_median_px": 0.0,
+        "edge_symmetric_p90_px": 1.0,
+        "edge_fraction_farther_than_2px": 0.009414548821895257,
+        "edge_fraction_farther_than_4px": 0.0024651027197585486,
+        "overlap_fraction": 0.95703125
+      }
+    }
+  ],
+  "feature_matches": 1858,
+  "feature_inlier_fraction": 0.9268030139935415,
+  "flat_region_color_fit": {
+    "gain": [
+      0.9368357953243108,
+      0.9213404769545029,
+      0.9243211714571572
+    ],
+    "bias": [
+      11.124541872221323,
+      11.570557921963148,
+      9.711617178088636
+    ],
+    "confidence": 0.8971603110063805,
+    "residual_mae": 1.9094001499440718,
+    "sample_count": 32774
+  },
+  "frame": 3240,
+  "left_source_frame": 3239,
+  "right_source_frame": 3240,
+  "time_seconds": 135.135,
+  "neighbors": [
+    {
+      "frames": [
+        3238,
+        3239
+      ],
+      "rgb_mae": 3.347272864701436,
+      "pixel_fraction_rgb_mae_gt15": 0.03453174603174603,
+      "edge_symmetric_median_px": 0.0,
+      "edge_symmetric_p90_px": 1.0,
+      "edge_fraction_farther_than_2px": 0.009267960445206955,
+      "edge_fraction_farther_than_4px": 0.0027200386236863206,
+      "overlap_fraction": 0.95703125
+    },
+    {
+      "frames": [
+        3240,
+        3241
+      ],
+      "rgb_mae": 0.7593416477702191,
+      "pixel_fraction_rgb_mae_gt15": 5.555555555555556e-05,
+      "edge_symmetric_median_px": 0.0,
+      "edge_symmetric_p90_px": 0.0,
+      "edge_fraction_farther_than_2px": 0.0021071579387388615,
+      "edge_fraction_farther_than_4px": 0.00043508119382867184,
+      "overlap_fraction": 0.95703125
+    },
+    {
+      "frames": [
+        3241,
+        3242
+      ],
+      "rgb_mae": 0.3935177626606198,
+      "pixel_fraction_rgb_mae_gt15": 5.555555555555556e-05,
+      "edge_symmetric_median_px": 0.0,
+      "edge_symmetric_p90_px": 0.0,
+      "edge_fraction_farther_than_2px": 0.0015347885402455662,
+      "edge_fraction_farther_than_4px": 0.0003964870395634379,
+      "overlap_fraction": 0.95703125
+    }
+  ],
+  "regions": [
+    {
+      "name": "Characters",
+      "roi": [
+        470,
+        220,
+        795,
+        610
+      ],
+      "metrics": {
+        "rgb_mae": 5.270585141354373,
+        "pixel_fraction_rgb_mae_gt15": 0.05944773175542406,
+        "edge_symmetric_median_px": 0.0,
+        "edge_symmetric_p90_px": 1.0,
+        "edge_fraction_farther_than_2px": 0.02659007258092257,
+        "edge_fraction_farther_than_4px": 0.008358845584947198,
+        "overlap_fraction": 1.0
+      }
+    },
+    {
+      "name": "Door and inscription",
+      "roi": [
+        285,
+        0,
+        975,
+        345
+      ],
+      "metrics": {
+        "rgb_mae": 5.27215805032807,
+        "pixel_fraction_rgb_mae_gt15": 0.057239887518927106,
+        "edge_symmetric_median_px": 0.0,
+        "edge_symmetric_p90_px": 1.0,
+        "edge_fraction_farther_than_2px": 0.013344464590861064,
+        "edge_fraction_farther_than_4px": 0.0034959105673028007,
+        "overlap_fraction": 0.9710144927536232
+      }
+    },
+    {
+      "name": "Right lion and column",
+      "roi": [
+        895,
+        0,
+        1280,
+        645
+      ],
+      "metrics": {
+        "rgb_mae": 4.148714610673666,
+        "pixel_fraction_rgb_mae_gt15": 0.035821522309711286,
+        "edge_symmetric_median_px": 0.0,
+        "edge_symmetric_p90_px": 1.0,
+        "edge_fraction_farther_than_2px": 0.0064446302946819505,
+        "edge_fraction_farther_than_4px": 0.0012626883783473542,
+        "overlap_fraction": 0.9589247961340984
+      }
+    }
+  ]
+}

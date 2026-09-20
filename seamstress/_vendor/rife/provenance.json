@@ -1,0 +1,7 @@
+{
+  "model": "RIFE 4.25",
+  "source": "https://github.com/hzwer/Practical-RIFE",
+  "weights_url": "https://drive.google.com/file/d/1ZKjcbmt1hypiFprJPIKW0Tt0lr_2i7bg/view",
+  "sha256": "6615790efd627772917205db291f51cd392528a157ecbb2ecaeec3bff8eb6de2",
+  "license": "MIT; see seamstress/_vendor/rife/LICENSE"
+}

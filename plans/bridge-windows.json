@@ -1,0 +1,716 @@
+{
+  "schema_version": 1,
+  "purpose": "Candidate original-source windows for temporal synthesis; not the geometry repair plan schema.",
+  "source": "IYTYT.mp4",
+  "source_sha256": "c64928f7c72aee57d4a536d1af711d354a0358109510b175407d011621e855ca",
+  "fps_fraction": "24000/1001",
+  "frame_index_convention": "Zero based, inclusive preserved endpoints. Frame names first frame after the original join.",
+  "measurement_proxy": {
+    "width": 640,
+    "height": 360,
+    "common_crop_fraction": 0.036763888888888895,
+    "note": "Original proxy was cropped to match encoded v2 for audit. Generate anchors from the original uncropped full-resolution source; rates are diagnostic, not direct render transforms."
+  },
+  "warnings": [
+    "Selections are based on decoded frame strips and measured picture evolution; normal-speed generated-bridge review is still required.",
+    "A single generated midpoint or confidence-weighted cross-morph does not establish coherent evolving linework.",
+    "Do not synthesize over the already warped v2 footage: it has late camera reversals and local shape distortion."
+  ],
+  "seams": [
+    {
+      "frame": 361,
+      "start": 349,
+      "end": 365,
+      "start_time_seconds": 14.556208333333334,
+      "end_time_seconds": 15.223541666666666,
+      "synthesized_frame_count": 15,
+      "endpoint_policy": "Preserve source frames start/end; replace every interior frame start+1 through end-1.",
+      "rationale": "Incoming zoom eases into the near-stationary continuation. Starting twelve frames early provides enough net magnification to match incoming velocity without a zoom reversal. End before the larger mouth/face change later in the continuation.",
+      "content_constraints": "Car windshield, sloth face, woman mouth/eyes, sky texture; preserve dialogue mouth action using interior references.",
+      "velocity_feasibility": {
+        "status": "supported camera trend; local character motion remains separate",
+        "incoming_estimator": "Four-frame source interval ending at start.",
+        "outgoing_estimator": "Four-frame source interval starting at end.",
+        "incoming": {
+          "scale_pct_per_frame": 0.3009977129633912,
+          "dx_per_frame": 0.5312587892182563,
+          "dy_per_frame": 0.06950389649529853,
+          "nonrigid_p90": 0.7032010494346277,
+          "inlier_fraction": 0.9277456647398844,
+          "point_count": 346,
+          "motion_p50_per_frame": 0.5929971933364868
+        },
+        "average_between_endpoints": {
+          "scale_pct_per_frame": 0.15661481439483982,
+          "dx_per_frame": 0.33508049514824734,
+          "dy_per_frame": 0.026146723493058133,
+          "nonrigid_p90": 2.941405399057222,
+          "inlier_fraction": 0.580441640378549,
+          "point_count": 317,
+          "motion_p50_per_frame": 0.2443351149559021
+        },
+        "outgoing": {
+          "scale_pct_per_frame": -0.0015859916247196182,
+          "dx_per_frame": 0.0016614986297582846,
+          "dy_per_frame": -0.004340994562653577,
+          "nonrigid_p90": 0.5622602828787439,
+          "inlier_fraction": 0.9223057644110275,
+          "point_count": 399,
+          "motion_p50_per_frame": 0.00773376040160656
+        }
+      },
+      "v2_residual_evidence": {
+        "cut_raw_difference": 4.986987847222222,
+        "edge_step_pct": 5.770668024400449,
+        "mean_rgb_step": [
+          0.25963107638888516,
+          0.1800086805555452,
+          -0.09468315972220864
+        ],
+        "before": {
+          "scale_pct_per_frame": 0.2851800882664124,
+          "dx_per_frame": 0.5827923261195878,
+          "dy_per_frame": 0.07179628768536617,
+          "nonrigid_p90": 1.9273409161442008
+        },
+        "after": {
+          "scale_pct_per_frame": 0.046218335842240776,
+          "dx_per_frame": 0.12486567460454978,
+          "dy_per_frame": 0.023664664421161774,
+          "nonrigid_p90": 1.033974574431571
+        },
+        "late": {
+          "scale_pct_per_frame": -0.09711366207991734,
+          "dx_per_frame": -0.16411616899438286,
+          "dy_per_frame": -0.020044646228825513,
+          "nonrigid_p90": 1.180723991914361
+        }
+      },
+      "interior_reference_frames": [
+        357,
+        359,
+        360,
+        361,
+        363
+      ]
+    },
+    {
+      "frame": 722,
+      "start": 714,
+      "end": 726,
+      "start_time_seconds": 29.77975,
+      "end_time_seconds": 30.28025,
+      "synthesized_frame_count": 11,
+      "endpoint_policy": "Preserve source frames start/end; replace every interior frame start+1 through end-1.",
+      "rationale": "Track the moving car and retain the separate lateral bridge/skyline motion. End at the beginning of the woman\u2019s turn, leaving the turn itself in the source.",
+      "content_constraints": "Stationary car relative to frame; moving bridge lights/poles; standing woman balance.",
+      "velocity_feasibility": {
+        "status": "multilayer parallax; one affine camera derivative is not reliable",
+        "incoming_estimator": "Four-frame source interval ending at start.",
+        "outgoing_estimator": "Four-frame source interval starting at end.",
+        "incoming": {
+          "scale_pct_per_frame": 0.012340859946591287,
+          "dx_per_frame": 1.8730614621662625,
+          "dy_per_frame": 0.004366268064046608,
+          "nonrigid_p90": 8.384680603878722,
+          "inlier_fraction": 0.4903100775193798,
+          "point_count": 516,
+          "motion_p50_per_frame": 1.8525888919830322
+        },
+        "average_between_endpoints": {
+          "scale_pct_per_frame": -0.05644829934843276,
+          "dx_per_frame": -0.07210137487498969,
+          "dy_per_frame": -0.3090505225389227,
+          "nonrigid_p90": 15.37593618692653,
+          "inlier_fraction": 0.4175,
+          "point_count": 400,
+          "motion_p50_per_frame": 0.4464823305606842
+        },
+        "outgoing": {
+          "scale_pct_per_frame": 0.004617326560829582,
+          "dx_per_frame": 0.14362392319571882,
+          "dy_per_frame": 0.015475491131361707,
+          "nonrigid_p90": 3.054413979296417,
+          "inlier_fraction": 0.8690228690228691,
+          "point_count": 481,
+          "motion_p50_per_frame": 0.2649540305137634
+        }
+      },
+      "v2_residual_evidence": {
+        "cut_raw_difference": 5.757319155092593,
+        "edge_step_pct": 4.560198471477284,
+        "mean_rgb_step": [
+          0.07683593750000028,
+          0.18223524305555827,
+          -0.1544661458333394
+        ],
+        "before": {
+          "scale_pct_per_frame": -0.01727223673171352,
+          "dx_per_frame": 2.0840148070756612,
+          "dy_per_frame": -0.02729083102389751,
+          "nonrigid_p90": 8.827327755997166
+        },
+        "after": {
+          "scale_pct_per_frame": -0.013666201483031326,
+          "dx_per_frame": 0.1901318747382703,
+          "dy_per_frame": -0.037868633931225304,
+          "nonrigid_p90": 2.970683068043376
+        },
+        "late": {
+          "scale_pct_per_frame": -0.008326128493363338,
+          "dx_per_frame": 0.007755980783912264,
+          "dy_per_frame": -0.04709886818591258,
+          "nonrigid_p90": 1.5410917186328705
+        }
+      },
+      "interior_reference_frames": [
+        718,
+        720,
+        721,
+        722,
+        724
+      ]
+    },
+    {
+      "frame": 1083,
+      "start": 1075,
+      "end": 1089,
+      "start_time_seconds": 44.83645833333333,
+      "end_time_seconds": 45.420375,
+      "synthesized_frame_count": 13,
+      "endpoint_policy": "Preserve source frames start/end; replace every interior frame start+1 through end-1.",
+      "rationale": "Bridge local scale/linework changes while retaining the skateboarder\u2019s bumper hand, balance, and lateral background motion. Endpoint lies before the more extended arm motion.",
+      "content_constraints": "Skateboard wheels, bumper hand contact, hair, and skyline have separate motion.",
+      "velocity_feasibility": {
+        "status": "multilayer subject motion; one affine derivative is not reliable",
+        "incoming_estimator": "Four-frame source interval ending at start.",
+        "outgoing_estimator": "Four-frame source interval starting at end.",
+        "incoming": {
+          "scale_pct_per_frame": 0.0027364783019123706,
+          "dx_per_frame": 0.11282181037370265,
+          "dy_per_frame": -0.015067838047144733,
+          "nonrigid_p90": 2.718778585434957,
+          "inlier_fraction": 0.8568376068376068,
+          "point_count": 468,
+          "motion_p50_per_frame": 0.14263999462127686
+        },
+        "average_between_endpoints": {
+          "scale_pct_per_frame": -0.02464262150608798,
+          "dx_per_frame": -0.10202752904939823,
+          "dy_per_frame": -0.012284554518996873,
+          "nonrigid_p90": 12.566414355878585,
+          "inlier_fraction": 0.43915343915343913,
+          "point_count": 378,
+          "motion_p50_per_frame": 0.1902346909046173
+        },
+        "outgoing": {
+          "scale_pct_per_frame": -0.02260010228904985,
+          "dx_per_frame": -0.3388907475600149,
+          "dy_per_frame": -0.009757175563471776,
+          "nonrigid_p90": 7.460310302082948,
+          "inlier_fraction": 0.6913875598086124,
+          "point_count": 418,
+          "motion_p50_per_frame": 0.4037061929702759
+        }
+      },
+      "v2_residual_evidence": {
+        "cut_raw_difference": 7.3930454282407405,
+        "edge_step_pct": -1.3585097694087445,
+        "mean_rgb_step": [
+          0.2516276041666714,
+          0.1885503472222183,
+          -0.009583333333338828
+        ],
+        "before": {
+          "scale_pct_per_frame": -0.027468765409477403,
+          "dx_per_frame": -0.006821632655629628,
+          "dy_per_frame": -0.03383001280906939,
+          "nonrigid_p90": 2.202957533578022
+        },
+        "after": {
+          "scale_pct_per_frame": -0.019937520751711624,
+          "dx_per_frame": -0.2560012921210273,
+          "dy_per_frame": -0.05038386666057448,
+          "nonrigid_p90": 9.119634381361235
+        },
+        "late": {
+          "scale_pct_per_frame": 0.06258265503025218,
+          "dx_per_frame": -0.14693932803122323,
+          "dy_per_frame": -0.018957154319423353,
+          "nonrigid_p90": 8.429087428842896
+        }
+      },
+      "interior_reference_frames": [
+        1079,
+        1081,
+        1082,
+        1083,
+        1085
+      ]
+    },
+    {
+      "frame": 1444,
+      "start": 1436,
+      "end": 1448,
+      "start_time_seconds": 59.893166666666666,
+      "end_time_seconds": 60.39366666666667,
+      "synthesized_frame_count": 11,
+      "endpoint_policy": "Preserve source frames start/end; replace every interior frame start+1 through end-1.",
+      "rationale": "Cover the foreground redraw and car/skateboarder proportion shift. End before the next conspicuous leg push around frame 1452; retain the preparatory crouch through interior conditioning frames.",
+      "content_constraints": "Raised torso before cut, crouch after cut, rigid truck/car geometry, moving road markings.",
+      "velocity_feasibility": {
+        "status": "mixed local motion; measured scale changes cannot all be attributed to camera",
+        "incoming_estimator": "Four-frame source interval ending at start.",
+        "outgoing_estimator": "Four-frame source interval starting at end.",
+        "incoming": {
+          "scale_pct_per_frame": 0.13711522800345932,
+          "dx_per_frame": -0.13787905025793634,
+          "dy_per_frame": -0.04249675321276669,
+          "nonrigid_p90": 10.232916686618506,
+          "inlier_fraction": 0.5748373101952278,
+          "point_count": 461,
+          "motion_p50_per_frame": 0.24190585315227509
+        },
+        "average_between_endpoints": {
+          "scale_pct_per_frame": -0.11465268698739317,
+          "dx_per_frame": 0.001137770391428224,
+          "dy_per_frame": 0.03737091997019822,
+          "nonrigid_p90": 30.52009850259468,
+          "inlier_fraction": 0.6299435028248588,
+          "point_count": 354,
+          "motion_p50_per_frame": 0.14669169485569
+        },
+        "outgoing": {
+          "scale_pct_per_frame": 0.04021348872984554,
+          "dx_per_frame": 0.01608033727666225,
+          "dy_per_frame": -0.014998614506502861,
+          "nonrigid_p90": 13.083774401617086,
+          "inlier_fraction": 0.7790178571428571,
+          "point_count": 448,
+          "motion_p50_per_frame": 0.05466761440038681
+        }
+      },
+      "v2_residual_evidence": {
+        "cut_raw_difference": 7.254703414351852,
+        "edge_step_pct": 5.918589863358492,
+        "mean_rgb_step": [
+          0.11252170138889284,
+          0.09425781250000398,
+          -0.1309331597222183
+        ],
+        "before": {
+          "scale_pct_per_frame": -0.07621722093900107,
+          "dx_per_frame": -0.010544688869288166,
+          "dy_per_frame": -0.008517079514966497,
+          "nonrigid_p90": 20.5011448641105
+        },
+        "after": {
+          "scale_pct_per_frame": -0.02468997899762737,
+          "dx_per_frame": 0.019670344043589694,
+          "dy_per_frame": 0.011258906467247698,
+          "nonrigid_p90": 13.315895194395434
+        },
+        "late": {
+          "scale_pct_per_frame": 0.014814725440137622,
+          "dx_per_frame": 0.022582113121288216,
+          "dy_per_frame": 0.03230556688374975,
+          "nonrigid_p90": 13.831730357810835
+        }
+      },
+      "interior_reference_frames": [
+        1440,
+        1442,
+        1443,
+        1444,
+        1446
+      ]
+    },
+    {
+      "frame": 1805,
+      "start": 1797,
+      "end": 1811,
+      "start_time_seconds": 74.949875,
+      "end_time_seconds": 75.53379166666667,
+      "synthesized_frame_count": 13,
+      "endpoint_policy": "Preserve source frames start/end; replace every interior frame start+1 through end-1.",
+      "rationale": "Bridge the cadence/appearance reset while continuing forward street travel and depth parallax. Distant car, near shops, trees, poles, and road markings must move at different speeds.",
+      "content_constraints": "Preserve rigid streetlights and shop corners; avoid v2\u2019s bent poles and breathing foreground.",
+      "velocity_feasibility": {
+        "status": "strong parallax; global similarity support is too low for camera constraints",
+        "incoming_estimator": "Four-frame source interval ending at start.",
+        "outgoing_estimator": "Four-frame source interval starting at end.",
+        "incoming": {
+          "scale_pct_per_frame": 0.04588138538015318,
+          "dx_per_frame": 0.0017680362909970881,
+          "dy_per_frame": -0.0581250730761127,
+          "nonrigid_p90": 41.07844373706351,
+          "inlier_fraction": 0.18472906403940886,
+          "point_count": 406,
+          "motion_p50_per_frame": 3.915621042251587
+        },
+        "average_between_endpoints": {
+          "scale_pct_per_frame": -0.015867206138575618,
+          "dx_per_frame": 0.03345910479554196,
+          "dy_per_frame": 0.1293960180568417,
+          "nonrigid_p90": 40.392273808693844,
+          "inlier_fraction": 0.2857142857142857,
+          "point_count": 175,
+          "motion_p50_per_frame": 0.7923606038093567
+        },
+        "outgoing": {
+          "scale_pct_per_frame": 0.15856868700860893,
+          "dx_per_frame": -0.024183693326008893,
+          "dy_per_frame": 0.038844054908068415,
+          "nonrigid_p90": 23.82318133091893,
+          "inlier_fraction": 0.3046594982078853,
+          "point_count": 558,
+          "motion_p50_per_frame": 1.9349865913391113
+        }
+      },
+      "v2_residual_evidence": {
+        "cut_raw_difference": 15.58023582175926,
+        "edge_step_pct": 2.241868828428628,
+        "mean_rgb_step": [
+          -0.9653428819444443,
+          -0.6767187500000063,
+          0.20993923611111143
+        ],
+        "before": {
+          "scale_pct_per_frame": 0.06918807066842447,
+          "dx_per_frame": -0.020706118468950763,
+          "dy_per_frame": 0.03208923579036593,
+          "nonrigid_p90": 39.14736735439706
+        },
+        "after": {
+          "scale_pct_per_frame": 0.13238741758574424,
+          "dx_per_frame": -0.00743642212231066,
+          "dy_per_frame": 0.09174953364501448,
+          "nonrigid_p90": 20.03823057244766
+        },
+        "late": {
+          "scale_pct_per_frame": 0.36466123197953504,
+          "dx_per_frame": 0.09468217316417338,
+          "dy_per_frame": 0.025199263063569788,
+          "nonrigid_p90": 22.887208072658023
+        }
+      },
+      "interior_reference_frames": [
+        1801,
+        1803,
+        1804,
+        1805,
+        1807
+      ]
+    },
+    {
+      "frame": 2166,
+      "start": 2154,
+      "end": 2170,
+      "start_time_seconds": 89.83975,
+      "end_time_seconds": 90.50708333333333,
+      "synthesized_frame_count": 15,
+      "endpoint_policy": "Preserve source frames start/end; replace every interior frame start+1 through end-1.",
+      "rationale": "Asymmetric window spans outgoing rapid aerial pullout and the slower continuation. Scale rate can decelerate smoothly; vertical drift changes direction once, rather than wobbling after the join.",
+      "content_constraints": "Rigid street grid, skyline silhouette, stars/clouds; broad darkness and detail change.",
+      "velocity_feasibility": {
+        "status": "camera scale and vertical drift strongly supported",
+        "incoming_estimator": "Four-frame source interval ending at start.",
+        "outgoing_estimator": "Four-frame source interval starting at end.",
+        "incoming": {
+          "scale_pct_per_frame": -1.47348899188946,
+          "dx_per_frame": -0.09149895227662341,
+          "dy_per_frame": 4.470061967490494,
+          "nonrigid_p90": 0.5324645510793248,
+          "inlier_fraction": 0.9951823812801102,
+          "point_count": 1453,
+          "motion_p50_per_frame": 5.068009376525879
+        },
+        "average_between_endpoints": {
+          "scale_pct_per_frame": -1.0157009092483293,
+          "dx_per_frame": -0.04809618921242631,
+          "dy_per_frame": 2.38889150203347,
+          "nonrigid_p90": 3.1653785970458523,
+          "inlier_fraction": 0.8159675236806495,
+          "point_count": 739,
+          "motion_p50_per_frame": 2.7134897708892822
+        },
+        "outgoing": {
+          "scale_pct_per_frame": -0.42009892869783183,
+          "dx_per_frame": -0.038716961151266105,
+          "dy_per_frame": -0.34806347543439387,
+          "nonrigid_p90": 0.15298767545077802,
+          "inlier_fraction": 1.0,
+          "point_count": 1599,
+          "motion_p50_per_frame": 0.9441935420036316
+        }
+      },
+      "v2_residual_evidence": {
+        "cut_raw_difference": 18.17398148148148,
+        "edge_step_pct": -0.5614602394630075,
+        "mean_rgb_step": [
+          -0.4071657986111106,
+          0.12592447916666316,
+          0.654322916666672
+        ],
+        "before": {
+          "scale_pct_per_frame": -1.5225457016449395,
+          "dx_per_frame": -0.07303917146012395,
+          "dy_per_frame": 4.960533800690413,
+          "nonrigid_p90": 0.5380401000315047
+        },
+        "after": {
+          "scale_pct_per_frame": -0.5544410402964273,
+          "dx_per_frame": -0.048278059753968705,
+          "dy_per_frame": 0.3385445922530863,
+          "nonrigid_p90": 0.35218233270376026
+        },
+        "late": {
+          "scale_pct_per_frame": -0.09756088230375992,
+          "dx_per_frame": -0.020339790355464515,
+          "dy_per_frame": -1.704860563499814,
+          "nonrigid_p90": 0.5406504626247334
+        }
+      },
+      "interior_reference_frames": [
+        2162,
+        2164,
+        2165,
+        2166,
+        2168
+      ]
+    },
+    {
+      "frame": 2527,
+      "start": 2519,
+      "end": 2537,
+      "start_time_seconds": 105.06329166666667,
+      "end_time_seconds": 105.81404166666667,
+      "synthesized_frame_count": 17,
+      "endpoint_policy": "Preserve source frames start/end; replace every interior frame start+1 through end-1.",
+      "rationale": "Extend ten frames after the cut to clear the seven held startup intervals and reach real action. Keep the apartment background fixed while continuing the woman\u2019s gesture and sloth tablet motion.",
+      "content_constraints": "Woman knees, hands and mouth; sloth/tablet; fixed lamp, bookcase, floor lines.",
+      "velocity_feasibility": {
+        "status": "mostly fixed camera; local redraw and excessive startup hold dominate",
+        "incoming_estimator": "Four-frame source interval ending at start.",
+        "outgoing_estimator": "Four-frame source interval starting at end.",
+        "incoming": {
+          "scale_pct_per_frame": 0.03452150041074464,
+          "dx_per_frame": 0.22731890734330307,
+          "dy_per_frame": 0.02984818417060353,
+          "nonrigid_p90": 2.0176973048399582,
+          "inlier_fraction": 0.7255639097744361,
+          "point_count": 532,
+          "motion_p50_per_frame": 0.3202558159828186
+        },
+        "average_between_endpoints": {
+          "scale_pct_per_frame": -0.030457959085472552,
+          "dx_per_frame": 0.017027343819544665,
+          "dy_per_frame": 0.04608730184814173,
+          "nonrigid_p90": 5.882890746902475,
+          "inlier_fraction": 0.3151750972762646,
+          "point_count": 514,
+          "motion_p50_per_frame": 0.13848033547401428
+        },
+        "outgoing": {
+          "scale_pct_per_frame": -0.0047273971104599966,
+          "dx_per_frame": -0.007056539159421504,
+          "dy_per_frame": 0.00081441442998198,
+          "nonrigid_p90": 2.5786715046425828,
+          "inlier_fraction": 0.8219424460431655,
+          "point_count": 556,
+          "motion_p50_per_frame": 0.002725728787481785
+        }
+      },
+      "v2_residual_evidence": {
+        "cut_raw_difference": 4.747837094907408,
+        "edge_step_pct": 4.108464729065675,
+        "mean_rgb_step": [
+          -0.2315234374999875,
+          -0.1616232638888846,
+          -0.029878472222222285
+        ],
+        "before": {
+          "scale_pct_per_frame": -0.03325847262973802,
+          "dx_per_frame": 0.21532679282110223,
+          "dy_per_frame": 0.047863157019335745,
+          "nonrigid_p90": 2.383287651349502
+        },
+        "after": {
+          "scale_pct_per_frame": -0.013237502633156595,
+          "dx_per_frame": 0.08577608857190455,
+          "dy_per_frame": 0.015647243469231853,
+          "nonrigid_p90": 1.8292206589542683
+        },
+        "late": {
+          "scale_pct_per_frame": -0.0223385850501856,
+          "dx_per_frame": -0.12297867870029222,
+          "dy_per_frame": 0.04705962595208035,
+          "nonrigid_p90": 4.423849148247786
+        }
+      },
+      "interior_reference_frames": [
+        2523,
+        2525,
+        2526,
+        2527,
+        2529,
+        2533,
+        2535
+      ]
+    },
+    {
+      "frame": 2888,
+      "start": 2880,
+      "end": 2892,
+      "start_time_seconds": 120.12,
+      "end_time_seconds": 120.6205,
+      "synthesized_frame_count": 11,
+      "endpoint_policy": "Preserve source frames start/end; replace every interior frame start+1 through end-1.",
+      "rationale": "Use a short asymmetric window before the continuation pose changes. Preserve forward flight and separate character/Empire State Building/distant-river trajectories; smooth the strong grading reset.",
+      "content_constraints": "Hand contact, two distinct bodies, jet flames, skyline and river parallax.",
+      "velocity_feasibility": {
+        "status": "multiple depth layers; across-window similarity support is weak",
+        "incoming_estimator": "Four-frame source interval ending at start.",
+        "outgoing_estimator": "Four-frame source interval starting at end.",
+        "incoming": {
+          "scale_pct_per_frame": 1.5420130387370445,
+          "dx_per_frame": 1.5834736768913018,
+          "dy_per_frame": 2.317001585222222,
+          "nonrigid_p90": 8.109552558516198,
+          "inlier_fraction": 0.8168389955686853,
+          "point_count": 677,
+          "motion_p50_per_frame": 4.098455429077148
+        },
+        "average_between_endpoints": {
+          "scale_pct_per_frame": 0.8694300482553041,
+          "dx_per_frame": 1.1062090556318651,
+          "dy_per_frame": 0.5735387937571303,
+          "nonrigid_p90": 11.392220047787616,
+          "inlier_fraction": 0.2761061946902655,
+          "point_count": 565,
+          "motion_p50_per_frame": 1.6625252962112427
+        },
+        "outgoing": {
+          "scale_pct_per_frame": -0.022089586858509147,
+          "dx_per_frame": -0.029955929276169968,
+          "dy_per_frame": -0.7623620727266811,
+          "nonrigid_p90": 3.385868965923542,
+          "inlier_fraction": 0.5591677503250976,
+          "point_count": 769,
+          "motion_p50_per_frame": 0.7396714687347412
+        }
+      },
+      "v2_residual_evidence": {
+        "cut_raw_difference": 11.043901909722223,
+        "edge_step_pct": 4.384936361265512,
+        "mean_rgb_step": [
+          0.39157118055555884,
+          0.2260026041666663,
+          0.15919270833333599
+        ],
+        "before": {
+          "scale_pct_per_frame": 1.7937178938755016,
+          "dx_per_frame": 1.8271659822470525,
+          "dy_per_frame": 2.5839602240872352,
+          "nonrigid_p90": 10.238921415738684
+        },
+        "after": {
+          "scale_pct_per_frame": 0.5039704728202254,
+          "dx_per_frame": 0.4449603434643308,
+          "dy_per_frame": 0.17759063038850087,
+          "nonrigid_p90": 3.739792547309973
+        },
+        "late": {
+          "scale_pct_per_frame": -0.5814015090378266,
+          "dx_per_frame": -0.47732313016015837,
+          "dy_per_frame": -2.202816383933893,
+          "nonrigid_p90": 7.949364828052001
+        }
+      },
+      "interior_reference_frames": [
+        2884,
+        2886,
+        2887,
+        2888,
+        2890
+      ]
+    },
+    {
+      "frame": 3240,
+      "start": 3228,
+      "end": 3244,
+      "start_time_seconds": 134.6345,
+      "end_time_seconds": 135.30183333333332,
+      "synthesized_frame_count": 15,
+      "endpoint_policy": "Preserve source frames start/end; replace every interior frame start+1 through end-1.",
+      "rationale": "Start twelve frames before the join so the push-in can decelerate without backing away. End after initial holds but before the woman turns around at approximately 3245; retain that natural turn untouched.",
+      "content_constraints": "Rigid stairs/columns/door/lion outlines, both figures walking away, library sign.",
+      "velocity_feasibility": {
+        "status": "incoming camera trend strong; across-window redraw limits one-transform fit",
+        "incoming_estimator": "Four-frame source interval ending at start.",
+        "outgoing_estimator": "Four-frame source interval starting at end.",
+        "incoming": {
+          "scale_pct_per_frame": 0.898016239246302,
+          "dx_per_frame": 0.0755759048209228,
+          "dy_per_frame": 0.40429051002647753,
+          "nonrigid_p90": 3.506366684428225,
+          "inlier_fraction": 0.8661567877629063,
+          "point_count": 523,
+          "motion_p50_per_frame": 1.878958821296692
+        },
+        "average_between_endpoints": {
+          "scale_pct_per_frame": 0.4144433635814293,
+          "dx_per_frame": -0.02703131839137285,
+          "dy_per_frame": 0.35512139168342927,
+          "nonrigid_p90": 6.782356042607761,
+          "inlier_fraction": 0.3510392609699769,
+          "point_count": 433,
+          "motion_p50_per_frame": 0.8121058940887451
+        },
+        "outgoing": {
+          "scale_pct_per_frame": -8.612155585341341e-05,
+          "dx_per_frame": -0.0029233960076169296,
+          "dy_per_frame": -0.0018447190307213646,
+          "nonrigid_p90": 0.07538760679658045,
+          "inlier_fraction": 0.9448584202682563,
+          "point_count": 671,
+          "motion_p50_per_frame": 0.0030863285064697266
+        }
+      },
+      "v2_residual_evidence": {
+        "cut_raw_difference": 12.585532407407408,
+        "edge_step_pct": 0.3687510297597285,
+        "mean_rgb_step": [
+          -0.42345486111111086,
+          -0.1494227430555526,
+          -0.14382378472221546
+        ],
+        "before": {
+          "scale_pct_per_frame": 0.9688854663537194,
+          "dx_per_frame": 0.08600853817365817,
+          "dy_per_frame": 0.5267094413837157,
+          "nonrigid_p90": 3.116558321960937
+        },
+        "after": {
+          "scale_pct_per_frame": -0.0027201411886612625,
+          "dx_per_frame": -0.0010057535388767747,
+          "dy_per_frame": 0.06687003511611067,
+          "nonrigid_p90": 1.0404794209350836
+        },
+        "late": {
+          "scale_pct_per_frame": -0.16927943828848324,
+          "dx_per_frame": -0.012192021556529653,
+          "dy_per_frame": -0.029221281696855783,
+          "nonrigid_p90": 0.9068659690897367
+        }
+      },
+      "interior_reference_frames": [
+        3236,
+        3238,
+        3239,
+        3240,
+        3242
+      ]
+    }
+  ]
+}

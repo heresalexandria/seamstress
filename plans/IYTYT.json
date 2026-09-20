@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "source": {
+    "path": "IYTYT.mp4",
+    "width": 1280,
+    "height": 720,
+    "fps": 23.976023976023978,
+    "fps_fraction": "24000/1001",
+    "frame_count": 3347,
+    "frame_count_estimated": false,
+    "duration": 139.597792,
+    "has_audio": true,
+    "codec_name": "h264",
+    "pix_fmt": "yuv420p",
+    "color_space": "bt709",
+    "color_transfer": "bt709",
+    "color_primaries": "bt709",
+    "color_range": "tv"
+  },
+  "source_sha256": "c64928f7c72aee57d4a536d1af711d354a0358109510b175407d011621e855ca",
+  "detection": "explicit frame indices",
+  "config": {
+    "flow_width": 640,
+    "max_displacement": 0.045,
+    "color_spatial_sigma": 24,
+    "local_color_strength": 0.8,
+    "geometry_strength": 1.0,
+    "color_strength": 1.0,
+    "crop_fraction": 0.0,
+    "max_crop_fraction": 0.04,
+    "velocity_strength": 1.0,
+    "texture_strength": 0.5,
+    "texture_window": 10
+  },
+  "seams": [
+    {
+      "frame": 361,
+      "time": 15.056708333333333,
+      "enabled": true,
+      "before": 14,
+      "after": 22,
+      "metrics": {
+        "raw_mae": 14.159523963928223,
+        "registered_mae": 6.103704929351807,
+        "registered_p90": 11.0,
+        "mean_rgb_step": [
+          -0.5593719482421875,
+          0.21807098388671875,
+          -0.3377532958984375
+        ],
+        "motion_p50": 2.458883285522461,
+        "sharpness_step": 1.7345094680786133
+      },
+      "fill_startup_hold": false
+    },
+    {
+      "frame": 722,
+      "time": 30.113416666666666,
+      "enabled": true,
+      "before": 14,
+      "after": 22,
+      "metrics": {
+        "raw_mae": 15.323896408081055,
+        "registered_mae": 5.352497100830078,
+        "registered_p90": 11.0,
+        "mean_rgb_step": [
+          -0.225921630859375,
+          -0.25057220458984375,
+          0.2355499267578125
+        ],
+        "motion_p50": 2.2753610610961914,
+        "sharpness_step": 2.218167304992676
+      },
+      "fill_startup_hold": false
+    },
+    {
+      "frame": 1083,
+      "time": 45.170125,
+      "enabled": true,
+      "before": 14,
+      "after": 22,
+      "metrics": {
+        "raw_mae": 12.841041564941406,
+        "registered_mae": 4.4713311195373535,
+        "registered_p90": 10.0,
+        "mean_rgb_step": [
+          -0.1226043701171875,
+          0.28794097900390625,
+          -0.30567169189453125
+        ],
+        "motion_p50": 1.9013315439224243,
+        "sharpness_step": -0.08885002136230469
+      },
+      "fill_startup_hold": false
+    },
+    {
+      "frame": 1444,
+      "time": 60.22683333333333,
+      "enabled": true,
+      "before": 14,
+      "after": 22,
+      "metrics": {
+        "raw_mae": 13.438714027404785,
+        "registered_mae": 4.718460559844971,
+        "registered_p90": 10.0,
+        "mean_rgb_step": [
+          -0.2759552001953125,
+          -0.23448944091796875,
+          0.307861328125
+        ],
+        "motion_p50": 2.5651633739471436,
+        "sharpness_step": 1.7249488830566406
+      },
+      "fill_startup_hold": false
+    },
+    {
+      "frame": 1805,
+      "time": 75.28354166666666,
+      "enabled": true,
+      "before": 14,
+      "after": 22,
+      "metrics": {
+        "raw_mae": 13.077715873718262,
+        "registered_mae": 5.23738431930542,
+        "registered_p90": 10.0,
+        "mean_rgb_step": [
+          0.052906036376953125,
+          0.1836700439453125,
+          0.767181396484375
+        ],
+        "motion_p50": 1.9510788917541504,
+        "sharpness_step": 1.5109024047851562
+      },
+      "fill_startup_hold": false
+    },
+    {
+      "frame": 2166,
+      "time": 90.34025,
+      "enabled": true,
+      "before": 14,
+      "after": 22,
+      "metrics": {
+        "raw_mae": 16.70024871826172,
+        "registered_mae": 6.433803558349609,
+        "registered_p90": 13.0,
+        "mean_rgb_step": [
+          -4.757106781005859,
+          -5.517219543457031,
+          -4.4637908935546875
+        ],
+        "motion_p50": 1.4191479682922363,
+        "sharpness_step": 1.8343791961669922
+      },
+      "fill_startup_hold": false
+    },
+    {
+      "frame": 2527,
+      "time": 105.39695833333333,
+      "enabled": true,
+      "before": 14,
+      "after": 22,
+      "metrics": {
+        "raw_mae": 13.731938362121582,
+        "registered_mae": 4.777640342712402,
+        "registered_p90": 10.0,
+        "mean_rgb_step": [
+          -0.3812255859375,
+          -0.5985107421875,
+          -0.38037109375
+        ],
+        "motion_p50": 1.8124768733978271,
+        "sharpness_step": 2.4391727447509766
+      },
+      "fill_startup_hold": true
+    },
+    {
+      "frame": 2888,
+      "time": 120.45366666666666,
+      "enabled": true,
+      "before": 14,
+      "after": 22,
+      "metrics": {
+        "raw_mae": 22.044374465942383,
+        "registered_mae": 6.004502296447754,
+        "registered_p90": 12.0,
+        "mean_rgb_step": [
+          -6.650291442871094,
+          -6.75128173828125,
+          -8.27081298828125
+        ],
+        "motion_p50": 4.670215129852295,
+        "sharpness_step": 2.2068099975585938
+      },
+      "fill_startup_hold": false
+    },
+    {
+      "frame": 3240,
+      "time": 135.135,
+      "enabled": true,
+      "before": 14,
+      "after": 22,
+      "metrics": {
+        "raw_mae": 31.18639373779297,
+        "registered_mae": 5.996433734893799,
+        "registered_p90": 14.0,
+        "mean_rgb_step": [
+          -6.8951263427734375,
+          -5.629150390625,
+          -4.191596984863281
+        ],
+        "motion_p50": 4.291201591491699,
+        "sharpness_step": 2.289043426513672
+      },
+      "fill_startup_hold": true
+    }
+  ],
+  "notes": [
+    "Frame indices are zero based, and identify the first frame after the edit.",
+    "Candidate detection is heuristic, not proof of an edit.",
+    "No image-generation service is called. Reproduction uses only local deterministic processing.",
+    "Output quality requires visual review; numerical improvement is not perceptual certification."
+  ]
+}

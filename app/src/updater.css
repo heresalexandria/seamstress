@@ -1,0 +1,35 @@
+.update-controls{position:absolute;right:165px;display:flex;gap:8px;align-items:center;-webkit-app-region:no-drag;app-region:no-drag}
+.version-button{font-family:'IBM Plex Mono',monospace;font-size:9px;color:#a9b8b5;padding:5px 8px;background:transparent;border:1px solid #3a4a4c;border-radius:4px;letter-spacing:0}
+.version-button:hover{border-color:var(--teal);color:var(--teal)}
+.update-offer{background:#29423f;color:#a8e1d3;border:1px solid #497c70;border-radius:4px;font-size:9px;padding:5px 8px;gap:6px;letter-spacing:0}
+.update-offer i{display:inline-block;width:4px;height:4px;border-radius:50%;background:#80d3bb}
+.update-backdrop{z-index:1200;-webkit-app-region:no-drag}
+.update-modal{position:relative;width:min(460px,calc(100vw - 60px));max-height:calc(100vh - 76px);overflow-y:auto;padding:35px;border:1px solid #536d66;border-radius:15px;background:radial-gradient(ellipse at top,#30423f,#212d30 70%);box-shadow:0 30px 100px #0007;color:var(--text);scrollbar-width:thin;scrollbar-color:#516560 transparent}
+.update-mark{width:47px;height:47px;padding:8px;border:1px solid #46645b;border-radius:10px;background:#2e4940;color:var(--teal);margin-bottom:22px}
+.update-mark .weave-mark{width:30px;height:30px}
+.update-modal>.eyebrow{display:flex;gap:10px;align-items:center;font-size:9px;color:#9eb5ac}
+.update-modal>.eyebrow .mono{font-size:9px;color:#d397bf}
+.update-modal h2{font:35px/1.15 'Instrument Serif',serif;font-weight:400;letter-spacing:-.3px;margin:9px 0 13px;color:#e5eade}
+.update-modal>p{font-size:11px;line-height:1.7;color:#b0c0b9}
+.update-version-row{display:flex;align-items:center;gap:24px;margin:23px 0;padding:16px 0;border-block:1px solid #3d524b;color:#789d8d}
+.update-version-row>span{display:flex;flex-direction:column;gap:5px;font-size:8px;letter-spacing:.08em;color:#93aca1}
+.update-version-row strong{font:13px 'IBM Plex Mono',monospace;color:#d7e4da}
+.update-version-row>span:last-child strong{color:#8ed2bd}
+.update-notes{background:#1c292bcc;border:1px solid #3c514a;border-radius:7px;padding:17px;margin:17px 0;max-height:215px;overflow:auto;scrollbar-width:thin;scrollbar-color:#516560 transparent}
+.update-notes h3{font-size:10px;font-weight:600;color:#d0dfd5;margin:0 0 11px}
+.update-notes>div{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;line-height:1.8;color:#acbdb4}
+.update-download{margin:22px 0;font-size:10px;color:#b5d8c7}
+.update-download>div{display:flex;justify-content:space-between;gap:10px;margin-bottom:9px}
+.update-download strong{font-size:9px;font-weight:400}
+.update-download progress{appearance:none;width:100%;height:4px;border:0;border-radius:3px;display:block;background:#1d3029}
+.update-download progress::-webkit-progress-bar{background:#1d3029;border-radius:3px}
+.update-download progress::-webkit-progress-value{background:#80d0b5;border-radius:3px}
+.update-modal .update-error,.update-modal .update-busy{display:flex;gap:8px;align-items:flex-start;padding:11px;border-radius:6px;font-size:10px}
+.update-error{background:#4e33424d;border:1px solid #8c5778;color:#eed2e0!important;overflow-wrap:anywhere}
+.update-busy{background:#57502d44;border:1px solid #827647;color:#e0d7ad!important}
+.update-error svg,.update-busy svg{flex:none;margin-top:2px}
+.update-actions{display:flex;flex-direction:column;align-items:center;gap:15px;margin-top:22px}
+.update-actions .primary-button{min-height:40px}
+.update-actions .text-button{font-size:10px;color:#acc6b8}
+.update-modal .update-footnote{font-size:9px;color:#8fa99c;text-align:center;margin:22px 0 0}
+.update-modal .update-checked{font-size:8px;color:#7e958b;text-align:center;margin:8px 0 0}

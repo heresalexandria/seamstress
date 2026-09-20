@@ -1,0 +1,90 @@
+{
+  "name": "seamstress",
+  "productName": "Seamstress",
+  "version": "0.2.0",
+  "description": "A thoughtful desktop studio for repairing seams in continuous video.",
+  "private": true,
+  "author": "Seamstress",
+  "license": "UNLICENSED",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "node scripts/dev.cjs",
+    "web": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "start": "electron .",
+    "test": "node --test electron/*.test.cjs",
+    "test:e2e": "node scripts/ui-smoke.cjs --workflow",
+    "package:backend": "../.venv/bin/python ../scripts/package_backend.py",
+    "package": "npm run build && npm run package:backend && electron-builder --mac --dir",
+    "dist": "npm run build && npm run package:backend && electron-builder --mac dmg zip",
+    "dist:release": "node ../scripts/signing/preflight.cjs && npm run build && npm run package:backend && electron-builder --config electron-builder.release.cjs --mac dmg zip --publish never && node ../scripts/signing/finalize-release.cjs release"
+  },
+  "dependencies": {
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "@fontsource/instrument-serif": "5.3.0",
+    "@fontsource/manrope": "5.3.0",
+    "electron-updater": "6.8.9",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "electron": "44.4.3",
+    "electron-builder": "26.15.3",
+    "typescript": "7.0.2",
+    "vite": "8.3.0"
+  },
+  "build": {
+    "appId": "studio.seamstress.desktop",
+    "productName": "Seamstress",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*.cjs",
+      "package.json",
+      "!electron/*.test.cjs"
+    ],
+    "extraResources": [
+      {
+        "from": "resources/backend",
+        "to": "backend"
+      },
+      {
+        "from": "assets/licenses",
+        "to": "licenses/fonts"
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.video",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "identity": null,
+      "hardenedRuntime": false,
+      "icon": "assets/icon.icns"
+    },
+    "artifactName": "Seamstress-${version}-${arch}.${ext}",
+    "asar": true,
+    "electronDist": "node_modules/electron/dist",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "heresalexandria",
+        "repo": "seamstress",
+        "releaseType": "release"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heresalexandria/seamstress.git"
+  },
+  "homepage": "https://github.com/heresalexandria/seamstress"
+}

@@ -1,0 +1,837 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "f4ea566",
+  "seam_frame": 361,
+  "purpose": "Read-only visual diagnosis and conservative flat-color ROI selection; no image, geometry, or grade modification.",
+  "coordinate_system": {
+    "space": "native baseline output pixels",
+    "width": 1280,
+    "height": 720,
+    "rectangle_format": "[x0,y0,x1,y1], x1/y1 exclusive",
+    "origin": "upper left",
+    "same_rectangle_used_in_both_images": true
+  },
+  "images": {
+    "left": {
+      "source_frame": 360,
+      "path": "research/local-color-diagnosis/361/left.png",
+      "sha256": "147b57a90924e1d7df20a957e9660b871c6d312c47b93d0eb636a4c0efe10ee9"
+    },
+    "right": {
+      "source_frame": 361,
+      "path": "research/local-color-diagnosis/361/right.png",
+      "sha256": "a16b9ef18c529c12e392befc4f7e982b2df304d023d602b73a616601238d355f"
+    }
+  },
+  "visual_findings": [
+    "The largest conspicuous color shifts in these selected flat interiors are the brown hair and sloth fur. Hair becomes more saturated orange/brown: red increases while blue decreases.",
+    "The sloth body and pale face fur become warmer/yellower. The upper body patch changes more than the nearby lower body patch despite nearly identical outgoing RGB.",
+    "Skin brightens modestly in all three channels. This is a different residual from the hair and fur warming.",
+    "The pale hood loses some red/blue without a comparable green change. Blue hood paint loses red while slightly gaining blue. The teal jacket darkens in red/green while gaining blue.",
+    "The central windshield-blue region changes little, while the selected exterior sky region loses some red. Fine texture/grain is more apparent on the incoming image.",
+    "Buildings, poles and windshield reflections also change spatially. They cannot be safely interpreted as pure color mismatch at fixed coordinates, so no fine building or reflection region was included."
+  ],
+  "regions": [
+    {
+      "id": "sky_upper_left",
+      "material": "Night sky outside windshield",
+      "rect_xyxy": [
+        65,
+        35,
+        130,
+        75
+      ],
+      "selection": "Broad dark-blue sky, away from the visible stars and poles.",
+      "left": {
+        "median_rgb": [
+          6.0,
+          29.0,
+          89.0
+        ],
+        "mean_rgb": [
+          6.418846153846154,
+          29.66423076923077,
+          88.57884615384616
+        ],
+        "std_rgb": [
+          0.552921102474956,
+          0.9089032828165944,
+          1.8910555191033873
+        ],
+        "p10_rgb": [
+          6.0,
+          29.0,
+          86.0
+        ],
+        "p90_rgb": [
+          7.0,
+          31.0,
+          91.0
+        ]
+      },
+      "right": {
+        "median_rgb": [
+          3.0,
+          28.0,
+          89.0
+        ],
+        "mean_rgb": [
+          3.5746153846153845,
+          27.78423076923077,
+          89.86346153846154
+        ],
+        "std_rgb": [
+          1.4165945915068265,
+          1.3931085138498733,
+          2.4726604207235776
+        ],
+        "p10_rgb": [
+          1.0,
+          26.0,
+          87.0
+        ],
+        "p90_rgb": [
+          5.0,
+          30.0,
+          93.0
+        ]
+      },
+      "right_minus_left_median_rgb": [
+        -3.0,
+        -1.0,
+        0.0
+      ]
+    },
+    {
+      "id": "windshield_blue_center",
+      "material": "Blue field seen through windshield",
+      "rect_xyxy": [
+        615,
+        280,
+        680,
+        380
+      ],
+      "selection": "Central blue interior field, away from reflection streaks, figures and windshield edges.",
+      "left": {
+        "median_rgb": [
+          38.0,
+          72.0,
+          122.0
+        ],
+        "mean_rgb": [
+          37.66523076923077,
+          71.8276923076923,
+          122.32292307692308
+        ],
+        "std_rgb": [
+          1.5725306480490293,
+          1.8839816830979021,
+          1.8777721849835842
+        ],
+        "p10_rgb": [
+          36.0,
+          69.0,
+          120.0
+        ],
+        "p90_rgb": [
+          39.0,
+          73.0,
+          124.0
+        ]
+      },
+      "right": {
+        "median_rgb": [
+          39.0,
+          74.0,
+          123.0
+        ],
+        "mean_rgb": [
+          39.33553846153846,
+          74.3503076923077,
+          123.00769230769231
+        ],
+        "std_rgb": [
+          2.8688563954563895,
+          2.756400924969463,
+          2.849443005884706
+        ],
+        "p10_rgb": [
+          37.0,
+          72.0,
+          120.0
+        ],
+        "p90_rgb": [
+          42.0,
+          76.0,
+          125.0
+        ]
+      },
+      "right_minus_left_median_rgb": [
+        1.0,
+        2.0,
+        1.0
+      ]
+    },
+    {
+      "id": "hood_gray_upper_right",
+      "material": "Pale gray/lavender hood paint",
+      "rect_xyxy": [
+        995,
+        545,
+        1145,
+        590
+      ],
+      "selection": "Broad paint field above the diagonal reflected highlight; excludes black contours.",
+      "left": {
+        "median_rgb": [
+          172.0,
+          174.0,
+          183.0
+        ],
+        "mean_rgb": [
+          171.4162962962963,
+          174.15777777777777,
+          182.07155555555556
+        ],
+        "std_rgb": [
+          0.9967508256855567,
+          0.5623978645271235,
+          1.1620185927413287
+        ],
+        "p10_rgb": [
+          170.0,
+          174.0,
+          181.0
+        ],
+        "p90_rgb": [
+          172.0,
+          175.0,
+          183.0
+        ]
+      },
+      "right": {
+        "median_rgb": [
+          169.0,
+          174.0,
+          181.0
+        ],
+        "mean_rgb": [
+          169.3002962962963,
+          173.91022222222222,
+          180.9794074074074
+        ],
+        "std_rgb": [
+          1.6673909274075702,
+          0.928048104330061,
+          1.4299514433418918
+        ],
+        "p10_rgb": [
+          167.0,
+          173.0,
+          179.0
+        ],
+        "p90_rgb": [
+          171.0,
+          175.0,
+          183.0
+        ]
+      },
+      "right_minus_left_median_rgb": [
+        -3.0,
+        0.0,
+        -2.0
+      ]
+    },
+    {
+      "id": "hood_blue_lower_left",
+      "material": "Blue painted hood panel",
+      "rect_xyxy": [
+        260,
+        668,
+        307,
+        694
+      ],
+      "selection": "Interior blue paint below the obvious highlight streaks, away from the panel boundary.",
+      "left": {
+        "median_rgb": [
+          30.0,
+          105.0,
+          147.0
+        ],
+        "mean_rgb": [
+          29.28396072013093,
+          105.36088379705402,
+          147.08346972176759
+        ],
+        "std_rgb": [
+          1.110309385421016,
+          0.8571687903241146,
+          0.5378368570137582
+        ],
+        "p10_rgb": [
+          27.0,
+          104.0,
+          146.0
+        ],
+        "p90_rgb": [
+          30.0,
+          107.0,
+          148.0
+        ]
+      },
+      "right": {
+        "median_rgb": [
+          26.0,
+          105.0,
+          149.0
+        ],
+        "mean_rgb": [
+          26.31505728314239,
+          104.71112929623568,
+          149.4369885433715
+        ],
+        "std_rgb": [
+          1.3294175490160736,
+          1.4955002451629686,
+          1.8531717663544949
+        ],
+        "p10_rgb": [
+          25.0,
+          103.0,
+          147.0
+        ],
+        "p90_rgb": [
+          28.0,
+          107.0,
+          151.0
+        ]
+      },
+      "right_minus_left_median_rgb": [
+        -4.0,
+        0.0,
+        2.0
+      ]
+    },
+    {
+      "id": "sloth_fur_body_upper",
+      "material": "Sloth muted brown body fur",
+      "rect_xyxy": [
+        273,
+        443,
+        289,
+        455
+      ],
+      "selection": "Small flat fur interior; both frames have less than 1.01 byte maximum channel standard deviation.",
+      "left": {
+        "median_rgb": [
+          100.0,
+          94.0,
+          82.0
+        ],
+        "mean_rgb": [
+          99.66666666666667,
+          93.66666666666667,
+          82.046875
+        ],
+        "std_rgb": [
+          0.6718548123582126,
+          0.6718548123582126,
+          1.001504402241115
+        ],
+        "p10_rgb": [
+          99.0,
+          93.0,
+          81.0
+        ],
+        "p90_rgb": [
+          101.0,
+          95.0,
+          83.0
+        ]
+      },
+      "right": {
+        "median_rgb": [
+          108.0,
+          99.0,
+          80.0
+        ],
+        "mean_rgb": [
+          107.83333333333333,
+          98.59375,
+          79.43229166666667
+        ],
+        "std_rgb": [
+          0.8799463367476217,
+          0.6626670386903718,
+          0.7185046380717068
+        ],
+        "p10_rgb": [
+          107.0,
+          98.0,
+          78.0
+        ],
+        "p90_rgb": [
+          109.0,
+          99.0,
+          80.0
+        ]
+      },
+      "right_minus_left_median_rgb": [
+        8.0,
+        5.0,
+        -2.0
+      ]
+    },
+    {
+      "id": "sloth_fur_body_lower",
+      "material": "Sloth muted brown body fur",
+      "rect_xyxy": [
+        300,
+        455,
+        316,
+        467
+      ],
+      "selection": "Second flat fur interior above the wiper/forearm boundary; both frames have less than 0.97 byte maximum channel standard deviation.",
+      "left": {
+        "median_rgb": [
+          99.0,
+          93.0,
+          79.0
+        ],
+        "mean_rgb": [
+          99.375,
+          93.375,
+          79.703125
+        ],
+        "std_rgb": [
+          0.4841229182759271,
+          0.4841229182759271,
+          0.9630629441396861
+        ],
+        "p10_rgb": [
+          99.0,
+          93.0,
+          79.0
+        ],
+        "p90_rgb": [
+          100.0,
+          94.0,
+          81.0
+        ]
+      },
+      "right": {
+        "median_rgb": [
+          103.0,
+          97.0,
+          77.0
+        ],
+        "mean_rgb": [
+          103.45833333333333,
+          97.36458333333333,
+          77.35416666666667
+        ],
+        "std_rgb": [
+          0.5574620066774859,
+          0.7161789765057964,
+          0.7497105923102748
+        ],
+        "p10_rgb": [
+          103.0,
+          97.0,
+          77.0
+        ],
+        "p90_rgb": [
+          104.0,
+          98.0,
+          78.0
+        ]
+      },
+      "right_minus_left_median_rgb": [
+        4.0,
+        4.0,
+        -2.0
+      ]
+    },
+    {
+      "id": "sloth_light_cheek",
+      "material": "Sloth pale cheek fur",
+      "rect_xyxy": [
+        390,
+        365,
+        406,
+        375
+      ],
+      "selection": "Small pale fill between eye/muzzle/mouth contours; stays inside the face fill on both sides.",
+      "left": {
+        "median_rgb": [
+          141.0,
+          129.0,
+          105.0
+        ],
+        "mean_rgb": [
+          140.46875,
+          128.53125,
+          104.69375
+        ],
+        "std_rgb": [
+          0.7238946314899704,
+          1.0180979508377375,
+          0.4872996383130198
+        ],
+        "p10_rgb": [
+          139.0,
+          127.0,
+          104.0
+        ],
+        "p90_rgb": [
+          141.0,
+          130.0,
+          105.0
+        ]
+      },
+      "right": {
+        "median_rgb": [
+          146.0,
+          131.0,
+          100.0
+        ],
+        "mean_rgb": [
+          145.8125,
+          130.80625,
+          101.1625
+        ],
+        "std_rgb": [
+          0.7598313957714566,
+          0.8838613791200538,
+          1.8058498691751739
+        ],
+        "p10_rgb": [
+          145.0,
+          130.0,
+          99.0
+        ],
+        "p90_rgb": [
+          146.1,
+          132.0,
+          104.0
+        ]
+      },
+      "right_minus_left_median_rgb": [
+        5.0,
+        2.0,
+        -5.0
+      ]
+    },
+    {
+      "id": "woman_face_cheek",
+      "material": "Woman skin, left cheek",
+      "rect_xyxy": [
+        830,
+        264,
+        850,
+        292
+      ],
+      "selection": "Flat cheek below the eye and left of the nose; avoids face and hair contours.",
+      "left": {
+        "median_rgb": [
+          178.0,
+          154.0,
+          145.0
+        ],
+        "mean_rgb": [
+          177.99821428571428,
+          154.0,
+          145.01607142857142
+        ],
+        "std_rgb": [
+          0.2770965996005779,
+          0.253546276418555,
+          0.3606921846128892
+        ],
+        "p10_rgb": [
+          178.0,
+          154.0,
+          145.0
+        ],
+        "p90_rgb": [
+          178.0,
+          154.0,
+          145.0
+        ]
+      },
+      "right": {
+        "median_rgb": [
+          180.0,
+          157.0,
+          147.0
+        ],
+        "mean_rgb": [
+          179.86964285714285,
+          157.34107142857144,
+          146.90892857142856
+        ],
+        "std_rgb": [
+          1.1239947322666903,
+          0.7581172133540217,
+          1.1713509882845075
+        ],
+        "p10_rgb": [
+          178.0,
+          157.0,
+          145.0
+        ],
+        "p90_rgb": [
+          181.0,
+          158.0,
+          148.0
+        ]
+      },
+      "right_minus_left_median_rgb": [
+        2.0,
+        3.0,
+        2.0
+      ]
+    },
+    {
+      "id": "woman_hair",
+      "material": "Woman brown hair",
+      "rect_xyxy": [
+        753,
+        275,
+        772,
+        320
+      ],
+      "selection": "Broad flat hair interior left of the face, avoiding strand and silhouette outlines.",
+      "left": {
+        "median_rgb": [
+          100.0,
+          73.0,
+          44.0
+        ],
+        "mean_rgb": [
+          100.57076023391812,
+          73.45263157894736,
+          44.66315789473684
+        ],
+        "std_rgb": [
+          0.6783787051923317,
+          0.5575967426589132,
+          0.8858797944173832
+        ],
+        "p10_rgb": [
+          100.0,
+          73.0,
+          44.0
+        ],
+        "p90_rgb": [
+          101.0,
+          74.0,
+          46.0
+        ]
+      },
+      "right": {
+        "median_rgb": [
+          108.0,
+          75.0,
+          36.0
+        ],
+        "mean_rgb": [
+          108.09239766081872,
+          75.1625730994152,
+          35.98713450292398
+        ],
+        "std_rgb": [
+          1.5959380400976646,
+          1.3343865748748307,
+          1.9784980065761826
+        ],
+        "p10_rgb": [
+          106.0,
+          74.0,
+          34.0
+        ],
+        "p90_rgb": [
+          110.0,
+          77.0,
+          38.0
+        ]
+      },
+      "right_minus_left_median_rgb": [
+        8.0,
+        2.0,
+        -8.0
+      ]
+    },
+    {
+      "id": "woman_teal_collar",
+      "material": "Woman teal jacket/collar",
+      "rect_xyxy": [
+        783,
+        392,
+        798,
+        412
+      ],
+      "selection": "Small flat teal interior, away from purple piping, necklace, hand and seam outlines.",
+      "left": {
+        "median_rgb": [
+          49.0,
+          131.0,
+          171.0
+        ],
+        "mean_rgb": [
+          49.53666666666667,
+          131.21666666666667,
+          171.19666666666666
+        ],
+        "std_rgb": [
+          1.0871931240073656,
+          0.512889418447637,
+          0.5335312132908049
+        ],
+        "p10_rgb": [
+          49.0,
+          131.0,
+          171.0
+        ],
+        "p90_rgb": [
+          52.0,
+          132.0,
+          172.0
+        ]
+      },
+      "right": {
+        "median_rgb": [
+          45.0,
+          127.0,
+          173.0
+        ],
+        "mean_rgb": [
+          45.10666666666667,
+          127.16666666666667,
+          173.45666666666668
+        ],
+        "std_rgb": [
+          1.4771443922499767,
+          1.051454019705834,
+          1.186643258196081
+        ],
+        "p10_rgb": [
+          43.0,
+          126.0,
+          172.0
+        ],
+        "p90_rgb": [
+          46.0,
+          128.0,
+          175.0
+        ]
+      },
+      "right_minus_left_median_rgb": [
+        -4.0,
+        -4.0,
+        2.0
+      ]
+    }
+  ],
+  "similar_rgb_evidence": {
+    "observed": true,
+    "same_rgb_across_different_materials_established": false,
+    "comparison": "Two different flat locations in the same sloth-body fur material, about 30 output pixels apart.",
+    "conditional_examples": [
+      {
+        "left_exact_rgb": [
+          100,
+          94,
+          80
+        ],
+        "locations": [
+          {
+            "region": "sloth_fur_body_upper",
+            "left_exact_rgb_count": 12,
+            "right_rgb_median_at_these_coordinates": [
+              109.0,
+              99.0,
+              79.0
+            ]
+          },
+          {
+            "region": "sloth_fur_body_lower",
+            "left_exact_rgb_count": 10,
+            "right_rgb_median_at_these_coordinates": [
+              103.0,
+              97.0,
+              77.0
+            ]
+          }
+        ]
+      },
+      {
+        "left_exact_rgb": [
+          100,
+          94,
+          81
+        ],
+        "locations": [
+          {
+            "region": "sloth_fur_body_upper",
+            "left_exact_rgb_count": 23,
+            "right_rgb_median_at_these_coordinates": [
+              108.0,
+              99.0,
+              79.0
+            ]
+          },
+          {
+            "region": "sloth_fur_body_lower",
+            "left_exact_rgb_count": 51,
+            "right_rgb_median_at_these_coordinates": [
+              104.0,
+              98.0,
+              78.0
+            ]
+          }
+        ]
+      },
+      {
+        "left_exact_rgb": [
+          100,
+          94,
+          82
+        ],
+        "locations": [
+          {
+            "region": "sloth_fur_body_upper",
+            "left_exact_rgb_count": 8,
+            "right_rgb_median_at_these_coordinates": [
+              108.0,
+              98.0,
+              79.5
+            ]
+          },
+          {
+            "region": "sloth_fur_body_lower",
+            "left_exact_rgb_count": 6,
+            "right_rgb_median_at_these_coordinates": [
+              104.5,
+              98.0,
+              78.5
+            ]
+          }
+        ]
+      }
+    ],
+    "interpretation": "The observed exact-RGB conditional differences suggest that one pointwise color mapping may not explain every local residual. They do not by themselves prove a required spatial color field. These are small samples at fixed output coordinates; motion, fine source shading/texture, quantization and imperfect correspondence remain possible contributors."
+  },
+  "measurement_limits": [
+    "Byte RGB statistics are empirical SDR values, not linear-light reflectance estimates.",
+    "Regions were chosen visually and checked for low internal variation, not segmented by a model.",
+    "These measurements use the already protected-LUT baseline, not the uncorrected source frames.",
+    "Fixed output rectangles sample flat interiors but are not dense tracked correspondences.",
+    "Different colors can require different changes under a purely color-dependent nonlinear LUT; material-dependent deltas alone do not establish spatial dependence."
+  ],
+  "excluded_candidates": [
+    "Windowed city facades: narrow structures and changed relative positioning leave no conservative shared flat patch at this view.",
+    "White diagonal windshield/hood reflections: substantial pattern changes should not train a color-only model.",
+    "Lamp globes, outlines, eyes, mouth, wipers and panel borders: changing edges, occlusion or saturated highlights."
+  ]
+}

@@ -1,0 +1,484 @@
+{
+  "adjacent_source_frames": [
+    2887,
+    2888
+  ],
+  "neural": false,
+  "pose_blend": false,
+  "foreground_map": [
+    [
+      1.0112559494756197,
+      0.0003723705079726314,
+      -6.602788912990691
+    ],
+    [
+      -0.0003723705079726314,
+      1.0112559494756197,
+      -6.03751841605491
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "background_method": "DIS forward/backward confidence, normalized Gaussian residual smoothing; independent source foreground",
+  "accepted_jacobian": true,
+  "smoothing_trials": [
+    {
+      "sigma": 0,
+      "jacobian_min": -19.812788009643555,
+      "jacobian_max": 8.584027290344238,
+      "background_p01": 0.4994315803050995,
+      "background_p99": 1.2862616777420044
+    },
+    {
+      "sigma": 4,
+      "jacobian_min": -0.26692160964012146,
+      "jacobian_max": 2.290830612182617,
+      "background_p01": 0.5701822638511658,
+      "background_p99": 1.2442078590393066
+    },
+    {
+      "sigma": 8,
+      "jacobian_min": 0.32897379994392395,
+      "jacobian_max": 1.5723506212234497,
+      "background_p01": 0.6720268726348877,
+      "background_p99": 1.1892549991607666
+    },
+    {
+      "sigma": 12,
+      "jacobian_min": 0.5451747179031372,
+      "jacobian_max": 1.377959132194519,
+      "background_p01": 0.7351365685462952,
+      "background_p99": 1.144485354423523
+    },
+    {
+      "sigma": 18,
+      "jacobian_min": 0.6699550747871399,
+      "jacobian_max": 1.2348848581314087,
+      "background_p01": 0.7978355884552002,
+      "background_p99": 1.0887131690979004
+    },
+    {
+      "sigma": 24,
+      "jacobian_min": 0.7372746467590332,
+      "jacobian_max": 1.1389967203140259,
+      "background_p01": 0.833959698677063,
+      "background_p99": 1.050750732421875
+    }
+  ],
+  "foreground_or_disocclusion_holes": 4612,
+  "previous_source_background_pixels_used": 10883,
+  "straight_lines": [
+    {
+      "source_line": [
+        624,
+        686,
+        1023,
+        686
+      ],
+      "length": 399.0,
+      "transformed_straightness_p95": 1.7063491344451904,
+      "max": 2.9176688194274902
+    },
+    {
+      "source_line": [
+        633,
+        712,
+        1024,
+        712
+      ],
+      "length": 391.0,
+      "transformed_straightness_p95": 0.0,
+      "max": 0.0
+    },
+    {
+      "source_line": [
+        354,
+        719,
+        354,
+        365
+      ],
+      "length": 354.0,
+      "transformed_straightness_p95": 1.5702730417251587,
+      "max": 1.5999822616577148
+    },
+    {
+      "source_line": [
+        350,
+        719,
+        350,
+        365
+      ],
+      "length": 354.0,
+      "transformed_straightness_p95": 1.5915323495864868,
+      "max": 1.6214903593063354
+    },
+    {
+      "source_line": [
+        334,
+        719,
+        334,
+        367
+      ],
+      "length": 352.0,
+      "transformed_straightness_p95": 1.667124629020691,
+      "max": 1.698586106300354
+    },
+    {
+      "source_line": [
+        361,
+        719,
+        361,
+        369
+      ],
+      "length": 350.0,
+      "transformed_straightness_p95": 1.5105565786361694,
+      "max": 1.5416820049285889
+    },
+    {
+      "source_line": [
+        420,
+        719,
+        420,
+        388
+      ],
+      "length": 331.0,
+      "transformed_straightness_p95": 1.1034361124038696,
+      "max": 1.1367088556289673
+    },
+    {
+      "source_line": [
+        367,
+        690,
+        367,
+        371
+      ],
+      "length": 319.0,
+      "transformed_straightness_p95": 0.028201721608638763,
+      "max": 0.044798918068408966
+    },
+    {
+      "source_line": [
+        337,
+        678,
+        337,
+        361
+      ],
+      "length": 317.0,
+      "transformed_straightness_p95": 0.021998843178153038,
+      "max": 0.023477397859096527
+    },
+    {
+      "source_line": [
+        394,
+        690,
+        394,
+        383
+      ],
+      "length": 307.0,
+      "transformed_straightness_p95": 0.027309859171509743,
+      "max": 0.034196481108665466
+    },
+    {
+      "source_line": [
+        378,
+        690,
+        378,
+        384
+      ],
+      "length": 306.0,
+      "transformed_straightness_p95": 0.026545977219939232,
+      "max": 0.03325394168496132
+    },
+    {
+      "source_line": [
+        356,
+        688,
+        356,
+        382
+      ],
+      "length": 306.0,
+      "transformed_straightness_p95": 0.01989176496863365,
+      "max": 0.028734257444739342
+    },
+    {
+      "source_line": [
+        404,
+        690,
+        404,
+        387
+      ],
+      "length": 303.0,
+      "transformed_straightness_p95": 0.028433680534362793,
+      "max": 0.03397192806005478
+    },
+    {
+      "source_line": [
+        369,
+        664,
+        369,
+        371
+      ],
+      "length": 293.0,
+      "transformed_straightness_p95": 0.028982574120163918,
+      "max": 0.0445924736559391
+    },
+    {
+      "source_line": [
+        708,
+        684,
+        1000,
+        684
+      ],
+      "length": 292.0,
+      "transformed_straightness_p95": 0.6099923253059387,
+      "max": 0.6315117478370667
+    },
+    {
+      "source_line": [
+        381,
+        690,
+        381,
+        461
+      ],
+      "length": 229.0,
+      "transformed_straightness_p95": 0.01330582331866026,
+      "max": 0.023213937878608704
+    },
+    {
+      "source_line": [
+        784,
+        715,
+        986,
+        715
+      ],
+      "length": 202.0,
+      "transformed_straightness_p95": 0.0,
+      "max": 0.0
+    },
+    {
+      "source_line": [
+        326,
+        679,
+        326,
+        480
+      ],
+      "length": 199.0,
+      "transformed_straightness_p95": 0.025861814618110657,
+      "max": 0.03351183608174324
+    },
+    {
+      "source_line": [
+        322,
+        530,
+        322,
+        352
+      ],
+      "length": 178.0,
+      "transformed_straightness_p95": 0.025892246514558792,
+      "max": 0.03014577366411686
+    },
+    {
+      "source_line": [
+        422,
+        719,
+        422,
+        543
+      ],
+      "length": 176.0,
+      "transformed_straightness_p95": 0.9957787990570068,
+      "max": 1.0393308401107788
+    },
+    {
+      "source_line": [
+        410,
+        562,
+        410,
+        388
+      ],
+      "length": 174.0,
+      "transformed_straightness_p95": 0.025165779516100883,
+      "max": 0.03164098411798477
+    },
+    {
+      "source_line": [
+        391,
+        553,
+        391,
+        381
+      ],
+      "length": 172.0,
+      "transformed_straightness_p95": 0.028433993458747864,
+      "max": 0.03362235426902771
+    },
+    {
+      "source_line": [
+        57,
+        704,
+        57,
+        532
+      ],
+      "length": 172.0,
+      "transformed_straightness_p95": 0.7547257542610168,
+      "max": 3.5946202278137207
+    },
+    {
+      "source_line": [
+        767,
+        693,
+        914,
+        693
+      ],
+      "length": 147.0,
+      "transformed_straightness_p95": 0.37265902757644653,
+      "max": 0.4122661352157593
+    },
+    {
+      "source_line": [
+        59,
+        682,
+        59,
+        538
+      ],
+      "length": 144.0,
+      "transformed_straightness_p95": 0.009253198280930519,
+      "max": 0.009720120579004288
+    },
+    {
+      "source_line": [
+        1128,
+        394,
+        1263,
+        394
+      ],
+      "length": 135.0,
+      "transformed_straightness_p95": 0.03782539442181587,
+      "max": 0.04113168269395828
+    },
+    {
+      "source_line": [
+        232,
+        719,
+        232,
+        603
+      ],
+      "length": 116.0,
+      "transformed_straightness_p95": 1.7184672355651855,
+      "max": 1.8134344816207886
+    },
+    {
+      "source_line": [
+        804,
+        710,
+        919,
+        710
+      ],
+      "length": 115.0,
+      "transformed_straightness_p95": 0.0,
+      "max": 0.0
+    },
+    {
+      "source_line": [
+        320,
+        363,
+        320,
+        477
+      ],
+      "length": 114.0,
+      "transformed_straightness_p95": 0.028344139456748962,
+      "max": 0.036932919174432755
+    },
+    {
+      "source_line": [
+        97,
+        328,
+        211,
+        328
+      ],
+      "length": 114.0,
+      "transformed_straightness_p95": 0.2059621512889862,
+      "max": 0.3286062479019165
+    },
+    {
+      "source_line": [
+        444,
+        719,
+        444,
+        606
+      ],
+      "length": 113.0,
+      "transformed_straightness_p95": 0.8295778036117554,
+      "max": 0.8765202760696411
+    },
+    {
+      "source_line": [
+        422,
+        407,
+        422,
+        520
+      ],
+      "length": 113.0,
+      "transformed_straightness_p95": 0.019330397248268127,
+      "max": 0.025313688442111015
+    },
+    {
+      "source_line": [
+        627,
+        715,
+        739,
+        715
+      ],
+      "length": 112.0,
+      "transformed_straightness_p95": 0.0,
+      "max": 0.0
+    },
+    {
+      "source_line": [
+        409,
+        608,
+        409,
+        718
+      ],
+      "length": 110.0,
+      "transformed_straightness_p95": 0.9794748425483704,
+      "max": 1.0474222898483276
+    },
+    {
+      "source_line": [
+        348,
+        470,
+        348,
+        361
+      ],
+      "length": 109.0,
+      "transformed_straightness_p95": 0.01196192018687725,
+      "max": 0.017821606248617172
+    },
+    {
+      "source_line": [
+        794,
+        689,
+        903,
+        689
+      ],
+      "length": 109.0,
+      "transformed_straightness_p95": 0.28618165850639343,
+      "max": 0.324998676776886
+    },
+    {
+      "source_line": [
+        417,
+        495,
+        417,
+        388
+      ],
+      "length": 107.0,
+      "transformed_straightness_p95": 0.0195847786962986,
+      "max": 0.02363833226263523
+    }
+  ],
+  "worst_line_p95_curvature": 1.7184672355651855,
+  "status": "Diagnostic only. Magenta explicitly marks uncovered background."
+}

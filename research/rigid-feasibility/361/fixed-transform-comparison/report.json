@@ -1,0 +1,831 @@
+{
+  "chosen": {
+    "similarity": {
+      "method": "previous_best",
+      "matrix_right_to_left": [
+        [
+          1.0067859978764417,
+          0.0013519741852913623,
+          -4.214936353935855
+        ],
+        [
+          -0.0013519741852913623,
+          1.0067859978764417,
+          -0.3431927089280862
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bounds": {
+        "maximum_corner_difference_from_similarity_px": 0.0,
+        "corner_differences_px": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_local_anisotropy": 1.00000000000008,
+        "local_area_scale_range": [
+          1.0136198733542603,
+          1.0136198733543318
+        ],
+        "projective_row": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "accepted": true
+      },
+      "color": {
+        "gain": [
+          0.9083438017520593,
+          0.9256341239952768,
+          0.9205000113544723
+        ],
+        "bias": [
+          6.986171655980798,
+          6.147332217922321,
+          9.621188135552336
+        ],
+        "confidence": 0.6980373989493152,
+        "residual_mae": 9.370626177177044,
+        "sample_count": 38348
+      },
+      "metrics": {
+        "rgb_mae": 9.340436885865458,
+        "pixel_fraction_rgb_mae_gt15": 0.12981519274376419,
+        "edge_symmetric_median_px": 1.0,
+        "edge_symmetric_p90_px": 5.0,
+        "edge_fraction_farther_than_2px": 0.20780089794508722,
+        "edge_fraction_farther_than_4px": 0.12183776549818684,
+        "overlap_fraction": 0.95703125
+      },
+      "score": 7.764710279421342,
+      "subject_regions": [
+        {
+          "name": "woman_face",
+          "roi": [
+            755,
+            210,
+            1000,
+            465
+          ],
+          "metrics": {
+            "rgb_mae": 9.846096904058264,
+            "pixel_fraction_rgb_mae_gt15": 0.13941133261586292,
+            "edge_symmetric_median_px": 1.0,
+            "edge_symmetric_p90_px": 1.399993896484375,
+            "edge_fraction_farther_than_2px": 0.061947761918632875,
+            "edge_fraction_farther_than_4px": 0.002427420137877464,
+            "overlap_fraction": 0.9369987995198079
+          }
+        },
+        {
+          "name": "sloth_face",
+          "roi": [
+            330,
+            240,
+            590,
+            480
+          ],
+          "metrics": {
+            "rgb_mae": 13.491453430031017,
+            "pixel_fraction_rgb_mae_gt15": 0.25064997263273125,
+            "edge_symmetric_median_px": 1.0,
+            "edge_symmetric_p90_px": 4.0,
+            "edge_fraction_farther_than_2px": 0.20426803952503528,
+            "edge_fraction_farther_than_4px": 0.09864651664867558,
+            "overlap_fraction": 0.936923076923077
+          }
+        },
+        {
+          "name": "hood_and_wipers",
+          "roi": [
+            220,
+            450,
+            1200,
+            690
+          ],
+          "metrics": {
+            "rgb_mae": 7.101539957901707,
+            "pixel_fraction_rgb_mae_gt15": 0.07998971193415638,
+            "edge_symmetric_median_px": 1.0,
+            "edge_symmetric_p90_px": 2.0,
+            "edge_fraction_farther_than_2px": 0.08910177610105549,
+            "edge_fraction_farther_than_4px": 0.029248442202534863,
+            "overlap_fraction": 0.9587755102040816
+          }
+        }
+      ]
+    },
+    "affine": {
+      "method": "native_sift",
+      "matrix_right_to_left": [
+        [
+          1.0047839643033851,
+          0.0005006064383793632,
+          -2.39269548912348
+        ],
+        [
+          6.170909954469211e-05,
+          1.0250489647735572,
+          -10.060580600270066
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bounds": {
+        "maximum_corner_difference_from_similarity_px": 9.886768390135975,
+        "corner_differences_px": [
+          9.886768390135975,
+          7.943676477232278,
+          3.6218237715298573,
+          5.393596580642029
+        ],
+        "maximum_local_anisotropy": 1.0201763558109171,
+        "local_area_scale_range": [
+          1.0299527315382,
+          1.0299527315383414
+        ],
+        "projective_row": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "accepted": true
+      },
+      "color": {
+        "gain": [
+          0.9170274980604168,
+          0.9343972185858138,
+          0.9381613357192307
+        ],
+        "bias": [
+          6.184549725359083,
+          5.241792451182829,
+          7.652651642644877
+        ],
+        "confidence": 0.7524804126467872,
+        "residual_mae": 5.478328029872866,
+        "sample_count": 38348
+      },
+      "metrics": {
+        "rgb_mae": 5.470535903250189,
+        "pixel_fraction_rgb_mae_gt15": 0.06289455782312925,
+        "edge_symmetric_median_px": 0.0,
+        "edge_symmetric_p90_px": 2.79998779296875,
+        "edge_fraction_farther_than_2px": 0.10530706886837429,
+        "edge_fraction_farther_than_4px": 0.08558704979846574,
+        "overlap_fraction": 0.95703125
+      },
+      "score": 4.884262100009286,
+      "subject_regions": [
+        {
+          "name": "woman_face",
+          "roi": [
+            755,
+            210,
+            1000,
+            465
+          ],
+          "metrics": {
+            "rgb_mae": 4.884139918117267,
+            "pixel_fraction_rgb_mae_gt15": 0.040929978305061586,
+            "edge_symmetric_median_px": 0.0,
+            "edge_symmetric_p90_px": 1.0,
+            "edge_fraction_farther_than_2px": 0.0014506769825918763,
+            "edge_fraction_farther_than_4px": 0.0006769825918762089,
+            "overlap_fraction": 0.9369987995198079
+          }
+        },
+        {
+          "name": "sloth_face",
+          "roi": [
+            330,
+            240,
+            590,
+            480
+          ],
+          "metrics": {
+            "rgb_mae": 7.133141762452107,
+            "pixel_fraction_rgb_mae_gt15": 0.10589422550629447,
+            "edge_symmetric_median_px": 0.0,
+            "edge_symmetric_p90_px": 3.1968994140625,
+            "edge_fraction_farther_than_2px": 0.1087918510478417,
+            "edge_fraction_farther_than_4px": 0.09468147282291058,
+            "overlap_fraction": 0.936923076923077
+          }
+        },
+        {
+          "name": "hood_and_wipers",
+          "roi": [
+            220,
+            450,
+            1200,
+            690
+          ],
+          "metrics": {
+            "rgb_mae": 3.8361093373066555,
+            "pixel_fraction_rgb_mae_gt15": 0.02731215410813112,
+            "edge_symmetric_median_px": 0.0,
+            "edge_symmetric_p90_px": 1.0,
+            "edge_fraction_farther_than_2px": 0.042863974264226404,
+            "edge_fraction_farther_than_4px": 0.03921227665956614,
+            "overlap_fraction": 0.9587755102040816
+          }
+        }
+      ]
+    },
+    "homography": {
+      "method": "native_sift",
+      "matrix_right_to_left": [
+        [
+          1.007731011918555,
+          0.0027320044376116653,
+          -3.9530342490793595
+        ],
+        [
+          0.0008514503460061273,
+          1.0279080588468894,
+          -11.054381362896143
+        ],
+        [
+          1.3599205151088893e-06,
+          2.2392131026726894e-06,
+          1.0
+        ]
+      ],
+      "bounds": {
+        "maximum_corner_difference_from_similarity_px": 10.714390094327454,
+        "corner_differences_px": [
+          10.714390094327454,
+          7.91233658260046,
+          3.536428856115771,
+          5.194106414073993
+        ],
+        "maximum_local_anisotropy": 1.0218242350955373,
+        "local_area_scale_range": [
+          1.0255400320193664,
+          1.0358791955799695
+        ],
+        "projective_row": [
+          1.3599205151088893e-06,
+          2.2392131026726894e-06,
+          1.0
+        ],
+        "accepted": true
+      },
+      "color": {
+        "gain": [
+          0.9169168960773463,
+          0.9343409271118052,
+          0.9384369195680149
+        ],
+        "bias": [
+          6.198815521463655,
+          5.250606392449131,
+          7.658361594818618
+        ],
+        "confidence": 0.7523191576342841,
+        "residual_mae": 5.55216375712851,
+        "sample_count": 38348
+      },
+      "metrics": {
+        "rgb_mae": 5.5419958427815565,
+        "pixel_fraction_rgb_mae_gt15": 0.06435034013605442,
+        "edge_symmetric_median_px": 0.0,
+        "edge_symmetric_p90_px": 2.1968994140625,
+        "edge_fraction_farther_than_2px": 0.10213557172490138,
+        "edge_fraction_farther_than_4px": 0.08274668701568093,
+        "overlap_fraction": 0.95703125
+      },
+      "score": 4.947143502147009,
+      "subject_regions": [
+        {
+          "name": "woman_face",
+          "roi": [
+            755,
+            210,
+            1000,
+            465
+          ],
+          "metrics": {
+            "rgb_mae": 4.864762522990371,
+            "pixel_fraction_rgb_mae_gt15": 0.04048582995951417,
+            "edge_symmetric_median_px": 0.0,
+            "edge_symmetric_p90_px": 1.0,
+            "edge_fraction_farther_than_2px": 0.0015499370338080015,
+            "edge_fraction_farther_than_4px": 0.0006780974522910007,
+            "overlap_fraction": 0.9369987995198079
+          }
+        },
+        {
+          "name": "sloth_face",
+          "roi": [
+            330,
+            240,
+            590,
+            480
+          ],
+          "metrics": {
+            "rgb_mae": 7.304392446633826,
+            "pixel_fraction_rgb_mae_gt15": 0.11297550629447181,
+            "edge_symmetric_median_px": 0.0,
+            "edge_symmetric_p90_px": 3.1968994140625,
+            "edge_fraction_farther_than_2px": 0.1103057568941098,
+            "edge_fraction_farther_than_4px": 0.09439306839956678,
+            "overlap_fraction": 0.936923076923077
+          }
+        },
+        {
+          "name": "hood_and_wipers",
+          "roi": [
+            220,
+            450,
+            1200,
+            690
+          ],
+          "metrics": {
+            "rgb_mae": 3.843268116456175,
+            "pixel_fraction_rgb_mae_gt15": 0.026700191570881226,
+            "edge_symmetric_median_px": 0.0,
+            "edge_symmetric_p90_px": 1.0,
+            "edge_fraction_farther_than_2px": 0.02636856252933396,
+            "edge_fraction_farther_than_4px": 0.02261381576140291,
+            "overlap_fraction": 0.9587755102040816
+          }
+        }
+      ]
+    }
+  },
+  "all_candidates": {
+    "similarity": [
+      {
+        "method": "previous_best",
+        "matrix_right_to_left": [
+          [
+            1.0067859978764417,
+            0.0013519741852913623,
+            -4.214936353935855
+          ],
+          [
+            -0.0013519741852913623,
+            1.0067859978764417,
+            -0.3431927089280862
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "bounds": {
+          "maximum_corner_difference_from_similarity_px": 0.0,
+          "corner_differences_px": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximum_local_anisotropy": 1.00000000000008,
+          "local_area_scale_range": [
+            1.0136198733542603,
+            1.0136198733543318
+          ],
+          "projective_row": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "accepted": true
+        },
+        "color": {
+          "gain": [
+            0.9083438017520593,
+            0.9256341239952768,
+            0.9205000113544723
+          ],
+          "bias": [
+            6.986171655980798,
+            6.147332217922321,
+            9.621188135552336
+          ],
+          "confidence": 0.6980373989493152,
+          "residual_mae": 9.370626177177044,
+          "sample_count": 38348
+        },
+        "metrics": {
+          "rgb_mae": 9.340436885865458,
+          "pixel_fraction_rgb_mae_gt15": 0.12981519274376419,
+          "edge_symmetric_median_px": 1.0,
+          "edge_symmetric_p90_px": 5.0,
+          "edge_fraction_farther_than_2px": 0.20780089794508722,
+          "edge_fraction_farther_than_4px": 0.12183776549818684,
+          "overlap_fraction": 0.95703125
+        },
+        "score": 7.764710279421342
+      }
+    ],
+    "affine": [
+      {
+        "method": "native_sift",
+        "matrix_right_to_left": [
+          [
+            1.0047839643033851,
+            0.0005006064383793632,
+            -2.39269548912348
+          ],
+          [
+            6.170909954469211e-05,
+            1.0250489647735572,
+            -10.060580600270066
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "bounds": {
+          "maximum_corner_difference_from_similarity_px": 9.886768390135975,
+          "corner_differences_px": [
+            9.886768390135975,
+            7.943676477232278,
+            3.6218237715298573,
+            5.393596580642029
+          ],
+          "maximum_local_anisotropy": 1.0201763558109171,
+          "local_area_scale_range": [
+            1.0299527315382,
+            1.0299527315383414
+          ],
+          "projective_row": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "accepted": true
+        },
+        "color": {
+          "gain": [
+            0.9170274980604168,
+            0.9343972185858138,
+            0.9381613357192307
+          ],
+          "bias": [
+            6.184549725359083,
+            5.241792451182829,
+            7.652651642644877
+          ],
+          "confidence": 0.7524804126467872,
+          "residual_mae": 5.478328029872866,
+          "sample_count": 38348
+        },
+        "metrics": {
+          "rgb_mae": 5.470535903250189,
+          "pixel_fraction_rgb_mae_gt15": 0.06289455782312925,
+          "edge_symmetric_median_px": 0.0,
+          "edge_symmetric_p90_px": 2.79998779296875,
+          "edge_fraction_farther_than_2px": 0.10530706886837429,
+          "edge_fraction_farther_than_4px": 0.08558704979846574,
+          "overlap_fraction": 0.95703125
+        },
+        "score": 4.884262100009286
+      },
+      {
+        "method": "ecc_from_similarity",
+        "matrix_right_to_left": [
+          [
+            1.0055391439013115,
+            0.0010700411184233298,
+            -3.4060744997867514
+          ],
+          [
+            -0.000375840510198489,
+            1.0248667712905006,
+            -9.672075887904656
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "bounds": {
+          "maximum_corner_difference_from_similarity_px": 9.363883749069588,
+          "corner_differences_px": [
+            9.363883749069588,
+            8.118533096584832,
+            3.7208974149830003,
+            5.01800867573594
+          ],
+          "maximum_local_anisotropy": 1.0192336672092346,
+          "local_area_scale_range": [
+            1.0305440579809946,
+            1.0305440579812408
+          ],
+          "projective_row": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "accepted": true
+        },
+        "color": {
+          "gain": [
+            0.9166703920458876,
+            0.9335292334068572,
+            0.9372959165337014
+          ],
+          "bias": [
+            6.21087665610013,
+            5.3115447120993595,
+            7.714054457792636
+          ],
+          "confidence": 0.747048087025419,
+          "residual_mae": 5.734490773369028,
+          "sample_count": 38348
+        },
+        "metrics": {
+          "rgb_mae": 5.703568405139834,
+          "pixel_fraction_rgb_mae_gt15": 0.07055442176870748,
+          "edge_symmetric_median_px": 0.0,
+          "edge_symmetric_p90_px": 2.79998779296875,
+          "edge_fraction_farther_than_2px": 0.10489835640138408,
+          "edge_fraction_farther_than_4px": 0.08686202422145328,
+          "overlap_fraction": 0.95703125
+        },
+        "score": 5.137763229930144
+      },
+      {
+        "method": "ecc_from_sift",
+        "matrix_right_to_left": [
+          [
+            1.005539265056756,
+            0.001068585342961499,
+            -3.4053703224732006
+          ],
+          [
+            -0.0003757562387303064,
+            1.0248668345301337,
+            -9.672156196121794
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "bounds": {
+          "maximum_corner_difference_from_similarity_px": 9.364024610427483,
+          "corner_differences_px": [
+            9.364024610427483,
+            8.118422632109219,
+            3.7208072572839206,
+            5.018117145130952
+          ],
+          "maximum_local_anisotropy": 1.0192335579618133,
+          "local_area_scale_range": [
+            1.0305442451020834,
+            1.0305442451021067
+          ],
+          "projective_row": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "accepted": true
+        },
+        "color": {
+          "gain": [
+            0.9166642615974008,
+            0.9335301104502415,
+            0.9372957637805679
+          ],
+          "bias": [
+            6.211276049276033,
+            5.3116777261576775,
+            7.714147701807675
+          ],
+          "confidence": 0.7470443679406674,
+          "residual_mae": 5.734308173151809,
+          "sample_count": 38348
+        },
+        "metrics": {
+          "rgb_mae": 5.703421012849585,
+          "pixel_fraction_rgb_mae_gt15": 0.07054761904761905,
+          "edge_symmetric_median_px": 0.0,
+          "edge_symmetric_p90_px": 2.79998779296875,
+          "edge_fraction_farther_than_2px": 0.10490690080231829,
+          "edge_fraction_farther_than_4px": 0.08687095867303908,
+          "overlap_fraction": 0.95703125
+        },
+        "score": 5.137624346196814
+      }
+    ],
+    "homography": [
+      {
+        "method": "native_sift",
+        "matrix_right_to_left": [
+          [
+            1.007731011918555,
+            0.0027320044376116653,
+            -3.9530342490793595
+          ],
+          [
+            0.0008514503460061273,
+            1.0279080588468894,
+            -11.054381362896143
+          ],
+          [
+            1.3599205151088893e-06,
+            2.2392131026726894e-06,
+            1.0
+          ]
+        ],
+        "bounds": {
+          "maximum_corner_difference_from_similarity_px": 10.714390094327454,
+          "corner_differences_px": [
+            10.714390094327454,
+            7.91233658260046,
+            3.536428856115771,
+            5.194106414073993
+          ],
+          "maximum_local_anisotropy": 1.0218242350955373,
+          "local_area_scale_range": [
+            1.0255400320193664,
+            1.0358791955799695
+          ],
+          "projective_row": [
+            1.3599205151088893e-06,
+            2.2392131026726894e-06,
+            1.0
+          ],
+          "accepted": true
+        },
+        "color": {
+          "gain": [
+            0.9169168960773463,
+            0.9343409271118052,
+            0.9384369195680149
+          ],
+          "bias": [
+            6.198815521463655,
+            5.250606392449131,
+            7.658361594818618
+          ],
+          "confidence": 0.7523191576342841,
+          "residual_mae": 5.55216375712851,
+          "sample_count": 38348
+        },
+        "metrics": {
+          "rgb_mae": 5.5419958427815565,
+          "pixel_fraction_rgb_mae_gt15": 0.06435034013605442,
+          "edge_symmetric_median_px": 0.0,
+          "edge_symmetric_p90_px": 2.1968994140625,
+          "edge_fraction_farther_than_2px": 0.10213557172490138,
+          "edge_fraction_farther_than_4px": 0.08274668701568093,
+          "overlap_fraction": 0.95703125
+        },
+        "score": 4.947143502147009
+      },
+      {
+        "method": "ecc_from_similarity",
+        "matrix_right_to_left": [
+          [
+            1.008154567759031,
+            0.003119674093569172,
+            -4.529930968265287
+          ],
+          [
+            -0.0001562392503241665,
+            1.0284446320615275,
+            -10.3252300675344
+          ],
+          [
+            7.24395859880275e-07,
+            4.008464663803907e-06,
+            1.0
+          ]
+        ],
+        "bounds": {
+          "maximum_corner_difference_from_similarity_px": 9.987006129750231,
+          "corner_differences_px": [
+            9.987006129750231,
+            8.446534297779221,
+            3.6252743297797774,
+            4.868210529167309
+          ],
+          "maximum_local_anisotropy": 1.0212175703601636,
+          "local_area_scale_range": [
+            1.025114449741873,
+            1.0368718136731556
+          ],
+          "projective_row": [
+            7.24395859880275e-07,
+            4.008464663803907e-06,
+            1.0
+          ],
+          "accepted": true
+        },
+        "color": {
+          "gain": [
+            0.9164805461033293,
+            0.9334460657542276,
+            0.9366980223856285
+          ],
+          "bias": [
+            6.2145013111419365,
+            5.317904824796765,
+            7.800692990440083
+          ],
+          "confidence": 0.7484985773142483,
+          "residual_mae": 5.746851854855594,
+          "sample_count": 38348
+        },
+        "metrics": {
+          "rgb_mae": 5.71549962207105,
+          "pixel_fraction_rgb_mae_gt15": 0.07001927437641724,
+          "edge_symmetric_median_px": 0.0,
+          "edge_symmetric_p90_px": 2.0,
+          "edge_fraction_farther_than_2px": 0.09843455807197805,
+          "edge_fraction_farther_than_4px": 0.0802947979988165,
+          "overlap_fraction": 0.95703125
+        },
+        "score": 5.139760623039962
+      },
+      {
+        "method": "ecc_from_sift",
+        "matrix_right_to_left": [
+          [
+            1.0080848112730423,
+            0.003053440506997222,
+            -4.497941975971291
+          ],
+          [
+            -0.00013469380636338616,
+            1.0282940082011014,
+            -10.311688938705723
+          ],
+          [
+            7.599248968199805e-07,
+            3.786918236141153e-06,
+            1.0
+          ]
+        ],
+        "bounds": {
+          "maximum_corner_difference_from_similarity_px": 9.972512685637188,
+          "corner_differences_px": [
+            9.972512685637188,
+            8.402429635613291,
+            3.641340952647604,
+            4.863865023607031
+          ],
+          "maximum_local_anisotropy": 1.021159637717963,
+          "local_area_scale_range": [
+            1.0252401246929246,
+            1.0366461274077123
+          ],
+          "projective_row": [
+            7.599248968199805e-07,
+            3.786918236141153e-06,
+            1.0
+          ],
+          "accepted": true
+        },
+        "color": {
+          "gain": [
+            0.9164780364421592,
+            0.9334528421784409,
+            0.9366018639969806
+          ],
+          "bias": [
+            6.218558737372376,
+            5.316459834416133,
+            7.810623689257854
+          ],
+          "confidence": 0.7487945390986988,
+          "residual_mae": 5.745346525675412,
+          "sample_count": 38348
+        },
+        "metrics": {
+          "rgb_mae": 5.713196900982616,
+          "pixel_fraction_rgb_mae_gt15": 0.06998979591836735,
+          "edge_symmetric_median_px": 0.0,
+          "edge_symmetric_p90_px": 2.0,
+          "edge_fraction_farther_than_2px": 0.0977655736822269,
+          "edge_fraction_farther_than_4px": 0.07979324826360847,
+          "overlap_fraction": 0.95703125
+        },
+        "score": 5.138213063483434
+      }
+    ]
+  },
+  "restrictions": "One fixed transform and single source resampling; global affine RGB grade; no frame interpolation, dense warp, crossfade, or pose blending."
+}

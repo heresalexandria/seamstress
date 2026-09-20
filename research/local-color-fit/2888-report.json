@@ -1,0 +1,47 @@
+{
+  "frame": 2888,
+  "checks": [
+    {
+      "samples": 10376,
+      "mae_before": 2.0988080501556396,
+      "mae_after": 1.2903090715408325,
+      "regional_signed_bias_before": 1.9225850105285645,
+      "regional_signed_bias_after": 0.7181910872459412,
+      "peak_matched_channel_change": 3.8094482421875
+    },
+    {
+      "samples": 32822,
+      "mae_before": 2.374376058578491,
+      "mae_after": 1.6303378343582153,
+      "regional_signed_bias_before": 2.0833535194396973,
+      "regional_signed_bias_after": 1.0300401449203491,
+      "peak_matched_channel_change": 3.8231048583984375
+    },
+    {
+      "samples": 26180,
+      "mae_before": 2.586923837661743,
+      "mae_after": 1.766099452972412,
+      "regional_signed_bias_before": 2.1071009635925293,
+      "regional_signed_bias_after": 1.0686036348342896,
+      "peak_matched_channel_change": 3.740386962890625
+    }
+  ],
+  "geometry_changed": false,
+  "fit_frames": [
+    2887,
+    2888
+  ],
+  "validation_frames": [
+    [
+      2886,
+      2889
+    ],
+    [
+      2885,
+      2890
+    ]
+  ],
+  "all_validation_biases_improve": true,
+  "all_validation_maes_improve": true,
+  "status": "Numerical color experiment; native/temporal review required"
+}

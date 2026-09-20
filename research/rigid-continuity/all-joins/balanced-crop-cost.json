@@ -1,0 +1,47 @@
+[
+  {
+    "cut": 361,
+    "enlargement": 1.026307923145479,
+    "crop_total_dimension": 0.025633557485212788
+  },
+  {
+    "cut": 722,
+    "enlargement": 1.025379979831489,
+    "crop_total_dimension": 0.02475178015047652
+  },
+  {
+    "cut": 1083,
+    "enlargement": 1.018762290290013,
+    "crop_total_dimension": 0.018416749882518735
+  },
+  {
+    "cut": 1444,
+    "enlargement": 1.0192511020571642,
+    "crop_total_dimension": 0.018887496926232927
+  },
+  {
+    "cut": 1805,
+    "enlargement": 1.0181368182250805,
+    "crop_total_dimension": 0.017813733773716645
+  },
+  {
+    "cut": 2166,
+    "enlargement": 1.0629684935916686,
+    "crop_total_dimension": 0.059238344288930045
+  },
+  {
+    "cut": 2527,
+    "enlargement": 1.0247171034361093,
+    "crop_total_dimension": 0.024120904543534327
+  },
+  {
+    "cut": 2888,
+    "enlargement": 1.1459200650376515,
+    "crop_total_dimension": 0.12733878172633017
+  },
+  {
+    "cut": 3240,
+    "enlargement": 1.0544298021575467,
+    "crop_total_dimension": 0.05162012876170019
+  }
+]

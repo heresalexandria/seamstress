@@ -1,0 +1,23 @@
+{
+  "source_frame": 722,
+  "source_cache": "research/rigid-feasibility/722/right-original.png",
+  "source_to_output_matrix": [
+    [
+      1.0651797736550206,
+      0.00044371309215472096,
+      -41.30179960271222
+    ],
+    [
+      -0.00014082424556605456,
+      1.0782871148902886,
+      -26.180454395751553
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "protected_grade_active": true,
+  "modified_geometry": false
+}

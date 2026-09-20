@@ -1,0 +1,33 @@
+{
+  "frame": 361,
+  "limit": 63.75,
+  "checks": [
+    {
+      "samples": 11154,
+      "mae_before": 2.3072566986083984,
+      "mae_after": 1.3279081583023071,
+      "regional_signed_bias_before": 2.014561414718628,
+      "regional_signed_bias_after": 0.6487775444984436,
+      "peak_matched_channel_change": 10.934391021728516
+    },
+    {
+      "samples": 22830,
+      "mae_before": 2.3883509635925293,
+      "mae_after": 1.3809047937393188,
+      "regional_signed_bias_before": 1.9373040199279785,
+      "regional_signed_bias_after": 0.7068803310394287,
+      "peak_matched_channel_change": 11.319148063659668
+    },
+    {
+      "samples": 20765,
+      "mae_before": 2.421334981918335,
+      "mae_after": 1.441852331161499,
+      "regional_signed_bias_before": 1.984705924987793,
+      "regional_signed_bias_after": 0.8150165677070618,
+      "peak_matched_channel_change": 10.931211471557617
+    }
+  ],
+  "maximum_coefficient": 119.952739128753,
+  "training": "Adjacentpair/alternating spatialtiles only; palette-balanced; nonlinear Huber+ridge with feasible common targets",
+  "status": "Research only; requires native ROI and color Jacobian review"
+}

@@ -1,0 +1,187 @@
+{
+  "cut": 2888,
+  "source": "IYTYT.mp4",
+  "foreground_matrix_incoming_to_outgoing": [
+    [
+      1.0112559494756197,
+      0.0003723705079726314,
+      -6.602788912990691
+    ],
+    [
+      -0.0003723705079726314,
+      1.0112559494756197,
+      -6.03751841605491
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "background_matrix_incoming_to_outgoing": [
+    [
+      1.0073189996770893,
+      0.00015832440373839577,
+      -4.432897951909595
+    ],
+    [
+      -0.008453511089553745,
+      1.0157179096261542,
+      13.658573953342875
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "foreground_registration": {
+    "matches": 369,
+    "inliers": 311,
+    "residual_p50": 0.9256625502271323,
+    "residual_p90": 3.005398652374406
+  },
+  "background_registration": {
+    "matches": 1786,
+    "inliers": 868,
+    "residual_p50": 2.508958047118835,
+    "residual_p90": 9.334641101413293
+  },
+  "color": {
+    "gain": [
+      0.8499185832903601,
+      0.9542718668001624,
+      0.9471555430878832
+    ],
+    "bias": [
+      24.480875929685038,
+      12.302506447237441,
+      15.342884532076974
+    ],
+    "confidence": 0.6338900505651432,
+    "residual_mae": 10.157377477420145,
+    "sample_count": 38328
+  },
+  "frames": [
+    {
+      "frame": 2888,
+      "initial_holes": 27400,
+      "final_holes": 3189,
+      "interior_final_holes": 3189,
+      "character_zone_final_holes": 3189,
+      "donors": [
+        {
+          "frame": 2887,
+          "pixels_used": 22979,
+          "registration": {
+            "matches": 1786,
+            "inliers": 914,
+            "residual_p50": 2.279721388668233,
+            "residual_p90": 11.01712769127833,
+            "exact_inverse_cut_registration": true
+          }
+        },
+        {
+          "frame": 2885,
+          "pixels_used": 746,
+          "registration": {
+            "matches": 993,
+            "inliers": 458,
+            "residual_p50": 2.5316618187184807,
+            "residual_p90": 9.617978895694815
+          }
+        },
+        {
+          "frame": 2883,
+          "pixels_used": 486,
+          "registration": {
+            "matches": 880,
+            "inliers": 417,
+            "residual_p50": 2.484046159127205,
+            "residual_p90": 9.356277083500904
+          }
+        }
+      ]
+    },
+    {
+      "frame": 2889,
+      "initial_holes": 27338,
+      "final_holes": 14124,
+      "interior_final_holes": 5230,
+      "character_zone_final_holes": 5230,
+      "donors": [
+        {
+          "frame": 2887,
+          "pixels_used": 9933,
+          "registration": {
+            "matches": 1736,
+            "inliers": 879,
+            "residual_p50": 2.5489950789125055,
+            "residual_p90": 8.880968890662
+          }
+        },
+        {
+          "frame": 2885,
+          "pixels_used": 1529,
+          "registration": {
+            "matches": 968,
+            "inliers": 474,
+            "residual_p50": 2.6118046917973383,
+            "residual_p90": 9.380343137306927
+          }
+        },
+        {
+          "frame": 2883,
+          "pixels_used": 1752,
+          "registration": {
+            "matches": 861,
+            "inliers": 404,
+            "residual_p50": 2.7880743207893217,
+            "residual_p90": 10.325537345062967
+          }
+        }
+      ]
+    },
+    {
+      "frame": 2896,
+      "initial_holes": 27440,
+      "final_holes": 6188,
+      "interior_final_holes": 5934,
+      "character_zone_final_holes": 5934,
+      "donors": [
+        {
+          "frame": 2887,
+          "pixels_used": 0,
+          "rejected": "median registration residual exceeds4px",
+          "registration": {
+            "matches": 1504,
+            "inliers": 639,
+            "residual_p50": 8.129503689894625,
+            "residual_p90": 17.55988372833732
+          }
+        },
+        {
+          "frame": 2885,
+          "pixels_used": 19974,
+          "registration": {
+            "matches": 838,
+            "inliers": 393,
+            "residual_p50": 2.627259341966934,
+            "residual_p90": 17.226886506122238
+          }
+        },
+        {
+          "frame": 2883,
+          "pixels_used": 1278,
+          "registration": {
+            "matches": 813,
+            "inliers": 383,
+            "residual_p50": 3.1584269442648822,
+            "residual_p90": 17.580595980028114
+          }
+        }
+      ]
+    }
+  ],
+  "status": "Experimental. Magenta marks uncovered pixels; masks and donor joins require visual review. No poses are synthesized or blended."
+}

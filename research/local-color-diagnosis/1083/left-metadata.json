@@ -1,0 +1,23 @@
+{
+  "source_frame": 1082,
+  "source_cache": "research/affine-feasibility/1083/left-original.png",
+  "source_to_output_matrix": [
+    [
+      1.06129663988291,
+      0.00047017050955533484,
+      -39.65135457956308
+    ],
+    [
+      -0.0005343234124815178,
+      1.0513274908396792,
+      -18.524300781048456
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "protected_grade_active": true,
+  "modified_geometry": false
+}

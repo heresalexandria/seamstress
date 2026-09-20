@@ -1,0 +1,336 @@
+{
+  "method": "ecc_affine",
+  "accepted": true,
+  "bounds": {
+    "singular_values": [
+      1.041242687823689,
+      1.0072319684754747
+    ],
+    "anisotropy": 1.0337665209332982,
+    "determinant": 1.0487729221173485
+  },
+  "matrix_right_to_left": [
+    [
+      1.0072898830834132,
+      -0.00016119965535841058,
+      -4.262956048411423
+    ],
+    [
+      -0.0026617260955060524,
+      1.0411832470472944,
+      -3.840523462195772
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "color": {
+    "gain": [
+      0.8985256076452852,
+      0.9517619579356487,
+      0.9441973190702845
+    ],
+    "bias": [
+      16.915487178247343,
+      11.94293440033849,
+      15.511355479743141
+    ],
+    "confidence": 0.6292032337212345,
+    "residual_mae": 11.032911586525048,
+    "sample_count": 38348
+  },
+  "score": 6.822394478936449,
+  "raw": {
+    "rgb_mae": 22.33238170823885,
+    "pixel_fraction_rgb_mae_gt15": 0.3563560090702948,
+    "edge_symmetric_median_px": 1.0,
+    "edge_symmetric_p90_px": 5.0,
+    "edge_fraction_farther_than_2px": 0.2723785985042516,
+    "edge_fraction_farther_than_4px": 0.13076272922856264,
+    "overlap_fraction": 0.95703125
+  },
+  "geometry_only": {
+    "rgb_mae": 13.17852343159486,
+    "pixel_fraction_rgb_mae_gt15": 0.1837063492063492,
+    "edge_symmetric_median_px": 1.0,
+    "edge_symmetric_p90_px": 3.0,
+    "edge_fraction_farther_than_2px": 0.1297781141332359,
+    "edge_fraction_farther_than_4px": 0.046256124532708755,
+    "overlap_fraction": 0.95703125
+  },
+  "geometry_and_grade": {
+    "rgb_mae": 10.990215041572183,
+    "pixel_fraction_rgb_mae_gt15": 0.1635283446712018,
+    "edge_symmetric_median_px": 1.0,
+    "edge_symmetric_p90_px": 3.0,
+    "edge_fraction_farther_than_2px": 0.1303887877732586,
+    "edge_fraction_farther_than_4px": 0.04615253201569081,
+    "overlap_fraction": 0.95703125
+  },
+  "candidates": [
+    {
+      "method": "native_sift_affine",
+      "accepted": true,
+      "bounds": {
+        "singular_values": [
+          1.0177976003313567,
+          1.005125213404002
+        ],
+        "anisotropy": 1.0126077694185363,
+        "determinant": 1.023014030235136
+      },
+      "matrix_right_to_left": [
+        [
+          1.0073440472044684,
+          0.0001696134090424106,
+          -4.452718507644885
+        ],
+        [
+          -0.009822832407611665,
+          1.0155540869974449,
+          14.110335806105027
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "color": {
+        "gain": [
+          0.8378049489965786,
+          0.9363198393300672,
+          0.9415032357218904
+        ],
+        "bias": [
+          24.831322943538225,
+          14.871618355964051,
+          16.406092137614806
+        ],
+        "confidence": 0.5923020979586099,
+        "residual_mae": 13.503001106580092,
+        "sample_count": 38268
+      },
+      "score": 8.904101241073384,
+      "raw": {
+        "rgb_mae": 22.351562532546055,
+        "pixel_fraction_rgb_mae_gt15": 0.35669074932711325,
+        "edge_symmetric_median_px": 1.0,
+        "edge_symmetric_p90_px": 5.0,
+        "edge_fraction_farther_than_2px": 0.27227418321588726,
+        "edge_fraction_farther_than_4px": 0.13079436258808455,
+        "overlap_fraction": 0.9550379774305555
+      },
+      "geometry_only": {
+        "rgb_mae": 15.76378693492001,
+        "pixel_fraction_rgb_mae_gt15": 0.2348144605033386,
+        "edge_symmetric_median_px": 1.0,
+        "edge_symmetric_p90_px": 3.1968994140625,
+        "edge_fraction_farther_than_2px": 0.1591419909573217,
+        "edge_fraction_farther_than_4px": 0.07503332200820637,
+        "overlap_fraction": 0.9550379774305555
+      },
+      "geometry_and_grade": {
+        "rgb_mae": 13.392089874261927,
+        "pixel_fraction_rgb_mae_gt15": 0.21069165597735873,
+        "edge_symmetric_median_px": 1.0,
+        "edge_symmetric_p90_px": 3.1968994140625,
+        "edge_fraction_farther_than_2px": 0.1594126381785184,
+        "edge_fraction_farther_than_4px": 0.0751757135786174,
+        "overlap_fraction": 0.9550379774305555
+      }
+    },
+    {
+      "method": "ecc_affine",
+      "accepted": true,
+      "bounds": {
+        "singular_values": [
+          1.041242687823689,
+          1.0072319684754747
+        ],
+        "anisotropy": 1.0337665209332982,
+        "determinant": 1.0487729221173485
+      },
+      "matrix_right_to_left": [
+        [
+          1.0072898830834132,
+          -0.00016119965535841058,
+          -4.262956048411423
+        ],
+        [
+          -0.0026617260955060524,
+          1.0411832470472944,
+          -3.840523462195772
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "color": {
+        "gain": [
+          0.8985256076452852,
+          0.9517619579356487,
+          0.9441973190702845
+        ],
+        "bias": [
+          16.915487178247343,
+          11.94293440033849,
+          15.511355479743141
+        ],
+        "confidence": 0.6292032337212345,
+        "residual_mae": 11.032911586525048,
+        "sample_count": 38348
+      },
+      "score": 6.822394478936449,
+      "raw": {
+        "rgb_mae": 22.33238170823885,
+        "pixel_fraction_rgb_mae_gt15": 0.3563560090702948,
+        "edge_symmetric_median_px": 1.0,
+        "edge_symmetric_p90_px": 5.0,
+        "edge_fraction_farther_than_2px": 0.2723785985042516,
+        "edge_fraction_farther_than_4px": 0.13076272922856264,
+        "overlap_fraction": 0.95703125
+      },
+      "geometry_only": {
+        "rgb_mae": 13.17852343159486,
+        "pixel_fraction_rgb_mae_gt15": 0.1837063492063492,
+        "edge_symmetric_median_px": 1.0,
+        "edge_symmetric_p90_px": 3.0,
+        "edge_fraction_farther_than_2px": 0.1297781141332359,
+        "edge_fraction_farther_than_4px": 0.046256124532708755,
+        "overlap_fraction": 0.95703125
+      },
+      "geometry_and_grade": {
+        "rgb_mae": 10.990215041572183,
+        "pixel_fraction_rgb_mae_gt15": 0.1635283446712018,
+        "edge_symmetric_median_px": 1.0,
+        "edge_symmetric_p90_px": 3.0,
+        "edge_fraction_farther_than_2px": 0.1303887877732586,
+        "edge_fraction_farther_than_4px": 0.04615253201569081,
+        "overlap_fraction": 0.95703125
+      }
+    }
+  ],
+  "feature_matches": 2246,
+  "feature_inlier_fraction": 0.3806767586821015,
+  "flat_region_color_fit": {
+    "gain": [
+      0.9247468799398777,
+      0.9639675592572007,
+      0.9538807885899825
+    ],
+    "bias": [
+      15.870452643115184,
+      10.66602881952787,
+      13.805063803960229
+    ],
+    "confidence": 0.9126225258688421,
+    "residual_mae": 1.6158695985235685,
+    "sample_count": 37914
+  },
+  "frame": 2888,
+  "left_source_frame": 2887,
+  "right_source_frame": 2888,
+  "time_seconds": 120.45366666666666,
+  "neighbors": [
+    {
+      "frames": [
+        2886,
+        2887
+      ],
+      "rgb_mae": 7.784849501148329,
+      "pixel_fraction_rgb_mae_gt15": 0.1208576286943168,
+      "edge_symmetric_median_px": 0.0,
+      "edge_symmetric_p90_px": 2.0,
+      "edge_fraction_farther_than_2px": 0.08763862591290235,
+      "edge_fraction_farther_than_4px": 0.03834189883689478,
+      "overlap_fraction": 0.9220757378472222
+    },
+    {
+      "frames": [
+        2888,
+        2889
+      ],
+      "rgb_mae": 1.5496632653061224,
+      "pixel_fraction_rgb_mae_gt15": 0.008069160997732427,
+      "edge_symmetric_median_px": 0.0,
+      "edge_symmetric_p90_px": 1.0,
+      "edge_fraction_farther_than_2px": 0.009746805694707287,
+      "edge_fraction_farther_than_4px": 0.00211510631192252,
+      "overlap_fraction": 0.95703125
+    },
+    {
+      "frames": [
+        2889,
+        2890
+      ],
+      "rgb_mae": 3.277408919123205,
+      "pixel_fraction_rgb_mae_gt15": 0.04609297052154195,
+      "edge_symmetric_median_px": 0.0,
+      "edge_symmetric_p90_px": 1.0,
+      "edge_fraction_farther_than_2px": 0.012865489852136425,
+      "edge_fraction_farther_than_4px": 0.0034649735031437993,
+      "overlap_fraction": 0.95703125
+    }
+  ],
+  "regions": [
+    {
+      "name": "Flying characters",
+      "roi": [
+        355,
+        175,
+        910,
+        685
+      ],
+      "metrics": {
+        "rgb_mae": 18.131744685862333,
+        "pixel_fraction_rgb_mae_gt15": 0.2689100865571454,
+        "edge_symmetric_median_px": 1.0,
+        "edge_symmetric_p90_px": 3.1968994140625,
+        "edge_fraction_farther_than_2px": 0.1699240595749691,
+        "edge_fraction_farther_than_4px": 0.07098074998528286,
+        "overlap_fraction": 1.0
+      }
+    },
+    {
+      "name": "Empire State and skyline",
+      "roi": [
+        220,
+        10,
+        575,
+        710
+      ],
+      "metrics": {
+        "rgb_mae": 13.507187122736418,
+        "pixel_fraction_rgb_mae_gt15": 0.20917505030181086,
+        "edge_symmetric_median_px": 1.0,
+        "edge_symmetric_p90_px": 3.0,
+        "edge_fraction_farther_than_2px": 0.14385794935812637,
+        "edge_fraction_farther_than_4px": 0.05146168321812524,
+        "overlap_fraction": 1.0
+      }
+    },
+    {
+      "name": "Water and right skyline",
+      "roi": [
+        870,
+        260,
+        1280,
+        695
+      ],
+      "metrics": {
+        "rgb_mae": 7.9527011494252875,
+        "pixel_fraction_rgb_mae_gt15": 0.126683908045977,
+        "edge_symmetric_median_px": 1.0,
+        "edge_symmetric_p90_px": 2.0,
+        "edge_fraction_farther_than_2px": 0.08288272049987984,
+        "edge_fraction_farther_than_4px": 0.018625330449411198,
+        "overlap_fraction": 0.975609756097561
+      }
+    }
+  ]
+}
