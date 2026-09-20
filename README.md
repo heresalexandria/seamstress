@@ -10,7 +10,7 @@ Each continuation can introduce a slight inconsistency—a changed crop, a small
 
 **[Download for Apple silicon](https://github.com/heresalexandria/seamstress/releases/latest/download/Seamstress-mac-arm64.dmg)** · **[Download for Intel Mac](https://github.com/heresalexandria/seamstress/releases/latest/download/Seamstress-mac-x64.dmg)** · [Release notes](https://github.com/heresalexandria/seamstress/releases/latest)
 
-Release installers are built by GitHub Actions, signed with Developer ID, notarized by Apple, and verified before publication. Open the DMG and drag **Seamstress** into Applications. The app includes its processing engine and FFmpeg; no Python installation or API key is needed. Download links resolve after the first signed release is published.
+Release installers are built by GitHub Actions, signed with Developer ID, notarized by Apple, and verified before publication. Open the DMG and drag **Seamstress** into Applications. The app includes its processing engine and FFmpeg; no Python installation or API key is needed.
 
 ## Refine your oner
 

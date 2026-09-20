@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import json
 import hashlib
+from fractions import Fraction
 import os
 from pathlib import Path
 import re
@@ -229,9 +230,18 @@ def render_conform(input, plan, output, crf=14, start_frame=0, end_frame=None, *
             _run([_tool('ffmpeg'), '-v', 'error', '-nostdin', '-i', str(temp/'video.mp4'),
                   '-i', str(input), '-map', '0:v:0', '-map', '1:a:0', '-c:v', 'copy',
                   '-af', f'atrim=start={start_frame/metadata["fps"]:.12f}:end={end_frame/metadata["fps"]:.12f},asetpts=PTS-{start_frame/metadata["fps"]:.12f}/TB',
-                  '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', str(temp/'complete.mp4')])
+                  # atrim bounds the audio. -shortest can discard the encoded
+                  # video tail when AAC packets end before the final picture.
+                  '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', str(temp/'complete.mp4')])
         else:
             mux_audio(temp/'video.mp4', input, temp/'complete.mp4')
+        if cancelled and cancelled():
+            raise InterruptedError('Rendering cancelled')
+        rendered = probe(temp/'complete.mp4')
+        if (rendered['frame_count_estimated'] or rendered['frame_count'] != total_frames or
+                Fraction(rendered['fps_fraction']) != Fraction(metadata['fps_fraction']) or
+                (rendered['width'], rendered['height']) != (width, height)):
+            raise RuntimeError('Muxed output does not preserve the requested frame count, rate, and dimensions')
         if cancelled and cancelled():
             raise InterruptedError('Rendering cancelled')
         os.link(temp/'complete.mp4', output)
@@ -248,7 +258,8 @@ def render_conform(input, plan, output, crf=14, start_frame=0, end_frame=None, *
         'constant_view_magnification': float(np.sqrt(np.linalg.det(view[:2, :2]))),
         'plan_status': recipe.get('status', 'Unreviewed'),
         'unresolved_seams': recipe.get('unresolved_seams', []),
-        'synthesized_frames': 0, 'frame_mapping': 'contiguous_original_frames' if preview else 'identity', 'frame_count': len(magnifications),
+        'synthesized_frames': 0, 'frame_mapping': 'contiguous_original_frames' if preview else 'identity', 'frame_count': rendered['frame_count'],
+        'output_fps_fraction': rendered['fps_fraction'], 'muxed_video_verified': True,
         'source_start_frame': start_frame, 'source_end_frame_exclusive': end_frame,
         'preview': preview, 'output_width': width, 'output_height': height, 'audio_mode': 'trimmed and encoded as AAC' if preview and metadata['has_audio'] else 'copied',
         'minimum_magnification': min(magnifications), 'maximum_magnification': max(magnifications),

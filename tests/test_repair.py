@@ -206,6 +206,32 @@ class RepairSafetyTests(unittest.TestCase):
 
 @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"), "FFmpeg is required")
 class RenderIntegrityTests(unittest.TestCase):
+    def test_explicit_sdr_color_tags_survive_encoding(self) -> None:
+        from seamstress.media import VideoWriter, probe, read_frame
+
+        colors = np.array([[210, 35, 40], [25, 185, 45], [30, 50, 210]], np.uint8)
+        image = np.repeat(np.repeat(colors[None, :, :], 64, axis=0), 32, axis=1)
+        for transfer, color_range in (("smpte170m", "tv"), ("gamma22", "pc"), ("gamma28", "tv")):
+            tags = {"color_space": "bt470bg", "color_transfer": transfer,
+                    "color_primaries": "bt470bg", "color_range": color_range}
+            with self.subTest(transfer=transfer, color_range=color_range), tempfile.TemporaryDirectory() as tmp:
+                output = Path(tmp) / "explicit-color.mp4"
+                with VideoWriter(output, 96, 64, "24", crf=0, preset="ultrafast", color_tags=tags) as writer:
+                    for _ in range(3):
+                        writer.write(image)
+                metadata = probe(output)
+                for key, value in tags.items():
+                    # FFprobe 9 uses the BT.470 names for transfer IDs 4/5;
+                    # previous versions report the equivalent gamma names.
+                    equivalents = ({"gamma22": {"gamma22", "bt470m"},
+                                    "gamma28": {"gamma28", "bt470bg"}}.get(value, {value})
+                                   if key == "color_transfer" else {value})
+                    self.assertIn(metadata[key], equivalents, key)
+                decoded = read_frame(output, 0)
+                centers = np.stack([decoded[16:48, 32 * i + 8:32 * i + 24].mean(axis=(0, 1))
+                                    for i in range(len(colors))])
+                self.assertLessEqual(float(abs(centers - colors).max()), 2)
+
     def test_sdr_color_roundtrip_and_fractional_frame_rate(self) -> None:
         from seamstress.media import VideoWriter, probe, read_frame
 

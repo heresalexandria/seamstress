@@ -9,7 +9,8 @@ from unittest.mock import patch
 import cv2
 import numpy as np
 
-from seamstress.calibration import CalibrationCancelled, calibrate_pair, calibrate_video, _protected_luts
+from seamstress.calibration import (CalibrationCancelled, calibrate_pair, calibrate_video,
+                                   _protected_luts, _color_scene_evidence)
 from seamstress.conform import validate_conform_plan
 from seamstress.media import VideoWriter, probe
 
@@ -25,12 +26,51 @@ def cartoon(width=192, height=128, seed=22):
     return frame
 
 
+def multilayer_cartoon():
+    """Two broad scene regions continue with incompatible motion and a grade."""
+    left = np.concatenate([
+        np.concatenate([cartoon(seed=22), cartoon(seed=33)], axis=1),
+        np.concatenate([cartoon(seed=44), cartoon(seed=55)], axis=1)], axis=0)
+    right = np.empty_like(left)
+    for rows, dx, dy in [(slice(0, 128), 8, 4), (slice(128, 256), -8, -4)]:
+        right[rows] = cv2.warpAffine(left, np.float32([[1, 0, dx], [0, 1, dy]]),
+                                    (384, 256), borderMode=cv2.BORDER_REFLECT101)[rows]
+    right = np.clip(right.astype(float)*[1.015, .99, 1.01]+[3, -2, 3], 0, 255).astype(np.uint8)
+    return left, right
+
+
 OPTIONS = {'analysis_max_size': 192, 'max_samples': 1800, 'min_samples': 80,
            'local_centers': 8, 'geometry_support_seconds': .5,
            'rate_support_frames': 3, 'local_iterations': 5}
 
 
 class CalibrationPairTests(unittest.TestCase):
+    def test_independent_motion_establishes_color_evidence_without_global_camera(self):
+        left, right = multilayer_cartoon()
+        self.assertFalse(calibrate_pair(left, right, {'analysis_max_size': 384})['scene_consistent'])
+        evidence = _color_scene_evidence(left, right)
+        self.assertTrue(evidence['accepted'], evidence)
+        self.assertGreaterEqual(evidence['heldout_matches'], 24)
+        self.assertGreaterEqual(evidence['heldout_coverage'], .5)
+        self.assertGreaterEqual(evidence['heldout_convex_hull_fraction'], .4)
+
+    def test_local_continuity_rejects_shared_palette_small_copy_and_large_motion(self):
+        left, _ = multilayer_cartoon()
+        unrelated = np.concatenate([
+            np.concatenate([cartoon(seed=71), cartoon(seed=82)], axis=1),
+            np.concatenate([cartoon(seed=93), cartoon(seed=104)], axis=1)], axis=0)
+        small_copy = unrelated.copy()
+        small_copy[70:170, 130:250] = left[70:170, 130:250]
+        # Same exact palette and image tiles, rearranged into a different scene.
+        shuffled = np.concatenate([left[128:, 192:], left[128:, :192]], axis=1)
+        shuffled = np.concatenate([shuffled, np.concatenate([left[:128, 192:], left[:128, :192]], axis=1)])
+        shifted = cv2.warpAffine(left, np.float32([[1, 0, 70], [0, 1, 0]]),
+                                (384, 256), borderMode=cv2.BORDER_REFLECT101)
+        for label, right in [('same palette', unrelated), ('small shared area', small_copy),
+                             ('shuffled tiles', shuffled), ('large motion', shifted)]:
+            with self.subTest(case=label):
+                self.assertFalse(_color_scene_evidence(left, right)['accepted'])
+
     def test_native_transform_direction_at_varied_aspects(self):
         for width, height in [(192, 128), (128, 192), (384, 128)]:
             with self.subTest(size=(width, height)):
@@ -97,7 +137,11 @@ class CalibrationVideoTests(unittest.TestCase):
         right = np.clip(right.astype(float)*[1.025, .985, 1.01]+[3, -2, 4], 0, 255).astype(np.uint8)
         source = self.video('shift.mp4', left, right)
         original = source.read_bytes(); events = []
-        result = self.run_calibration(source, [16], progress=events.append)
+        with patch('seamstress.calibration._color_scene_evidence',
+                   side_effect=AssertionError('Established global path must not use fallback')), \
+                patch('seamstress.calibration.recover_partial_edit',
+                      side_effect=AssertionError('Reliable camera motion must not use partial recovery')):
+            result = self.run_calibration(source, [16], progress=events.append)
         plan = json.loads(Path(result['plan_path']).read_text()); report = result['report']; color = report['seams'][0]['color']
         validate_conform_plan(plan, probe(source))
         self.assertEqual(report['summary']['geometry_accepted'], 1, report)
@@ -109,6 +153,43 @@ class CalibrationVideoTests(unittest.TestCase):
         self.assertLess(report['summary']['constant_crop_fraction'], .08)
         self.assertEqual(source.read_bytes(), original)
         self.assertEqual(events[-1]['stage'], 'complete')
+
+    def test_multilayer_color_recovery_keeps_geometry_timing_and_source_unchanged(self):
+        left, right = multilayer_cartoon()
+        source = self.video('multilayer.mp4', left, right)
+        original = source.read_bytes()
+        result = calibrate_video(source, [16], self.folder/'multilayer.json',
+                                 options={**OPTIONS, 'analysis_max_size': 384})
+        seam = result['report']['seams'][0]
+        self.assertFalse(seam['geometry']['scene_consistent'])
+        self.assertTrue(seam['geometry_excluded_reason'])
+        self.assertTrue(seam['scene_continuity']['accepted'], seam)
+        self.assertEqual(seam['scene_continuity']['method'], 'independent-local-correspondence')
+        self.assertEqual(len(seam['scene_continuity']['pairs']), 3)
+        self.assertTrue(seam['color']['global_accepted'] or seam['color']['local_accepted'], seam['color'])
+        self.assertEqual(result['unresolved_seams'], [16])
+        plan = json.loads(Path(result['plan_path']).read_text())
+        np.testing.assert_allclose(plan['frame_matrices'], np.repeat(np.eye(3)[None], 36, axis=0))
+        np.testing.assert_array_equal(plan['view_matrix'], np.eye(3))
+        self.assertEqual(plan['source']['frame_count'], 36)
+        self.assertEqual(plan['source']['fps_fraction'], '24/1')
+        self.assertEqual(source.read_bytes(), original)
+
+    def test_one_related_pair_cannot_unlock_color_for_unrelated_following_frames(self):
+        left, right = multilayer_cartoon()
+        unrelated = np.tile(cartoon(seed=818), (2, 2, 1))
+        source = self.folder/'single-related-frame.mp4'
+        with VideoWriter(source, 384, 256, '24', crf=0, preset='ultrafast') as writer:
+            for n in range(36):
+                writer.write(left if n < 16 else right if n == 16 else unrelated)
+        result = calibrate_video(source, [16], self.folder/'single-related-frame.json',
+                                 options={**OPTIONS, 'analysis_max_size': 384})
+        seam = result['report']['seams'][0]
+        self.assertTrue(seam['scene_continuity']['pairs'][0]['accepted'], seam)
+        self.assertFalse(seam['scene_continuity']['accepted'])
+        self.assertEqual(seam['color']['status'], 'excluded')
+        self.assertEqual(result['calibration']['grade_curves'], [])
+        self.assertEqual(result['calibration']['local_color_curves'], [])
 
     def test_spatial_color_shift_uses_heldout_validated_local_model(self):
         left = cartoon()

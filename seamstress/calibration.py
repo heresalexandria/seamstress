@@ -25,6 +25,7 @@ from .conform import validate_conform_plan
 from .design import ALGORITHM, build_conform_plan
 from .local_color import apply_samples as apply_local_samples
 from .media import iter_frames, probe
+from .motion_evidence import recover_partial_edit
 from .registration import _fit_color, _measure, _warp
 
 
@@ -267,6 +268,110 @@ def _identity_plan(calibration, metadata):
 
 def _assemble(calibration, metadata):
     return build_conform_plan(calibration, metadata) if calibration['cuts'] else _identity_plan(calibration, metadata)
+
+
+def _color_scene_evidence(left, right, cancelled=None):
+    """Establish local scene continuity without authorizing output geometry.
+
+    This deliberately stricter fallback is only used when the existing global
+    camera fit cannot establish scene continuity. Up to three bounded affine
+    models explain independent local correspondences, as can occur at different
+    scene depths. They are evidence only: none is used to move output pixels.
+    Training and held-out matches are distinct, spatially balanced SIFT points;
+    matching one small object in an otherwise different scene is insufficient.
+    """
+    _check(cancelled)
+    h, w = left.shape[:2]
+    report = {'accepted': False, 'method': 'held-out-local-correspondence',
+              'analysis_size': [w, h], 'matches': 0, 'models': [],
+              'reason': 'Too few independent local matches to establish scene continuity'}
+    gray = [cv2.cvtColor(image, cv2.COLOR_RGB2GRAY) for image in (left, right)]
+    detector = cv2.SIFT_create(nfeatures=4500, contrastThreshold=.010, edgeThreshold=14)
+    ka, da = detector.detectAndCompute(gray[0], None)
+    kb, db = detector.detectAndCompute(gray[1], None)
+    if da is None or db is None or min(len(da), len(db)) < 2:
+        return report
+    matcher = cv2.BFMatcher()
+    lr, rl = matcher.knnMatch(da, db, k=2), matcher.knnMatch(db, da, k=2)
+    reverse = {m.queryIdx: m.trainIdx for pair in rl if len(pair) == 2
+               for m, n in [pair] if m.distance < .72*n.distance}
+    matches = [m for pair in lr if len(pair) == 2 for m, n in [pair]
+               if m.distance < .72*n.distance and reverse.get(m.trainIdx) == m.queryIdx]
+    points, cells, seen_left, seen_right = [], {}, set(), set()
+    for index, match in enumerate(sorted(matches, key=lambda item: item.distance)):
+        if index % 128 == 0:
+            _check(cancelled)
+        a, b = np.array(ka[match.queryIdx].pt), np.array(kb[match.trainIdx].pt)
+        if (np.linalg.norm(b-a) > math.hypot(w, h)*.10 or min(*a, *b) < 8 or
+                max(a[0], b[0]) >= w-8 or max(a[1], b[1]) >= h-8):
+            continue
+        cell = (int(a[0]/w*6), int(a[1]/h*4))
+        # Multiple SIFT orientations at one corner must not make that same
+        # physical observation count as both training and held-out evidence.
+        key_a, key_b = tuple(np.round(a/2).astype(int)), tuple(np.round(b/2).astype(int))
+        if cells.get(cell, 0) >= 20 or key_a in seen_left or key_b in seen_right:
+            continue
+        patches = [cv2.getRectSubPix(image, (13, 13), tuple(p.astype(float))).astype(float).ravel()
+                   for image, p in zip(gray, (a, b))]
+        patches = [patch-patch.mean() for patch in patches]
+        norm = np.linalg.norm(patches[0])*np.linalg.norm(patches[1])
+        if norm < 100 or patches[0]@patches[1]/norm < .70:
+            continue
+        points.append((a, b)); cells[cell] = cells.get(cell, 0)+1
+        seen_left.add(key_a); seen_right.add(key_b)
+    report['matches'] = len(points)
+    if len(points) < 48:
+        return report
+    target = np.float32([point[0] for point in points])
+    source = np.float32([point[1] for point in points])
+    train = np.zeros(len(points), bool)
+    train[np.random.default_rng(681).permutation(len(points))[:len(points)//2]] = True
+    remaining = train.copy(); errors = []; center = np.array([w/2, h/2])
+    for _ in range(3):
+        _check(cancelled)
+        if remaining.sum() < 12:
+            break
+        transform, inside = cv2.estimateAffine2D(source[remaining], target[remaining],
+                                                method=cv2.RANSAC, ransacReprojThreshold=1.8,
+                                                maxIters=4000, confidence=.999, refineIters=20)
+        if transform is None or inside is None or inside.sum() < 10:
+            break
+        singular = np.linalg.svd(transform[:, :2], compute_uv=False)
+        shift = transform[:, :2]@center+transform[:, 2]-center
+        angle = abs(math.degrees(math.atan2(transform[1, 0], transform[0, 0])))
+        if (np.linalg.det(transform[:, :2]) <= 0 or np.max(abs(singular-1)) > .12 or
+                singular.max()/max(singular.min(), 1e-9) > 1.12 or angle > 8 or
+                np.linalg.norm(shift/[w, h]) > .10):
+            break
+        error = np.linalg.norm(source@transform[:, :2].T+transform[:, 2]-target, axis=1)
+        errors.append(error); report['models'].append(transform.tolist())
+        remaining &= error >= 2.
+    if not errors:
+        report['reason'] = 'No bounded local motion model has independent support'
+        return report
+    support = np.min(errors, axis=0) < 2.
+    heldout = support & ~train
+
+    def distributed_coverage(points, minimum=3):
+        bins = np.clip((points/[w, h]*4).astype(int), 0, 3)
+        counts = np.bincount(bins[:, 1]*4+bins[:, 0], minlength=16)
+        return float(np.mean(counts >= minimum))
+
+    coverage = min(distributed_coverage(points[support]) for points in (target, source))
+    hull = min(float(cv2.contourArea(cv2.convexHull(points[support]))/(w*h))
+               for points in (target, source))
+    heldout_coverage = min(distributed_coverage(points[heldout], 1) for points in (target, source))
+    heldout_hull = (min(float(cv2.contourArea(cv2.convexHull(points[heldout]))/(w*h))
+                       for points in (target, source)) if heldout.sum() >= 3 else 0.)
+    fraction = float(support[~train].mean())
+    accepted = bool(fraction >= .80 and heldout.sum() >= 24 and coverage >= .5 and hull >= .4 and
+                    heldout_coverage >= .5 and heldout_hull >= .4)
+    report.update(accepted=accepted, heldout_fraction=fraction, heldout_matches=int(heldout.sum()),
+                  distributed_coverage=coverage, convex_hull_fraction=hull,
+                  heldout_coverage=heldout_coverage, heldout_convex_hull_fraction=heldout_hull,
+                  reason=('Distributed local correspondence establishes scene continuity for color only'
+                          if accepted else 'Local matches do not establish broad independent scene continuity'))
+    return report
 
 
 def _flow_observations(left, right, opts):
@@ -618,17 +723,33 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
                     post, post_ok, post_report = _camera_rate(frames, list(range(cut, end+1)), upscale, center, opts, cancelled)
                     ease = bool(pre_ok and post_ok and np.linalg.norm((pre-post)/[.002, .001, max(1., width*.002), max(1., height*.002)]) > .15)
                     reason = handle_exclusions.get(cut)
+                    partial = None
                     if not fit['accepted']:
                         reason = fit['reason']
                     elif not pre_ok:
-                        reason = reason or 'Incoming edit cannot be separated from camera motion: outgoing rate is unreliable'
+                        if reason is None:
+                            partial = recover_partial_edit(
+                                frames, cut, fit, pair_fit=lambda left, right: calibrate_pair(left, right, opts),
+                                upscale=upscale, options=opts, cancelled=cancelled)
+                        if not partial or not partial['accepted']:
+                            reason = reason or 'Incoming edit cannot be separated from camera motion: outgoing rate is unreliable'
                     if reason:
                         calibration['excluded_geometry'].append({'frame': cut, 'reason': reason})
-                    calibration['cuts'].append({'frame': cut, 'right_to_left_matrix': (np.eye(3) if reason else native).tolist(),
-                                                'pre_rate': pre.tolist(), 'post_rate': post.tolist(), 'ease_rate': ease})
+                    recovered = partial is not None and partial['accepted'] and reason is None
+                    # A partial edit has already compensated measured ordinary
+                    # motion. Zero assembly rates prevent applying it twice;
+                    # the original evidence remains in the seam report below.
+                    calibration['cuts'].append({'frame': cut, 'right_to_left_matrix': (
+                        np.eye(3) if reason else np.asarray(partial['edit_matrix']) if recovered else native).tolist(),
+                        'pre_rate': (np.zeros(4) if recovered else pre).tolist(),
+                        'post_rate': (np.zeros(4) if recovered else post).tolist(), 'ease_rate': False if recovered else ease})
                     report['seams'].append({'frame': cut, 'geometry': fit, 'measured_native_right_to_left_matrix': native.tolist(), 'geometry_excluded_reason': reason,
                                             'pre_rate': pre_report, 'post_rate': post_report,
                                             'rate_easing': ease, 'color': {'status': 'pending'}})
+                    if partial is not None:
+                        partial['original_native_pre_rate'] = pre.tolist()
+                        partial['original_native_post_rate'] = post.tolist()
+                        report['seams'][-1]['partial_geometry'] = partial
                     keep = [n for n in range(max(start, cut-3), min(end, cut+2)+1)]
                     np.savez_compressed(temporary/f'{cut}.npz', indices=np.array(keep), frames=np.stack([frames[n] for n in keep]))
                     pending += 1
@@ -658,9 +779,29 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
         for i, seam_report in enumerate(report['seams']):
             _check(cancelled); cut = seam_report['frame']
             _event(progress, 'color', i, len(seams), 'Validating source-specific color corrections', cut)
-            if cut in handle_exclusions or not seam_report['geometry']['scene_consistent']:
-                seam_report['color'] = {'status': 'excluded', 'reason': handle_exclusions.get(cut, 'Insufficient structural evidence that these pictures continue the same scene')}; continue
+            if cut in handle_exclusions:
+                seam_report['color'] = {'status': 'excluded', 'reason': handle_exclusions[cut]}; continue
             with np.load(temporary/f'{cut}.npz') as stored:
+                originals = {int(n): image for n, image in zip(stored['indices'], stored['frames'])}
+                if seam_report['geometry']['scene_consistent']:
+                    # Keep the established path and its numerical operations
+                    # unchanged. The fallback cannot loosen camera/rate gates.
+                    continuity = {'accepted': True, 'method': 'global-registration',
+                                  'reason': 'Existing global registration establishes scene continuity'}
+                else:
+                    evidence = []
+                    for offset in range(3):
+                        a, b = cut-1-offset, cut+offset
+                        if a in originals and b in originals:
+                            evidence.append({'frames': [a, b],
+                                             **_color_scene_evidence(originals[a], originals[b], cancelled)})
+                    continuity = {'accepted': len(evidence) >= 2 and all(pair['accepted'] for pair in evidence),
+                                  'method': 'independent-local-correspondence', 'pairs': evidence,
+                                  'reason': 'Every independent cross-cut pair must establish broad local scene continuity'}
+                seam_report['scene_continuity'] = continuity
+                if not continuity['accepted']:
+                    seam_report['color'] = {'status': 'excluded', 'reason': 'Insufficient structural evidence that these pictures continue the same scene'}
+                    continue
                 frames = {}
                 for n, image in zip(stored['indices'], stored['frames']):
                     native_matrix = np.asarray(plan['view_matrix'])@np.asarray(plan['frame_matrices'][int(n)])
@@ -691,6 +832,8 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
                          'protected_tone_curves': len(calibration['grade_curves']),
                          'local_color_curves': len(calibration['local_color_curves']),
                          'constant_crop_fraction': plan['design_report']['constant_view_crop_fraction_total_dimension'],
+                         'partial_geometry_frames': [item['frame'] for item in report['seams']
+                                                     if item.get('partial_geometry', {}).get('accepted') and not item['geometry_excluded_reason']],
                          'geometry_exclusions': calibration['excluded_geometry']}
     plan['generator'] = {'name': 'seamstress.calibrate', 'version': __version__, 'algorithm': ALGORITHM}
     validate_conform_plan(plan, metadata)

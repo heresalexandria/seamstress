@@ -226,6 +226,7 @@ class LocalColorTests(unittest.TestCase):
 class LocalColorOrchestrationTests(unittest.TestCase):
     def setUp(self):
         self.metadata = {'width': 16, 'height': 12, 'frame_count': 18,
+                         'frame_count_estimated': False,
                          'fps_fraction': '24000/1001', 'fps': 24000/1001, 'has_audio': False}
         self.frames = np.array([np.full((12, 16, 3), [55+i*4, 100, 160-i*2], np.uint8) for i in range(18)])
         self.plan = {'schema_version': 3, 'method': 'source_conform', 'source': self.metadata,
@@ -244,7 +245,9 @@ class LocalColorOrchestrationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); source = root/'source.mp4'; source.write_bytes(b'unchanged source')
             plan = root/'plan.json'; plan.write_text(json.dumps(recipe)); output = root/'output.mp4'
-            with patch.object(conform, 'probe', return_value=self.metadata), \
+            def recorded_metadata(path):
+                return {**self.metadata, 'frame_count': end-start} if Path(path).name == 'complete.mp4' else self.metadata
+            with patch.object(conform, 'probe', side_effect=recorded_metadata), \
                  patch.object(conform, 'VideoWriter', Writer), \
                  patch.object(conform, 'iter_frames', return_value=iter(self.frames[start:end])) as decode, \
                  patch.object(conform, '_run', return_value=SimpleNamespace(stdout=b'ffmpeg version test\n')), \
