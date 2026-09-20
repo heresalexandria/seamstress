@@ -72,7 +72,6 @@
     },
     "artifactName": "Seamstress-${version}-${arch}.${ext}",
     "asar": true,
-    "electronDist": "node_modules/electron/dist",
     "publish": [
       {
         "provider": "github",
