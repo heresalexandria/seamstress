@@ -141,7 +141,8 @@ class ArtifactTests(unittest.TestCase):
     def test_published_release_is_never_overwritten(self):
         collect_artifacts.assemble(self.incoming, self.output, '1.2.3')
         notes = self.root/'notes.md'; notes.write_text('Changes')
-        with patch.object(publish, 'gh', return_value=json.dumps({'draft': False})) as call:
+        release = {'id': 42, 'tag_name': 'v1.2.3', 'draft': False}
+        with patch.object(publish, 'gh', return_value=json.dumps([[release]])) as call:
             with self.assertRaisesRegex(ValueError, 'immutable'):
                 publish.publish('1.2.3', 'a'*40, self.output, notes)
         self.assertEqual(call.call_count, 1)
@@ -150,8 +151,8 @@ class ArtifactTests(unittest.TestCase):
         collect_artifacts.assemble(self.incoming, self.output, '1.2.3')
         notes = self.root/'notes.md'; notes.write_text('Changes')
         sha = 'a'*40
-        state = {'draft': True, 'target_commitish': sha, 'assets': []}
-        with patch.object(publish, 'gh', side_effect=[None, None, '', '', json.dumps(state)]) as call:
+        state = {'id': 42, 'tag_name': 'v1.2.3', 'draft': True, 'target_commitish': sha, 'assets': []}
+        with patch.object(publish, 'gh', side_effect=[json.dumps([[state]]), None, '', json.dumps(state)]) as call:
             with self.assertRaisesRegex(ValueError, 'Uploaded release assets'):
                 publish.publish('1.2.3', sha, self.output, notes)
         self.assertFalse(any('edit' in args.args for args in call.call_args_list))
@@ -160,7 +161,7 @@ class ArtifactTests(unittest.TestCase):
         collect_artifacts.assemble(self.incoming, self.output, '1.2.3')
         notes = self.root/'notes.md'; notes.write_text('Changes')
         reference = {'object': {'type': 'commit', 'sha': 'b'*40}}
-        with patch.object(publish, 'gh', side_effect=[None, json.dumps(reference)]) as call:
+        with patch.object(publish, 'gh', side_effect=['[[]]', json.dumps(reference)]) as call:
             with self.assertRaisesRegex(ValueError, 'version tag'):
                 publish.publish('1.2.3', 'a'*40, self.output, notes)
         self.assertFalse(any('create' in args.args for args in call.call_args_list))
@@ -170,12 +171,49 @@ class ArtifactTests(unittest.TestCase):
         notes = self.root/'notes.md'; notes.write_text('Changes')
         sha = 'a'*40
         assets = [{'name': path.name, 'size': path.stat().st_size} for path in self.output.iterdir()]
-        state = {'draft': True, 'target_commitish': sha, 'assets': assets}
-        with patch.object(publish, 'gh', side_effect=[None, None, '', '', json.dumps(state), '']) as call:
+        state = {'id': 42, 'tag_name': 'v1.2.3', 'draft': True, 'target_commitish': sha, 'assets': assets}
+        with patch.object(publish, 'gh', side_effect=[
+            '[[]]', None, '', json.dumps([[state]]), '', json.dumps(state), '',
+        ]) as call:
             url = publish.publish('1.2.3', sha, self.output, notes)
         self.assertTrue(url.endswith('/v1.2.3'))
         self.assertIn('edit', call.call_args.args)
         self.assertIn('--draft=false', call.call_args.args)
+        self.assertIn(('api', f'repos/{publish.REPOSITORY}/releases/42'), [item.args for item in call.call_args_list])
+        self.assertFalse(any('/releases/tags/' in str(item) for item in call.call_args_list))
+
+    def test_draft_recovery_uses_paginated_listing_and_numeric_id(self):
+        collect_artifacts.assemble(self.incoming, self.output, '1.2.3')
+        notes = self.root/'notes.md'; notes.write_text('Changes')
+        sha = 'a'*40
+        state = {'id': 42, 'tag_name': 'v1.2.3', 'draft': True, 'target_commitish': sha,
+                 'assets': [{'name': p.name, 'size': p.stat().st_size} for p in self.output.iterdir()]}
+        pages = [[{'id': 99, 'tag_name': 'v2.0.0', 'draft': False}], [state]]
+        with patch.object(publish, 'gh', side_effect=[json.dumps(pages), None, '', json.dumps(state), '']) as call:
+            publish.publish('1.2.3', sha, self.output, notes)
+        self.assertIn('--paginate', call.call_args_list[0].args)
+        self.assertIn('--slurp', call.call_args_list[0].args)
+        self.assertFalse(any('create' in item.args for item in call.call_args_list))
+        self.assertIn(('api', f'repos/{publish.REPOSITORY}/releases/42'), [item.args for item in call.call_args_list])
+
+    def test_changed_draft_is_not_published(self):
+        collect_artifacts.assemble(self.incoming, self.output, '1.2.3')
+        notes = self.root/'notes.md'; notes.write_text('Changes')
+        sha = 'a'*40
+        state = {'id': 42, 'tag_name': 'v1.2.3', 'draft': True, 'target_commitish': sha}
+        for change in [{'id': 43}, {'tag_name': 'v1.2.4'}, {'draft': False}, {'target_commitish': 'b'*40}]:
+            with self.subTest(change=change), patch.object(publish, 'gh', side_effect=[
+                json.dumps([[state]]), None, '', json.dumps(state | change),
+            ]) as call:
+                with self.assertRaisesRegex(ValueError, 'state changed'):
+                    publish.publish('1.2.3', sha, self.output, notes)
+                self.assertFalse(any('edit' in item.args for item in call.call_args_list))
+
+    def test_conflicting_drafts_are_rejected(self):
+        state = {'id': 42, 'tag_name': 'v1.2.3'}
+        with patch.object(publish, 'gh', return_value=json.dumps([[state], [state | {'id': 43}]])):
+            with self.assertRaisesRegex(ValueError, 'Multiple releases'):
+                publish.release_for_tag('v1.2.3')
 
 
 if __name__ == '__main__':
