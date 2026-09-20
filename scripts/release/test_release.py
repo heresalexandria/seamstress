@@ -19,6 +19,30 @@ import select_bump
 
 
 class ReleaseRulesTests(unittest.TestCase):
+    def test_merged_pr_signing_override_stays_on_trusted_main_build(self):
+        workflow = yaml.safe_load((Path(__file__).resolve().parents[2]/'.github/workflows/release.yml').read_text())
+        # PyYAML's YAML 1.1 loader treats the GitHub "on" key as true.
+        triggers = workflow.get('on', workflow.get(True))
+        self.assertEqual(triggers['pull_request_target']['types'], ['closed'])
+        self.assertEqual(triggers['pull_request_target']['branches'], ['main'])
+        prepare = workflow['jobs']['prepare']
+        self.assertEqual(prepare['if'], "github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true")
+        prepare_checkout = next(step for step in prepare['steps'] if step.get('uses', '').startswith('actions/checkout@'))
+        self.assertEqual(prepare_checkout['with']['ref'], 'main')
+        build = workflow['jobs']['build']
+        build_checkout = next(step for step in build['steps'] if step.get('uses', '').startswith('actions/checkout@'))
+        self.assertEqual(build_checkout['with']['ref'], '${{ needs.prepare.outputs.sha }}')
+        signing = next(step for step in build['steps'] if step.get('env', {}).get('SEAMSTRESS_RELEASE') == '1')
+        self.assertEqual(signing['env']['CSC_FOR_PULL_REQUEST'], 'true')
+        self.assertNotIn('CSC_FOR_PULL_REQUEST', workflow.get('env', {}))
+        overrides = []
+        for job_id, job in workflow['jobs'].items():
+            self.assertNotIn('CSC_FOR_PULL_REQUEST', job.get('env', {}))
+            for step in job['steps']:
+                if 'CSC_FOR_PULL_REQUEST' in step.get('env', {}):
+                    overrides.append((job_id, step['name']))
+        self.assertEqual(overrides, [('build', signing['name'])])
+
     def test_exactly_one_release_label(self):
         self.assertEqual(select_bump.select(['minor', 'ui']), 'minor')
         self.assertEqual(select_bump.select(['no-release']), 'none')
