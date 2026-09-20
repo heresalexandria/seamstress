@@ -169,7 +169,7 @@ async function main() {
       const finished = await page.evaluate(() => window.__smokeProject);
       assert.equal(finished?.artifacts.export, exportPath, 'Whole workflow exports to the chosen destination');
       assert.ok(fs.statSync(exportPath).size > 0, 'Real encoded export exists');
-      await page.getByRole('button', { name: 'Whole video', exact: true }).click();
+      await page.getByRole('button', { name: 'Whole shot', exact: true }).click();
       await page.waitForFunction(() => document.querySelector('.candidate-video')?.readyState >= 2, undefined, { timeout: 60000 });
       await page.locator('.source-video').evaluate(video => { video.currentTime = Math.min(2, video.duration / 2); });
       await page.waitForFunction(() => Math.abs(document.querySelector('.source-video').currentTime - document.querySelector('.candidate-video').currentTime) < .08);

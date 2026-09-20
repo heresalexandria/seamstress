@@ -81,7 +81,7 @@ export const VideoViewer = forwardRef<ViewerHandle, Props>(function VideoViewer(
   }
 
   return <section className="viewer-section" aria-label="Video comparison">
-    <div className="viewer-topline"><div className="viewer-label"><span className="live-dot"/> REVIEW CANVAS</div><div className="segmented scope-switch" aria-label="Playback range"><button className={scope === 'seam' ? 'active' : ''} onClick={() => setScope('seam')} disabled={!selected}>Selected seam</button><button className={scope === 'whole' ? 'active' : ''} onClick={() => { setScope('whole'); setLoop(false); }}>Whole video</button></div><span className="mono dim">{project.metadata.width} × {project.metadata.height}</span></div>
+    <div className="viewer-topline"><div className="viewer-label"><span className="live-dot"/> CONTINUITY REVIEW</div><div className="segmented scope-switch" aria-label="Playback range"><button className={scope === 'seam' ? 'active' : ''} onClick={() => setScope('seam')} disabled={!selected}>Selected seam</button><button className={scope === 'whole' ? 'active' : ''} onClick={() => { setScope('whole'); setLoop(false); }}>Whole shot</button></div><span className="mono dim">{project.metadata.width} × {project.metadata.height}</span></div>
     <div className="video-viewport" ref={viewport} style={{ '--video-aspect': `${project.metadata.width} / ${project.metadata.height}` } as React.CSSProperties}>
       <video ref={source} src={api.mediaUrl(project.artifacts.proxy ?? project.source)} className="source-video" playsInline preload="metadata" muted={muted} onLoadedMetadata={() => { onFrame(0); setMediaError(''); }} onTimeUpdate={() => {
         const a = source.current; if (!a) return;

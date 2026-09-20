@@ -123,7 +123,7 @@ app.whenReady().then(()=>{
     }catch{return new Response('Not found',{status:404});}
   });
   handle('video:pick',async()=>{
-    const result=await dialog.showOpenDialog(window,{title:'Choose a video',properties:['openFile'],filters:[{name:'Video',extensions:['mp4','mov','m4v','mkv','webm','avi']}]});
+    const result=await dialog.showOpenDialog(window,{title:'Choose your stitched oner',properties:['openFile'],filters:[{name:'Video',extensions:['mp4','mov','m4v','mkv','webm','avi']}]});
     return result.canceled?null:result.filePaths[0];
   });
   handle('project:create',async options=>{
@@ -133,7 +133,7 @@ app.whenReady().then(()=>{
     const name=path.basename(source,path.extname(source)).replace(/[^\p{L}\p{N}._-]+/gu,'-').slice(0,80)||'video';
     const folder=path.join(app.getPath('userData'),'projects',`${name}-${randomUUID().slice(0,8)}.seamstress`);
     const jobId=randomUUID();
-    send({jobId,type:'progress',stage:'import',progress:0,message:'Opening your video and preparing the timeline'});
+    send({jobId,type:'progress',stage:'import',progress:0,message:'Opening your stitched shot and finding candidate seams'});
     return worker('create',{source,folder},{jobId,stage:'import',events:true}).promise;
   });
   handle('project:open',async()=>{
@@ -160,7 +160,7 @@ app.whenReady().then(()=>{
   handle('job:cancel',jobId=>{jobs.get(jobId)?.cancel();});
   handle('export:choose',async options=>{
     const name=path.basename(String(options?.suggestedName||'corrected.mp4'));
-    const result=await dialog.showSaveDialog(window,{title:'Export corrected video',defaultPath:path.join(app.getPath('videos'),name),filters:[{name:'MP4 video',extensions:['mp4']}]});
+    const result=await dialog.showSaveDialog(window,{title:'Export your corrected oner',defaultPath:path.join(app.getPath('videos'),name),filters:[{name:'MP4 video',extensions:['mp4']}]});
     if(result.canceled||!result.filePath)return null;
     const file=path.resolve(result.filePath);
     if(fs.existsSync(file))throw new Error('Choose a new filename. Seamstress preserves existing exports.');

@@ -1,10 +1,12 @@
-# Seamstress desktop and general CLI
+# Seamstress: refine AI-generated oners
 
-Seamstress 0.2 turns a flattened video into an editable project: source playback, suggested seam markers, measured correction plans, review previews, and a full-resolution export. It runs locally without an API key. The desktop app and CLI share the same processing engine and project files.
+An **oner** is a continuous single shot. In an AI video workflow, you build one by extending the same shot across sequential generations and stitching them together. Small changes in framing, scale, composition, or color can reveal where one generation meets the next.
+
+Seamstress works on that already-stitched video, helping you review and correct those continuity seams. It turns the single file into an editable project with source playback, suggested markers, measured correction plans, previews, and a full-resolution export. The separate generation clips are not required. It runs locally without an API key; the desktop app and CLI share the same processing engine and project files.
 
 ## Open the app
 
-On this Mac, the packaged application is built in `app/release/mac-arm64/Seamstress.app`. Open it, then drop a video into the window. The app prepares a playback copy and automatically scans the whole timeline for seams.
+On this Mac, the packaged application is built in `app/release/mac-arm64/Seamstress.app`. Open it, then drop your stitched oner into the window. The app prepares a playback copy and automatically scans the whole timeline for candidate generation seams.
 
 1. Select a seam marker to inspect it. Play the seam loop at normal speed; step with the left/right arrows to check the first incoming frame.
 2. Drag a marker, edit its time or exact frame in the inspector, add a marker at the playhead, or remove/disable a false positive. Frames are zero-based. Time fields accept seconds, `MM:SS.mmm` or `HH:MM:SS.mmm`.
