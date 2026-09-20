@@ -203,6 +203,48 @@ class ConformIntegrationTests(unittest.TestCase):
             conform.render_conform(self.source, recipe, self.root/"preview-identity.mp4", crf=12, start_frame=10, end_frame=16)
         np.testing.assert_array_equal(np.stack(written), self.decoded[10:16])
 
+    def test_preview_preserves_every_video_frame_when_source_audio_ends_early(self):
+        audio, source = self.root/'short-audio.m4a', self.root/'short-audio-source.mp4'
+        run('ffmpeg', '-v', 'error', '-nostdin', '-n', '-f', 'lavfi', '-i',
+            'sine=frequency=523:sample_rate=48000:duration=0.25',
+            '-c:a', 'aac', '-b:a', '96k', str(audio))
+        mux_audio(self.root/'pictures.mp4', audio, source)
+        metadata = probe(source)
+        plan = self.plan(); plan['source'] = metadata; plan['source_sha256'] = digest(source)
+        recipe = self.write_plan(plan, 'short-audio-plan')
+        # The first preview has a short audio tail; the second begins after all
+        # source audio has ended. Neither may lose any requested source picture.
+        for start in (4, 10):
+            with self.subTest(start_frame=start):
+                output = self.root/f'short-audio-preview-{start}.mp4'
+                report = conform.render_conform(source, recipe, output, crf=12,
+                                                start_frame=start, end_frame=18)
+                rendered = probe(output)
+                actual = read_frames(output, 0, 18-start)
+                self.assertEqual((rendered['frame_count'], rendered['fps_fraction']),
+                                 (18-start, '24000/1001'))
+                self.assertEqual(len(actual), 18-start)
+                self.assertLess(np.mean(abs(actual[-1].astype(float)-self.decoded[-1])), 1.5)
+                self.assertEqual(report['frame_count'], rendered['frame_count'])
+                self.assertEqual(report['output_fps_fraction'], rendered['fps_fraction'])
+                self.assertTrue(report['muxed_video_verified'])
+
+    def test_failed_mux_verification_publishes_neither_movie_nor_sidecar(self):
+        recipe = self.write_plan(self.plan(), 'mux-verification')
+        output = self.root/'mux-verification-failed.mp4'
+
+        def damaged_probe(path):
+            metadata = probe(path)
+            if Path(path).name == 'complete.mp4':
+                metadata['frame_count'] -= 1
+            return metadata
+
+        with patch.object(conform, 'probe', side_effect=damaged_probe):
+            with self.assertRaisesRegex(RuntimeError, 'Muxed output does not preserve'):
+                conform.render_conform(self.source, recipe, output, start_frame=6, end_frame=14)
+        self.assertFalse(output.exists())
+        self.assertFalse(output.with_suffix('.repair.json').exists())
+
     def test_invalid_preview_ranges_fail_before_encoding(self):
         recipe = self.write_plan(self.plan(), "preview-ranges")
         with patch.object(conform, "VideoWriter") as writer:
