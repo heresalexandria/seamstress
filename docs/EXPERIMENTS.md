@@ -16,6 +16,8 @@ The sections below preserve the original experiments and reproduction records.
 
 For the separate color-only experiment, see [Reproduce the color-refined candidate](REPRODUCE-COLOR-REFINEMENT.md). It retains the baseline framing and adds optional residual color models; it remains a candidate for viewing.
 
+The [fresh 30s and 120s review](SEAM-REVISIT.md) explains the remaining background-motion discontinuities and the separate color-only improvement to automatic calibration. It preserves these saved recipes.
+
 The current baseline is `output/IYTYT-source-conform-eight-joins.mp4`, rendered from [plans/IYTYT-eight-joins.json](../plans/IYTYT-eight-joins.json) at CRF 14. It preserves original drawings and timing with global framing correction and slow, protected color grading. The user finds this version much better and mostly seamless, but still sees local color shifts at the joins. **It is a checkpoint for further refinement, not a completed imperceptible-seam repair.** Geometry at frame 2888 remains explicitly unresolved. No new local-color treatment is included in this baseline.
 
 The RIFE `bridge` render was rejected in viewing: its pose and scenery morphing is more distracting than the original cuts. Its commands and plans below are retained for reproducible experiments, **not as a recommended repair**.

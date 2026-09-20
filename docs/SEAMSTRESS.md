@@ -78,7 +78,11 @@ The detector scans an aspect-preserving low-resolution copy across the entire ti
 
 Calibration compares the source frames around each marked boundary, matches visual features, estimates a small global camera transform, and checks whether the match has enough reliable evidence across the image. Supported framing changes are distributed across both sides of the join and eased back to the original framing. A small constant viewing crop keeps exposed edges out of view. Camera-rate reconciliation is applied only where supported by the observations.
 
+If scene layers disagree about camera movement, a stricter fallback can sometimes recover only the framing component they independently support. It compensates ordinary movement first, checks other frame pairs, leaves the uncertain direction untouched, and disables camera-rate easing. The app reports this as partial framing correction for review.
+
 Color calibration first fits protected tone curves, then fits a bounded residual model that can adjust colors differently in different image regions. It checks observations withheld from fitting and adjacent frame pairs, rejecting unsupported corrections. Color changes ease in and out smoothly around the join. Black/white protection and gamut bounds limit unintended shifts.
+
+Color and geometry have separate evidence checks. When several scene layers move differently, a global camera correction can be unsafe even though the same surfaces can still be matched for color. Strong, distributed local correspondences can permit color-only correction; the geometry exclusion remains in the report. This does not repair a background speed change or a jump between objects at different depths. See the [30s and 120s seam review](SEAM-REVISIT.md) for measured examples.
 
 Rendering uses exactly one original source drawing for each output frame. It changes that drawing's global framing and pointwise color. It does not crossfade, blend different frames, morph objects, synthesize tween frames or replace poses. Optical flow is used to measure matching color observations, not to deform the rendered footage.
 

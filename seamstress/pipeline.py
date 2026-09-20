@@ -121,6 +121,9 @@ def analyze_project(project, *, options=None,progress=None,cancelled=None):
         reason=issue.get('reason','Review this seam') if isinstance(issue,dict) else exclusions.get(frame,'Review this seam')
         warnings.append(f"Frame {frame}: {reason}")
     for item in result.get('report',{}).get('seams',[]):
+        partial=item.get('partial_geometry',{})
+        if partial.get('accepted') and not item.get('geometry_excluded_reason'):
+            warnings.append(f"Frame {item.get('frame','?')}, partial framing: {partial['limitation']}")
         color=item.get('color',{})
         if color.get('status')=='excluded':warnings.append(f"Frame {item.get('frame','?')}, color: {color.get('reason','Unreliable color match')}")
     if not frames:warnings.append('No enabled seams: the correction plan preserves the original framing and colors.')
