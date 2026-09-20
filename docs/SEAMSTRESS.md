@@ -78,6 +78,8 @@ The detector scans an aspect-preserving low-resolution copy across the entire ti
 
 Calibration compares the source frames around each marked boundary, matches visual features, estimates a small global camera transform, and checks whether the match has enough reliable evidence across the image. Supported framing changes are distributed across both sides of the join and eased back to the original framing. A small constant viewing crop keeps exposed edges out of view. Camera-rate reconciliation is applied only where supported by the observations.
 
+For animation with alternating motion steps, an additional cadence check can replace a biased short-window camera estimate with a trajectory measured across complete cycles. It requires consistent independent registrations and rejects material acceleration; it does not change animation timing. See the [framing review](FRAMING-REVIEW.md) for the measured 1:30 example.
+
 If scene layers disagree about camera movement, a stricter fallback can sometimes recover only the framing component they independently support. It compensates ordinary movement first, checks other frame pairs, leaves the uncertain direction untouched, and disables camera-rate easing. The app reports this as partial framing correction for review.
 
 Color calibration first fits protected tone curves, then fits a bounded residual model that can adjust colors differently in different image regions. It checks observations withheld from fitting and adjacent frame pairs, rejecting unsupported corrections. Color changes ease in and out smoothly around the join. Black/white protection and gamut bounds limit unintended shifts.

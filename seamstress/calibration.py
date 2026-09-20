@@ -22,10 +22,12 @@ from scipy.interpolate import PchipInterpolator
 
 from . import __version__
 from .conform import validate_conform_plan
+from .camera_rate import recover_cadence_rate
 from .design import ALGORITHM, build_conform_plan
 from .local_color import apply_samples as apply_local_samples
 from .media import iter_frames, probe
 from .motion_evidence import recover_partial_edit
+from .framing_evidence import recover_endpoint_edit
 from .registration import _fit_color, _measure, _warp
 
 
@@ -701,13 +703,16 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
     aw, ah = _size(width, height, opts['analysis_max_size'])
     down = np.diag([aw/width, ah/height, 1.]); upscale = np.linalg.inv(down)
     center = np.array([(width-1)/2, (height-1)/2]); handles = opts['camera_handles']
+    # Keep the ordinary estimator's requested handles unchanged. The additional
+    # pictures only test for phase aliasing across complete animation cycles.
+    analysis_handles = max(handles, 12)
     windows = []
     for i, cut in enumerate(seams):
-        start = max(0, cut-handles-1, seams[i-1] if i else 0)
-        end = min(count-1, cut+handles, seams[i+1]-1 if i+1 < len(seams) else count-1)
+        start = max(0, cut-analysis_handles-1, seams[i-1] if i else 0)
+        end = min(count-1, cut+analysis_handles, seams[i+1]-1 if i+1 < len(seams) else count-1)
         windows.append((cut, start, end))
     with tempfile.TemporaryDirectory(prefix='.seamstress-calibration-', dir=output.parent) as temporary:
-        temporary = Path(temporary); rolling = deque(maxlen=2*handles+2); pending = 0
+        temporary = Path(temporary); rolling = deque(maxlen=2*analysis_handles+2); pending = 0
         iterator = iter_frames(source, 0, windows[-1][2]+1, (aw, ah))
         try:
             for index, frame in enumerate(iterator):
@@ -715,15 +720,27 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
                 if index % max(1, round(fps)) == 0:
                     _event(progress, 'decode', index, windows[-1][2]+1, 'Reading source frames')
                 while pending < len(windows) and index == windows[pending][2]:
-                    cut, start, end = windows[pending]; frames = dict(rolling)
+                    cut, start, end = windows[pending]
+                    frames = {n: frame for n, frame in rolling if start <= n <= end}
                     _event(progress, 'geometry', pending, len(seams), 'Measuring global geometry and camera rates', cut)
                     fit = calibrate_pair(frames[cut-1], frames[cut], opts); _check(cancelled)
                     native = upscale@np.asarray(fit['matrix'])@down
-                    pre, pre_ok, pre_report = _camera_rate(frames, list(range(start, cut)), upscale, center, opts, cancelled)
-                    post, post_ok, post_report = _camera_rate(frames, list(range(cut, end+1)), upscale, center, opts, cancelled)
+                    pre, pre_ok, pre_report = _camera_rate(frames, list(range(max(start, cut-handles-1), cut)), upscale, center, opts, cancelled)
+                    post, post_ok, post_report = _camera_rate(frames, list(range(cut, min(end, cut+handles)+1)), upscale, center, opts, cancelled)
+                    for side, reliable, rate_report in (('pre', pre_ok, pre_report), ('post', post_ok, post_report)):
+                        if reliable:
+                            cadence = recover_cadence_rate(
+                                frames, cut, side, pair_fit=lambda left, right: calibrate_pair(left, right, opts),
+                                upscale=upscale, center=center, cancelled=cancelled)
+                            rate_report['cadence_recovery'] = cadence
+                            if cadence['accepted']:
+                                if side == 'pre':
+                                    pre = np.asarray(cadence['rate'])
+                                else:
+                                    post = np.asarray(cadence['rate'])
                     ease = bool(pre_ok and post_ok and np.linalg.norm((pre-post)/[.002, .001, max(1., width*.002), max(1., height*.002)]) > .15)
                     reason = handle_exclusions.get(cut)
-                    partial = None
+                    partial = endpoint = None
                     if not fit['accepted']:
                         reason = fit['reason']
                     elif not pre_ok:
@@ -731,25 +748,30 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
                             partial = recover_partial_edit(
                                 frames, cut, fit, pair_fit=lambda left, right: calibrate_pair(left, right, opts),
                                 upscale=upscale, options=opts, cancelled=cancelled)
-                        if not partial or not partial['accepted']:
+                        if reason is None and (not partial or not partial['accepted']):
+                            endpoint = recover_endpoint_edit(
+                                frames, cut, fit, upscale=upscale, options=opts, cancelled=cancelled)
+                        if not (partial and partial['accepted']) and not (endpoint and endpoint['accepted']):
                             reason = reason or 'Incoming edit cannot be separated from camera motion: outgoing rate is unreliable'
                     if reason:
                         calibration['excluded_geometry'].append({'frame': cut, 'reason': reason})
-                    recovered = partial is not None and partial['accepted'] and reason is None
-                    # A partial edit has already compensated measured ordinary
-                    # motion. Zero assembly rates prevent applying it twice;
-                    # the original evidence remains in the seam report below.
+                    recovery = partial if partial and partial['accepted'] else endpoint
+                    recovered = recovery is not None and recovery['accepted'] and reason is None
+                    # Recovered edits already separate recrop from ordinary
+                    # motion. Zero assembly rates prevent applying it twice.
                     calibration['cuts'].append({'frame': cut, 'right_to_left_matrix': (
-                        np.eye(3) if reason else np.asarray(partial['edit_matrix']) if recovered else native).tolist(),
+                        np.eye(3) if reason else np.asarray(recovery['edit_matrix']) if recovered else native).tolist(),
                         'pre_rate': (np.zeros(4) if recovered else pre).tolist(),
                         'post_rate': (np.zeros(4) if recovered else post).tolist(), 'ease_rate': False if recovered else ease})
                     report['seams'].append({'frame': cut, 'geometry': fit, 'measured_native_right_to_left_matrix': native.tolist(), 'geometry_excluded_reason': reason,
                                             'pre_rate': pre_report, 'post_rate': post_report,
-                                            'rate_easing': ease, 'color': {'status': 'pending'}})
+                                            'rate_easing': bool(ease and not recovered and not reason), 'color': {'status': 'pending'}})
                     if partial is not None:
                         partial['original_native_pre_rate'] = pre.tolist()
                         partial['original_native_post_rate'] = post.tolist()
                         report['seams'][-1]['partial_geometry'] = partial
+                    if endpoint is not None:
+                        report['seams'][-1]['framing_recovery'] = endpoint
                     keep = [n for n in range(max(start, cut-3), min(end, cut+2)+1)]
                     np.savez_compressed(temporary/f'{cut}.npz', indices=np.array(keep), frames=np.stack([frames[n] for n in keep]))
                     pending += 1
@@ -834,6 +856,14 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
                          'constant_crop_fraction': plan['design_report']['constant_view_crop_fraction_total_dimension'],
                          'partial_geometry_frames': [item['frame'] for item in report['seams']
                                                      if item.get('partial_geometry', {}).get('accepted') and not item['geometry_excluded_reason']],
+                         'endpoint_geometry_frames': [item['frame'] for item in report['seams']
+                                                      if item.get('framing_recovery', {}).get('accepted') and not item['geometry_excluded_reason']],
+                         'cadence_adjusted_frames': [item['frame'] for item in report['seams']
+                                                     if not item['geometry_excluded_reason']
+                                                     and not item.get('partial_geometry', {}).get('accepted')
+                                                     and not item.get('framing_recovery', {}).get('accepted') and any(
+                                                         item[side].get('cadence_recovery', {}).get('accepted')
+                                                         for side in ('pre_rate', 'post_rate'))],
                          'geometry_exclusions': calibration['excluded_geometry']}
     plan['generator'] = {'name': 'seamstress.calibrate', 'version': __version__, 'algorithm': ALGORITHM}
     validate_conform_plan(plan, metadata)

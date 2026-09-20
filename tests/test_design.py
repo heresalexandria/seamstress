@@ -102,5 +102,17 @@ class DesignTests(unittest.TestCase):
         self.assertEqual(regenerated['unresolved_seams'],[2888])
         self.assertEqual(regenerated['design_report']['actual_geometry_supports'][-1]['after_frames'],106)
 
+    def test_reviewed_framing_recipe_rebuild_preserves_pixels_and_review_provenance(self):
+        calibration=json.loads((ROOT/'plans/IYTYT-framing-reviewed-calibration.json').read_text())
+        reference=json.loads((ROOT/'plans/IYTYT-framing-reviewed.json').read_text())
+        regenerated=build_conform_plan(calibration,reference['source'])
+        np.testing.assert_allclose(regenerated['frame_matrices'],reference['frame_matrices'],rtol=0,atol=1e-12)
+        np.testing.assert_array_equal(regenerated['view_matrix'],reference['view_matrix'])
+        for key in ('grade_curves','local_color_curves','segments','review_decisions'):
+            self.assertEqual(regenerated[key],reference[key])
+        self.assertEqual(regenerated['unresolved_seams'],[2888])
+        self.assertEqual(regenerated['review_decisions'][0]['frame'],1805)
+        self.assertFalse(regenerated['review_decisions'][0]['automatic_approval'])
+
 
 if __name__=='__main__':unittest.main()

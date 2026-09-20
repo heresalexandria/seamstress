@@ -66,3 +66,5 @@ CI tests pull requests and builds native packages. A merged PR with exactly one 
 The previous GitHub implementation is preserved unchanged in [legacy/](legacy/README.md), with its original history retained. It is separate from the current desktop app and CLI.
 
 The accepted original-frame experiment remains reproducible: [IYTYT eight-join guide](docs/REPRODUCE-IYTYT.md), [color refinement](docs/REPRODUCE-COLOR-REFINEMENT.md), and [research history](docs/EXPERIMENTS.md). Source videos and generated outputs are local files and are not included in this repository.
+
+The [reviewed framing candidate](docs/REPRODUCE-FRAMING-REVIEW.md) restores the 1:00 and 1:15 framing and reduces the 1:30 camera overcorrection. Its recipe explicitly records the reviewed 1:15 decision; the 2:00 depth jump remains unresolved. [Framing analysis](docs/FRAMING-REVIEW.md) explains the automatic checks and limits.
