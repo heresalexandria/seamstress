@@ -235,6 +235,27 @@ class CalibrationVideoTests(unittest.TestCase):
         plan = json.loads(Path(result['plan_path']).read_text())
         np.testing.assert_allclose(plan['frame_matrices'], np.repeat(np.eye(3)[None], 36, axis=0))
 
+    def test_extended_cadence_evidence_never_crosses_another_marked_join(self):
+        source = self.video('nearby-markers.mp4', cartoon(), count=48)
+        markers = [12, 24, 36]
+        observed = []
+
+        def inspect_window(frames, cut, side, **kwargs):
+            position = markers.index(cut)
+            previous = markers[position-1] if position else 0
+            following = markers[position+1] if position+1 < len(markers) else 48
+            self.assertGreaterEqual(min(frames), previous)
+            self.assertLess(max(frames), following)
+            observed.append((cut, side))
+            return {'accepted': False, 'reason': 'Independent cadence handles unavailable'}
+
+        with patch('seamstress.calibration.recover_cadence_rate', side_effect=inspect_window):
+            result = self.run_calibration(source, markers)
+        self.assertEqual(len(observed), 6)
+        self.assertEqual(result['unresolved_seams'], [])
+        plan = json.loads(Path(result['plan_path']).read_text())
+        np.testing.assert_allclose(plan['frame_matrices'], np.repeat(np.eye(3)[None], 48, axis=0))
+
     def test_scene_change_without_nearby_cuts_is_not_color_corrected(self):
         source = self.video('unrelated.mp4', cartoon(), cartoon(seed=818))
         result = self.run_calibration(source, [16])

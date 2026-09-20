@@ -6,6 +6,7 @@ contains those measurements and the decision to exclude unreliable geometry.
 from __future__ import annotations
 
 import hashlib
+import copy
 import json
 import os
 from pathlib import Path
@@ -160,6 +161,8 @@ def build_conform_plan(calibration, metadata, geometry_support=None, rate_suppor
                               'maximum_affine_singular_ratio': float(np.linalg.cond(matrices[:,:2,:2]).max())}}
     if 'local_color_curves' in calibration:
         plan['local_color_curves'] = calibration['local_color_curves']
+    if 'review_decisions' in calibration:
+        plan['review_decisions'] = copy.deepcopy(calibration['review_decisions'])
     validate_conform_plan(plan, metadata)
     return plan
 

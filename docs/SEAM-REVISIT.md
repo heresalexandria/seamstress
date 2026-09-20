@@ -1,5 +1,9 @@
 # Revisiting the two remaining IYTYT joins
 
+This documents the v0.2.3 review. The subsequent [framing review](FRAMING-REVIEW.md)
+addresses automatic-export regressions at 1:00, 1:15 and 1:30 and rechecks the
+remaining 2:00 limitation.
+
 This review compares the original stitched video with the saved eight-join and
 color-refined renders. It also checks the generalized engine separately: its
 conservative automatic measurements do not reproduce every decision in those

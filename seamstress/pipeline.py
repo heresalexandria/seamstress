@@ -124,6 +124,9 @@ def analyze_project(project, *, options=None,progress=None,cancelled=None):
         partial=item.get('partial_geometry',{})
         if partial.get('accepted') and not item.get('geometry_excluded_reason'):
             warnings.append(f"Frame {item.get('frame','?')}, partial framing: {partial['limitation']}")
+        endpoint=item.get('framing_recovery',{})
+        if endpoint.get('accepted') and not item.get('geometry_excluded_reason'):
+            warnings.append(f"Frame {item.get('frame','?')}, framing restored: {endpoint['limitation']}")
         color=item.get('color',{})
         if color.get('status')=='excluded':warnings.append(f"Frame {item.get('frame','?')}, color: {color.get('reason','Unreliable color match')}")
     if not frames:warnings.append('No enabled seams: the correction plan preserves the original framing and colors.')
