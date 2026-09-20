@@ -1,3 +1,5 @@
+<img src="icon.png" alt="Seamstress icon" width="160" height="160">
+
 # Seamstress
 
 A local video studio for making stitched continuous shots feel continuous. Drop in a video, review detected joins, match framing and color, and export a high-quality corrected movie.
@@ -41,6 +43,8 @@ cd app
 npm ci
 npm run dev
 ```
+
+The source artwork is `icon.png`. After replacing it, run `.venv/bin/python scripts/create_icon.py` from the repository root to refresh the desktop PNG and macOS icon.
 
 ```sh
 .venv/bin/python -m unittest discover -s tests -v

@@ -99,6 +99,7 @@ function handle(channel,fn){ipcMain.handle(channel,async(event,...args)=>{
 function requireIdle(projectPath){if(busy.has(projectPath))throw new Error('Wait for the current operation, or cancel it first');}
 async function withProject(projectPath,operation){requireIdle(projectPath);busy.add(projectPath);updater?.refreshActivity();try{return await operation();}finally{busy.delete(projectPath);updater?.refreshActivity();}}
 app.whenReady().then(()=>{
+  if(!app.isPackaged&&!smoke&&process.platform==='darwin')app.dock.setIcon(path.join(__dirname,'../assets/icon.png'));
   updater=createUpdater({app,autoUpdater,nativeUpdater,hasActiveJobs:()=>jobs.size>0||busy.size>0,
     disabled:smoke,openExternal:url=>shell.openExternal(url),
     onState:state=>{if(window&&!window.isDestroyed())window.webContents.send('update:event',state);}});
