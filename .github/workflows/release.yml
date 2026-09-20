@@ -143,6 +143,9 @@ jobs:
         working-directory: app
         env:
           SEAMSTRESS_RELEASE: '1'
+          # A closed, merged PR still sets GITHUB_BASE_REF. Only this trusted
+          # main-commit job may override electron-builder's PR signing guard.
+          CSC_FOR_PULL_REQUEST: 'true'
           CSC_LINK: ${{ secrets.CSC_LINK }}
           CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
           APPLE_KEY_CONTENT: ${{ secrets.APPLE_API_KEY }}
