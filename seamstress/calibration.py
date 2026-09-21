@@ -650,7 +650,10 @@ def _write_bundle(payloads, cancelled):
 
 def calibrate_video(source: Path, seams: list[int], output: Path, *,
                     progress: Callable | None = None, cancelled: Callable | None = None,
-                    options: dict | None = None, seam_settings: dict | None = None) -> dict:
+                    options: dict | None = None, seam_settings: dict | None = None,
+                    analysis_boundaries: list[int] | None = None,
+                    plan_transform: Callable | None = None,
+                    geometry_support_frames: int | None = None) -> dict:
     """Measure a CFR SDR source and publish new calibration, plan, and report.
 
     ``output`` names the calibration JSON. Sibling ``.plan.json`` and
@@ -661,6 +664,11 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
     Callers must validate constant frame rate and unrotated native dimensions.
     ``seam_settings`` maps enabled incoming frame indices to correction choices;
     omitted seams retain the established automatic defaults.
+    ``analysis_boundaries`` can include additional joins that limit generation
+    handles without being analyzed. ``plan_transform`` is an internal assembly
+    hook used to fit a selected seam within a frozen correction plan.
+    ``geometry_support_frames`` supplies that workflow's exact whole-frame
+    return support without rounding it through the public seconds option.
     """
     opts = _options(options); _check(cancelled)
     source, output = Path(source).expanduser().resolve(), Path(output).expanduser().resolve()
@@ -678,6 +686,13 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
         raise ValueError('seams must be sorted unique zero-based incoming frame indices within the source')
     if len(seams) > opts['max_seams']:
         raise ValueError('Too many seams for the configured bounded calibration run')
+    boundaries=seams if analysis_boundaries is None else analysis_boundaries
+    if (not isinstance(boundaries,list) or len(boundaries)>10000 or
+            any(type(n) is not int or not 0<n<count for n in boundaries) or
+            boundaries!=sorted(set(boundaries)) or not set(seams)<=set(boundaries)):
+        raise ValueError('analysis_boundaries must be sorted unique source frame indices including every analyzed seam')
+    if plan_transform is not None and not callable(plan_transform):
+        raise ValueError('plan_transform must be callable')
     if seam_settings is None:
         seam_settings = {}
     if (not isinstance(seam_settings, dict) or
@@ -695,8 +710,25 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
                 for frame, policy in settings.items()}
     output.parent.mkdir(parents=True, exist_ok=True)
     fps = float(Fraction(metadata['fps_fraction']))
-    requested = max(1, round(opts['geometry_support_seconds']*fps))
-    support, handle_exclusions = _supports(seams, count, requested)
+    if geometry_support_frames is not None and (type(geometry_support_frames) is not int or
+            not 1 <= geometry_support_frames <= max(1, round(60*fps))):
+        raise ValueError('geometry_support_frames must be a positive whole-frame support of at most 60 seconds')
+    requested = (geometry_support_frames if geometry_support_frames is not None else
+                 max(1, round(opts['geometry_support_seconds']*fps)))
+    support, handle_exclusions = _supports(boundaries, count, requested)
+    if boundaries != seams:
+        # Unanalyzed markers bound the selected generation's handles, but an
+        # unrelated pair elsewhere must not shorten this correction's return.
+        support = requested
+        positions = {cut: i for i, cut in enumerate(boundaries)}
+        for cut in seams:
+            if cut in handle_exclusions:
+                continue
+            index = positions[cut]
+            neighbors = boundaries[max(0, index-1):index]+boundaries[index+1:index+2]
+            for neighbor in neighbors:
+                support = min(support, max(1, (abs(neighbor-cut)-2)//2))
+        handle_exclusions = {cut: reason for cut, reason in handle_exclusions.items() if cut in seams}
     rate_support = min(opts['rate_support_frames'], support)
     calibration = {'schema_version': 1, 'method': 'source_conform_calibration', 'algorithm': ALGORITHM,
                    'source': metadata.copy(), 'source_sha256': digest.hexdigest(),
@@ -708,6 +740,8 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
                               if any(policy['geometry'] == 'manual' for policy in settings.values()) else
                               'AUTOMATIC CANDIDATE: source-specific measured corrections; visual review required'),
                    'generator': {'name': 'seamstress.calibrate', 'version': __version__, 'options': opts}}
+    if geometry_support_frames is not None:
+        calibration['generator']['geometry_support_frames'] = geometry_support_frames
     report = {'schema_version': 1, 'source_sha256': digest.hexdigest(), 'source': metadata.copy(),
               'options': opts, 'correction_settings': copy.deepcopy(calibration['correction_settings']),
               'seams': [], 'limitations': [
@@ -716,8 +750,14 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
                   'Jacobians and palette safeguards are sampled, not a guarantee of imperceptible transitions.',
                   'A close seam pair can shorten the globally shared neutral-return support.',
                   'Constant frame rate and native display orientation must be validated by the caller.']}
+    def assembled():
+        candidate=_assemble(calibration,metadata)
+        if plan_transform is not None:
+            candidate=plan_transform(candidate,calibration,metadata)
+            validate_conform_plan(candidate,metadata)
+        return candidate
     if not seams:
-        plan = _assemble(calibration, metadata)
+        plan = assembled()
         report['summary'] = {'seam_count': 0, 'geometry_accepted': 0, 'protected_tone_curves': 0, 'local_color_curves': 0, 'constant_crop_fraction': 0., 'geometry_exclusions': []}
         validate_conform_plan(plan, metadata)
         _write_bundle({output: calibration, plan_path: plan, report_path: report}, cancelled)
@@ -731,9 +771,11 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
     # pictures only test for phase aliasing across complete animation cycles.
     analysis_handles = max(handles, 12)
     windows = []
-    for i, cut in enumerate(seams):
-        start = max(0, cut-analysis_handles-1, seams[i-1] if i else 0)
-        end = min(count-1, cut+analysis_handles, seams[i+1]-1 if i+1 < len(seams) else count-1)
+    positions={cut:i for i,cut in enumerate(boundaries)}
+    for cut in seams:
+        i=positions[cut]
+        start = max(0, cut-analysis_handles-1, boundaries[i-1] if i else 0)
+        end = min(count-1, cut+analysis_handles, boundaries[i+1]-1 if i+1 < len(boundaries) else count-1)
         windows.append((cut, start, end))
     with tempfile.TemporaryDirectory(prefix='.seamstress-calibration-', dir=output.parent) as temporary:
         temporary = Path(temporary); rolling = deque(maxlen=2*analysis_handles+2); pending = 0
@@ -831,7 +873,7 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
         while True:
             _check(cancelled)
             try:
-                plan = _assemble(calibration, metadata); break
+                plan = assembled(); break
             except ValueError as exc:
                 if 'crop' not in str(exc) and 'covers' not in str(exc):
                     raise
@@ -905,7 +947,7 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
                 seam_report['color'] = color_report
             except (ValueError, cv2.error, np.linalg.LinAlgError) as exc:
                 seam_report['color'] = {'status': 'excluded', 'reason': str(exc)}
-        plan = _assemble(calibration, metadata)
+        plan = assembled()
     report['summary'] = {'seam_count': len(seams), 'geometry_accepted': len(seams)-len(calibration['excluded_geometry']),
                          'protected_tone_curves': len(calibration['grade_curves']),
                          'local_color_curves': len(calibration['local_color_curves']),

@@ -128,7 +128,7 @@ export function SeamCorrection({ seam, project, result, disabled, onSave, onImpo
       </div>}
       {localError && <p className="correction-error" role="alert">{localError}</p>}
       <div className="correction-save"><button className="primary-button" disabled={disabled || !dirty} onClick={() => void apply()}>Apply seam settings</button><button className="text-button" disabled={disabled || !dirty} onClick={reset}>Reset changes</button></div>
-      <p className={`field-help ${dirty ? 'correction-unsaved' : ''}`} role="status">{dirty ? 'Unapplied changes. Apply or reset before continuing.' : 'Settings are saved with this project. After a change, analyze again and regenerate previews.'}</p>
+      <p className={`field-help ${dirty ? 'correction-unsaved' : ''}`} role="status">{dirty ? 'Unapplied changes. Apply or reset before continuing.' : 'Settings are saved with this project. After a change, refine this seam or analyze the shot, then preview it.'}</p>
     </section>
     <section className="inspector-section correction-result" aria-label="Applied correction">
       <div className="section-caption">APPLIED CORRECTION</div>

@@ -77,6 +77,31 @@ discontinuity would require separately handled scene layers and reliable
 occlusion reconstruction; the current flat-video renderer does not provide
 that reconstruction.
 
+## Deeper 2:00 reconstruction audit
+
+A subsequent audit preserved the accepted movie and explored temporal endpoint
+selection, neighboring-frame background donors, and a continuous whole-image
+mesh. None qualified as a seamless repair.
+
+- Searching nearby frame pairs still left roughly 14–20 native pixels of depth
+  mismatch. Omitting a frame changes timing without resolving all scene layers.
+- Twenty-one neighboring donor frames could supply only 627 of 3,189 exposed
+  background pixels at the cut under conservative local-registration checks.
+  Most missing areas behind arms, legs and flames stayed occluded.
+- A subject-constrained mesh reduced median background endpoint mismatch to
+  3.50 pixels, but retained a local jump beside the sloth’s arm. Corresponding
+  foreground/background features are 10.40 pixels apart incoming and 31.61
+  pixels apart outgoing. A continuous warp matching both would stretch that
+  gap by at least 3.04 times.
+- Balanced mesh previews also bowed moving architectural lines by about three
+  native pixels. Straight-line constraints at the cut did not protect buildings
+  that moved through the warp later. This deformation was rejected for the app.
+
+The existing color correction and all earlier framing fixes remain intact. These
+experiments do not justify a new automatic geometry mode. The new single-seam
+refinement workflow supports isolated, reviewed adjustments with the existing
+framing/color tactics; it does not claim to solve the missing-layer problem.
+
 ## Using the changes
 
 The app now exposes [per-seam controls](SEAM-CONTROLS.md) for these automatic checks and for importing the reviewed 1:15 framing. Custom geometry remains a recorded review decision; the automatic evidence requirements are unchanged.

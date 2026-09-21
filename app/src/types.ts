@@ -1,4 +1,4 @@
-export type Stage = 'detect' | 'analyze' | 'preview' | 'process' | 'export';
+export type Stage = 'detect' | 'analyze' | 'refine' | 'preview' | 'process' | 'export';
 export type JobStage = Stage | 'import';
 export type CameraRate = [number, number, number, number];
 export type ManualFraming = {
@@ -52,6 +52,7 @@ export type Project = {
   seams: Seam[];
   seamResults?: SeamResult[];
   revision: number;
+  refinementBaseline?: { plan: string; planSha256: string; sourceSha256: string; revision: number };
   artifacts: {
     proxy?: string;
     thumbnails?: { frame: number; time: number; path: string }[];
@@ -93,7 +94,7 @@ export interface SeamstressAPI {
   getProject(projectPath: string): Promise<Project>;
   setSeams(options: { projectPath: string; seams: Seam[] }): Promise<Project>;
   importSeamCorrection(options: { projectPath: string; frame: number }): Promise<Project | null>;
-  run(options: { projectPath: string; stage: Stage; options?: { exportPath?: string; crf?: number; previewSeconds?: number } }): Promise<{ jobId: string }>;
+  run(options: { projectPath: string; stage: Stage; options?: { exportPath?: string; crf?: number; previewSeconds?: number; frame?: number; supportFrames?: number } }): Promise<{ jobId: string }>;
   cancelJob(jobId: string): Promise<void>;
   chooseExportPath(options: { suggestedName: string }): Promise<string | null>;
   onJobEvent(callback: (event: JobEvent) => void): () => void;

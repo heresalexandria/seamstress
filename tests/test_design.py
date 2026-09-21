@@ -69,6 +69,15 @@ class DesignTests(unittest.TestCase):
             with self.subTest(geometry_support=geo,rate_support=rate),self.assertRaises(ValueError):
                 build_conform_plan(self.calibration,self.metadata,geo,rate)
 
+    def test_target_only_calibration_cannot_silently_drop_preserved_seams(self):
+        with tempfile.TemporaryDirectory() as folder:
+            folder=Path(folder);source=folder/'source.mp4';source.write_bytes(b'original')
+            calibration=folder/'calibration.json';output=folder/'plan.json'
+            calibration.write_text(json.dumps({**self.calibration,'refinement_context':{'frame':40}}))
+            with self.assertRaisesRegex(ValueError,'merged rendering plan'):
+                design_conform(source,calibration,output)
+            self.assertFalse(output.exists())
+
     def test_source_hash_and_existing_paths_are_guarded_before_publication(self):
         with tempfile.TemporaryDirectory() as folder:
             folder=Path(folder);source=folder/'source.mp4';source.write_bytes(b'original source')

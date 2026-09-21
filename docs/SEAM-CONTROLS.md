@@ -6,8 +6,10 @@ behavior unless you change a setting.
 
 1. Choose the framing and color treatments for the selected join.
 2. Click **Apply seam settings**. **Reset changes** discards only unapplied edits.
-3. Run **Analyze & match**, then **Review previews**. Settings changes invalidate
-   the previous correction plan and its previews; old exported files remain on disk.
+3. For the first pass, run **Analyze & match**, then **Review previews**. When
+   revisiting one join, use **Refine this seam only**, then **Preview this seam**.
+   Settings changes invalidate current previews but retain the previous plan as
+   a refinement baseline; old plans and exported files remain on disk.
 4. Review both the seam loop and the full shot before exporting to a new filename.
 
 The **Applied correction** readout describes the last analysis: which framing
@@ -15,6 +17,33 @@ method was used, whether cadence adjustment and camera-rate easing were applied,
 and the color treatment. Its review notes explain skipped or partial corrections.
 **Detection readout** is separate: a confidently located boundary is not evidence
 that every kind of correction is safe there.
+
+## Refine one seam without losing other fixes
+
+After analyzing the shot once, select the join, edit and apply its settings, then
+click **Refine this seam only**. This analyzes only that join and creates a new
+complete rendering plan. The original source, previous plan and exports remain
+available. The full-shot viewing crop stays fixed; geometry and color values
+outside the declared correction window are copied exactly from the baseline.
+
+**Correction reach** optionally sets a whole-frame support on each side. Leave
+it blank to cover the seam’s existing correction automatically. A shorter reach
+cannot strand part of an old correction outside the new window. A longer reach
+cannot overlap a neighboring correction. Refinement refuses adjustments that
+expose source edges under the preserved crop. Reduce the adjustment, or choose
+whole-shot analysis explicitly if you want a different crop.
+
+Only the selected seam’s settings may differ from the baseline. Changes to other
+markers or settings must be restored or analyzed together first. Moving a seam
+that already has a correction also requires whole-shot analysis; its old support
+cannot simply be discarded. Source and baseline fingerprints are checked before
+the new plan is published.
+
+**Preview this seam** renders just the selected review window. **Review previews**
+in the sidebar still makes the whole-shot preview and all enabled seam loops.
+Export uses the merged full-shot plan. It re-encodes the video, so unchanged
+render values outside the window do not mean byte-identical compressed video.
+See [CLI one-seam commands](SEAMSTRESS.md#refine-a-single-seam).
 
 ## Framing and color
 
@@ -29,7 +58,7 @@ that every kind of correction is safe there.
 
 Turning one seam’s framing off does not remove the constant viewing crop needed
 to cover source edges for other active seams. Similarly, each seam’s decision is
-local even though the complete plan is rebuilt and validated together.
+local. Whole-shot analysis rebuilds the plan together; single-seam refinement keeps the existing crop and other corrections fixed.
 
 Expand **Automatic checks** to enable or disable individual framing tactics:
 
@@ -74,8 +103,8 @@ provenance are copied into the project, so reopening it does not depend on the
 calibration file remaining at its original path.
 
 Importing saves the custom framing immediately and clears stale analysis. Run
-**Analyze & match** to refit and independently validate color in the chosen
-geometry; importing does not transplant old color curves. You can temporarily
+**Refine this seam only** (with an existing baseline) or **Analyze & match** to
+refit and independently validate color in the chosen geometry; importing does not transplant old color curves. You can temporarily
 choose **Automatic** or **Off** without losing saved custom measurements, then
 return to **Custom**. Moving the seam to a different frame clears those bound
 measurements. A custom marker returns to automatic framing; an off marker stays off. Rerunning **Find

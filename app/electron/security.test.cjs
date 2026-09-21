@@ -7,5 +7,5 @@ test('asset resolution rejects encoded traversal and root escape',()=>{
 });
 test('media access is explicit and excludes non-media artifacts',()=>{
   assert.deepEqual(collectMedia({source:'/video.mp4',artifacts:{plan:'/secret.env',thumbnails:[{path:'/thumb.jpg'}]}}),['/video.mp4','/thumb.jpg']);
-  assert.equal(validateStage('preview'),'preview');assert.throws(()=>validateStage('shell'));
+  assert.equal(validateStage('preview'),'preview');assert.equal(validateStage('refine'),'refine');assert.throws(()=>validateStage('shell'));
 });
