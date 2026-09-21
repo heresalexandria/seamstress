@@ -21,6 +21,7 @@ from . import __version__
 from .conform import _similarity, validate_conform_plan
 from .media import probe
 from .repair import fingerprint
+from .corrections import normalize_correction
 
 
 ALGORITHM = "balanced-affine-neutral-return-v1"
@@ -119,6 +120,16 @@ def build_conform_plan(calibration, metadata, geometry_support=None, rate_suppor
     cut_indices = {r['frame'] for r in cuts}
     if not excluded <= cut_indices:
         raise ValueError('Every geometry exclusion must name a calibrated cut')
+    policies=calibration.get('correction_settings',[])
+    if not isinstance(policies,list) or any(not isinstance(row,dict) or type(row.get('frame')) is not int for row in policies):
+        raise ValueError('correction_settings must contain frame and correction objects')
+    if len({row['frame'] for row in policies})!=len(policies) or any(row['frame'] not in cut_indices for row in policies):
+        raise ValueError('Correction settings must name unique calibrated cuts')
+    policies=[{'frame':row['frame'],'correction':normalize_correction(row.get('correction'),metadata=metadata,
+        source_sha256=calibration.get('source_sha256'),frame=row['frame'])} for row in policies]
+    intentionally_off={row['frame'] for row in policies if row['correction']['geometry']=='off'}
+    if not intentionally_off <= excluded:
+        raise ValueError('Disabled framing must also be excluded from geometry assembly')
     corners = np.array([[0,0,1], [width-1,0,1], [0,height-1,1], [width-1,height-1,1]], dtype=float).T
     inverse = np.linalg.inv(matrices)
     def clearance(enlargement):
@@ -146,7 +157,7 @@ def build_conform_plan(calibration, metadata, geometry_support=None, rate_suppor
             'seams': [{'frame': r['frame'], 'time': r['frame']/float(Fraction(metadata['fps_fraction']))} for r in cuts],
             'segments': [{'start': 0, 'end': count, 'matrix': np.eye(3).tolist(), 'gain': [1,1,1], 'bias': [0,0,0]}],
             'frame_matrices': matrices.tolist(), 'view_matrix': view.tolist(), 'edge_extension_pixels': 0,
-            'grade_curves': calibration.get('grade_curves', []), 'unresolved_seams': sorted(excluded),
+            'grade_curves': calibration.get('grade_curves', []), 'unresolved_seams': sorted(excluded-intentionally_off),
             'status': 'EXPERIMENTAL CALIBRATED CANDIDATE; perceptual review pending; not certified seamless',
             'notes': ['One original drawing per frame; no image interpolation, temporal crossfade, or generated poses.',
                       'Camera and color measurements come from explicit calibration; this command does not automatically validate them.',
@@ -163,6 +174,8 @@ def build_conform_plan(calibration, metadata, geometry_support=None, rate_suppor
         plan['local_color_curves'] = calibration['local_color_curves']
     if 'review_decisions' in calibration:
         plan['review_decisions'] = copy.deepcopy(calibration['review_decisions'])
+    if 'correction_settings' in calibration:
+        plan['correction_settings'] = copy.deepcopy(policies)
     validate_conform_plan(plan, metadata)
     return plan
 

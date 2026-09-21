@@ -7,6 +7,7 @@ not a claim that every seam can be repaired from a flattened video.
 from __future__ import annotations
 
 from collections import deque
+import copy
 from fractions import Fraction
 import hashlib
 import json
@@ -22,6 +23,7 @@ from scipy.interpolate import PchipInterpolator
 
 from . import __version__
 from .conform import validate_conform_plan
+from .corrections import normalize_correction
 from .camera_rate import recover_cadence_rate
 from .design import ALGORITHM, build_conform_plan
 from .local_color import apply_samples as apply_local_samples
@@ -269,7 +271,13 @@ def _identity_plan(calibration, metadata):
 
 
 def _assemble(calibration, metadata):
-    return build_conform_plan(calibration, metadata) if calibration['cuts'] else _identity_plan(calibration, metadata)
+    plan = build_conform_plan(calibration, metadata) if calibration['cuts'] else _identity_plan(calibration, metadata)
+    if 'correction_settings' in calibration:
+        plan['correction_settings'] = copy.deepcopy(calibration['correction_settings'])
+        intentional = {item['frame'] for item in calibration['correction_settings']
+                       if item['correction']['geometry'] == 'off'}
+        plan['unresolved_seams'] = [frame for frame in plan['unresolved_seams'] if frame not in intentional]
+    return plan
 
 
 def _color_scene_evidence(left, right, cancelled=None):
@@ -642,7 +650,7 @@ def _write_bundle(payloads, cancelled):
 
 def calibrate_video(source: Path, seams: list[int], output: Path, *,
                     progress: Callable | None = None, cancelled: Callable | None = None,
-                    options: dict | None = None) -> dict:
+                    options: dict | None = None, seam_settings: dict | None = None) -> dict:
     """Measure a CFR SDR source and publish new calibration, plan, and report.
 
     ``output`` names the calibration JSON. Sibling ``.plan.json`` and
@@ -651,6 +659,8 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
     ``cancelled()`` is checked between decoded frames and fitting iterations;
     cancellation raises CalibrationCancelled before any output publication.
     Callers must validate constant frame rate and unrotated native dimensions.
+    ``seam_settings`` maps enabled incoming frame indices to correction choices;
+    omitted seams retain the established automatic defaults.
     """
     opts = _options(options); _check(cancelled)
     source, output = Path(source).expanduser().resolve(), Path(output).expanduser().resolve()
@@ -668,12 +678,22 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
         raise ValueError('seams must be sorted unique zero-based incoming frame indices within the source')
     if len(seams) > opts['max_seams']:
         raise ValueError('Too many seams for the configured bounded calibration run')
-    output.parent.mkdir(parents=True, exist_ok=True)
+    if seam_settings is None:
+        seam_settings = {}
+    if (not isinstance(seam_settings, dict) or
+            any(type(frame) is not int or frame not in seams for frame in seam_settings)):
+        raise ValueError('seam_settings must map enabled seam frame indices to correction objects')
+    settings = {frame: normalize_correction(seam_settings.get(frame), metadata=metadata, frame=frame)
+                for frame in seams}
     _event(progress, 'fingerprint', 0, 1, 'Fingerprinting the source')
     digest = hashlib.sha256()
     with source.open('rb') as handle:
         for block in iter(lambda: handle.read(4*1024*1024), b''):
             _check(cancelled); digest.update(block)
+    settings = {frame: normalize_correction(policy, metadata=metadata,
+                                           source_sha256=digest.hexdigest(), frame=frame)
+                for frame, policy in settings.items()}
+    output.parent.mkdir(parents=True, exist_ok=True)
     fps = float(Fraction(metadata['fps_fraction']))
     requested = max(1, round(opts['geometry_support_seconds']*fps))
     support, handle_exclusions = _supports(seams, count, requested)
@@ -683,17 +703,21 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
                    'parameters': {'geometry_support': support, 'rate_support': rate_support,
                                   'source_margin_pixels': 0., 'max_view_crop_fraction_total_dimension': opts['max_view_crop_fraction']},
                    'cuts': [], 'excluded_geometry': [], 'grade_curves': [], 'local_color_curves': [],
-                   'status': 'AUTOMATIC CANDIDATE: source-specific measured corrections; visual review required',
+                   'correction_settings': [{'frame': frame, 'correction': policy} for frame, policy in settings.items()],
+                   'status': ('REVIEWED SETTINGS CANDIDATE: includes explicit manual framing; visual review required'
+                              if any(policy['geometry'] == 'manual' for policy in settings.values()) else
+                              'AUTOMATIC CANDIDATE: source-specific measured corrections; visual review required'),
                    'generator': {'name': 'seamstress.calibrate', 'version': __version__, 'options': opts}}
     report = {'schema_version': 1, 'source_sha256': digest.hexdigest(), 'source': metadata.copy(),
-              'options': opts, 'seams': [], 'limitations': [
+              'options': opts, 'correction_settings': copy.deepcopy(calibration['correction_settings']),
+              'seams': [], 'limitations': [
                   'Global affine geometry cannot resolve depth-dependent parallax or changed poses.',
                   'Color samples use correspondence only; output never uses dense warps or mixed source frames.',
                   'Jacobians and palette safeguards are sampled, not a guarantee of imperceptible transitions.',
                   'A close seam pair can shorten the globally shared neutral-return support.',
                   'Constant frame rate and native display orientation must be validated by the caller.']}
     if not seams:
-        plan = _identity_plan(calibration, metadata)
+        plan = _assemble(calibration, metadata)
         report['summary'] = {'seam_count': 0, 'geometry_accepted': 0, 'protected_tone_curves': 0, 'local_color_curves': 0, 'constant_crop_fraction': 0., 'geometry_exclusions': []}
         validate_conform_plan(plan, metadata)
         _write_bundle({output: calibration, plan_path: plan, report_path: report}, cancelled)
@@ -721,6 +745,7 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
                     _event(progress, 'decode', index, windows[-1][2]+1, 'Reading source frames')
                 while pending < len(windows) and index == windows[pending][2]:
                     cut, start, end = windows[pending]
+                    policy = settings[cut]
                     frames = {n: frame for n, frame in rolling if start <= n <= end}
                     _event(progress, 'geometry', pending, len(seams), 'Measuring global geometry and camera rates', cut)
                     fit = calibrate_pair(frames[cut-1], frames[cut], opts); _check(cancelled)
@@ -728,7 +753,7 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
                     pre, pre_ok, pre_report = _camera_rate(frames, list(range(max(start, cut-handles-1), cut)), upscale, center, opts, cancelled)
                     post, post_ok, post_report = _camera_rate(frames, list(range(cut, min(end, cut+handles)+1)), upscale, center, opts, cancelled)
                     for side, reliable, rate_report in (('pre', pre_ok, pre_report), ('post', post_ok, post_report)):
-                        if reliable:
+                        if reliable and policy['geometry'] == 'auto' and policy['cadence']:
                             cadence = recover_cadence_rate(
                                 frames, cut, side, pair_fit=lambda left, right: calibrate_pair(left, right, opts),
                                 upscale=upscale, center=center, cancelled=cancelled)
@@ -738,17 +763,22 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
                                     pre = np.asarray(cadence['rate'])
                                 else:
                                     post = np.asarray(cadence['rate'])
-                    ease = bool(pre_ok and post_ok and np.linalg.norm((pre-post)/[.002, .001, max(1., width*.002), max(1., height*.002)]) > .15)
+                    ease = bool(policy['rate_easing'] and pre_ok and post_ok and np.linalg.norm((pre-post)/[.002, .001, max(1., width*.002), max(1., height*.002)]) > .15)
                     reason = handle_exclusions.get(cut)
                     partial = endpoint = None
-                    if not fit['accepted']:
+                    if policy['geometry'] == 'off':
+                        reason = 'Geometry disabled by the per-seam correction policy'
+                    elif policy['geometry'] == 'manual':
+                        if reason:
+                            raise ValueError(f'Manual geometry at frame {cut}: {reason}')
+                    elif not fit['accepted']:
                         reason = fit['reason']
                     elif not pre_ok:
-                        if reason is None:
+                        if reason is None and policy['partial_recovery']:
                             partial = recover_partial_edit(
                                 frames, cut, fit, pair_fit=lambda left, right: calibrate_pair(left, right, opts),
                                 upscale=upscale, options=opts, cancelled=cancelled)
-                        if reason is None and (not partial or not partial['accepted']):
+                        if reason is None and policy['endpoint_recovery'] and (not partial or not partial['accepted']):
                             endpoint = recover_endpoint_edit(
                                 frames, cut, fit, upscale=upscale, options=opts, cancelled=cancelled)
                         if not (partial and partial['accepted']) and not (endpoint and endpoint['accepted']):
@@ -759,13 +789,29 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
                     recovered = recovery is not None and recovery['accepted'] and reason is None
                     # Recovered edits already separate recrop from ordinary
                     # motion. Zero assembly rates prevent applying it twice.
-                    calibration['cuts'].append({'frame': cut, 'right_to_left_matrix': (
+                    record = {'frame': cut, 'right_to_left_matrix': (
                         np.eye(3) if reason else np.asarray(recovery['edit_matrix']) if recovered else native).tolist(),
                         'pre_rate': (np.zeros(4) if recovered else pre).tolist(),
-                        'post_rate': (np.zeros(4) if recovered else post).tolist(), 'ease_rate': False if recovered else ease})
+                        'post_rate': (np.zeros(4) if recovered else post).tolist(), 'ease_rate': False if recovered else ease,
+                        'correction': copy.deepcopy(policy)}
+                    if policy['geometry'] == 'manual':
+                        for key in ('right_to_left_matrix', 'pre_rate', 'post_rate', 'ease_rate'):
+                            record[key] = copy.deepcopy(policy['manual'][key])
+                        record['ease_rate'] = bool(record['ease_rate'] and policy['rate_easing'])
+                        calibration.setdefault('review_decisions', []).append({
+                            'frame': cut, 'treatment': 'Explicit manual global framing and camera rates',
+                            'automatic_approval': False, 'correction': copy.deepcopy(policy),
+                            'provenance': copy.deepcopy(policy['manual'].get('provenance'))})
+                    elif policy['geometry'] == 'off':
+                        calibration.setdefault('review_decisions', []).append({
+                            'frame': cut, 'treatment': 'Geometry intentionally disabled',
+                            'automatic_approval': False, 'correction': copy.deepcopy(policy)})
+                    calibration['cuts'].append(record)
                     report['seams'].append({'frame': cut, 'geometry': fit, 'measured_native_right_to_left_matrix': native.tolist(), 'geometry_excluded_reason': reason,
+                                            'correction': copy.deepcopy(policy),
+                                            'geometry_status': ('off' if policy['geometry'] == 'off' else 'unresolved' if reason else 'manual' if policy['geometry'] == 'manual' else 'automatic'),
                                             'pre_rate': pre_report, 'post_rate': post_report,
-                                            'rate_easing': bool(ease and not recovered and not reason), 'color': {'status': 'pending'}})
+                                            'rate_easing': bool(record['ease_rate'] and not reason), 'color': {'status': 'pending'}})
                     if partial is not None:
                         partial['original_native_pre_rate'] = pre.tolist()
                         partial['original_native_post_rate'] = post.tolist()
@@ -794,13 +840,22 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
                 if not remaining:
                     raise
                 worst = max(remaining, key=lambda r: np.linalg.norm(_parameters(np.asarray(r['right_to_left_matrix']), center)/[.03, .02, width*.03, height*.03]))
+                if settings[worst['frame']]['geometry'] == 'manual':
+                    raise ValueError(f'Manual geometry at frame {worst["frame"]} exceeds the source coverage/crop budget: {exc}') from exc
                 reason = 'Excluded to satisfy actual constant-crop source coverage: '+str(exc)
                 calibration['excluded_geometry'].append({'frame': worst['frame'], 'reason': reason})
-                next(r for r in report['seams'] if r['frame'] == worst['frame'])['geometry_excluded_reason'] = reason
+                seam_report = next(r for r in report['seams'] if r['frame'] == worst['frame'])
+                seam_report['geometry_excluded_reason'] = reason
+                seam_report['geometry_status'] = 'unresolved'
+                seam_report['rate_easing'] = False
         _event(progress, 'color', 0, len(seams), 'Fitting protected tone and bounded local color')
         for i, seam_report in enumerate(report['seams']):
             _check(cancelled); cut = seam_report['frame']
+            policy = settings[cut]
             _event(progress, 'color', i, len(seams), 'Validating source-specific color corrections', cut)
+            if policy['color'] == 'off':
+                seam_report['color'] = {'status': 'off', 'reason': 'Color disabled by the per-seam correction policy'}
+                continue
             if cut in handle_exclusions:
                 seam_report['color'] = {'status': 'excluded', 'reason': handle_exclusions[cut]}; continue
             with np.load(temporary/f'{cut}.npz') as stored:
@@ -837,7 +892,8 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
                         _check(cancelled); pairs.append(_flow_observations(frames[a], frames[b], opts))
                 if len(pairs) < 2:
                     raise ValueError('No independent cross-cut pair for color validation')
-                tone, local, color_report = _color_fit(pairs, opts, cancelled)
+                color_options = {**opts, 'enable_local_color': False} if policy['color'] == 'tone' else opts
+                tone, local, color_report = _color_fit(pairs, color_options, cancelled)
                 before, after = min(support, cut-1), min(support, count-1-cut)
                 if tone is not None:
                     calibration['grade_curves'].append({'frame': cut, 'support_before': before, 'support_after': after,
@@ -860,12 +916,18 @@ def calibrate_video(source: Path, seams: list[int], output: Path, *,
                                                       if item.get('framing_recovery', {}).get('accepted') and not item['geometry_excluded_reason']],
                          'cadence_adjusted_frames': [item['frame'] for item in report['seams']
                                                      if not item['geometry_excluded_reason']
+                                                     and item['correction']['geometry'] == 'auto'
                                                      and not item.get('partial_geometry', {}).get('accepted')
-                                                     and not item.get('framing_recovery', {}).get('accepted') and any(
-                                                         item[side].get('cadence_recovery', {}).get('accepted')
-                                                         for side in ('pre_rate', 'post_rate'))],
+                                                     and not item.get('framing_recovery', {}).get('accepted') and (
+                                                         item['pre_rate'].get('cadence_recovery', {}).get('accepted') or
+                                                         (item['rate_easing'] and item['post_rate'].get('cadence_recovery', {}).get('accepted')))],
+                         'manual_geometry_frames': [item['frame'] for item in report['seams'] if item['geometry_status'] == 'manual'],
+                         'geometry_disabled_frames': [item['frame'] for item in report['seams'] if item['geometry_status'] == 'off'],
+                         'color_disabled_frames': [item['frame'] for item in report['seams'] if item['color']['status'] == 'off'],
                          'geometry_exclusions': calibration['excluded_geometry']}
     plan['generator'] = {'name': 'seamstress.calibrate', 'version': __version__, 'algorithm': ALGORITHM}
+    if 'review_decisions' in calibration:
+        report['review_decisions'] = copy.deepcopy(calibration['review_decisions'])
     validate_conform_plan(plan, metadata)
     _check(cancelled); _event(progress, 'publish', 0, 1, 'Publishing calibration, plan, and evidence report')
     _write_bundle({output: calibration, plan_path: plan, report_path: report}, cancelled)

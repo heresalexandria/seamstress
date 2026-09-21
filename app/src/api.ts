@@ -12,6 +12,7 @@ export const browserAdapter: SeamstressAPI = {
   openProject: async () => desktopRequired(),
   getProject: async () => desktopRequired(),
   setSeams: async () => desktopRequired(),
+  importSeamCorrection: async () => desktopRequired(),
   run: async () => desktopRequired(),
   cancelJob: async () => desktopRequired(),
   chooseExportPath: async () => desktopRequired(),

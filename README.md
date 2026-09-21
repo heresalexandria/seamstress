@@ -21,6 +21,8 @@ Release installers are built by GitHub Actions, signed with Developer ID, notari
 
 Seamstress is designed for small continuity mismatches between generations of the same shot. It applies gradual, bounded framing and color corrections to original frames. The desktop workflow never morphs drawings, crossfades poses, or generates replacement frames. It skips corrections that lack reliable evidence. A changed character, gesture, or scene may still be visible; inspect previews before exporting.
 
+Each join has its own framing, camera and color controls. Keep automatic checks enabled, turn a tactic off for a particular seam, or import/edit reviewed framing measurements. The inspector shows what analysis actually applied. See [per-seam controls](docs/SEAM-CONTROLS.md).
+
 The installed app checks GitHub Releases for updates. Click the version button or **Seamstress → Check for Updates…** to download an update and restart when ready. Processing must finish or be cancelled before installation. See [how updates work](docs/updates.md).
 
 ## Command line

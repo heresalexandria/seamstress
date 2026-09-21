@@ -1,11 +1,12 @@
 """Persistent desktop/CLI projects and frame-exact seam editing."""
 from __future__ import annotations
-import json,math,os,re,subprocess,tempfile,uuid
+import copy,hashlib,json,math,os,re,subprocess,tempfile,uuid
 from pathlib import Path
 from fractions import Fraction
 from datetime import datetime,timezone
 from .media import probe,_tool,_run
 from .repair import fingerprint
+from .corrections import normalize_correction
 
 
 def timecode_to_frame(value: str, fps: float | str) -> int:
@@ -39,7 +40,7 @@ def atomic_json(path: Path, value):
     os.replace(temporary,path)
 
 
-def normalized_seams(seams,metadata):
+def normalized_seams(seams,metadata,source_sha256=None):
     if not isinstance(seams,list) or len(seams)>10000:raise ValueError('Seams must be a list of at most 10,000 boundaries')
     seen=set();result=[]
     for value in seams:
@@ -51,9 +52,10 @@ def normalized_seams(seams,metadata):
         confidence=row.get('confidence')
         if confidence is not None and (type(confidence) not in (int,float) or not math.isfinite(confidence) or not 0<=confidence<=1):raise ValueError('Seam confidence must be between 0 and 1')
         if 'enabled' in row and type(row['enabled']) is not bool:raise ValueError('Seam enabled must be true or false')
+        correction=normalize_correction(row.get('correction'),metadata=metadata,source_sha256=source_sha256,frame=frame)
         result.append({**row,'id':str(row.get('id') or f'seam-{frame}-{uuid.uuid4().hex[:6]}'),
             'frame':frame,'time':frame/metadata['fps'],'enabled':row.get('enabled',True),'origin':row.get('origin','manual'),
-            'kind':row.get('kind',row.get('classification','continuation'))})
+            'kind':row.get('kind',row.get('classification','continuation')),'correction':correction})
     return sorted(result,key=lambda r:r['frame'])
 
 
@@ -125,7 +127,7 @@ def load_project(path:Path,*,check_source=True):
     data=json.loads(path.read_text())
     if not isinstance(data,dict) or data.get('version')!=1 or not isinstance(data.get('artifacts'),dict):raise ValueError('Not a supported Seamstress project')
     if not isinstance(data.get('source'),str) or not isinstance(data.get('metadata'),dict):raise ValueError('Project is missing its source')
-    data['projectPath']=str(path);data['seams']=normalized_seams(data.get('seams',[]),data['metadata'])
+    data['projectPath']=str(path);data['seams']=normalized_seams(data.get('seams',[]),data['metadata'],data.get('sourceSha256'))
     if check_source:
         source=Path(data['source'])
         if not source.is_file():raise FileNotFoundError(f'The original video has moved: {source}')
@@ -147,13 +149,73 @@ def save_project(project):
 
 
 def set_seams(path:Path,seams):
-    project=load_project(path);rows=normalized_seams(seams,project['metadata'])
-    before=[(r['frame'],r['enabled']) for r in project['seams']];after=[(r['frame'],r['enabled']) for r in rows]
+    project=load_project(path)
+    # An exact-frame measurement is never carried to a newly placed boundary.
+    # Apply this in the worker too; callers other than the UI can move markers.
+    old_by_id={r['id']:r for r in project['seams']}
+    if isinstance(seams,list):
+        seams=copy.deepcopy(seams)
+        for row in seams:
+            if not isinstance(row,dict):continue
+            old=old_by_id.get(row.get('id'))
+            if old and row.get('frame')!=old['frame'] and isinstance(row.get('correction'),dict):
+                correction=row['correction']
+                if correction.pop('manual',None) is not None and correction.get('geometry')=='manual':
+                    correction['geometry']='auto'
+    rows=normalized_seams(seams,project['metadata'],project.get('sourceSha256'))
+    def signature(items):
+        return [(r['frame'],r['enabled'],r['correction']) for r in items]
+    before=signature(project['seams']);after=signature(rows)
     project['seams']=rows
     if before!=after:
         project['revision']+=1
         keep=('proxy','thumbnails','detection')
         project['artifacts']={k:v for k,v in project['artifacts'].items() if k in keep}
-        project['status']='marked';project['warnings']=[]
+        project['status']='marked';project['warnings']=[];project.pop('seamResults',None)
     if project['status']=='imported':project['status']='marked'
     return save_project(project)
+
+
+def import_seam_correction(path:Path,frame:int,reviewed_path:Path):
+    """Copy one source-bound reviewed cut; color is refitted on next analysis.
+
+    Only measurements are imported. No paths or color models from the external
+    calibration become executable project inputs.
+    """
+    from .design import ALGORITHM
+    project=load_project(path)
+    if type(frame) is not int or not any(row['frame']==frame for row in project['seams']):
+        raise ValueError('Select an existing seam before importing reviewed framing')
+    reviewed_path=Path(reviewed_path).expanduser().resolve()
+    if not reviewed_path.is_file() or reviewed_path.stat().st_size>16*1024*1024:
+        raise ValueError('Choose a reviewed calibration JSON smaller than 16 MiB')
+    # Limit the read itself too, in case the file grows after stat().
+    with reviewed_path.open('rb') as handle:data=handle.read(16*1024*1024+1)
+    if len(data)>16*1024*1024:raise ValueError('Reviewed calibration exceeds 16 MiB')
+    try:calibration=json.loads(data)
+    except (ValueError,UnicodeDecodeError):raise ValueError('Choose a valid reviewed calibration JSON') from None
+    if (not isinstance(calibration,dict) or calibration.get('schema_version')!=1 or
+            calibration.get('method')!='source_conform_calibration' or calibration.get('algorithm')!=ALGORITHM):
+        raise ValueError('Choose a source_conform_calibration JSON, not a render plan or project')
+    if calibration.get('source_sha256')!=project['sourceSha256']:
+        raise ValueError('Reviewed framing belongs to a different source video (SHA-256 mismatch)')
+    metadata=calibration.get('source')
+    if not isinstance(metadata,dict) or any(metadata.get(k)!=project['metadata'][k] for k in ('width','height','frame_count','fps_fraction')):
+        raise ValueError('Reviewed framing source dimensions or timing differ from this project')
+    cuts=calibration.get('cuts');excluded=calibration.get('excluded_geometry',[])
+    if (not isinstance(cuts,list) or len(cuts)>10000 or not all(isinstance(cut,dict) for cut in cuts) or
+            not isinstance(excluded,list) or not all(isinstance(row,dict) for row in excluded)):
+        raise ValueError('Reviewed calibration has invalid cut records')
+    matching=[cut for cut in cuts if type(cut.get('frame')) is int and cut['frame']==frame]
+    if len(matching)!=1:raise ValueError(f'Reviewed calibration must contain exactly one cut at frame {frame}')
+    if any(row.get('frame')==frame for row in excluded):
+        raise ValueError(f'Frame {frame} was excluded from this calibration; choose accepted measurements')
+    cut=matching[0]
+    manual={key:copy.deepcopy(cut.get(key)) for key in ('right_to_left_matrix','pre_rate','post_rate','ease_rate')}
+    manual['provenance']={'kind':'imported','label':reviewed_path.name,'frame':frame,
+                          'source_sha256':project['sourceSha256'],'calibration_sha256':hashlib.sha256(data).hexdigest()}
+    rows=copy.deepcopy(project['seams']);row=next(row for row in rows if row['frame']==frame)
+    row['correction']=normalize_correction({**row['correction'],'geometry':'manual','manual':manual,
+                                           'rate_easing':manual['ease_rate']},
+        metadata=project['metadata'],source_sha256=project['sourceSha256'],frame=frame)
+    return set_seams(path,rows)

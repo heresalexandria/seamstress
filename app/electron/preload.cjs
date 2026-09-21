@@ -6,6 +6,7 @@ contextBridge.exposeInMainWorld('seamstress', {
   openProject:()=>ipcRenderer.invoke('project:open'),
   getProject:projectPath=>ipcRenderer.invoke('project:get',projectPath),
   setSeams:options=>ipcRenderer.invoke('project:seams',options),
+  importSeamCorrection:options=>ipcRenderer.invoke('project:import-correction',options),
   run:options=>ipcRenderer.invoke('job:run',options),
   cancelJob:jobId=>ipcRenderer.invoke('job:cancel',jobId),
   chooseExportPath:options=>ipcRenderer.invoke('export:choose',options),

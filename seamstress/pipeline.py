@@ -1,6 +1,6 @@
 """Resumable source-conform workflow shared by the CLI and desktop application."""
 from __future__ import annotations
-import json, os, subprocess, tempfile, uuid
+import copy, json, os, subprocess, tempfile, uuid
 from pathlib import Path
 import cv2
 from .projects import create_project, load_project, save_project, set_seams, atomic_json
@@ -37,7 +37,7 @@ def _command(args, *, duration=1., progress=None, stage='import', cancelled=None
     _check(cancelled)
 
 
-def _commit(project, artifacts, status, warnings=None, *, invalidate=(), require_plan=False):
+def _commit(project, artifacts, status, warnings=None, *, invalidate=(), require_plan=False,seam_results=None):
     current=load_project(Path(project['projectPath']))
     if current['revision']!=project['revision']:
         raise RuntimeError('Seams changed during this job. Run this stage again with the current markers')
@@ -46,6 +46,7 @@ def _commit(project, artifacts, status, warnings=None, *, invalidate=(), require
     for key in invalidate:current['artifacts'].pop(key,None)
     current['artifacts'].update(artifacts);current['status']=status
     if warnings is not None:current['warnings']=warnings
+    if seam_results is not None:current['seamResults']=seam_results
     return save_project(current)
 
 
@@ -84,17 +85,71 @@ def prepare_media(project, *, progress=None,cancelled=None):
 
 def detect_project(project, *, options=None,progress=None,cancelled=None):
     from .detection import detect_seams
+    from .corrections import DEFAULT_CORRECTION
     detection_options={k:v for k,v in (options or {}).items() if k in ('interval_hints','sensitivity','min_spacing','scan_width')}
     callback=(lambda event: progress({**event,'stage':'detect'})) if progress else None
     result=detect_seams(Path(project['source']),options=detection_options,progress=callback,cancelled=cancelled)
     _check(cancelled)
     current=load_project(Path(project['projectPath']))
     if current['revision']!=project['revision']:raise RuntimeError('Seams changed during detection; results were not applied')
-    project=set_seams(Path(project['projectPath']),result['seams'])
+    existing={row['frame']:row for row in current['seams']}
+    rows=[]
+    for candidate in result['seams']:
+        old=existing.get(candidate['frame'])
+        if old:
+            candidate={**candidate,**{key:old[key] for key in ('id','enabled','origin','correction')}}
+        rows.append(candidate)
+    detected={row['frame'] for row in rows}
+    # Re-detection may add evidence, but must not discard reviewed choices or
+    # move source-bound measurements to a nearby suggested frame.
+    rows.extend(row for row in current['seams'] if row['frame'] not in detected and
+                (row['origin']=='manual' or not row['enabled'] or row['correction']!=DEFAULT_CORRECTION))
+    project=set_seams(Path(project['projectPath']),rows)
     report=_run_dir(project,'detect')/'detection.json';atomic_json(report,result)
     warnings=['Detection suggests boundaries; review markers before your final export.']
-    if not result['seams']:warnings=['No likely seams found. Add markers manually if a transition is still visible.']
+    if not result['seams']:warnings=['No new likely seams found. Existing reviewed markers and settings are retained. Add markers manually if a transition is still visible.']
     return _commit(project,{'detection':str(report)},'detected',warnings)
+
+
+def _seam_results(project,result):
+    """Small applied-treatment readout; raw diagnostic fits stay in the report."""
+    calibration=result.get('calibration',{})
+    cuts={row['frame']:row for row in calibration.get('cuts',[])}
+    settings={row['frame']:row['correction'] for row in project['seams']}
+    tone={row['frame'] for row in calibration.get('grade_curves',[])}
+    local={row['frame'] for row in calibration.get('local_color_curves',[])}
+    rows=[]
+    for item in result.get('report',{}).get('seams',[]):
+        frame=item['frame'];policy=settings[frame];reason=item.get('geometry_excluded_reason');notes=[]
+        if policy['geometry']=='off':geometry='off'
+        elif reason:geometry='excluded'
+        elif policy['geometry']=='manual':geometry='manual'
+        elif item.get('partial_geometry',{}).get('accepted'):geometry='partial'
+        elif item.get('framing_recovery',{}).get('accepted'):geometry='endpoint'
+        else:geometry='auto'
+        applied_sides=('pre_rate','post_rate') if item.get('rate_easing') else ('pre_rate',)
+        cadence=geometry=='auto' and any(item.get(side,{}).get('cadence_recovery',{}).get('accepted') for side in applied_sides)
+        color=item.get('color',{})
+        if policy['color']=='off':color_label='off'
+        elif frame in tone and frame in local:color_label='tone + local'
+        elif frame in tone:color_label='tone'
+        elif frame in local:color_label='local'
+        else:color_label=color.get('status','unchanged')
+        if geometry in ('partial','endpoint'):
+            detail=item['partial_geometry' if geometry=='partial' else 'framing_recovery'].get('limitation')
+            if detail:notes.append(detail)
+        if color.get('status')=='excluded' and policy['color']!='off':notes.append(color.get('reason','Color match was unreliable'))
+        row={'frame':frame,'geometry':geometry,'cadence':bool(cadence),'rateEasing':bool(item.get('rate_easing')),
+             'color':color_label,'notes':notes}
+        if reason:row['geometryReason']=reason
+        if geometry not in ('off','excluded') and frame in cuts:
+            record=cuts[frame]
+            manual={key:copy.deepcopy(record[key]) for key in ('right_to_left_matrix','pre_rate','post_rate','ease_rate')}
+            manual['provenance']=(copy.deepcopy(policy['manual'].get('provenance')) if geometry=='manual' and policy['manual'].get('provenance') else
+                {'kind':'snapshot','label':'Locked from analyzed framing','frame':frame,'source_sha256':project['sourceSha256']})
+            row['manual']=manual
+        rows.append(row)
+    return rows
 
 
 def analyze_project(project, *, options=None,progress=None,cancelled=None):
@@ -111,7 +166,8 @@ def analyze_project(project, *, options=None,progress=None,cancelled=None):
         latest_fraction=max(latest_fraction,min(1,base+span*fraction))
         if progress:progress({**event,'stage':'analyze','fraction':latest_fraction})
     result=calibrate_video(Path(project['source']),frames,folder/'calibration.json',
-                           options=calibration_options,progress=callback,cancelled=cancelled)
+                           options=calibration_options,progress=callback,cancelled=cancelled,
+                           seam_settings={s['frame']:s['correction'] for s in project['seams'] if s['enabled']})
     _check(cancelled)
     plan=json.loads(Path(result['plan_path']).read_text())
     warnings=[]
@@ -121,6 +177,7 @@ def analyze_project(project, *, options=None,progress=None,cancelled=None):
         reason=issue.get('reason','Review this seam') if isinstance(issue,dict) else exclusions.get(frame,'Review this seam')
         warnings.append(f"Frame {frame}: {reason}")
     for item in result.get('report',{}).get('seams',[]):
+        policy=next(s['correction'] for s in project['seams'] if s['frame']==item['frame'])
         partial=item.get('partial_geometry',{})
         if partial.get('accepted') and not item.get('geometry_excluded_reason'):
             warnings.append(f"Frame {item.get('frame','?')}, partial framing: {partial['limitation']}")
@@ -128,11 +185,11 @@ def analyze_project(project, *, options=None,progress=None,cancelled=None):
         if endpoint.get('accepted') and not item.get('geometry_excluded_reason'):
             warnings.append(f"Frame {item.get('frame','?')}, framing restored: {endpoint['limitation']}")
         color=item.get('color',{})
-        if color.get('status')=='excluded':warnings.append(f"Frame {item.get('frame','?')}, color: {color.get('reason','Unreliable color match')}")
+        if color.get('status')=='excluded' and policy['color']!='off':warnings.append(f"Frame {item.get('frame','?')}, color: {color.get('reason','Unreliable color match')}")
     if not frames:warnings.append('No enabled seams: the correction plan preserves the original framing and colors.')
     return _commit(project,{'calibration':str(result['calibration_path']),'plan':str(result['plan_path']),
                             'report':str(result['report_path'])},'analyzed',warnings,
-                   invalidate=('fullPreview','seamPreviews','export','verification'))
+                   invalidate=('fullPreview','seamPreviews','export','verification'),seam_results=_seam_results(project,result))
 
 
 def preview_project(project, *, options=None,progress=None,cancelled=None):

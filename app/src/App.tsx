@@ -5,6 +5,7 @@ import { Icon, WeaveMark, WovenIllustration } from './Icons';
 import { Timeline } from './Timeline';
 import { UpdateControl } from './UpdateControl';
 import { VideoViewer, type ViewerHandle } from './VideoViewer';
+import { SeamCorrection } from './SeamCorrection';
 import type { JobEvent, JobStage, Project, Seam, Stage } from './types';
 
 const stageNames: Record<JobStage, string> = { import: 'Opening your video', detect: 'Finding the joins', analyze: 'Measuring continuity', preview: 'Making review previews', process: 'Processing your video', export: 'Exporting your film' };
@@ -28,6 +29,7 @@ export default function App() {
   const [timeDraft, setTimeDraft] = useState('');
   const [frameDraft, setFrameDraft] = useState('');
   const [help, setHelp] = useState(false);
+  const [correctionDirty, setCorrectionDirty] = useState(false);
   const viewer = useRef<ViewerHandle>(null);
   const projectRef = useRef(project);
   const jobRef = useRef(job);
@@ -83,6 +85,7 @@ export default function App() {
 
   async function importVideo(path?: string) {
     if (isWorking()) return;
+    if (correctionDirty) { setError('Apply or reset your seam settings before opening another video.'); return; }
     setError(''); setNotice('');
     operationRef.current = true;
     try {
@@ -99,6 +102,7 @@ export default function App() {
 
   async function openProject() {
     if (isWorking()) return;
+    if (correctionDirty) { setError('Apply or reset your seam settings before opening another project.'); return; }
     setError('');
     operationRef.current = true; setOperation('Opening project…');
     try { const next = await api.openProject(); if (next) { applyProject(next, true); setNotice('Project reopened.'); } }
@@ -116,29 +120,39 @@ export default function App() {
     } catch (reason) { setError(message(reason)); } finally { operationRef.current = false; setOperation(''); }
   }
 
-  async function saveSeams(seams: Seam[], focusId?: string) {
-    if (!project || isWorking()) return;
+  async function saveSeams(seams: Seam[], focusId?: string, successNotice = 'Seams saved. Analyze again to update corrected previews.') {
+    if (!project || isWorking()) return false;
     const frames = seams.map(s => s.frame);
-    if (new Set(frames).size !== frames.length) { setError('There is already a seam at that frame. Choose a different frame.'); return; }
+    if (new Set(frames).size !== frames.length) { setError('There is already a seam at that frame. Choose a different frame.'); return false; }
     operationRef.current = true; setOperation('Saving seam changes…'); setError('');
     try {
       const next = await api.setSeams({ projectPath: project.projectPath, seams: [...seams].sort((a, b) => a.frame - b.frame) });
       applyProject(next);
       if (focusId) setSelectedId(focusId);
-      setNotice('Seams saved. Analyze again to update corrected previews.');
-    } catch (reason) { setError(message(reason)); }
+      setNotice(successNotice);
+      return true;
+    } catch (reason) { setError(message(reason)); return false; }
     finally { operationRef.current = false; setOperation(''); }
   }
 
   function moveSeam(seam: Seam, nextFrame: number) {
     if (!project || nextFrame === seam.frame) return;
+    if (correctionDirty) { setError('Apply or reset your seam settings before moving a marker.'); return; }
     if (!Number.isInteger(nextFrame) || nextFrame <= 0 || nextFrame >= project.metadata.frame_count) { setError(`Use a frame between 1 and ${project.metadata.frame_count - 1}.`); return; }
-    void saveSeams(project.seams.map(s => s.id === seam.id ? { ...s, frame: nextFrame, time: nextFrame / project.metadata.fps, origin: 'manual', confidence: undefined, reasons: undefined } : s), seam.id);
+    const correction = seam.correction ? { ...seam.correction } : undefined;
+    const hadManual = Boolean(correction?.manual);
+    if (correction?.manual) { if (correction.geometry === 'manual') correction.geometry = 'auto'; delete correction.manual; }
+    void saveSeams(project.seams.map(s => s.id === seam.id ? { ...s, correction, frame: nextFrame, time: nextFrame / project.metadata.fps, origin: 'manual', confidence: undefined, reasons: undefined } : s), seam.id,
+      hadManual ? 'Seam moved. Its custom framing was cleared because it belongs to the previous frame. Analyze again to update previews.' : undefined);
   }
 
-  function selectSeam(seam: Seam) { setSelectedId(seam.id); viewer.current?.seek(Math.max(0, seam.frame - 1)); }
+  function selectSeam(seam: Seam) {
+    if (correctionDirty && seam.id !== selectedId) { setError('Apply or reset your seam settings before selecting another seam.'); return; }
+    setSelectedId(seam.id); viewer.current?.seek(Math.max(0, seam.frame - 1));
+  }
   function addSeam() {
     if (!project || isWorking()) return;
+    if (correctionDirty) { setError('Apply or reset your seam settings before adding a marker.'); return; }
     const at = clamp(frame, 1, project.metadata.frame_count - 1);
     const existing = project.seams.find(s => s.frame === at);
     if (existing) { selectSeam(existing); setNotice('A seam already exists at this frame.'); return; }
@@ -148,6 +162,7 @@ export default function App() {
 
   async function runStage(stage: Stage, exportPath?: string) {
     if (!project || isWorking()) return;
+    if (correctionDirty) { setError('Apply or reset your seam settings before running a stage.'); return; }
     setError(''); setNotice(''); setCancelling(false); pendingJob.current = true;
     setJob({ id: null, stage, message: stageNames[stage] });
     try {
@@ -166,7 +181,20 @@ export default function App() {
     } catch (reason) { setExportError(message(reason)); }
   }
 
-  function showExport(intent: 'process' | 'export') { setExportError(''); setExportIntent(intent); setExportDialog(true); }
+  function showExport(intent: 'process' | 'export') {
+    if (correctionDirty) { setError('Apply or reset your seam settings before exporting.'); return; }
+    setExportError(''); setExportIntent(intent); setExportDialog(true);
+  }
+
+  async function importSeamCorrection() {
+    if (!project || !selected || isWorking() || correctionDirty) return;
+    operationRef.current = true; setOperation('Importing reviewed framing…'); setError('');
+    try {
+      const next = await api.importSeamCorrection({ projectPath: project.projectPath, frame: selected.frame });
+      if (next) { applyProject(next); setNotice('Reviewed framing imported for this seam. Analyze again to refit color and update previews.'); }
+    } catch (reason) { setError(message(reason)); }
+    finally { operationRef.current = false; setOperation(''); }
+  }
 
   function dialogKeys(event: React.KeyboardEvent<HTMLElement>) {
     if (event.key === 'Escape') { setExportDialog(false); return; }
@@ -210,9 +238,9 @@ export default function App() {
       {(job || operation) && <div className="job-panel" role="status"><div className="job-symbol"><span className="spinner"/></div><div className="job-copy"><strong>{operation || (job && stageNames[job.stage])}</strong><span>{operation ? 'Your source remains untouched.' : job?.message}</span><div className={`job-track ${progress === undefined ? 'indeterminate' : ''}`}><span style={progress === undefined ? undefined : { width: `${progress * 100}%` }}/></div></div>{job && <><span className="job-percent mono">{progress === undefined ? '···' : `${Math.round(progress * 100)}%`}</span><button className="small-button" onClick={cancelJob} disabled={!job.id || cancelling}>{cancelling ? 'Stopping…' : 'Cancel'}</button></>}</div>}
       <footer className="workspace-footer"><span><WeaveMark small/> Made for continuity between generations.</span><span className="mono">{project ? `REV ${String(project.revision).padStart(3, '0')}` : 'READY WHEN YOU ARE'}</span></footer>
     </main>
-    <aside className="inspector"><div className="inspector-header"><span className="eyebrow">SEAM INSPECTOR</span><Icon name="sliders" size={16}/></div>{selected && project ? <><div className="seam-heading"><span className="seam-index">{String(selectedIndex + 1).padStart(2, '0')}</span><div><h2>A closer look.</h2><span>{selected.origin === 'manual' ? 'Manually placed seam' : 'Detected join'}</span></div></div><div className="inspector-section"><div className="label-row"><label htmlFor="seam-enabled">Include in correction</label><button id="seam-enabled" role="switch" aria-checked={selected.enabled} className={`toggle ${selected.enabled ? 'on' : ''}`} disabled={busy} onClick={() => void saveSeams(project.seams.map(s => s.id === selected.id ? { ...s, enabled: !s.enabled } : s))}><span/></button></div><label className="field-label" htmlFor="seam-time">Join time <span>MIN : SEC</span></label><div className="input-wrap"><input id="seam-time" value={timeDraft} className="mono" disabled={busy} onChange={e => setTimeDraft(e.target.value)} onBlur={() => { const seconds = parseTimecode(timeDraft); if (seconds === null) { setError('Enter a time as mm:ss.mmm, hh:mm:ss.mmm, or seconds.'); setTimeDraft(timecode(selected.time)); } else moveSeam(selected, Math.round(seconds * project.metadata.fps)); }} onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur(); }}/><Icon name="diamond" size={13}/></div><label className="field-label" htmlFor="seam-frame">Exact frame <span>ZERO BASED</span></label><div className="input-wrap"><input id="seam-frame" inputMode="numeric" value={frameDraft} className="mono" disabled={busy} onChange={e => setFrameDraft(e.target.value)} onBlur={() => { const n = Number(frameDraft); if (!frameDraft.trim() || !Number.isInteger(n)) { setError('Enter a whole frame number.'); setFrameDraft(String(selected.frame)); } else moveSeam(selected, n); }} onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur(); }}/><span className="input-suffix">F</span></div><p className="field-help">The first frame of the next generation. Drag its marker or enter an exact position.</p></div><div className="inspector-section"><div className="section-caption">THE READOUT</div>{selected.confidence !== undefined ? <div className="confidence"><span>{selected.confidence < .6 ? <Icon name="warning" size={15}/> : <span className="status-dot"/>}{selected.confidence < .6 ? 'Needs a closer look' : 'Detection confidence'}</span><strong className="mono">{Math.round(clamp(selected.confidence, 0, 1) * 100)}%</strong></div> : <div className="muted-info"><Icon name="diamond" size={15}/>{selected.origin === 'manual' ? 'Placed by you' : 'Confidence not provided'}</div>}{selected.kind && <div className="kind-chip">{selected.kind.replace(/[_-]/g, ' ')}</div>}{selected.reasons?.length ? <ul className="reason-list">{selected.reasons.map((reason, i) => <li key={i}>{reason}</li>)}</ul> : <p className="field-help">Analyze this join to inspect continuity. Check that each marker matches a generation boundary.</p>}</div><div className="inspector-section"><div className="section-caption">REVIEW WINDOW</div><label className="select-row" htmlFor="preview-seconds"><span>Time around join</span><select id="preview-seconds" value={previewSeconds} disabled={busy} onChange={e => setPreviewSeconds(Number(e.target.value))}>{[4, 6, 8, 12].map(n => <option key={n} value={n}>{n} seconds</option>)}</select></label><button className="secondary-button full" disabled={!hasPlan || busy} onClick={() => void runStage('preview')}><Icon name="play" size={14}/> Generate seam previews</button><p className="field-help">Review movement and color at normal speed before exporting.</p></div><button className="delete-seam" disabled={busy} onClick={() => void saveSeams(project.seams.filter(s => s.id !== selected.id))}><Icon name="trash" size={14}/> Remove seam</button></> : <div className="inspector-empty"><div className="inspector-glyph"><Icon name="diamond" size={32}/><span/></div><h2>Mind the<br/><em>in-between.</em></h2><p>{project ? 'Find the joins, then select a marker to inspect and adjust its correction.' : 'Each generation continues the shot a little differently. Inspect the small shifts where they meet.'}</p><div className="inspector-empty-rule"/><div className="inspector-tip"><span>01</span><p>Find where one generation<br/>becomes the next.</p></div><div className="inspector-tip"><span>02</span><p>Match the framing,<br/>motion and color.</p></div><div className="inspector-tip"><span>03</span><p>Watch it through.<br/>Trust what you see.</p></div>{project && <button className="secondary-button full" disabled={busy} onClick={() => void runStage('detect')}><Icon name="scan" size={15}/> Find seams</button>}</div>}{Boolean(project?.warnings?.length || lowConfidence) && <div className="project-warnings"><div><Icon name="warning" size={15}/><strong>Review notes</strong></div>{lowConfidence > 0 && <p>{lowConfidence} {lowConfidence === 1 ? 'join needs' : 'joins need'} a closer look.</p>}{project?.warnings?.map((warning, i) => <p key={i}>{warning}</p>)}</div>}<div className="inspector-footnote"><span className="mini-stitch"/> A good seam is one you don’t notice.</div></aside>
+    <aside className="inspector"><div className="inspector-header"><span className="eyebrow">SEAM INSPECTOR</span><Icon name="sliders" size={16}/></div>{selected && project ? <><div className="seam-heading"><span className="seam-index">{String(selectedIndex + 1).padStart(2, '0')}</span><div><h2>A closer look.</h2><span>{selected.origin === 'manual' ? 'Manually placed seam' : 'Detected join'}</span></div></div><div className="inspector-section"><div className="label-row"><label htmlFor="seam-enabled">Include in correction</label><button id="seam-enabled" role="switch" aria-checked={selected.enabled} className={`toggle ${selected.enabled ? 'on' : ''}`} disabled={busy || correctionDirty} onClick={() => void saveSeams(project.seams.map(s => s.id === selected.id ? { ...s, enabled: !s.enabled } : s))}><span/></button></div><label className="field-label" htmlFor="seam-time">Join time <span>MIN : SEC</span></label><div className="input-wrap"><input id="seam-time" value={timeDraft} className="mono" disabled={busy || correctionDirty} onChange={e => setTimeDraft(e.target.value)} onBlur={() => { const seconds = parseTimecode(timeDraft); if (seconds === null) { setError('Enter a time as mm:ss.mmm, hh:mm:ss.mmm, or seconds.'); setTimeDraft(timecode(selected.time)); } else moveSeam(selected, Math.round(seconds * project.metadata.fps)); }} onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur(); }}/><Icon name="diamond" size={13}/></div><label className="field-label" htmlFor="seam-frame">Exact frame <span>ZERO BASED</span></label><div className="input-wrap"><input id="seam-frame" inputMode="numeric" value={frameDraft} className="mono" disabled={busy || correctionDirty} onChange={e => setFrameDraft(e.target.value)} onBlur={() => { const n = Number(frameDraft); if (!frameDraft.trim() || !Number.isInteger(n)) { setError('Enter a whole frame number.'); setFrameDraft(String(selected.frame)); } else moveSeam(selected, n); }} onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur(); }}/><span className="input-suffix">F</span></div><p className="field-help">The first frame of the next generation. Drag its marker or enter an exact position.</p></div><div className="inspector-section"><div className="section-caption">DETECTION READOUT</div>{selected.confidence !== undefined ? <div className="confidence"><span>{selected.confidence < .6 ? <Icon name="warning" size={15}/> : <span className="status-dot"/>}{selected.confidence < .6 ? 'Needs a closer look' : 'Detection confidence'}</span><strong className="mono">{Math.round(clamp(selected.confidence, 0, 1) * 100)}%</strong></div> : <div className="muted-info"><Icon name="diamond" size={15}/>{selected.origin === 'manual' ? 'Placed by you' : 'Confidence not provided'}</div>}{selected.kind && <div className="kind-chip">{selected.kind.replace(/[_-]/g, ' ')}</div>}{selected.reasons?.length ? <ul className="reason-list">{selected.reasons.map((reason, i) => <li key={i}>{reason}</li>)}</ul> : <p className="field-help">Analyze this join to inspect continuity. Check that each marker matches a generation boundary.</p>}</div><SeamCorrection key={`${project.id}:${selected.id}`} seam={selected} project={project} result={project.seamResults?.find(item => item.frame === selected.frame)} disabled={busy} onDirtyChange={setCorrectionDirty} onSave={async correction => { return await saveSeams(project.seams.map(seam => seam.id === selected.id ? { ...seam, correction } : seam), selected.id, 'Seam settings saved. Analyze again to apply them, refit color, and update previews.'); }} onImport={importSeamCorrection}/><div className="inspector-section"><div className="section-caption">REVIEW WINDOW</div><label className="select-row" htmlFor="preview-seconds"><span>Time around join</span><select id="preview-seconds" value={previewSeconds} disabled={busy} onChange={e => setPreviewSeconds(Number(e.target.value))}>{[4, 6, 8, 12].map(n => <option key={n} value={n}>{n} seconds</option>)}</select></label><button className="secondary-button full" disabled={!hasPlan || busy} onClick={() => void runStage('preview')}><Icon name="play" size={14}/> Generate seam previews</button><p className="field-help">Review movement and color at normal speed before exporting.</p></div><button className="delete-seam" disabled={busy || correctionDirty} onClick={() => void saveSeams(project.seams.filter(s => s.id !== selected.id))}><Icon name="trash" size={14}/> Remove seam</button></> : <div className="inspector-empty"><div className="inspector-glyph"><Icon name="diamond" size={32}/><span/></div><h2>Mind the<br/><em>in-between.</em></h2><p>{project ? 'Find the joins, then select a marker to inspect and adjust its correction.' : 'Each generation continues the shot a little differently. Inspect the small shifts where they meet.'}</p><div className="inspector-empty-rule"/><div className="inspector-tip"><span>01</span><p>Find where one generation<br/>becomes the next.</p></div><div className="inspector-tip"><span>02</span><p>Match the framing,<br/>motion and color.</p></div><div className="inspector-tip"><span>03</span><p>Watch it through.<br/>Trust what you see.</p></div>{project && <button className="secondary-button full" disabled={busy} onClick={() => void runStage('detect')}><Icon name="scan" size={15}/> Find seams</button>}</div>}{Boolean(project?.warnings?.length || lowConfidence) && <div className="project-warnings"><div><Icon name="warning" size={15}/><strong>Review notes</strong></div>{lowConfidence > 0 && <p>{lowConfidence} {lowConfidence === 1 ? 'join needs' : 'joins need'} a closer look.</p>}{project?.warnings?.map((warning, i) => <p key={i}>{warning}</p>)}</div>}<div className="inspector-footnote"><span className="mini-stitch"/> A good seam is one you don’t notice.</div></aside>
     {dragOver && <div className="drop-overlay"><WeaveMark/><h2>Start a new thread.</h2><p>{busy ? 'Finish or cancel the current job before importing.' : 'Drop one stitched video to create a project.'}</p></div>}
-    {help && <div className="help-popover" role="dialog" aria-label="Workflow guidance"><button className="icon-button" onClick={() => setHelp(false)} aria-label="Close guidance"><Icon name="close" size={15}/></button><span className="eyebrow">A LITTLE GUIDANCE</span><h2>Keep one shot going.</h2><p>An oner is a single continuous shot. Sequential AI generations can extend it, but slight changes in framing, scale, composition or color can reveal the joins.</p><p>Import the generations already stitched into one video. Check the detected joins and adjust their markers. Analyze, review the corrected previews, then export the full shot.</p><p>Corrections use your original frames, with no morphs or generated in-betweens. Large redraws or changes in action may still show; review each join at normal speed.</p><div><kbd>Space</kbd> Play / pause <kbd>← →</kbd> Step one frame</div></div>}
+    {help && <div className="help-popover" role="dialog" aria-label="Workflow guidance"><button className="icon-button" onClick={() => setHelp(false)} aria-label="Close guidance"><Icon name="close" size={15}/></button><span className="eyebrow">A LITTLE GUIDANCE</span><h2>Keep one shot going.</h2><p>An oner is a single continuous shot. Sequential AI generations can extend it, but slight changes in framing, scale, composition or color can reveal the joins.</p><p>Import the generations already stitched into one video. Check the detected joins and adjust their markers. Analyze, review the corrected previews, then export the full shot.</p><p>Select a seam to choose automatic, custom or disabled framing and set its color treatment. Apply settings, analyze again, and regenerate previews. Import reviewed framing to reuse measurements for the same source and seam.</p><p>Corrections use your original frames, with no morphs or generated in-betweens. Large redraws or changes in action may still show; review each join at normal speed.</p><div><kbd>Space</kbd> Play / pause <kbd>← →</kbd> Step one frame</div></div>}
     {exportDialog && project && <div className="modal-backdrop" onClick={() => setExportDialog(false)}><section className="export-modal" role="dialog" aria-modal="true" aria-labelledby="export-title" onClick={e => e.stopPropagation()} onKeyDown={dialogKeys}><button className="modal-close icon-button" onClick={() => setExportDialog(false)} aria-label="Close export"><Icon name="close"/></button><div className="export-emblem"><Icon name="export" size={27}/></div><span className="eyebrow">THE FINAL THREAD</span><h2 id="export-title">Bring it all <em>together.</em></h2><p>{exportIntent === 'process' ? 'Analyze the generation joins, build previews, and export your shot in one workflow.' : 'Export the full corrected shot at its original size and frame rate.'}</p><div className="export-facts"><span>{project.metadata.width} × {project.metadata.height}</span><span>{project.metadata.fps_fraction} fps</span><span>{timecode(project.metadata.duration, false)}</span></div><label className="field-label" htmlFor="export-quality">Picture quality</label><select autoFocus id="export-quality" className="quality-select" value={crf} onChange={e => setCrf(Number(e.target.value))}><option value={10}>Very high · CRF 10 · larger file</option><option value={14}>High · CRF 14</option><option value={18}>Balanced · CRF 18 · smaller file</option></select><p className="field-help">H.264 video · {project.metadata.has_audio ? 'original audio copied' : 'no source audio'} · original timing</p>{Boolean(project.warnings?.length || lowConfidence) && <div className="export-review-note"><Icon name="warning" size={15}/> Your project has review notes. Check the previews before calling the edit finished.</div>}{exportError && <div className="export-error" role="alert"><Icon name="warning" size={15}/><span>{exportError}</span></div>}<button className="primary-button full" onClick={() => void exportVideo()} disabled={busy || (exportIntent === 'export' && !hasPlan)}><Icon name="export" size={16}/>{exportIntent === 'process' ? 'Choose location & run workflow' : 'Choose location & export'} <Icon name="arrow" size={15}/></button><button className="text-button modal-cancel" onClick={() => setExportDialog(false)}>Back to the editing room</button></section></div>}
   </div>;
 }

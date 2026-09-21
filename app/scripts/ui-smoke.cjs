@@ -13,6 +13,123 @@ const assert = require('node:assert/strict');
 const { spawnSync } = require('node:child_process');
 const { _electron: electron } = require('@playwright/test');
 
+async function chooseNativeFile(application, file) {
+  await application.evaluate(({ dialog }, value) => {
+    dialog.showOpenDialog = async () => value ? { canceled: false, filePaths: [value] } : { canceled: true, filePaths: [] };
+  }, file);
+}
+
+async function readProject(page, projectPath) {
+  return page.evaluate(value => window.seamstress.getProject(value), projectPath);
+}
+
+async function selectSeam(page, project, frame) {
+  const index = project.seams.findIndex(seam => seam.frame === frame);
+  assert.ok(index >= 0, `Frame ${frame} exists in the project`);
+  await page.getByRole('button', { name: new RegExp(`^Seam ${index + 1},`) }).click();
+  await page.waitForFunction(value => document.querySelector('#seam-frame')?.value === String(value), frame);
+}
+
+async function applySeamSettings(page) {
+  await page.getByRole('button', { name: 'Apply seam settings', exact: true }).click();
+  await page.waitForFunction(() => !document.querySelector('.job-panel') && document.querySelector('#seam-frame')?.disabled === false);
+  assert.equal(await page.locator('.notification.is-error').count(), 0, (await page.locator('.notification.is-error').allTextContents()).join('\n'));
+}
+
+async function checkReviewedImport(application, page, project, output, checks) {
+  // A real analysis supplies the source fingerprint and calibration schema. The
+  // explicitly reviewed identity below is a test input, never a fabricated
+  // analysis result: it exercises importing a user's chosen correction.
+  const seam = project.seams.find(row => row.enabled);
+  assert.ok(seam, 'The workflow has an enabled seam to review');
+  await selectSeam(page, project, seam.frame);
+  const readout = page.getByRole('region', { name: 'Applied correction', exact: true });
+  await readout.waitFor();
+  assert.ok((await readout.innerText()).trim().length > 0, 'Analyzed seam reports the applied correction');
+  assert.ok(project.seamResults?.some(row => row.frame === seam.frame), 'The readout comes from real backend analysis');
+  await readout.screenshot({ path: path.join(output, 'analyzed-seam.png') });
+  const calibration = JSON.parse(fs.readFileSync(project.artifacts.calibration, 'utf8'));
+  const reviewed = {
+    ...calibration,
+    cuts: [{ frame: seam.frame, right_to_left_matrix: [[1, 0, 0], [0, 1, 0], [0, 0, 1]], pre_rate: [0, 0, 0, 0], post_rate: [0, 0, 0, 0], ease_rate: false }],
+    excluded_geometry: [],
+  };
+  const before = fs.readFileSync(project.projectPath, 'utf8');
+  await chooseNativeFile(application, null);
+  assert.equal(await page.evaluate(options => window.seamstress.importSeamCorrection(options), { projectPath: project.projectPath, frame: seam.frame }), null, 'Canceling the native picker does not import');
+  assert.equal(fs.readFileSync(project.projectPath, 'utf8'), before, 'Canceling preserves saved corrections and previews');
+  const rejected = [
+    ['wrong-source', { ...reviewed, source_sha256: '0'.repeat(64) }, /source|fingerprint/i],
+    ['wrong-frame', { ...reviewed, cuts: [{ ...reviewed.cuts[0], frame: seam.frame === 1 ? 2 : 1 }] }, /frame|cut|seam/i],
+    ['excluded-frame', { ...reviewed, excluded_geometry: [{ frame: seam.frame, reason: 'Unreliable geometry in this test recipe' }] }, /excluded|review|geometry/i],
+  ];
+  for (const [name, value, expected] of rejected) {
+    const file = path.join(output, `reviewed-${name}.json`);
+    fs.writeFileSync(file, JSON.stringify(value));
+    await chooseNativeFile(application, file);
+    const error = await page.evaluate(async options => { try { await window.seamstress.importSeamCorrection(options); return ''; } catch (reason) { return reason.message; } }, { projectPath: project.projectPath, frame: seam.frame });
+    assert.match(error, expected, `${name} calibration is rejected through production IPC`);
+    assert.equal(fs.readFileSync(project.projectPath, 'utf8'), before, `${name} cannot mutate the project or discard existing previews`);
+  }
+  const reviewedPath = path.join(output, 'reviewed-identity.json');
+  fs.writeFileSync(reviewedPath, JSON.stringify(reviewed));
+  await chooseNativeFile(application, reviewedPath);
+  await page.getByRole('button', { name: 'Import reviewed framing', exact: true }).click();
+  await page.waitForFunction(() => document.querySelector('#seam-frame')?.disabled === false && [...document.querySelectorAll('select')].some(select => select.value === 'manual'));
+  let imported = await readProject(page, project.projectPath);
+  let correction = imported.seams.find(row => row.frame === seam.frame).correction;
+  assert.equal(correction.geometry, 'manual');
+  assert.deepEqual(correction.manual.right_to_left_matrix, reviewed.cuts[0].right_to_left_matrix);
+  assert.equal(correction.manual.provenance.source_sha256, project.sourceSha256);
+  assert.equal(correction.manual.provenance.frame, seam.frame);
+  assert.match(correction.manual.provenance.calibration_sha256, /^[a-f0-9]{64}$/);
+  assert.ok(imported.revision > project.revision, 'Importing reviewed framing advances the saved revision');
+  for (const key of ['plan', 'calibration', 'report', 'fullPreview', 'seamPreviews', 'export']) {
+    assert.equal(imported.artifacts[key], undefined, `Importing framing invalidates stale ${key}`);
+    if (typeof project.artifacts[key] === 'string') assert.ok(fs.existsSync(project.artifacts[key]), `Existing ${key} remains on disk`);
+  }
+  assert.equal(imported.seamResults?.length || 0, 0, 'Stale applied-correction readouts are removed');
+  assert.equal(await page.locator('.candidate-video').count(), 0, 'Stale corrected media is removed from the viewer');
+  assert.match(await readout.innerText(), /Analyze to see/i, 'The inspector no longer presents a stale applied result');
+  await page.getByText('Edit custom measurements', { exact: true }).click();
+  await page.getByLabel('Horizontal shift (tx)', { exact: true }).fill('0.5');
+  await page.getByLabel('Framing', { exact: true }).selectOption('off');
+  await page.getByLabel('Framing', { exact: true }).selectOption('manual');
+  assert.equal(Number(await page.getByLabel('Horizontal shift (tx)', { exact: true }).inputValue()), .5, 'An unapplied custom edit survives switching Off and back to Custom');
+  await applySeamSettings(page);
+  imported = await readProject(page, project.projectPath);
+  correction = imported.seams.find(row => row.frame === seam.frame).correction;
+  assert.equal(correction.manual.right_to_left_matrix[0][2], .5, 'Custom affine editor saves native-pixel shifts');
+  assert.equal(correction.manual.provenance.kind, 'manual', 'An edited import records a new review decision');
+  assert.equal(correction.manual.provenance.calibration_sha256, undefined, 'An edited import does not claim exact calibration provenance');
+  await chooseNativeFile(application, project.projectPath);
+  await page.getByRole('button', { name: 'Open', exact: true }).click();
+  await page.waitForFunction(() => !document.querySelector('.job-panel') && document.querySelector('#seam-frame')?.disabled === false);
+  await selectSeam(page, imported, seam.frame);
+  assert.equal(await page.getByLabel('Framing', { exact: true }).inputValue(), 'manual', 'Custom mode survives reopening');
+  if (!(await page.getByLabel('Horizontal shift (tx)', { exact: true }).isVisible())) await page.getByText('Edit custom measurements', { exact: true }).click();
+  assert.equal(Number(await page.getByLabel('Horizontal shift (tx)', { exact: true }).inputValue()), .5, 'Custom transform survives reopening');
+  await page.getByLabel('Framing', { exact: true }).selectOption('off');
+  await applySeamSettings(page);
+  const temporarilyOff = await readProject(page, project.projectPath);
+  assert.equal(temporarilyOff.seams.find(row => row.frame === seam.frame).correction.manual.right_to_left_matrix[0][2], .5, 'Turning framing off preserves reviewed measurements');
+  await page.getByLabel('Framing', { exact: true }).selectOption('manual');
+  assert.equal(Number(await page.getByLabel('Horizontal shift (tx)', { exact: true }).inputValue()), .5, 'Turning custom framing back on restores the measurements');
+  await applySeamSettings(page);
+  if (!(await page.getByLabel('Horizontal shift (tx)', { exact: true }).isVisible())) await page.getByText('Edit custom measurements', { exact: true }).click();
+  await page.getByLabel('Horizontal shift (tx)', { exact: true }).scrollIntoViewIfNeeded();
+  await page.screenshot({ path: path.join(output, 'seam-settings.png') });
+  const movedFrame = Array.from({ length: project.metadata.frame_count - 1 }, (_, index) => index + 1).find(frame => !project.seams.some(row => row.frame === frame));
+  assert.ok(movedFrame, 'The short source has an unmarked frame for the movement check');
+  await page.locator('#seam-frame').fill(String(movedFrame));
+  await page.locator('#seam-frame').press('Enter');
+  await page.waitForFunction(value => document.querySelector('#seam-frame')?.value === String(value) && document.querySelector('#seam-frame')?.disabled === false, movedFrame);
+  const moved = (await readProject(page, project.projectPath)).seams.find(row => row.frame === movedFrame);
+  assert.equal(moved.correction.geometry, 'auto', 'Moving a reviewed boundary restores automatic inference');
+  assert.equal(moved.correction.manual, undefined, 'Exact-frame measurements cannot move silently to another boundary');
+  checks.push('real per-seam analysis readout', 'native reviewed-calibration import', 'source/frame/exclusion import validation', 'canceled and rejected imports preserve project', 'reviewed correction invalidates stale artifacts without deleting files', 'custom affine editor + reopen', 'unapplied custom edits survive mode toggles', 'reversible custom framing toggle retains reviewed measurements', 'moving a seam clears exact-frame custom geometry');
+}
+
 async function main() {
   const sourceArgument = process.argv.slice(2).find(value => !value.startsWith('--'));
   const workflow = process.argv.includes('--workflow');
@@ -92,10 +209,11 @@ async function main() {
       const other = new BrowserWindow({ show: false, focusable: false, skipTaskbar: true, webPreferences: { nodeIntegration: true, contextIsolation: false, sandbox: false } });
       try {
         await other.loadURL('data:text/html,<title>Untrusted IPC test</title>');
-        return await other.webContents.executeJavaScript("require('electron').ipcRenderer.invoke('update:state').then(()=>'accepted',error=>error.message)");
+        return await other.webContents.executeJavaScript("Promise.all(['update:state', 'project:import-correction'].map(channel => require('electron').ipcRenderer.invoke(channel).then(()=>'accepted',error=>error.message)))");
       } finally { other.destroy(); }
     });
-    assert.match(rejectedSender, /Untrusted request/, 'Updater IPC refuses another webContents');
+    assert.equal(rejectedSender.length, 2);
+    for (const rejection of rejectedSender) assert.match(rejection, /Untrusted request/, 'Updater and reviewed-import IPC refuse another webContents');
     await page.evaluate(() => {
       window.__updateEvents = 0;
       window.__stopUpdateEvents = window.seamstress.onUpdateState(() => { window.__updateEvents++; });
@@ -132,6 +250,14 @@ async function main() {
     await page.locator('#seam-frame').fill(String(before + 2));
     await page.locator('#seam-frame').press('Enter');
     await page.waitForFunction(at => document.querySelector('#seam-frame')?.value === String(at) && !document.querySelector('#seam-frame')?.disabled, before + 2);
+    await page.getByLabel('Color', { exact: true }).selectOption('tone');
+    await page.getByText('Automatic checks', { exact: true }).click();
+    await page.getByLabel('Partial framing recovery', { exact: true }).uncheck();
+    await page.getByLabel('Repeated endpoint recovery', { exact: true }).uncheck();
+    await page.getByLabel('Animation cadence check', { exact: true }).uncheck();
+    await page.getByLabel('Camera-rate easing', { exact: true }).uncheck();
+    await page.getByLabel('Framing', { exact: true }).selectOption('off');
+    await applySeamSettings(page);
     await page.getByRole('switch', { name: 'Include in correction' }).click();
     await page.waitForFunction(() => document.querySelector('[role="switch"]')?.getAttribute('aria-checked') === 'false');
     await page.waitForFunction(() => !document.querySelector('.job-panel'));
@@ -147,9 +273,18 @@ async function main() {
     await page.getByRole('button', { name: 'Open', exact: true }).click();
     await page.waitForSelector('.source-video');
     await page.waitForFunction(() => !document.querySelector('.job-panel'));
+    const reopened = await readProject(page, project.projectPath);
+    await selectSeam(page, reopened, before + 2);
+    const savedSettings = reopened.seams.find(seam => seam.frame === before + 2).correction;
+    assert.equal(savedSettings.geometry, 'off');
+    assert.equal(savedSettings.color, 'tone');
+    for (const key of ['partial_recovery', 'endpoint_recovery', 'cadence', 'rate_easing']) assert.equal(savedSettings[key], false, `${key} persists after reopen`);
+    assert.equal(await page.getByLabel('Framing', { exact: true }).inputValue(), 'off');
+    assert.equal(await page.getByLabel('Color', { exact: true }).inputValue(), 'tone');
+    for (const label of ['Partial framing recovery', 'Repeated endpoint recovery', 'Animation cadence check', 'Camera-rate easing']) assert.equal(await page.getByLabel(label, { exact: true }).isChecked(), false, `${label} displays its saved value`);
     await page.getByRole('button', { name: 'Remove seam', exact: true }).click();
     await page.waitForFunction(count => document.querySelectorAll('.seam-marker').length === count && !document.querySelector('.job-panel'), initialSeams);
-    const checks = ['updater IPC with no live network', 'update menu + keyboard focus', 'inert release notes + update progress fixtures', 'update install controls respect busy state', 'fixed release URL', 'untrusted updater sender rejected', 'update listener cleanup', 'real import updates busy guard', 'real import + detection', 'custom-protocol media decoding', 'manual seam creation', 'frame edit', 'toggle', 'frame step', 'project reopen', 'seam deletion', 'renderer errors'];
+    const checks = ['updater IPC with no live network', 'update menu + keyboard focus', 'inert release notes + update progress fixtures', 'update install controls respect busy state', 'fixed release URL', 'untrusted updater and reviewed-import senders rejected', 'update listener cleanup', 'real import updates busy guard', 'real import + detection', 'custom-protocol media decoding', 'manual seam creation', 'frame edit', 'toggle', 'frame step', 'per-seam settings persist after project reopen', 'seam deletion', 'renderer errors'];
     if (workflow) {
       const current = await page.evaluate(projectPath => window.seamstress.getProject(projectPath), project.projectPath);
       if (!current.seams.some(seam => seam.enabled)) {
@@ -184,6 +319,7 @@ async function main() {
       await page.getByRole('button', { name: 'Split', exact: true }).click();
       await page.screenshot({ path: path.join(output, 'workflow.png') });
       checks.push('whole workflow + export', 'corrected custom-protocol playback and seek', 'synchronized comparison', 'comparison divider');
+      await checkReviewedImport(application, page, finished, output, checks);
     }
     assert.equal(await page.locator('.media-error').count(), 0, 'No playback error');
     assert.deepEqual(errors, [], 'No renderer exceptions');

@@ -10,13 +10,15 @@ On this Mac, the packaged application is built in `app/release/mac-arm64/Seamstr
 
 1. Select a seam marker to inspect it. Play the seam loop at normal speed; step with the left/right arrows to check the first incoming frame.
 2. Drag a marker, edit its time or exact frame in the inspector, add a marker at the playhead, or remove/disable a false positive. Frames are zero-based. Time fields accept seconds, `MM:SS.mmm` or `HH:MM:SS.mmm`.
-3. Choose **Analyze & match**, then **Review previews**. Or use **Run workflow**: choose quality and a destination, then run missing analysis/preview stages and export using the current markers. A new automatic detection pass is available through **Find seams**; it replaces the current suggestions.
+3. Choose **Analyze & match**, then **Review previews**. Or use **Run workflow**: choose quality and a destination, then run missing analysis/preview stages and export using the current markers. A new automatic detection pass is available through **Find seams**; it refreshes automatic suggestions while preserving manual, disabled and customized markers at their exact source frames.
 4. Switch between original, corrected and comparison playback. Review the whole film as well as each seam. The preview is a smaller playback copy; export uses the original resolution.
 5. **Export** opens the quality and destination controls. High quality is H.264 CRF 14. Lower CRF makes larger files. Original audio streams are copied, and every source frame keeps its original place and frame rate.
 
 Projects save automatically. **Open** accepts a `project.json`; **Continue last session** reopens the last project. Development projects live in `.app-data/projects`; the packaged app uses its normal macOS application-support folder. The source video stays where you imported it, so keep it available. Projects store its SHA-256 and refuse a changed source.
 
-Moving, enabling, disabling or deleting a seam invalidates the correction plan and corrected previews. Source playback and thumbnails remain usable. Analysis and detection reports are saved beside the project for inspection.
+The inspector also provides per-seam automatic/custom/off framing, color treatments, individual recovery checks and reviewed-calibration import. See [per-seam controls](SEAM-CONTROLS.md) for the workflow and exact measurement conventions.
+
+Moving, enabling, disabling or deleting a seam, or changing its correction settings, invalidates the correction plan and corrected previews. Source playback and thumbnails remain usable. Analysis and detection reports are saved beside the project for inspection.
 
 ## One command
 
@@ -45,7 +47,7 @@ Resume reuses the current markers and any current analysis/preview artifacts. It
 # Import and detect. Hints are optional; every frame boundary is scanned.
 seamstress detect "/path/to/video.mp4" --work-dir "/path/to/video.seamstress"
 
-# Rerun detection on an existing project. This replaces its marker list.
+# Rerun detection; retain reviewed markers and refresh automatic suggestions.
 seamstress detect --project "/path/to/video.seamstress" --sensitivity 0.6
 
 # Replace markers with exact times OR exact incoming frame numbers.
