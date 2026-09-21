@@ -130,6 +130,44 @@ async function checkReviewedImport(application, page, project, output, checks) {
   checks.push('real per-seam analysis readout', 'native reviewed-calibration import', 'source/frame/exclusion import validation', 'canceled and rejected imports preserve project', 'reviewed correction invalidates stale artifacts without deleting files', 'custom affine editor + reopen', 'unapplied custom edits survive mode toggles', 'reversible custom framing toggle retains reviewed measurements', 'moving a seam clears exact-frame custom geometry');
 }
 
+async function checkSingleSeamRefinement(page, project, output, checks) {
+  const seam = project.seams.find(row => row.enabled);
+  await selectSeam(page, project, seam.frame);
+  const baselineBytes = fs.readFileSync(project.artifacts.plan, 'utf8');
+  const baseline = JSON.parse(baselineBytes);
+  await page.getByLabel('Framing', { exact: true }).selectOption('off');
+  await page.getByLabel('Color', { exact: true }).selectOption('off');
+  await applySeamSettings(page);
+  const edited = await readProject(page, project.projectPath);
+  assert.equal(edited.refinementBaseline.plan, project.artifacts.plan, 'Editing only this seam retains the accepted plan');
+  await page.getByRole('button', { name: 'Refine this seam only', exact: true }).click();
+  await page.waitForFunction(() => !!document.querySelector('.job-panel') || !!document.querySelector('.notification.is-error'));
+  await page.waitForFunction(() => !document.querySelector('.job-panel'), undefined, { timeout: 180000 });
+  assert.equal(await page.locator('.notification.is-error').count(), 0, (await page.locator('.notification.is-error').allTextContents()).join('\n'));
+  let refined = await readProject(page, project.projectPath);
+  const plan = JSON.parse(fs.readFileSync(refined.artifacts.plan, 'utf8'));
+  assert.equal(plan.refinement.frame, seam.frame, 'UI sends the selected incoming frame to the worker');
+  assert.deepEqual(plan.view_matrix, baseline.view_matrix, 'Refinement preserves the full-shot viewing crop');
+  const { start_frame: start, end_frame: end } = plan.refinement;
+  assert.deepEqual(plan.frame_matrices.slice(0, start), baseline.frame_matrices.slice(0, start));
+  assert.deepEqual(plan.frame_matrices.slice(end), baseline.frame_matrices.slice(end));
+  assert.deepEqual(refined.seamResults.filter(row => row.frame !== seam.frame), project.seamResults.filter(row => row.frame !== seam.frame));
+  assert.equal(fs.readFileSync(project.artifacts.plan, 'utf8'), baselineBytes, 'Refining creates a new plan without altering the accepted artifact');
+  await page.getByRole('button', { name: 'Preview this seam', exact: true }).click();
+  await page.waitForFunction(() => !!document.querySelector('.job-panel') || !!document.querySelector('.notification.is-error'));
+  await page.waitForFunction(() => !document.querySelector('.job-panel'), undefined, { timeout: 180000 });
+  assert.equal(await page.locator('.notification.is-error').count(), 0, (await page.locator('.notification.is-error').allTextContents()).join('\n'));
+  refined = await readProject(page, project.projectPath);
+  assert.equal(refined.artifacts.fullPreview, undefined, 'A selected preview does not render the entire shot');
+  assert.equal(refined.artifacts.seamPreviews.length, 1);
+  assert.equal(refined.artifacts.seamPreviews[0].frame, seam.frame);
+  assert.match(await page.getByRole('button', { name: 'Selected seam', exact: true }).getAttribute('class'), /active/, 'Preview this seam switches playback to its review interval');
+  await page.waitForFunction(() => document.querySelector('.candidate-video')?.readyState >= 2, undefined, { timeout: 60000 });
+  await page.screenshot({ path: path.join(output, 'single-seam-refinement.png') });
+  checks.push('selected-seam refinement through real IPC', 'baseline artifact and neighboring corrections preserved', 'selected preview without full render', 'selected corrected clip decodes');
+  return refined;
+}
+
 async function main() {
   const sourceArgument = process.argv.slice(2).find(value => !value.startsWith('--'));
   const workflow = process.argv.includes('--workflow');
@@ -319,7 +357,8 @@ async function main() {
       await page.getByRole('button', { name: 'Split', exact: true }).click();
       await page.screenshot({ path: path.join(output, 'workflow.png') });
       checks.push('whole workflow + export', 'corrected custom-protocol playback and seek', 'synchronized comparison', 'comparison divider');
-      await checkReviewedImport(application, page, finished, output, checks);
+      const refined = await checkSingleSeamRefinement(page, finished, output, checks);
+      await checkReviewedImport(application, page, refined, output, checks);
     }
     assert.equal(await page.locator('.media-error').count(), 0, 'No playback error');
     assert.deepEqual(errors, [], 'No renderer exceptions');

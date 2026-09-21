@@ -21,7 +21,7 @@ Release installers are built by GitHub Actions, signed with Developer ID, notari
 
 Seamstress is designed for small continuity mismatches between generations of the same shot. It applies gradual, bounded framing and color corrections to original frames. The desktop workflow never morphs drawings, crossfades poses, or generates replacement frames. It skips corrections that lack reliable evidence. A changed character, gesture, or scene may still be visible; inspect previews before exporting.
 
-Each join has its own framing, camera and color controls. Keep automatic checks enabled, turn a tactic off for a particular seam, or import/edit reviewed framing measurements. The inspector shows what analysis actually applied. See [per-seam controls](docs/SEAM-CONTROLS.md).
+Each join has its own framing, camera and color controls. Keep automatic checks enabled, turn a tactic off for a particular seam, or import/edit reviewed framing measurements. The inspector shows what analysis actually applied. After the first analysis, **Refine this seam only** updates one join while retaining the viewing crop and other corrections. **Preview this seam** renders just its review window. See [per-seam controls](docs/SEAM-CONTROLS.md).
 
 The installed app checks GitHub Releases for updates. Click the version button or **Seamstress → Check for Updates…** to download an update and restart when ready. Processing must finish or be cancelled before installation. See [how updates work](docs/updates.md).
 
@@ -37,7 +37,7 @@ python -m pip install --no-deps -e .
 seamstress process oner.mp4 --work-dir oner.seamstress --output oner-corrected.mp4
 ```
 
-One command runs detection, analysis, correction previews, and export. The same stages can run separately with `detect`, `mark`, `calibrate`, `preview`, and `export`. Projects save markers, analysis, correction plans, and revision-specific artifacts for repeatable review.
+One command runs detection, analysis, correction previews, and export. The same stages can run separately with `detect`, `mark`, `calibrate`, `refine`, `preview`, and `export`. Use `refine --project oner.seamstress --frame 2888` to revisit one known seam, then `preview --project oner.seamstress --frame 2888` to review only that join. Frame numbers refer to the original source. Projects save markers, analysis, correction plans, and revision-specific artifacts for repeatable review.
 
 **[Desktop and CLI guide](docs/SEAMSTRESS.md)** includes individual commands, seam timecodes, supported inputs, and limitations. The current engine supports constant-frame-rate, square-pixel, 8-bit SDR video; it is not an HDR mastering workflow.
 

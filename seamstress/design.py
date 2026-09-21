@@ -186,6 +186,8 @@ def design_conform(input, calibration, output, geometry_support=None, rate_suppo
         raise ValueError('Choose a new plan output distinct from source and calibration')
     data = calibration.read_bytes()
     measurements = json.loads(data)
+    if isinstance(measurements, dict) and 'refinement_context' in measurements:
+        raise ValueError('Single-seam calibration requires its merged rendering plan. Render the saved .plan.json with conform, or rerun refine with the baseline; design-conform would discard preserved seams')
     metadata = probe(input)
     if not isinstance(measurements, dict) or fingerprint(input) != measurements.get('source_sha256'):
         raise ValueError('Source fingerprint differs from calibration')

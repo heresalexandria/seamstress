@@ -148,6 +148,22 @@ def save_project(project):
     return project
 
 
+def capture_refinement_baseline(project):
+    """Freeze the current accepted render context before invalidating settings.
+
+    Files remain immutable revision artifacts. Their digest detects external
+    edits; the marker snapshot prevents a one-seam job discarding other edits.
+    """
+    plan=project['artifacts'].get('plan')
+    if not isinstance(plan,str) or not Path(plan).is_file():return None
+    data=Path(plan).read_bytes()
+    return {'plan':str(Path(plan).resolve()),'planSha256':hashlib.sha256(data).hexdigest(),
+            'sourceSha256':project['sourceSha256'],'revision':project['revision'],
+            'seams':copy.deepcopy(project['seams']),
+            'seamResults':copy.deepcopy(project.get('seamResults',[])),
+            'warnings':copy.deepcopy(project.get('warnings',[]))}
+
+
 def set_seams(path:Path,seams):
     project=load_project(path)
     # An exact-frame measurement is never carried to a newly placed boundary.
@@ -166,12 +182,14 @@ def set_seams(path:Path,seams):
     def signature(items):
         return [(r['frame'],r['enabled'],r['correction']) for r in items]
     before=signature(project['seams']);after=signature(rows)
-    project['seams']=rows
     if before!=after:
+        baseline=capture_refinement_baseline(project)
+        if baseline is not None:project['refinementBaseline']=baseline
         project['revision']+=1
         keep=('proxy','thumbnails','detection')
         project['artifacts']={k:v for k,v in project['artifacts'].items() if k in keep}
         project['status']='marked';project['warnings']=[];project.pop('seamResults',None)
+    project['seams']=rows
     if project['status']=='imported':project['status']='marked'
     return save_project(project)
 

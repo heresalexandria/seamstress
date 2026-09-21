@@ -11,7 +11,7 @@ function collectMedia(project) {
   return values.filter(v=>typeof v==='string' && MEDIA_EXTENSIONS.has(path.extname(v).toLowerCase())).map(v=>path.resolve(v));
 }
 function validateStage(stage) {
-  if (!['detect','analyze','preview','process','export'].includes(stage)) throw new Error('Unknown workflow stage');
+  if (!['detect','analyze','refine','preview','process','export'].includes(stage)) throw new Error('Unknown workflow stage');
   return stage;
 }
 module.exports = {containedFile,collectMedia,validateStage};

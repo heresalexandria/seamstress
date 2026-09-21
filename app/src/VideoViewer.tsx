@@ -4,7 +4,7 @@ import { clamp, timecode } from './format';
 import { Icon } from './Icons';
 import type { Project, Seam } from './types';
 
-export type ViewerHandle = { seek(frame: number): void; step(direction: number): void; toggle(): void };
+export type ViewerHandle = { seek(frame: number): void; step(direction: number): void; toggle(): void; reviewSeam(): void };
 type Props = { project: Project; selected?: Seam; frame: number; onFrame(frame: number): void; previewSeconds: number };
 
 export const VideoViewer = forwardRef<ViewerHandle, Props>(function VideoViewer({ project, selected, frame, onFrame, previewSeconds }, ref) {
@@ -58,7 +58,7 @@ export const VideoViewer = forwardRef<ViewerHandle, Props>(function VideoViewer(
   }
 
   function step(direction: number) { seek(Math.floor((source.current?.currentTime ?? frame / fps) * fps + .001) + direction); }
-  useImperativeHandle(ref, () => ({ seek, toggle, step }));
+  useImperativeHandle(ref, () => ({ seek, toggle, step, reviewSeam: () => { if (selected) { setScope('seam'); setLoop(true); seek(selected.frame); } } }));
   useEffect(() => { setMediaError(''); synchronize(true); }, [corrected, offset]);
   useEffect(() => {
     const a = source.current;

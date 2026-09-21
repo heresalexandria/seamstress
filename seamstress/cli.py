@@ -25,6 +25,13 @@ def _crf(value: str) -> int:
     return number
 
 
+def _positive_int(value: str) -> int:
+    number = int(value)
+    if number < 1:
+        raise argparse.ArgumentTypeError('must be a positive whole number')
+    return number
+
+
 def _seams(value: str) -> list[int]:
     try:
         frames = [int(part.strip()) for part in value.split(",")]
@@ -71,11 +78,26 @@ def parser() -> argparse.ArgumentParser:
             cmd.add_argument('--crf', type=_crf, default=14)
         if name in ('preview', 'resume'):
             cmd.add_argument('--preview-width', type=int, default=640)
+        if name == 'preview':
+            cmd.add_argument('--frame', type=_positive_int, help='render only this enabled seam preview from the current plan')
         if name == 'mark':
             markers = cmd.add_mutually_exclusive_group(required=True)
             markers.add_argument('--seams', type=_seams)
             markers.add_argument('--timecodes')
             markers.add_argument('--clear', action='store_true')
+
+    refine = commands.add_parser('refine', help='refine one seam while preserving a saved plan elsewhere')
+    refine.add_argument('input', type=Path, nargs='?', help='original source video; omit with --project')
+    refine.add_argument('--project', type=Path, help='saved project with an accepted baseline plan')
+    refine.add_argument('--base-plan', type=Path, help='frozen source-conform plan; required with an input video')
+    target = refine.add_mutually_exclusive_group(required=True)
+    target.add_argument('--frame', type=_positive_int, help='exact zero-based first incoming source frame')
+    target.add_argument('--timecode', help='seconds, HH:MM:SS.mmm or HH:MM:SS:FF, rounded to a source frame')
+    refine.add_argument('--correction', type=Path, help='JSON correction overrides for the selected seam')
+    refine.add_argument('--support-frames', type=_positive_int, help='return support on each side; defaults to the existing seam support')
+    refine.add_argument('--work-dir', type=Path, help='new standalone artifact folder; not used with --project')
+    refine.add_argument('--output', type=Path, help='optional new full-resolution corrected MP4')
+    refine.add_argument('--crf', type=_crf, default=14)
 
     def analysis_args(command: argparse.ArgumentParser) -> None:
         command.add_argument("input", type=Path, help="original video")
@@ -152,12 +174,109 @@ def _json_default(value: Any) -> Any:
     raise TypeError(f"cannot encode {type(value).__name__} as JSON")
 
 
+def _refine_command(args):
+    """CLI orchestration only; the shared backend owns preservation checks."""
+    import copy
+    from .corrections import normalize_correction
+    from .projects import inspect_source, load_project, set_seams, timecode_to_frame
+    from .pipeline import run_stage
+    from .refinement import load_baseline, refine_video
+    from .repair import fingerprint
+
+    def progress(event):
+        print(f"{event.get('stage', 'working')}: {event.get('fraction', 0):.0%} {event.get('message', '')}",
+              file=sys.stderr, flush=True)
+    if args.project:
+        if args.input or args.base_plan or args.work_dir:
+            raise ValueError('Use --project alone; input, --base-plan and --work-dir are standalone options')
+        project = load_project(args.project)
+        source = Path(project['source'])
+    else:
+        if not args.input or not args.base_plan:
+            raise ValueError('Provide either --project or an input video with --base-plan')
+        source = _source(args.input)
+        project = None
+    destination = None
+    if args.output:
+        destination = _new_output(args.output, source)
+        for sidecar in (destination.with_suffix('.repair.json'), destination.with_suffix('.verification.json')):
+            if sidecar.exists():raise FileExistsError(f'Refusing to overwrite existing sidecar: {sidecar}')
+    overrides = {}
+    if args.correction:
+        path = _source(args.correction, 'correction')
+        with path.open('rb') as handle:data = handle.read(1024*1024+1)
+        if len(data) > 1024*1024:raise ValueError('Correction JSON must be smaller than 1 MiB')
+        overrides = json.loads(data)
+        if not isinstance(overrides, dict):raise ValueError('Correction JSON must contain a correction object')
+    if project:
+        metadata = project['metadata'];digest = project['sourceSha256']
+    else:
+        # Preflight the baseline and artifact folder before scanning source timing.
+        baseline_path = _source(args.base_plan, 'baseline plan')
+        if args.work_dir and args.work_dir.expanduser().resolve().exists():
+            raise FileExistsError('Choose a new --work-dir; existing artifact folders are preserved')
+        metadata = inspect_source(source, progress=progress)
+        digest = fingerprint(source)
+    frame = args.frame if args.frame is not None else timecode_to_frame(args.timecode, metadata['fps_fraction'])
+    if not 0 < frame < metadata['frame_count']:
+        raise ValueError('The selected seam must be a first incoming frame inside the video')
+    if project:
+        selected = next((row for row in project['seams'] if row['frame'] == frame), None)
+        if selected is None or not selected['enabled']:
+            raise ValueError('Select an existing enabled project seam; add or enable its marker first')
+        if not project['artifacts'].get('plan') and not project.get('refinementBaseline'):
+            raise ValueError('Analyze the shot once before refining a single seam; an accepted baseline plan is required')
+        choice = normalize_correction({**selected['correction'], **overrides}, metadata=metadata, source_sha256=digest, frame=frame)
+        if choice != selected['correction']:
+            rows = copy.deepcopy(project['seams'])
+            next(row for row in rows if row['frame'] == frame)['correction'] = choice
+            project = set_seams(Path(project['projectPath']), rows)
+        options = {'frame': frame}
+        if args.support_frames is not None:options['supportFrames'] = args.support_frames
+        result = run_stage(project['projectPath'], 'refine', options=options, progress=progress)
+        if destination:
+            result = run_stage(project['projectPath'], 'export',
+                               options={'exportPath': str(destination), 'crf': args.crf}, progress=progress)
+        return result
+    baseline, _ = load_baseline(baseline_path, metadata, digest)
+    inherited = next((row['correction'] for row in baseline.get('correction_settings', []) if row.get('frame') == frame), {})
+    choice = normalize_correction({**inherited, **overrides}, metadata=metadata, source_sha256=digest, frame=frame)
+    folder = (args.work_dir or source.with_name(f'{source.stem}-seam-{frame}.refinement')).expanduser().resolve()
+    if folder.exists():raise FileExistsError('Choose a new --work-dir; existing artifact folders are preserved')
+    if destination in {folder/'calibration.json', folder/'calibration.plan.json', folder/'calibration.report.json'}:
+        raise ValueError('The video output must differ from the refinement JSON artifacts')
+    folder.mkdir(parents=True, exist_ok=False)
+    result = refine_video(source, frame, baseline_path, folder/'calibration.json', correction=choice,
+                          support_frames=args.support_frames, progress=progress)
+    if destination:
+        from .conform import render_conform
+        from .media import probe
+        from .pipeline import _audio_hash
+        from .projects import atomic_json
+        rendered = render_conform(source, result['plan_path'], destination, crf=args.crf, progress=progress)
+        actual = probe(destination)
+        starts, new_starts = metadata.get('audio_start_times', []), actual.get('audio_start_times', [])
+        checks = {key: actual[key] == metadata[key] for key in ('frame_count', 'width', 'height', 'fps_fraction')}
+        checks['video_start_time_preserved'] = abs(metadata.get('video_start_time', 0)-actual.get('video_start_time', 0)) < .0002
+        checks['audio_start_times_preserved'] = len(starts) == len(new_starts) and all(abs(a-b) < .002 for a, b in zip(starts, new_starts))
+        checks['audio_streams_unchanged'] = _audio_hash(source) == _audio_hash(destination) if metadata['has_audio'] else not actual['has_audio']
+        verification = {'checks': checks, 'passed': all(checks.values()), 'source': metadata, 'output': actual,
+                        'visual_perfection_verified': False, 'render': rendered}
+        path = destination.with_suffix('.verification.json');atomic_json(path, verification)
+        if not verification['passed']:raise RuntimeError(f'Export verification failed. Inspect {path}')
+        result['export_path'] = str(destination);result['verification_path'] = str(path)
+    return result
+
+
 def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
     try:
         if args.command == "setup-model":
             from .model_setup import setup_model
             print(json.dumps(setup_model(args.output), indent=2))
+            return 0
+        if args.command == 'refine':
+            print(json.dumps(_refine_command(args), indent=2, default=_json_default, allow_nan=False))
             return 0
         if args.command in ('process', 'detect', 'calibrate', 'preview', 'export', 'resume', 'mark', 'inspect'):
             from .pipeline import prepare_project, run_stage
@@ -187,6 +306,7 @@ def main(argv: list[str] | None = None) -> int:
                 if getattr(args, 'output', None):options['exportPath'] = str(args.output.expanduser().resolve())
                 options['crf'] = getattr(args, 'crf', 14)
                 options['previewWidth'] = getattr(args, 'preview_width', 640)
+                if args.command == 'preview' and args.frame is not None:options['frame'] = args.frame
                 if args.command in ('process', 'resume'):options['export'] = True
                 stage = {'calibrate':'analyze', 'resume':'process'}.get(args.command, args.command)
                 # Explicit points bypass auto-detection even in the detect command.

@@ -74,6 +74,59 @@ Detection defaults to soft interval hints of 10, 15 and 30 seconds. Set `--inter
 
 For automation use `.venv/bin/python -m seamstress` in place of `seamstress`; exit code 0 means the requested stage completed. Ctrl-C cancels processing. Completed artifacts stay on disk; an incomplete stage is not published as a current project artifact. A completed export is not a certification of invisible seams.
 
+## Refine a single seam
+
+Start from a project you have already analyzed. Change only the selected seam’s
+settings in the app, or supply a JSON object of correction overrides with
+`--correction`. The default uses its saved settings.
+
+```sh
+seamstress refine --project oner.seamstress --frame 2888
+seamstress preview --project oner.seamstress --frame 2888 --preview-width 960
+seamstress export --project oner.seamstress --output oner-refined.mp4
+```
+
+Use `--timecode "00:02:00.454"` instead of `--frame` for refinement. Timecodes
+round to the nearest source frame; a nominal two-minute label is not necessarily
+the precise boundary. `--support-frames 168` optionally sets correction reach on
+each side. Omitting it uses the prior correction’s complete support, bounded by
+neighboring seams. `--output new.mp4` on `refine` combines refinement and export.
+
+For a frozen rendering plan without a desktop project:
+
+```sh
+seamstress refine oner.mp4 --base-plan accepted.plan.json \
+  --frame 2888 --work-dir one-seam-review \
+  --correction correction.json
+```
+
+For example, `correction.json` can contain `{"color": "tone"}` to override only
+the selected seam’s color treatment. Settings already recorded in the baseline
+are retained for unspecified fields; legacy plans without recorded settings use
+automatic defaults. Custom affine measurements use the schema described in
+[per-seam controls](SEAM-CONTROLS.md). No video-specific frame number is built into
+the correction engine.
+
+The returned `plan_path` identifies the **complete merged rendering plan**. Use
+it with `conform` for native-resolution short previews or another export:
+
+```sh
+seamstress conform oner.mp4 --plan one-seam-review/calibration.plan.json \
+  --start-frame 2840 --end-frame 2984 --output seam-review.mp4
+```
+
+The refinement calibration contains only the chosen seam’s new measurements and
+its baseline context. Keep its merged `.plan.json` for reproduction; `design-conform` refuses target-only calibration because it would discard
+the other seams.
+
+Refinement preserves the baseline viewing crop and all render parameters outside
+its recorded frame window. It refuses overlapping neighbor corrections, changed
+non-target settings, altered source/baseline files, and adjustments that would
+expose source edges. It never silently expands the full-shot crop. Existing
+artifacts are kept, and a new export filename is required. Export re-encodes the
+whole movie; preservation refers to render values and pre-encoding pixels, not
+identical MP4 bytes. Review the selected preview before exporting.
+
 ## What the correction does
 
 The detector scans an aspect-preserving low-resolution copy across the entire timeline. It looks for unusual changes in registered appearance, geometry, color, sharpness and timing relative to the surrounding motion. It then examines candidate neighborhoods more carefully. Common clip intervals are additional evidence, never instructions to place a seam where no change exists.

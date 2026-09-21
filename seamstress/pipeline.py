@@ -3,7 +3,7 @@ from __future__ import annotations
 import copy, json, os, subprocess, tempfile, uuid
 from pathlib import Path
 import cv2
-from .projects import create_project, load_project, save_project, set_seams, atomic_json
+from .projects import create_project, load_project, save_project, set_seams, atomic_json, capture_refinement_baseline
 from .media import probe, iter_frames, _tool, _run
 
 
@@ -37,12 +37,19 @@ def _command(args, *, duration=1., progress=None, stage='import', cancelled=None
     _check(cancelled)
 
 
-def _commit(project, artifacts, status, warnings=None, *, invalidate=(), require_plan=False,seam_results=None):
+def _commit(project, artifacts, status, warnings=None, *, invalidate=(), require_plan=False,seam_results=None, require_refinement_baseline=None):
     current=load_project(Path(project['projectPath']))
     if current['revision']!=project['revision']:
         raise RuntimeError('Seams changed during this job. Run this stage again with the current markers')
     if require_plan and current['artifacts'].get('plan')!=project['artifacts'].get('plan'):
         raise RuntimeError('The correction plan changed during rendering. Run this stage again')
+    if require_refinement_baseline is not None:
+        import hashlib
+        baseline=capture_refinement_baseline(current) or current.get('refinementBaseline')
+        baseline_path=Path(require_refinement_baseline['plan'])
+        if (baseline!=require_refinement_baseline or not baseline_path.is_file() or
+                hashlib.sha256(baseline_path.read_bytes()).hexdigest()!=require_refinement_baseline['planSha256']):
+            raise RuntimeError('The accepted baseline changed during refinement. Run this stage again')
     for key in invalidate:current['artifacts'].pop(key,None)
     current['artifacts'].update(artifacts);current['status']=status
     if warnings is not None:current['warnings']=warnings
@@ -192,9 +199,81 @@ def analyze_project(project, *, options=None,progress=None,cancelled=None):
                    invalidate=('fullPreview','seamPreviews','export','verification'),seam_results=_seam_results(project,result))
 
 
+
+def refine_project(project, *, options=None,progress=None,cancelled=None):
+    """Analyze one seam against a frozen full-shot plan, never recropping it."""
+    import hashlib
+    from .calibration import DEFAULT_OPTIONS
+    from .refinement import refine_video, RefinementError
+    options=options or {};frame=options.get('frame')
+    if type(frame) is not int:raise ValueError('Refine needs the selected incoming source frame')
+    selected=next((row for row in project['seams'] if row['frame']==frame),None)
+    if selected is None or not selected['enabled']:
+        raise ValueError('Select an enabled seam before refining it')
+    baseline=capture_refinement_baseline(project) or project.get('refinementBaseline')
+    if not baseline:
+        raise RefinementError('Analyze the shot once before refining a single seam; an accepted baseline plan is required')
+    if baseline.get('sourceSha256')!=project['sourceSha256']:
+        raise RefinementError('The accepted baseline belongs to a different source video')
+    path=Path(baseline['plan'])
+    if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest()!=baseline['planSha256']:
+        raise RefinementError('The accepted baseline plan is missing or changed; restore it or analyze the whole shot again')
+    def others(rows):
+        return [(row['frame'],row['enabled'],row['correction']) for row in rows if row['frame']!=frame]
+    if others(project['seams'])!=others(baseline['seams']):
+        raise RefinementError('Other seam markers or settings changed since the baseline. Restore those changes or analyze the whole shot before refining one seam')
+    folder=_run_dir(project,'refine')
+    def callback(event):
+        if progress:progress({**event,'stage':'refine'})
+    result=refine_video(project['source'],frame,path,folder/'calibration.json',
+        correction=selected['correction'],analysis_boundaries=[row['frame'] for row in project['seams']],
+        support_frames=options.get('supportFrames'),options={key:value for key,value in options.items() if key in DEFAULT_OPTIONS},
+        progress=callback,cancelled=cancelled)
+    _check(cancelled)
+    readout=_seam_results(project,result)
+    combined=sorted([copy.deepcopy(row) for row in baseline.get('seamResults',[]) if row['frame']!=frame]+readout,key=lambda row:row['frame'])
+    warnings=[warning for warning in baseline.get('warnings',[]) if not warning.startswith(f'Frame {frame}:') and not warning.startswith(f'Frame {frame},')]
+    for row in readout:
+        if row.get('geometry')=='excluded':warnings.append(f"Frame {frame}: {row.get('geometryReason','Review this seam')}")
+        warnings.extend(f'Frame {frame}: {note}' for note in row.get('notes',[]))
+    window=result['refinement']
+    warnings.append(f"Single-seam refinement at frame {frame}: only frames {window['start_frame']}–{window['end_frame']-1} may differ; the viewing crop and all other corrections are preserved.")
+    return _commit(project,{'calibration':str(result['calibration_path']),'plan':str(result['plan_path']),
+                            'report':str(result['report_path'])},'analyzed',warnings,
+        invalidate=('fullPreview','seamPreviews','export','verification'),seam_results=combined,
+        require_refinement_baseline=baseline)
+
+
 def preview_project(project, *, options=None,progress=None,cancelled=None):
     from .conform import render_conform
     options=options or {}
+    if 'frame' in options:
+        frame=options['frame']
+        if type(frame) is not int:
+            raise ValueError('Seam preview needs the selected incoming source frame')
+        selected=next((row for row in project['seams'] if row['frame']==frame),None)
+        if selected is None or not selected['enabled']:
+            raise ValueError('Select an enabled seam before previewing it')
+        plan=project['artifacts'].get('plan')
+        if not plan or not Path(plan).is_file():
+            raise ValueError('Analyze or refine the selected seam before previewing it; a current correction plan is required')
+        # A local review renders only its source interval. It must
+        # not trigger analysis, rebuild a full proxy, or replace other previews.
+        _check(cancelled)
+        meta=project['metadata'];radius=max(1,round(float(options.get('previewSeconds',4))*meta['fps']/2))
+        start=max(0,frame-radius);end=min(meta['frame_count'],frame+radius)
+        folder=_run_dir(project,'preview');clip=folder/f'seam-{frame}.mp4'
+        render_conform(project['source'],plan,clip,crf=20,preview_width=int(options.get('previewWidth',640)),
+                       start_frame=start,end_frame=end,progress=progress,cancelled=cancelled)
+        clip_meta=probe(clip)
+        if clip_meta['frame_count']!=end-start or clip_meta['fps_fraction']!=meta['fps_fraction']:
+            raise RuntimeError('Seam preview timing verification failed; the clip was not published')
+        _check(cancelled)
+        previews=[copy.deepcopy(row) for row in project['artifacts'].get('seamPreviews',[]) if row['frame']!=frame]
+        previews.append({'frame':frame,'path':str(clip),'startFrame':start,'endFrame':end})
+        previews.sort(key=lambda row:row['frame'])
+        _emit(progress,'preview',1,'Prepared selected seam preview')
+        return _commit(project,{'seamPreviews':previews},'previewed',require_plan=True)
     project=prepare_media(project,progress=progress,cancelled=cancelled)
     if not project['artifacts'].get('plan'):project=analyze_project(project,progress=progress,cancelled=cancelled)
     folder=_run_dir(project,'preview');video=folder/'corrected.mp4'
@@ -249,7 +328,7 @@ def export_project(project, *, options=None,progress=None,cancelled=None):
 
 def run_stage(path, stage, *, options=None,progress=None,cancelled=None):
     project=load_project(Path(path));options=options or {};_check(cancelled)
-    functions={'detect':detect_project,'analyze':analyze_project,'preview':preview_project,'export':export_project}
+    functions={'detect':detect_project,'analyze':analyze_project,'refine':refine_project,'preview':preview_project,'export':export_project}
     if stage in functions:return functions[stage](project,options=options,progress=progress,cancelled=cancelled)
     if stage!='process':raise ValueError(f'Unknown workflow stage: {stage}')
     project=prepare_media(project,progress=progress,cancelled=cancelled)
