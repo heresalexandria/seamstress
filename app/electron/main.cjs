@@ -1,4 +1,4 @@
-const {app,BrowserWindow,ipcMain,dialog,protocol,net,shell,Menu,autoUpdater:nativeUpdater} = require('electron');
+const {app,BrowserWindow,ipcMain,dialog,protocol,net,shell,Menu,safeStorage,autoUpdater:nativeUpdater} = require('electron');
 const smoke=app.commandLine.hasSwitch('smoke');
 // Set this before Electron is ready: automated checks must never activate the
 // app or interrupt the foreground application. Normal launches are unchanged.
@@ -12,15 +12,16 @@ const {spawn}=require('node:child_process');
 const {randomUUID}=require('node:crypto');
 const {containedFile,collectMedia,validateStage}=require('./security.cjs');
 const {serveMedia}=require('./media.cjs');
+const {createCredentialStore,redactSecrets,workerEnvironment,assertNoRendererSecrets}=require('./credentials.cjs');
 const root=path.resolve(__dirname,'../..');
 const explicitUserData=app.commandLine.getSwitchValue('user-data-dir');
 if(explicitUserData)app.setPath('userData',path.resolve(explicitUserData));
 else if(!app.isPackaged)app.setPath('userData',path.join(root,'.app-data'));
 protocol.registerSchemesAsPrivileged([
   {scheme:'seamstress-app',privileges:{standard:true,secure:true,supportFetchAPI:true}},
-  {scheme:'seamstress-media',privileges:{standard:true,secure:true,stream:true,supportFetchAPI:true}}
+  {scheme:'seamstress-media',privileges:{standard:true,secure:true,stream:true,supportFetchAPI:true,corsEnabled:true}}
 ]);
-let window,updater;
+let window,updater,credentials;
 const registryPath=path.join(app.getPath('userData'),'recent-projects.json');
 let recent=[];
 try{recent=JSON.parse(fs.readFileSync(registryPath,'utf8'));if(!Array.isArray(recent))recent=[];}catch{}
@@ -40,14 +41,15 @@ function knownProject(value){
   return path.resolve(value);
 }
 function send(event){if(window&&!window.isDestroyed())window.webContents.send('job:event',event);}
-function worker(operation,args,{jobId=randomUUID(),stage='import',events=false}={}){
+function worker(operation,args,{jobId=randomUUID(),stage='import',events=false,openaiApiKey}={}){
   if(updater?.isInstalling())throw new Error('Seamstress is restarting to install an update.');
   const packaged=app.isPackaged;
   const backend=path.join(process.resourcesPath,'backend');
   const executable=packaged?path.join(backend,'seamstress-worker','seamstress-worker'):path.join(root,'.venv','bin','python');
   const argv=packaged?[]:['-m','seamstress.desktop_worker'];
   const child=spawn(executable,argv,{cwd:packaged?backend:root,detached:process.platform!=='win32',
-    env:{...process.env,PYTHONUNBUFFERED:'1',OPENBLAS_NUM_THREADS:'2',OMP_NUM_THREADS:'2',
+    env:{...workerEnvironment(process.env),PYTHONUNBUFFERED:'1',OPENBLAS_NUM_THREADS:'2',OMP_NUM_THREADS:'2',
+      SEAMSTRESS_MODEL_DIR:path.join(app.getPath('userData'),'models','mobile-sam'),
       PATH:[packaged?path.join(backend,'bin'):'','/opt/homebrew/bin','/usr/local/bin',process.env.PATH||''].filter(Boolean).join(path.delimiter)},
     stdio:['pipe','pipe','pipe']});
   let buffer='',errors='',finalEvent=null,cancelling=false;
@@ -57,7 +59,7 @@ function worker(operation,args,{jobId=randomUUID(),stage='import',events=false}=
       while((newline=buffer.indexOf('\n'))>=0){
         const line=buffer.slice(0,newline);buffer=buffer.slice(newline+1);
         try{
-          const event=JSON.parse(line);
+          const event=JSON.parse(redactSecrets(line,[openaiApiKey]));
           if(event.project)grant(event.project);
           if(event.type!=='progress')finalEvent=event;
           if(events)send({...event,jobId,stage:event.stage||stage});
@@ -70,19 +72,19 @@ function worker(operation,args,{jobId=randomUUID(),stage='import',events=false}=
     child.on('close',code=>{
       jobs.delete(jobId);
       updater?.refreshActivity();
-      if(finalEvent?.type==='complete'&&code===0)resolve(finalEvent.project);
+      if(finalEvent?.type==='complete'&&code===0)resolve(finalEvent.result??finalEvent.project);
       else if(cancelling||finalEvent?.type==='cancelled'){
         if(events&&finalEvent?.type!=='cancelled')send({jobId,type:'cancelled',stage,message:'Operation cancelled'});
         reject(new Error('Operation cancelled'));
       }else{
-        const error=finalEvent?.error||errors.trim()||`Processing stopped (${code})`;
+        const error=redactSecrets(finalEvent?.error||errors.trim()||`Processing stopped (${code})`,[openaiApiKey]);
         if(events&&finalEvent?.type!=='error')send({jobId,type:'error',stage,error});
         reject(new Error(error));
       }
     });
   });
   child.stdin.on('error',()=>{});
-  child.stdin.end(JSON.stringify({operation,args})+'\n');
+  child.stdin.end(JSON.stringify({operation,args,...(openaiApiKey?{credentials:{openaiApiKey}}:{})})+'\n');
   jobs.set(jobId,{child,cancel:()=>{
     cancelling=true;
     try{process.platform==='win32'?child.kill('SIGTERM'):process.kill(-child.pid,'SIGINT');}catch{}
@@ -99,6 +101,11 @@ function handle(channel,fn){ipcMain.handle(channel,async(event,...args)=>{
 function requireIdle(projectPath){if(busy.has(projectPath))throw new Error('Wait for the current operation, or cancel it first');}
 async function withProject(projectPath,operation){requireIdle(projectPath);busy.add(projectPath);updater?.refreshActivity();try{return await operation();}finally{busy.delete(projectPath);updater?.refreshActivity();}}
 app.whenReady().then(()=>{
+  credentials=createCredentialStore({safeStorage,file:path.join(app.getPath('userData'),'credentials','openai.enc')});
+  handle('ai:settings',()=>credentials.status());
+  handle('ai:key:set',key=>credentials.set(key));
+  handle('ai:key:clear',()=>credentials.clear());
+  handle('segmentation:status',()=>worker('segmentationStatus',{}).promise);
   if(!app.isPackaged&&!smoke&&process.platform==='darwin')app.dock.setIcon(path.join(__dirname,'../assets/icon.png'));
   updater=createUpdater({app,autoUpdater,nativeUpdater,hasActiveJobs:()=>jobs.size>0||busy.size>0,
     disabled:smoke,openExternal:url=>shell.openExternal(url),
@@ -119,7 +126,8 @@ app.whenReady().then(()=>{
     try{
       const url=new URL(request.url),file=path.resolve(url.searchParams.get('path')||'');
       if(url.hostname!=='local'||!media.has(file))return new Response('Forbidden',{status:403});
-      return serveMedia(file,request);
+      const origin=!app.isPackaged&&process.env.SEAMSTRESS_DEV_URL?new URL(process.env.SEAMSTRESS_DEV_URL).origin:'seamstress-app://app';
+      return serveMedia(file,request,{origin});
     }catch{return new Response('Not found',{status:404});}
   });
   handle('video:pick',async()=>{
@@ -155,13 +163,27 @@ app.whenReady().then(()=>{
       return worker('importSeamCorrection',{projectPath,frame,reviewedPath:result.filePaths[0]}).promise;
     });
   });
+  handle('project:import-reconstruction',options=>{
+    const projectPath=knownProject(options?.projectPath),frame=options?.frame;
+    if(!Number.isSafeInteger(frame)||frame<=0)throw new Error('Select a valid seam frame');
+    return withProject(projectPath,async()=>{
+      const result=await dialog.showOpenDialog(window,{title:'Import a layer reconstruction package',properties:['openFile'],filters:[{name:'Reconstruction manifest',extensions:['json']}]});
+      if(result.canceled||!result.filePaths.length)return null;
+      return worker('importReconstruction',{projectPath,frame,manifestPath:result.filePaths[0]}).promise;
+    });
+  });
   handle('job:run',args=>{
     const projectPath=knownProject(args?.projectPath),stage=validateStage(args.stage);requireIdle(projectPath);
     const options={...(args.options||{})};
+    assertNoRendererSecrets(options);
+    if(stage==='reconstruct'&&options.action==='import')throw new Error('Choose a reconstruction package with the import dialog.');
+    const ai=stage==='reconstruct'&&options.reconstruction?.allowAI===true;
+    if(ai&&options.reconstruction.maxAIRequests!==undefined&&(!Number.isSafeInteger(options.reconstruction.maxAIRequests)||options.reconstruction.maxAIRequests<1||options.reconstruction.maxAIRequests>8))throw new Error('AI request limit must be between 1 and 8.');
+    const openaiApiKey=ai?credentials.get():undefined;
     if(options.exportPath&&!exportsAllowed.has(path.resolve(options.exportPath)))throw new Error('Choose an export destination first');
     busy.add(projectPath);
     let job;
-    try{job=worker('run',{projectPath,stage,options},{events:true,stage});}
+    try{job=worker('run',{projectPath,stage,options},{events:true,stage,openaiApiKey});}
     catch(error){busy.delete(projectPath);updater?.refreshActivity();throw error;}
     job.promise.catch(()=>{}).finally(()=>{busy.delete(projectPath);updater?.refreshActivity();});
     return {jobId:job.jobId};

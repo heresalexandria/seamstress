@@ -23,6 +23,7 @@ def self_test():
     import cv2
     import numpy as np
     import scipy
+    import onnxruntime
     from scipy.linalg import expm, logm
     from scipy.ndimage import percentile_filter
     from scipy.signal import find_peaks
@@ -31,6 +32,7 @@ def self_test():
     from seamstress.media import _tool
     from seamstress.pipeline import run_stage
     cv2.SIFT_create()
+    assert 'CPUExecutionProvider' in onnxruntime.get_available_providers()
     np.testing.assert_allclose(expm(logm(np.eye(3))), np.eye(3))
     assert percentile_filter(np.arange(9).reshape(3, 3), 50, size=3).shape == (3, 3)
     assert len(find_peaks([0., 1., 0.])[0]) == 1
@@ -55,7 +57,8 @@ def self_test():
     assert float(decoded_rgb[..., 2].mean()) > 240
     assert float(decoded_rgb[..., :2].mean()) < 10
     print(json.dumps({'self_test': 'ok', 'numpy': np.__version__, 'scipy': scipy.__version__,
-                      'opencv': cv2.__version__, 'ffmpeg': ffmpeg, 'ffprobe': ffprobe}))
+                      'opencv': cv2.__version__, 'onnxruntime': onnxruntime.__version__,
+                      'ffmpeg': ffmpeg, 'ffprobe': ffprobe}))
     return 0
 
 

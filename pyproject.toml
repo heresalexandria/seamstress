@@ -23,6 +23,8 @@ include = ["seamstress*"]
 
 [project.optional-dependencies]
 bridge = ["torch>=2.2"]
+segmentation = ["onnxruntime==1.23.2"]
 
 [tool.setuptools.package-data]
+"seamstress" = ["resources/*.txt"]
 "seamstress._vendor.rife" = ["LICENSE", "provenance.json"]

@@ -1,7 +1,8 @@
 """Preserve source drawings while correcting segment framing and grading.
 
-There is exactly one source frame for every output frame. No frame blending,
-optical-flow deformation, or image generation is used by this renderer.
+There is exactly one source frame for every output frame. The default path
+only adjusts geometry/color. Explicit reconstruction entries may supply
+reviewed source-native layers before those same geometry/color operations.
 """
 from __future__ import annotations
 
@@ -14,6 +15,7 @@ import re
 import sys
 import tempfile
 import time
+from contextlib import ExitStack
 
 import cv2
 import numpy as np
@@ -116,6 +118,9 @@ def validate_conform_plan(plan, metadata):
     if curves and any(not np.allclose(s['gain'], 1) or not np.allclose(s['bias'], 0) for s in segments):
         raise ValueError('Use either segment gains/biases or protected grade curves, not both')
     validate_local_color_curves(plan.get('local_color_curves', []), expected)
+    if 'reconstructions' in plan:
+        from .reconstruction_render import validate_entries
+        validate_entries(plan, metadata)
 
 
 def tone_lut_at(frame, curves):
@@ -190,8 +195,13 @@ def render_conform(input, plan, output, crf=14, start_frame=0, end_frame=None, *
     magnifications = []
     render_started = time.monotonic()
     total_frames = end_frame-start_frame
-    with tempfile.TemporaryDirectory(prefix='seamstress-conform-', dir=output.parent) as temp:
+    with tempfile.TemporaryDirectory(prefix='seamstress-conform-', dir=output.parent) as temp, ExitStack() as cleanup:
         temp = Path(temp)
+        reconstruction = None
+        if recipe.get('reconstructions'):
+            from .reconstruction_render import FrameReconstruction
+            reconstruction = FrameReconstruction(input, recipe, metadata)
+            cleanup.callback(reconstruction.close)
         with VideoWriter(temp/'video.mp4', width, height, metadata['fps_fraction'], crf=crf, preset='fast' if preview else 'slow',
                          color_tags={k:metadata.get(k) for k in ('color_space','color_transfer','color_primaries','color_range')
                                      if not (k=='color_space' and metadata.get(k)=='gbr')}) as writer:
@@ -201,6 +211,8 @@ def render_conform(input, plan, output, crf=14, start_frame=0, end_frame=None, *
                     raise InterruptedError('Rendering cancelled')
                 if number >= metadata['frame_count']:
                     raise RuntimeError('Source decoded more frames than its metadata')
+                if reconstruction is not None:
+                    frame = reconstruction.apply(number, frame, resize)
                 while number >= segments[index]['end']:
                     index += 1
                 segment = segments[index]
@@ -269,5 +281,8 @@ def render_conform(input, plan, output, crf=14, start_frame=0, end_frame=None, *
     }
     if local_curves:
         report['local_color_model_provenance'] = local_provenance
+    if recipe.get('reconstructions'):
+        report['reconstructions'] = recipe['reconstructions']
+        report['method'] = 'Original frame cadence; explicit native layer reconstruction followed by preserved framing and grading'
     output.with_suffix('.repair.json').write_text(json.dumps(report, indent=2))
     return report

@@ -6,3 +6,5 @@ opencv-python-headless==5.0.0.93
 scikit-image==0.26.0
 pyinstaller==6.22.3
 PyYAML==6.0.3
+# Runtime is bundled; MobileSAM weights are an explicit in-app download.
+onnxruntime==1.23.2

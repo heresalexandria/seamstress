@@ -114,7 +114,7 @@ def ffmpeg_closure(programs):
 
 def version_record():
     result = {'python': sys.version, 'machine': platform.machine(), 'platform': platform.platform(), 'packages': {}}
-    for name in ('pyinstaller', 'pyinstaller-hooks-contrib', 'numpy', 'scipy', 'opencv-python-headless', 'pillow'):
+    for name in ('pyinstaller', 'pyinstaller-hooks-contrib', 'numpy', 'scipy', 'opencv-python-headless', 'pillow', 'onnxruntime'):
         try:
             result['packages'][name] = importlib.metadata.version(name)
         except importlib.metadata.PackageNotFoundError:
@@ -123,7 +123,7 @@ def version_record():
 
 
 def source_files():
-    return sorted([*ROOT.joinpath('seamstress').rglob('*.py'), ROOT/'pyproject.toml',
+    return sorted([*ROOT.joinpath('seamstress').rglob('*.py'), *ROOT.joinpath('seamstress/resources').glob('*.txt'), ROOT/'pyproject.toml',
                    ROOT/'scripts/package_backend.py', ROOT/'scripts/worker_entry.py'])
 
 
@@ -165,7 +165,7 @@ def collect_licenses(destination, paths):
         receipt = root/'INSTALL_RECEIPT.json'
         if receipt.is_file():
             copy(receipt, package)
-    for name in ('numpy', 'scipy', 'opencv-python-headless', 'pillow', 'pyinstaller', 'pyinstaller-hooks-contrib'):
+    for name in ('numpy', 'scipy', 'opencv-python-headless', 'pillow', 'pyinstaller', 'pyinstaller-hooks-contrib', 'onnxruntime', 'flatbuffers', 'protobuf', 'coloredlogs', 'humanfriendly'):
         try:
             distribution = importlib.metadata.distribution(name)
         except importlib.metadata.PackageNotFoundError:
@@ -304,6 +304,8 @@ def main():
                    '--target-arch', platform.machine()]
         for module in EXCLUDES:
             command += ['--exclude-module', module]
+        command += ['--collect-all', 'onnxruntime', '--add-data',
+                    str(snapshot/'seamstress/resources')+os.pathsep+'seamstress/resources']
         command += [str(snapshot/'scripts/worker_entry.py')]
         print('Building standalone Python worker…', flush=True)
         log = build_root/'pyinstaller.log'

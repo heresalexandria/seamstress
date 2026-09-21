@@ -183,6 +183,15 @@ def set_seams(path:Path,seams):
         return [(r['frame'],r['enabled'],r['correction']) for r in items]
     before=signature(project['seams']);after=signature(rows)
     if before!=after:
+        for old in project['seams']:
+            reconstruction=project.get('reconstructions',{}).get(str(old['frame']),{}).get('accepted')
+            if not reconstruction:
+                continue
+            current=next((row for row in rows if row['frame']==old['frame']),None)
+            if current is None or (current['frame'],current['enabled'],current['correction'])!=(old['frame'],old['enabled'],old['correction']):
+                raise ValueError(f"Revert the layer reconstruction at frame {old['frame']} before moving, disabling, or changing that seam")
+            if any(row['frame']!=old['frame'] and reconstruction['startFrame']<=row['frame']<reconstruction['endFrame'] for row in rows):
+                raise ValueError(f"Revert the layer reconstruction at frame {old['frame']} before marking another seam inside its repair window")
         baseline=capture_refinement_baseline(project)
         if baseline is not None:project['refinementBaseline']=baseline
         project['revision']+=1

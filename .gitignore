@@ -33,6 +33,7 @@ node_modules/
 .app-data/
 app/release/
 app/resources/backend/
+app/resources/.backend-build-*/
 app/test-results/
 app/playwright-report/
 *.seamstress/

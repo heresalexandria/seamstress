@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Any
@@ -68,6 +69,9 @@ def parser() -> argparse.ArgumentParser:
             cmd.add_argument('--output', type=Path, help='new corrected MP4; default is inside the project')
             cmd.add_argument('--crf', type=_crf, default=14)
             cmd.add_argument('--preview-width', type=int, default=640)
+            cmd.add_argument('--reconstruct', action='store_true', help='opt in to automatic layer-reconstruction candidates after normal correction')
+            cmd.add_argument('--allow-ai', action='store_true', help='permit bounded background uploads; requires --reconstruct and OPENAI_API_KEY')
+            cmd.add_argument('--max-ai-requests', type=_positive_int, default=1)
     for name in ('calibrate', 'preview', 'export', 'resume', 'mark', 'inspect'):
         cmd = commands.add_parser(name, help={'calibrate':'analyze marked seams and build a correction plan',
             'preview':'render whole-video and seam previews', 'export':'render a full-resolution corrected video',
@@ -78,6 +82,10 @@ def parser() -> argparse.ArgumentParser:
             cmd.add_argument('--crf', type=_crf, default=14)
         if name in ('preview', 'resume'):
             cmd.add_argument('--preview-width', type=int, default=640)
+        if name == 'resume':
+            cmd.add_argument('--reconstruct', action='store_true')
+            cmd.add_argument('--allow-ai', action='store_true')
+            cmd.add_argument('--max-ai-requests', type=_positive_int, default=1)
         if name == 'preview':
             cmd.add_argument('--frame', type=_positive_int, help='render only this enabled seam preview from the current plan')
         if name == 'mark':
@@ -98,6 +106,32 @@ def parser() -> argparse.ArgumentParser:
     refine.add_argument('--work-dir', type=Path, help='new standalone artifact folder; not used with --project')
     refine.add_argument('--output', type=Path, help='optional new full-resolution corrected MP4')
     refine.add_argument('--crf', type=_crf, default=14)
+
+    reconstruct = commands.add_parser('reconstruct', help='prepare, review and accept an isolated layer reconstruction')
+    reconstruct.add_argument('input', type=Path, nargs='?', help='new input video, or use --project')
+    reconstruct.add_argument('--project', type=Path)
+    reconstruct.add_argument('--work-dir', type=Path, help='new project directory when using an input video')
+    reconstruct.add_argument('--base-plan', type=Path, help='optional accepted conform plan for a new input project')
+    target = reconstruct.add_mutually_exclusive_group()
+    target.add_argument('--frame', type=_positive_int)
+    target.add_argument('--timecode')
+    target.add_argument('--all-seams', action='store_true')
+    reconstruct.add_argument('--stage', choices=['propose','edit','background','render','accept','reject','revert','auto','import','segment'], default='auto')
+    reconstruct.add_argument('--bundle', type=Path, help='portable reconstruction manifest for --stage import')
+    reconstruct.add_argument('--edits', type=Path, help='mask strokes, keyframes or layer adjustments as JSON')
+    reconstruct.add_argument('--reach-frames', type=_positive_int)
+    reconstruct.add_argument('--motion-strength', type=float)
+    reconstruct.add_argument('--segmentation', choices=['auto','classic','neural'], default='auto')
+    reconstruct.add_argument('--allow-ai', action='store_true', help='allow source-frame upload for missing background only')
+    reconstruct.add_argument('--max-ai-requests', type=_positive_int, default=1)
+    reconstruct.add_argument('--quality', choices=['low','medium','high'], default='medium')
+    reconstruct.add_argument('--reviewed', action='store_true', help='confirm review when accepting a rendered candidate')
+    reconstruct.add_argument('--output', type=Path, help='export the accepted result to a new full movie')
+    reconstruct.add_argument('--crf', type=_crf, default=14)
+    segment_setup=commands.add_parser('setup-segmentation-model',help='install verified optional local subject-mask weights')
+    segment_setup.add_argument('--output',type=Path,help='model cache directory (default: OS cache)')
+    segment_setup.add_argument('--source-dir',type=Path,help='import already downloaded weights after checksum verification')
+    segment_setup.add_argument('--download',action='store_true',help='authorize the pinned model download')
 
     def analysis_args(command: argparse.ArgumentParser) -> None:
         command.add_argument("input", type=Path, help="original video")
@@ -268,9 +302,97 @@ def _refine_command(args):
     return result
 
 
+def _reconstruct_command(args):
+    from .pipeline import prepare_project,run_stage
+    from .projects import load_project,set_seams,timecode_to_frame,atomic_json,save_project
+    from .conform import validate_conform_plan
+    def progress(event):
+        print(f"reconstruct: {event.get('fraction',0):.0%} {event.get('message','')}",file=sys.stderr,flush=True)
+    if args.project:
+        if args.input or args.work_dir or args.base_plan:
+            raise ValueError('Use --project or a new input with --work-dir/--base-plan, not both')
+        project=load_project(args.project)
+    else:
+        if not args.input:raise ValueError('Provide an input video or --project')
+        source=_source(args.input)
+        if args.output:
+            destination=_new_output(args.output,source)
+            for suffix in ('.repair.json','.verification.json'):
+                if destination.with_suffix(suffix).exists():raise FileExistsError('Output sidecar already exists; choose a new output path')
+        project=prepare_project(source,args.work_dir or source.with_suffix('.seamstress'),progress=progress)
+    if args.output:
+        destination=_new_output(args.output,Path(project['source']))
+        for suffix in ('.repair.json','.verification.json'):
+            if destination.with_suffix(suffix).exists():raise FileExistsError('Output sidecar already exists; choose a new output path')
+    frame=args.frame
+    if args.timecode is not None:frame=timecode_to_frame(args.timecode,project['metadata']['fps_fraction'])
+    if args.stage=='import':
+        if not args.bundle:raise ValueError('--stage import requires --bundle')
+        if frame is None:
+            data=json.loads(_source(args.bundle,'reconstruction manifest').read_text())
+            frame=data.get('frame')
+    if args.base_plan:
+        from .pipeline import _run_dir
+        plan_path=_source(args.base_plan,'accepted plan');recipe=json.loads(plan_path.read_text())
+        validate_conform_plan(recipe,project['metadata'])
+        if recipe['source_sha256']!=project['sourceSha256']:raise ValueError('Accepted plan belongs to another source')
+        seams=[row['frame'] if isinstance(row,dict) else row for row in recipe.get('seams',[])]
+        if frame is not None and frame not in seams:seams.append(frame)
+        seams.extend(row['frame'] for row in recipe.get('reconstructions',[]))
+        corrections={row['frame']:row['correction'] for row in recipe.get('correction_settings',[])}
+        project=set_seams(Path(project['projectPath']),[{'frame':n,'correction':corrections.get(n)} for n in sorted(set(seams))])
+        target=_run_dir(project,'baseline')/'plan.json';atomic_json(target,recipe)
+        project['artifacts']['plan']=str(target);project['status']='analyzed'
+        if recipe.get('reconstructions'):
+            from .reconstruction_render import FrameReconstruction
+            from .reconstruction_workflow import _bind_summary
+            FrameReconstruction(project['source'],recipe,project['metadata']).close()
+            project['reconstructions']={str(row['frame']):{'accepted':{
+                **_bind_summary(row['manifest'],project),'acceptance':'baseline'}} for row in recipe['reconstructions']}
+        project=save_project(project)
+    if frame is not None and not any(row['frame']==frame for row in project['seams']):
+        if args.project:raise ValueError('Mark the requested seam in this project before reconstructing it')
+        project=set_seams(Path(project['projectPath']),[*project['seams'],{'frame':frame,'origin':'manual'}])
+    if frame is None and args.stage!='auto':raise ValueError('This reconstruction stage requires --frame or --timecode')
+    if args.all_seams and args.stage!='auto':raise ValueError('--all-seams is available with --stage auto')
+    if not project['seams'] and args.stage=='auto':
+        project=run_stage(project['projectPath'],'detect',progress=progress)
+    settings={'segmentation':args.segmentation} if args.stage in ('propose','auto') else {}
+    if args.edits:
+        path=_source(args.edits,'reconstruction edits')
+        if path.stat().st_size>8*1024*1024:raise ValueError('Reconstruction edits must be smaller than 8 MiB')
+        edits=json.loads(path.read_text())
+        if not isinstance(edits,dict):raise ValueError('Reconstruction edits must be an object')
+        settings.update(edits)
+    if args.reach_frames is not None:settings['reachFrames']=args.reach_frames
+    if args.motion_strength is not None:settings['motionStrength']=args.motion_strength
+    if args.bundle:settings['manifestPath']=str(_source(args.bundle,'reconstruction manifest').resolve())
+    if args.allow_ai:
+        if args.stage not in ('background','auto'):raise ValueError('--allow-ai is only used by background or auto stages')
+        settings.update(allowAI=True,maxAIRequests=args.max_ai_requests,quality=args.quality)
+    if args.reviewed:settings['review_approved']=True
+    project=run_stage(project['projectPath'],'reconstruct',
+        options={'frame':frame,'action':args.stage,'reconstruction':settings},
+        provider_key=os.environ.get('OPENAI_API_KEY') if args.allow_ai else None,progress=progress)
+    if args.output:
+        selected=[frame] if frame is not None else [row['frame'] for row in project['seams'] if row['enabled']]
+        pending=[n for n in selected if project.get('reconstructions',{}).get(str(n),{}).get('candidate')]
+        if pending:raise ValueError(f'Candidate needs review at frames {pending}; render, then accept with --reviewed before exporting. Project: {project["projectPath"]}')
+        project=run_stage(project['projectPath'],'export',
+            options={'exportPath':str(args.output.expanduser().resolve()),'crf':args.crf},progress=progress)
+    return project
+
+
 def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
     try:
+        if args.command=='setup-segmentation-model':
+            from .segmentation_model import setup_model
+            print(json.dumps(setup_model(args.output,allow_download=args.download,source_dir=args.source_dir),indent=2))
+            return 0
+        if args.command=='reconstruct':
+            print(json.dumps(_reconstruct_command(args),indent=2,default=_json_default,allow_nan=False))
+            return 0
         if args.command == "setup-model":
             from .model_setup import setup_model
             print(json.dumps(setup_model(args.output), indent=2))
@@ -285,6 +407,7 @@ def main(argv: list[str] | None = None) -> int:
                 fraction = event.get('fraction', 0)
                 print(f"{event.get('stage', 'working')}: {fraction:.0%} {event.get('message', '')}", file=sys.stderr, flush=True)
             options = {}
+            provider_key=None
             if args.command in ('process', 'detect'):
                 if args.command == 'detect' and args.project:
                     if args.input or args.work_dir:raise ValueError('Use either an input video or --project, not both')
@@ -308,10 +431,16 @@ def main(argv: list[str] | None = None) -> int:
                 options['previewWidth'] = getattr(args, 'preview_width', 640)
                 if args.command == 'preview' and args.frame is not None:options['frame'] = args.frame
                 if args.command in ('process', 'resume'):options['export'] = True
+                if getattr(args,'allow_ai',False) and not getattr(args,'reconstruct',False):
+                    raise ValueError('--allow-ai requires --reconstruct')
+                if getattr(args,'reconstruct',False):
+                    options['reconstructionEnabled']=True
+                    options['reconstruction']={'allowAI':args.allow_ai,'maxAIRequests':args.max_ai_requests}
+                    provider_key=os.environ.get('OPENAI_API_KEY') if args.allow_ai else None
                 stage = {'calibrate':'analyze', 'resume':'process'}.get(args.command, args.command)
                 # Explicit points bypass auto-detection even in the detect command.
                 if not (stage == 'detect' and (getattr(args, 'seams', None) or getattr(args, 'timecodes', None))):
-                    project = run_stage(project['projectPath'], stage, options=options, progress=progress)
+                    project = run_stage(project['projectPath'], stage, options=options, progress=progress,provider_key=provider_key)
             print(json.dumps(project, indent=2, default=_json_default, allow_nan=False))
             return 0
         source = _source(args.input)
