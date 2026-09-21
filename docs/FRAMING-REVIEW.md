@@ -79,6 +79,8 @@ that reconstruction.
 
 ## Using the changes
 
+The app now exposes [per-seam controls](SEAM-CONTROLS.md) for these automatic checks and for importing the reviewed 1:15 framing. Custom geometry remains a recorded review decision; the automatic evidence requirements are unchanged.
+
 The app's **Analyze** action and the CLI's `calibrate` / `process` stages share
 the same implementation. Reanalyze an existing project, then regenerate its
 previews and export to a new filename. Old exports and frozen plans do not

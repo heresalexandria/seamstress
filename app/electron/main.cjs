@@ -146,6 +146,15 @@ app.whenReady().then(()=>{
     const projectPath=knownProject(options?.projectPath);
     return withProject(projectPath,()=>worker('setSeams',{projectPath,seams:options.seams}).promise);
   });
+  handle('project:import-correction',options=>{
+    const projectPath=knownProject(options?.projectPath),frame=options?.frame;
+    if(!Number.isSafeInteger(frame)||frame<=0)throw new Error('Select a valid seam frame');
+    return withProject(projectPath,async()=>{
+      const result=await dialog.showOpenDialog(window,{title:'Import reviewed framing for this seam',properties:['openFile'],filters:[{name:'Reviewed calibration',extensions:['json']}]});
+      if(result.canceled||!result.filePaths.length)return null;
+      return worker('importSeamCorrection',{projectPath,frame,reviewedPath:result.filePaths[0]}).promise;
+    });
+  });
   handle('job:run',args=>{
     const projectPath=knownProject(args?.projectPath),stage=validateStage(args.stage);requireIdle(projectPath);
     const options={...(args.options||{})};

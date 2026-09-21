@@ -56,6 +56,23 @@ join at 4.004 seconds. Equivalent ranges are 1709–1901 for 1:15, 2070–2262 f
 1:30, and 2792–2984 for 2:00. End frames are exclusive. Preview audio is trimmed
 and re-encoded; `verify` expects a complete video.
 
+To use the reviewed 1:15 decision in the desktop app, select source frame 1805, choose **Import reviewed framing**, and open the calibration file above. Then reanalyze and regenerate previews. This imports that seam’s geometry and camera-rate choice; color is refitted. See [per-seam controls](SEAM-CONTROLS.md).
+
 Running ordinary automatic analysis on another video uses only the generalized
 checks. It does not adopt this movie's reviewed 1:15 decision. Review notes
 identify joins where automatic framing remains unreliable.
+
+## Reproduce through the app
+
+Import the original `IYTYT.mp4` and check that the enabled incoming-frame markers
+are **361, 722, 1083, 1444, 1805, 2166, 2527, 2888, 3240**. Keep the default
+automatic settings on every seam except frame **1805**. Select that seam, click
+**Import reviewed framing**, and choose
+`plans/IYTYT-framing-reviewed-calibration.json`. Then run **Analyze & match**,
+review previews, and export at **High · CRF 14**.
+
+This saved-project workflow has been checked against the frozen recipe: all
+3,347 frame transforms, the viewing crop, protected tone curves, and local color
+models match exactly. It uses the same renderer as the CLI. The 2:00 geometry
+remains excluded in both workflows. See [per-seam controls](SEAM-CONTROLS.md)
+for editing or reusing measurements on other projects.
