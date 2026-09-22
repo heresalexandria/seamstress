@@ -4,6 +4,8 @@
 
 **Many generations. One continuous shot.**
 
+[Visit the Seamstress website](https://heresalexandria.github.io/seamstress/)
+
 Seamstress is a local studio for **AI-generated oners**: continuous single shots built by generating a clip, extending the same shot through subsequent AI video generations, and stitching them together.
 
 Each continuation can introduce a slight inconsistency—a changed crop, a small scale or composition shift, or colors that no longer match. Those seams interrupt the feeling of one unbroken take. Seamstress helps you find and smooth them in the already-stitched video while preserving its original frames and timing.
@@ -60,6 +62,8 @@ npm --prefix app run test:e2e
 ```
 
 [Release guide](docs/RELEASES.md) · [Signing and notarization](docs/MACOS-SIGNING.md) · [Updater design](docs/updates.md)
+
+The GitHub Pages splash page lives in `site/`. See the [website guide](docs/PAGES.md) for local preview and deployment.
 
 CI tests pull requests and builds native packages. A merged PR with exactly one `major`, `minor`, or `patch` label starts the signed release pipeline; `no-release` skips publication. Both Mac architectures must pass signing, notarization, package verification, and the actual app workflow before installers and update metadata are published together.
 

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" preserveAspectRatio="none" fill="none">
+  <defs>
+    <linearGradient id="sky" x2="0" y2="420" gradientUnits="userSpaceOnUse"><stop stop-color="#bccaba"/><stop offset="1" stop-color="#ede4bd"/></linearGradient>
+    <linearGradient id="hill" x2="0" y1="160" y2="420" gradientUnits="userSpaceOnUse"><stop stop-color="#728a70"/><stop offset="1" stop-color="#405a46"/></linearGradient>
+    <linearGradient id="near" x2="0" y1="290" y2="420" gradientUnits="userSpaceOnUse"><stop stop-color="#3a5d49"/><stop offset="1" stop-color="#203f31"/></linearGradient>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".11"/></feComponentTransfer><feBlend in="SourceGraphic" mode="soft-light"/></filter>
+  </defs>
+  <g filter="url(#grain)">
+    <path fill="url(#sky)" d="M0 0h1200v420H0z"/>
+    <circle cx="904" cy="97" r="40" fill="#f6ebc6"/>
+    <path d="M0 229 65 183l63 21 70-76 44 53 48-29 65 68 98-104 65 72 52-34 70 56 82-77 101 105 57-55 77 9 103-70 150 103v195H0z" fill="#b1bba0"/>
+    <path d="m0 266 105-80 82 52 105-89 93 93 92-18 83 18 145-72 98 73 114-21 54 27 121-59 108 76v154H0z" fill="#8e9f83"/>
+    <path d="M0 277c81 17 144 11 220-21s123-29 213 11 179 22 270-17 118-2 187 5 190-29 310 33v132H0z" fill="url(#hill)"/>
+    <path d="M0 323c198-53 264 46 425 3s279-72 418-20 214 42 357-12v126H0z" fill="#57795c"/>
+    <path d="M589 288c-69 16-81 29-19 42s128 44 27 90h-86c132-43 34-67 4-82s-11-36 74-50" fill="#bdc39e"/>
+    <path d="M0 373c147-41 259-27 416 47H0zm714 47c142-97 358-89 486-72v72z" fill="url(#near)"/>
+    <g fill="#294c38"><path d="m78 331 13-56 13 56h-10v23h-7v-23zm-31 18 11-42 11 42h-8v17h-6v-17zm986-10 14-62 14 62h-11v26h-6v-26zm37 6 11-45 11 45h-8v21h-6v-21z"/></g>
+    <g stroke="#758e68" stroke-width="2" opacity=".5"><path d="m60 394 36-5m-11 16 52-3m645-18 49-13m-3 24 61-15m158 12 75-1"/></g>
+  </g>
+</svg>
