@@ -16,6 +16,12 @@ def main():
     signal.signal(signal.SIGTERM,stop);signal.signal(signal.SIGINT,stop)
     try:
         request=json.loads(sys.stdin.readline());operation=request.get('operation');args=request.get('args',{})
+        credentials=request.get('credentials') or {}
+        if not isinstance(credentials,dict):raise ValueError('Invalid credential transport')
+        provider_key=credentials.get('openaiApiKey')
+        if operation=='segmentationStatus':
+            from .segmentation_model import model_status
+            emit({'type':'complete','result':model_status()});return 0
         with contextlib.redirect_stdout(sys.stderr):
             from .projects import load_project,set_seams,import_seam_correction
             from .pipeline import prepare_project,run_stage,detect_project
@@ -25,7 +31,9 @@ def main():
             elif operation=='get':result=load_project(Path(args['projectPath']))
             elif operation=='setSeams':result=set_seams(Path(args['projectPath']),args['seams'])
             elif operation=='importSeamCorrection':result=import_seam_correction(Path(args['projectPath']),args['frame'],Path(args['reviewedPath']))
-            elif operation=='run':result=run_stage(args['projectPath'],args['stage'],options=args.get('options'),progress=progress)
+            elif operation=='importReconstruction':result=run_stage(args['projectPath'],'reconstruct',
+                options={'frame':args['frame'],'action':'import','reconstruction':{'manifestPath':args['manifestPath']}},progress=progress)
+            elif operation=='run':result=run_stage(args['projectPath'],args['stage'],options=args.get('options'),progress=progress,provider_key=provider_key)
             else:raise ValueError('Unknown worker operation')
         emit({'type':'complete','project':result});return 0
     except (KeyboardInterrupt,InterruptedError):

@@ -5,7 +5,7 @@ test('media replies have exact lengths and seekable byte ranges',async()=>{
  const folder=fs.mkdtempSync(path.join(os.tmpdir(),'seamstress-range-')),file=path.join(folder,'source.mp4');fs.writeFileSync(file,'0123456789');
  try{
   const request=(range,method='GET')=>new Request('https://local/video',{method,headers:range?{Range:range}:{}});
-  let r=serveMedia(file,request());assert.equal(r.status,200);assert.equal(r.headers.get('content-length'),'10');assert.equal(await r.text(),'0123456789');
+  let r=serveMedia(file,request());assert.equal(r.status,200);assert.equal(r.headers.get('content-length'),'10');assert.equal(r.headers.get('access-control-allow-origin'),'seamstress-app://app');assert.equal(await r.text(),'0123456789');
   r=serveMedia(file,request('bytes=3-5'));assert.equal(r.status,206);assert.equal(r.headers.get('content-range'),'bytes 3-5/10');assert.equal(r.headers.get('content-length'),'3');assert.equal(await r.text(),'345');
   r=serveMedia(file,request('bytes=8-'));assert.equal(await r.text(),'89');
   r=serveMedia(file,request('bytes=-3'));assert.equal(await r.text(),'789');

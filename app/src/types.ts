@@ -1,4 +1,4 @@
-export type Stage = 'detect' | 'analyze' | 'refine' | 'preview' | 'process' | 'export';
+export type Stage = 'detect' | 'analyze' | 'refine' | 'reconstruct' | 'preview' | 'process' | 'export';
 export type JobStage = Stage | 'import';
 export type CameraRate = [number, number, number, number];
 export type ManualFraming = {
@@ -38,6 +38,31 @@ export type Seam = {
   kind?: string;
   correction?: SeamCorrection;
 };
+export type AISettings = { configured: boolean; secureStorageAvailable: boolean; provider: 'openai' };
+export type SegmentationStatus = { modelId: string; name: string; downloadBytes: number; runtimeAvailable: boolean; downloaded: boolean; available: boolean; reason: string | null; provider: string; license: string; publisher: string };
+export type NeuralPrompt = { frame: number; layerId: string; points: { x: number; y: number; label: 1 | 0 }[]; box?: [number, number, number, number] };
+export type ReconstructionAction = 'propose' | 'edit' | 'background' | 'render' | 'accept' | 'reject' | 'revert' | 'auto' | 'import' | 'setup-model' | 'segment';
+export type MaskStroke = {
+  frame: number; layer_id: string; mode: 'include' | 'exclude' | 'protect' | 'emission';
+  radius: number; points: [number, number][];
+};
+export type ReconstructionOptions = {
+  reachFrames?: number; motionStrength?: number; allowAI?: boolean; maxAIRequests?: number;
+  strokes?: MaskStroke[]; review_approved?: boolean;
+  neuralPrompt?: NeuralPrompt;
+  segmentation?: 'auto' | 'classic' | 'neural';
+};
+export type ReconstructionSummary = {
+  id: string; manifestPath: string; status: string;
+  sourceFrame: number; width: number; height: number; startFrame: number; endFrame: number;
+  sourceFramePath: string; candidatePreviewPath?: string;
+  previewStartFrame?: number; previewEndFrame?: number;
+  layers: { id: string; name: string; role: string; maskPreviewPath: string; keyframes: number[]; confidence?: number }[];
+  frames: { frame: number; sourceFramePath: string; masks: Record<string, string> }[];
+  issues: string[]; metrics?: Record<string, unknown>; qa?: { autoEligible?: boolean; [key: string]: unknown };
+  canRender: boolean; canAccept: boolean; reachFrames?: number | null; motionStrength?: number | null;
+};
+export type ReconstructionEntry = { candidate?: ReconstructionSummary; accepted?: ReconstructionSummary; history?: ReconstructionSummary[] };
 export type Project = {
   version: 1;
   id: string;
@@ -51,6 +76,7 @@ export type Project = {
   };
   seams: Seam[];
   seamResults?: SeamResult[];
+  reconstructions?: Record<string, ReconstructionEntry>;
   revision: number;
   refinementBaseline?: { plan: string; planSha256: string; sourceSha256: string; revision: number };
   artifacts: {
@@ -94,7 +120,12 @@ export interface SeamstressAPI {
   getProject(projectPath: string): Promise<Project>;
   setSeams(options: { projectPath: string; seams: Seam[] }): Promise<Project>;
   importSeamCorrection(options: { projectPath: string; frame: number }): Promise<Project | null>;
-  run(options: { projectPath: string; stage: Stage; options?: { exportPath?: string; crf?: number; previewSeconds?: number; frame?: number; supportFrames?: number } }): Promise<{ jobId: string }>;
+  importReconstruction(options: { projectPath: string; frame: number }): Promise<Project | null>;
+  getAISettings(): Promise<AISettings>;
+  setAIKey(key: string): Promise<AISettings>;
+  clearAIKey(): Promise<AISettings>;
+  getSegmentationStatus(): Promise<SegmentationStatus>;
+  run(options: { projectPath: string; stage: Stage; options?: { exportPath?: string; crf?: number; previewSeconds?: number; frame?: number; supportFrames?: number; action?: ReconstructionAction; reconstruction?: ReconstructionOptions; reconstructionEnabled?: boolean } }): Promise<{ jobId: string }>;
   cancelJob(jobId: string): Promise<void>;
   chooseExportPath(options: { suggestedName: string }): Promise<string | null>;
   onJobEvent(callback: (event: JobEvent) => void): () => void;

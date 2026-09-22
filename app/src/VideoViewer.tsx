@@ -5,9 +5,9 @@ import { Icon } from './Icons';
 import type { Project, Seam } from './types';
 
 export type ViewerHandle = { seek(frame: number): void; step(direction: number): void; toggle(): void; reviewSeam(): void };
-type Props = { project: Project; selected?: Seam; frame: number; onFrame(frame: number): void; previewSeconds: number };
+type Props = { project: Project; selected?: Seam; frame: number; onFrame(frame: number): void; previewSeconds: number; reviewRange?: { startFrame: number; endFrame: number } };
 
-export const VideoViewer = forwardRef<ViewerHandle, Props>(function VideoViewer({ project, selected, frame, onFrame, previewSeconds }, ref) {
+export const VideoViewer = forwardRef<ViewerHandle, Props>(function VideoViewer({ project, selected, frame, onFrame, previewSeconds, reviewRange }, ref) {
   const source = useRef<HTMLVideoElement>(null);
   const candidate = useRef<HTMLVideoElement>(null);
   const viewport = useRef<HTMLDivElement>(null);
@@ -26,8 +26,8 @@ export const VideoViewer = forwardRef<ViewerHandle, Props>(function VideoViewer(
   const candidateEnd = scope === 'seam' && seamPreview ? seamPreview.endFrame / fps : project.metadata.duration;
   const currentTime = frame / fps;
   const inCandidate = Boolean(corrected) && currentTime >= offset && currentTime < candidateEnd;
-  const loopStart = selected ? Math.max(0, selected.time - previewSeconds / 2) : 0;
-  const loopEnd = selected ? Math.min(project.metadata.duration, selected.time + previewSeconds / 2) : project.metadata.duration;
+  const loopStart = reviewRange ? reviewRange.startFrame / fps : selected ? Math.max(0, selected.time - previewSeconds / 2) : 0;
+  const loopEnd = reviewRange ? reviewRange.endFrame / fps : selected ? Math.min(project.metadata.duration, selected.time + previewSeconds / 2) : project.metadata.duration;
 
   function synchronize(force = false) {
     const a = source.current, b = candidate.current;
@@ -43,7 +43,7 @@ export const VideoViewer = forwardRef<ViewerHandle, Props>(function VideoViewer(
     const video = source.current;
     if (!video) return;
     video.pause(); candidate.current?.pause(); setPlaying(false);
-    const next = clamp(Math.round(target), 0, project.metadata.frame_count - 1);
+    const next = clamp(Math.round(target), reviewRange?.startFrame ?? 0, reviewRange ? reviewRange.endFrame - 1 : project.metadata.frame_count - 1);
     video.currentTime = (next + .05) / fps;
     onFrame(next); synchronize(true);
   }
@@ -81,9 +81,9 @@ export const VideoViewer = forwardRef<ViewerHandle, Props>(function VideoViewer(
   }
 
   return <section className="viewer-section" aria-label="Video comparison">
-    <div className="viewer-topline"><div className="viewer-label"><span className="live-dot"/> CONTINUITY REVIEW</div><div className="segmented scope-switch" aria-label="Playback range"><button className={scope === 'seam' ? 'active' : ''} onClick={() => setScope('seam')} disabled={!selected}>Selected seam</button><button className={scope === 'whole' ? 'active' : ''} onClick={() => { setScope('whole'); setLoop(false); }}>Whole shot</button></div><span className="mono dim">{project.metadata.width} × {project.metadata.height}</span></div>
+    <div className="viewer-topline"><div className="viewer-label"><span className="live-dot"/> {reviewRange ? 'CANDIDATE REVIEW' : 'CONTINUITY REVIEW'}</div>{!reviewRange && <div className="segmented scope-switch" aria-label="Playback range"><button className={scope === 'seam' ? 'active' : ''} onClick={() => setScope('seam')} disabled={!selected}>Selected seam</button><button className={scope === 'whole' ? 'active' : ''} onClick={() => { setScope('whole'); setLoop(false); }}>Whole shot</button></div>}<span className="mono dim">{project.metadata.width} × {project.metadata.height}</span></div>
     <div className="video-viewport" ref={viewport} style={{ '--video-aspect': `${project.metadata.width} / ${project.metadata.height}` } as React.CSSProperties}>
-      <video ref={source} src={api.mediaUrl(project.artifacts.proxy ?? project.source)} className="source-video" playsInline preload="metadata" muted={muted} onLoadedMetadata={() => { onFrame(0); setMediaError(''); }} onTimeUpdate={() => {
+      <video ref={source} src={api.mediaUrl(project.artifacts.proxy ?? project.source)} className="source-video" playsInline preload="metadata" muted={muted} onLoadedMetadata={() => { if (reviewRange) seek(reviewRange.startFrame); else onFrame(0); setMediaError(''); }} onTimeUpdate={() => {
         const a = source.current; if (!a) return;
         if (scope === 'seam' && selected && loop && a.currentTime >= loopEnd && !a.paused) { a.currentTime = loopStart; synchronize(true); }
         onFrame(clamp(Math.floor(a.currentTime * fps + .001), 0, project.metadata.frame_count - 1));

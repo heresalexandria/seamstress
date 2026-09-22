@@ -168,6 +168,85 @@ async function checkSingleSeamRefinement(page, project, output, checks) {
   return refined;
 }
 
+async function checkReconstruction(application, page, project, output, checks) {
+  const seam = project.seams.find(row => row.enabled);
+  await selectSeam(page, project, seam.frame);
+  const baselineBytes = fs.readFileSync(project.artifacts.plan, 'utf8');
+  const baseline = JSON.parse(baselineBytes);
+  const ai = await page.evaluate(() => window.seamstress.getAISettings());
+  assert.equal(typeof ai.configured, 'boolean');
+  assert.equal(Object.hasOwn(ai, 'key'), false, 'Renderer receives credential status only');
+  const model = await page.evaluate(() => window.seamstress.getSegmentationStatus());
+  assert.equal(typeof model.available, 'boolean', 'Optional model status is a real backend result');
+  await page.getByRole('button', {name: /^AI settings/}).click();
+  await page.getByRole('dialog', {name: 'AI settings', exact: true}).waitFor();
+  assert.equal(await page.getByLabel('OpenAI API key', {exact: true}).getAttribute('type'), 'password');
+  await page.keyboard.press('Escape');
+  const section = page.getByRole('region', {name: 'Layer reconstruction', exact: true});
+  if (!await section.getByRole('button', {name: 'Propose layers', exact: true}).isVisible()) {
+    await section.getByRole('button', {name: /Layer reconstruction/}).click();
+  }
+  await section.locator('summary').filter({hasText: 'Reach & motion'}).click();
+  await section.locator('#reconstruction-reach').fill('3');
+  // Zero correction is a real, supported review choice. It makes the smoke
+  // fixture independent of whatever camera/subject motion the supplied video has.
+  await section.locator('#reconstruction-strength').fill('0');
+  await section.locator('summary').filter({hasText: 'Background recovery'}).click();
+  assert.equal(await section.getByLabel('Allow AI background fill', {exact: true}).isChecked(), false);
+  async function completed() {
+    await page.waitForFunction(() => !document.querySelector('.job-panel'), undefined, {timeout: 180000});
+    assert.equal(await page.locator('.notification.is-error').count(), 0, (await page.locator('.notification.is-error').allTextContents()).join('\n'));
+    return readProject(page, project.projectPath);
+  }
+  await section.getByRole('button', {name: 'Propose layers', exact: true}).click();
+  await page.waitForFunction(() => !!document.querySelector('.job-panel') || !!document.querySelector('.notification.is-error'));
+  let current = await completed();
+  assert.ok(current.reconstructions[String(seam.frame)].candidate);
+  assert.equal(current.artifacts.plan, project.artifacts.plan, 'Proposals leave accepted plan active');
+  await section.getByRole('button', {name: 'Edit layer masks', exact: true}).click();
+  const editor = page.getByRole('dialog', {name: 'Layer mask editor', exact: true});
+  await editor.waitFor();
+  await editor.getByLabel('Mask layer', {exact: true}).selectOption('foreground');
+  const canvas = editor.locator('canvas');
+  await canvas.focus();
+  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('Space');
+  assert.equal(await editor.getByRole('button', {name: 'Save & propagate masks', exact: true}).isEnabled(), true);
+  await editor.screenshot({path: path.join(output, 'reconstruction-mask-editor.png')});
+  await editor.getByRole('button', {name: 'Save & propagate masks', exact: true}).click();
+  await page.waitForFunction(() => !document.querySelector('.job-panel'), undefined, {timeout: 180000});
+  await editor.waitFor({state: 'hidden', timeout: 180000});
+  current = await completed();
+  assert.equal(current.artifacts.plan, project.artifacts.plan, 'Mask editing cannot replace accepted corrections');
+  await section.getByRole('button', {name: 'Build candidate preview', exact: true}).click();
+  await page.waitForFunction(() => !!document.querySelector('.job-panel') || !!document.querySelector('.notification.is-error'));
+  current = await completed();
+  const candidate = current.reconstructions[String(seam.frame)].candidate;
+  assert.ok(fs.statSync(candidate.candidatePreviewPath).size > 0);
+  await section.getByRole('button', {name: 'Review candidate loop', exact: true}).click();
+  const review = page.getByRole('dialog', {name: 'Reconstruction review', exact: true});
+  await review.waitFor();
+  await page.waitForFunction(() => document.querySelector('[aria-label="Reconstruction review"] .candidate-video')?.readyState >= 2, undefined, {timeout: 60000});
+  await review.screenshot({path: path.join(output, 'reconstruction-review.png')});
+  await review.getByRole('button', {name: 'Back to reconstruction', exact: true}).click();
+  assert.equal(await section.getByRole('button', {name: 'Accept reconstruction', exact: true}).isDisabled(), true);
+  await section.getByLabel('I reviewed this reconstruction', {exact: true}).check();
+  await section.getByRole('button', {name: 'Accept reconstruction', exact: true}).click();
+  await page.waitForFunction(() => !!document.querySelector('.job-panel') || !!document.querySelector('.notification.is-error'));
+  current = await completed();
+  assert.ok(current.reconstructions[String(seam.frame)].accepted);
+  const accepted = JSON.parse(fs.readFileSync(current.artifacts.plan, 'utf8'));
+  assert.equal(accepted.reconstructions.length, 1);
+  delete accepted.reconstructions;
+  assert.deepEqual(accepted, baseline, 'Accepted layer is the only change to the conform plan');
+  assert.equal(fs.readFileSync(project.artifacts.plan, 'utf8'), baselineBytes, 'Baseline artifact stays immutable');
+  await section.getByRole('button', {name: 'Revert reconstruction', exact: true}).click();
+  await page.waitForFunction(() => !!document.querySelector('.job-panel') || !!document.querySelector('.notification.is-error'));
+  current = await completed();
+  assert.deepEqual(JSON.parse(fs.readFileSync(current.artifacts.plan, 'utf8')), baseline, 'Revert restores exact underlying correction plan');
+  checks.push('secure credential and local-model status', 'real layer proposal, mask propagation and candidate render', 'candidate custom-protocol review', 'explicit acceptance and exact baseline restoration', 'AI disabled by default');
+}
+
 async function main() {
   const sourceArgument = process.argv.slice(2).find(value => !value.startsWith('--'));
   const workflow = process.argv.includes('--workflow');
@@ -358,6 +437,7 @@ async function main() {
       await page.screenshot({ path: path.join(output, 'workflow.png') });
       checks.push('whole workflow + export', 'corrected custom-protocol playback and seek', 'synchronized comparison', 'comparison divider');
       const refined = await checkSingleSeamRefinement(page, finished, output, checks);
+      await checkReconstruction(application, page, refined, output, checks);
       await checkReviewedImport(application, page, refined, output, checks);
     }
     assert.equal(await page.locator('.media-error').count(), 0, 'No playback error');

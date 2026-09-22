@@ -21,7 +21,9 @@ Release installers are built by GitHub Actions, signed with Developer ID, notari
 3. **Match continuity.** Analyze framing and color differences, apply supported corrections, and compare the original and corrected seam previews. Watch the full shot to judge how each correction feels in motion.
 4. **Export your oner.** Save at the original resolution and frame rate, with original audio preserved.
 
-Seamstress is designed for small continuity mismatches between generations of the same shot. It applies gradual, bounded framing and color corrections to original frames. The desktop workflow never morphs drawings, crossfades poses, or generates replacement frames. It skips corrections that lack reliable evidence. A changed character, gesture, or scene may still be visible; inspect previews before exporting.
+Seamstress applies gradual, bounded framing and color corrections to original frames. These remain the default. For a difficult join where the character and scenery shift differently, optional **Layer reconstruction** separates their motion and recovers hidden background from nearby frames. You can paint masks, use an optional local selection model, and review a candidate before accepting it. Optional OpenAI background fill uses your own API key and requires explicit upload consent; it does not generate character poses or tween frames. See the [layer reconstruction guide](docs/RECONSTRUCTION.md).
+
+The tool skips unsupported automatic corrections. A changed character, gesture, or scene may still be visible; inspect previews before exporting. Quality checks are safeguards, not a guarantee of invisible seams.
 
 Each join has its own framing, camera and color controls. Keep automatic checks enabled, turn a tactic off for a particular seam, or import/edit reviewed framing measurements. The inspector shows what analysis actually applied. After the first analysis, **Refine this seam only** updates one join while retaining the viewing crop and other corrections. **Preview this seam** renders just its review window. See [per-seam controls](docs/SEAM-CONTROLS.md).
 
@@ -40,6 +42,8 @@ seamstress process oner.mp4 --work-dir oner.seamstress --output oner-corrected.m
 ```
 
 One command runs detection, analysis, correction previews, and export. The same stages can run separately with `detect`, `mark`, `calibrate`, `refine`, `preview`, and `export`. Use `refine --project oner.seamstress --frame 2888` to revisit one known seam, then `preview --project oner.seamstress --frame 2888` to review only that join. Frame numbers refer to the original source. Projects save markers, analysis, correction plans, and revision-specific artifacts for repeatable review.
+
+Add `--reconstruct` to `process` to attempt conservative, source-only layer repairs after normal correction. Uncertain candidates stay separate for review; exports include accepted repairs only. To work on one difficult join, use `seamstress reconstruct --project oner.seamstress --frame 2888 --stage auto`. Proposal, mask editing, background recovery, preview, acceptance and reversion can also run as [individual stages](docs/RECONSTRUCTION.md).
 
 **[Desktop and CLI guide](docs/SEAMSTRESS.md)** includes individual commands, seam timecodes, supported inputs, and limitations. The current engine supports constant-frame-rate, square-pixel, 8-bit SDR video; it is not an HDR mastering workflow.
 
@@ -73,4 +77,4 @@ The previous GitHub implementation is preserved unchanged in [legacy/](legacy/RE
 
 The accepted original-frame experiment remains reproducible: [IYTYT eight-join guide](docs/REPRODUCE-IYTYT.md), [color refinement](docs/REPRODUCE-COLOR-REFINEMENT.md), and [research history](docs/EXPERIMENTS.md). Source videos and generated outputs are local files and are not included in this repository.
 
-The [reviewed framing candidate](docs/REPRODUCE-FRAMING-REVIEW.md) restores the 1:00 and 1:15 framing and reduces the 1:30 camera overcorrection. Its recipe explicitly records the reviewed 1:15 decision; the 2:00 depth jump remains unresolved. [Framing analysis](docs/FRAMING-REVIEW.md) explains the automatic checks and limits.
+The [reviewed framing candidate](docs/REPRODUCE-FRAMING-REVIEW.md) restores the 1:00 and 1:15 framing and reduces the 1:30 camera overcorrection. The subsequent 2:00 layer repair is reproducible through the new immutable reconstruction bundle format: the production compositor was checked against all 96 authored reference frames. This validates replay of that reviewed repair; automatic proposals for a new video still require their own checks. [Framing analysis](docs/FRAMING-REVIEW.md) explains the earlier automatic checks and limits.

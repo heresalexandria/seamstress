@@ -41,6 +41,8 @@ def _commit(project, artifacts, status, warnings=None, *, invalidate=(), require
     current=load_project(Path(project['projectPath']))
     if current['revision']!=project['revision']:
         raise RuntimeError('Seams changed during this job. Run this stage again with the current markers')
+    if current.get('reconstructionRevision',0)!=project.get('reconstructionRevision',0):
+        raise RuntimeError('Reconstruction changed during this job. Run this stage again with the current accepted repairs')
     if require_plan and current['artifacts'].get('plan')!=project['artifacts'].get('plan'):
         raise RuntimeError('The correction plan changed during rendering. Run this stage again')
     if require_refinement_baseline is not None:
@@ -110,7 +112,8 @@ def detect_project(project, *, options=None,progress=None,cancelled=None):
     # Re-detection may add evidence, but must not discard reviewed choices or
     # move source-bound measurements to a nearby suggested frame.
     rows.extend(row for row in current['seams'] if row['frame'] not in detected and
-                (row['origin']=='manual' or not row['enabled'] or row['correction']!=DEFAULT_CORRECTION))
+                (row['origin']=='manual' or not row['enabled'] or row['correction']!=DEFAULT_CORRECTION
+                 or current.get('reconstructions',{}).get(str(row['frame']),{}).get('accepted')))
     project=set_seams(Path(project['projectPath']),rows)
     report=_run_dir(project,'detect')/'detection.json';atomic_json(report,result)
     warnings=['Detection suggests boundaries; review markers before your final export.']
@@ -177,6 +180,13 @@ def analyze_project(project, *, options=None,progress=None,cancelled=None):
                            seam_settings={s['frame']:s['correction'] for s in project['seams'] if s['enabled']})
     _check(cancelled)
     plan=json.loads(Path(result['plan_path']).read_text())
+    previous_path=project['artifacts'].get('plan') or project.get('refinementBaseline',{}).get('plan')
+    if previous_path and Path(previous_path).is_file():
+        previous=json.loads(Path(previous_path).read_text())
+        if previous.get('reconstructions'):
+            from .reconstruction_workflow import preserve_accepted_reconstructions
+            plan=preserve_accepted_reconstructions(previous,plan)
+            atomic_json(Path(result['plan_path']),plan)
     warnings=[]
     exclusions={item['frame']:item['reason'] for item in result.get('calibration',{}).get('excluded_geometry',[])}
     for issue in plan.get('unresolved_seams',[]):
@@ -210,6 +220,8 @@ def refine_project(project, *, options=None,progress=None,cancelled=None):
     selected=next((row for row in project['seams'] if row['frame']==frame),None)
     if selected is None or not selected['enabled']:
         raise ValueError('Select an enabled seam before refining it')
+    if project.get('reconstructions',{}).get(str(frame),{}).get('accepted'):
+        raise RefinementError('Revert this seam’s layer reconstruction before changing its underlying framing or grade')
     baseline=capture_refinement_baseline(project) or project.get('refinementBaseline')
     if not baseline:
         raise RefinementError('Analyze the shot once before refining a single seam; an accepted baseline plan is required')
@@ -326,8 +338,19 @@ def export_project(project, *, options=None,progress=None,cancelled=None):
     return _commit(project,{'export':str(output),'verification':str(path)},'exported',require_plan=True)
 
 
-def run_stage(path, stage, *, options=None,progress=None,cancelled=None):
+def run_stage(path, stage, *, options=None,progress=None,cancelled=None,provider_key=None):
     project=load_project(Path(path));options=options or {};_check(cancelled)
+    if stage=='reconstruct':
+        if options.get('action')=='setup-model':
+            from .segmentation_model import setup_model
+            callback=(lambda event: progress({**event,'stage':'reconstruct'})) if progress else None
+            setup_model(allow_download=True,progress=callback,cancelled=cancelled)
+            return project
+        from .reconstruction_workflow import reconstruct_project
+        if not project['artifacts'].get('plan') and not (options.get('action') in ('revert','reject') and project.get('refinementBaseline')):
+            project=analyze_project(project,progress=progress,cancelled=cancelled)
+        return reconstruct_project(project,options=options,provider_key=provider_key,
+                                   progress=progress,cancelled=cancelled)
     functions={'detect':detect_project,'analyze':analyze_project,'refine':refine_project,'preview':preview_project,'export':export_project}
     if stage in functions:return functions[stage](project,options=options,progress=progress,cancelled=cancelled)
     if stage!='process':raise ValueError(f'Unknown workflow stage: {stage}')
@@ -337,6 +360,10 @@ def run_stage(path, stage, *, options=None,progress=None,cancelled=None):
         project=detect_project(project,options=options,progress=progress,cancelled=cancelled)
     if not project['artifacts'].get('plan'):
         project=analyze_project(project,options=options,progress=progress,cancelled=cancelled)
+    if options.get('reconstructionEnabled') is True:
+        from .reconstruction_workflow import reconstruct_project
+        project=reconstruct_project(project,options={**options,'action':'auto'},provider_key=provider_key,
+                                    progress=progress,cancelled=cancelled)
     if not project['artifacts'].get('fullPreview'):
         project=preview_project(project,options=options,progress=progress,cancelled=cancelled)
     if options.get('exportPath') or options.get('export',False):

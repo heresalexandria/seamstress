@@ -3,13 +3,14 @@ const path=require('node:path');
 const {Readable}=require('node:stream');
 const MIME={'.mp4':'video/mp4','.m4v':'video/mp4','.mov':'video/quicktime','.webm':'video/webm','.mkv':'video/x-matroska','.avi':'video/x-msvideo','.jpg':'image/jpeg','.jpeg':'image/jpeg','.png':'image/png'};
 /** Serve only an already-authorized path. Explicit ranges are essential for Chromium seeking. */
-function serveMedia(filename,request){
+function serveMedia(filename,request,{origin='seamstress-app://app'}={}){
   const method=request.method||'GET';
   if(!['GET','HEAD'].includes(method))return new Response(null,{status:405,headers:{Allow:'GET, HEAD'}});
   let stat;try{stat=fs.statSync(filename);if(!stat.isFile())throw new Error();}catch{return new Response(null,{status:404});}
   const size=stat.size;
   const headers={'Accept-Ranges':'bytes','Content-Type':MIME[path.extname(filename).toLowerCase()]||'application/octet-stream',
-                 'Cache-Control':'no-store','Content-Length':String(size)};
+                 'Cache-Control':'no-store','Content-Length':String(size),
+                 'Access-Control-Allow-Origin':origin};
   const invalid=()=>new Response(null,{status:416,headers:{...headers,'Content-Range':`bytes */${size}`,'Content-Length':'0'}});
   let start=0,end=size-1,status=200;
   const range=request.headers.get('Range');

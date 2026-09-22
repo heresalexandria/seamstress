@@ -141,7 +141,9 @@ Color calibration first fits protected tone curves, then fits a bounded residual
 
 Color and geometry have separate evidence checks. When several scene layers move differently, a global camera correction can be unsafe even though the same surfaces can still be matched for color. Strong, distributed local correspondences can permit color-only correction; the geometry exclusion remains in the report. This does not repair a background speed change or a jump between objects at different depths. See the [30s and 120s seam review](SEAM-REVISIT.md) for measured examples.
 
-Rendering uses exactly one original source drawing for each output frame. It changes that drawing's global framing and pointwise color. It does not crossfade, blend different frames, morph objects, synthesize tween frames or replace poses. Optical flow is used to measure matching color observations, not to deform the rendered footage.
+Default rendering uses exactly one original source drawing for each output frame. It changes that drawing's global framing and pointwise color. It does not crossfade, morph objects, synthesize tween frames or replace poses. Optical flow is used to measure matching color observations, not to deform the rendered footage.
+
+For foreground/background depth jumps, optional [layer reconstruction](RECONSTRUCTION.md) adds local mask editing, separate rigid layer motion, source-first background recovery, optional local MobileSAM selection, and explicitly enabled OpenAI background fill. It preserves same-frame foreground drawings and applies the accepted conform plan afterward. Candidates stay separate until accepted; reverting a reconstruction retains the underlying correction. It is off by default in the complete workflow.
 
 Seams with insufficient evidence, large geometric changes, parallax or unrelated scenes can be left unresolved and listed in the report. Those are deliberate review points: a flat composite may not contain the image information needed to reconstruct a physically continuous shot.
 
@@ -177,7 +179,7 @@ To build the standalone macOS app, install PyInstaller in the same Python enviro
 
 ```sh
 # From repository root:
-uv pip install --python .venv/bin/python pyinstaller==6.22.3
+uv pip install --python .venv/bin/python pyinstaller==6.22.3 onnxruntime==1.23.2
 cd app
 npm run package   # .app folder
 npm run dist      # DMG and ZIP
