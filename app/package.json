@@ -1,7 +1,7 @@
 {
   "name": "seamstress",
   "productName": "Seamstress",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "A local studio for smoothing continuity seams in AI-generated oners.",
   "private": true,
   "author": "Seamstress",
